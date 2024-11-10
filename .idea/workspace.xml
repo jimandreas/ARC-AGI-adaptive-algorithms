@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="c3ae805f-3a0f-4aec-8425-20dbb29a9350" name="Changes" comment="analysis in README">
+      <change afterPath="$PROJECT_DIR$/LICENSE.txt" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Kotlin Class" />
+        <option value="Kotlin File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="2odzd7d3nGlodp9vC5uxQtZi13v" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Gradle.Build ARC-AGI-database-analysis.executor": "Run",
+    "Gradle.CompareMatrixSizesTest.compareSizes.executor": "Run",
+    "Kotlin.MainKt.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/a/j/kotlinIdea/ARC-AGI-database-analysis"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\a\j\kotlinIdea\ARC-AGI-database-analysis\docs" />
+      <recent name="C:\a\j\kotlinIdea\ARC-AGI-database-analysis" />
+      <recent name="C:\a\j\kotlinIdea\ARC-AGI-database-analysis\src\main\kotlin" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\a\j\kotlinIdea\ARC-AGI-database-analysis\src\main\kotlin" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Gradle.CompareMatrixSizesTest.compareSizes">
+    <configuration name="CompareMatrixSizesTest.compareSizes" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;CompareMatrixSizesTest.compareSizes&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="MainKt" type="JetRunConfigurationType" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.jimandreas.MainKt" />
+      <module name="ARC-AGI-database-analysis.main" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.CompareMatrixSizesTest.compareSizes" />
+        <item itemvalue="Kotlin.MainKt" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c3ae805f-3a0f-4aec-8425-20dbb29a9350" name="Changes" comment="" />
+      <created>1731214325482</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1731214325482</updated>
+    </task>
+    <task id="LOCAL-00001" summary="initial">
+      <option name="closed" value="true" />
+      <created>1731214402380</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1731214402380</updated>
+    </task>
+    <task id="LOCAL-00002" summary="first pass debugging of database creation.">
+      <option name="closed" value="true" />
+      <created>1731220213929</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1731220213929</updated>
+    </task>
+    <task id="LOCAL-00003" summary="first analysis of matrix sizes in the ARC corpus.">
+      <option name="closed" value="true" />
+      <created>1731241119853</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1731241119853</updated>
+    </task>
+    <task id="LOCAL-00004" summary="first analysis of matrix sizes in the ARC corpus.">
+      <option name="closed" value="true" />
+      <created>1731241316103</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1731241316103</updated>
+    </task>
+    <task id="LOCAL-00005" summary="bigger / smaller / same matrix examination part I">
+      <option name="closed" value="true" />
+      <created>1731243344058</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1731243344058</updated>
+    </task>
+    <task id="LOCAL-00006" summary="analysis in README">
+      <option name="closed" value="true" />
+      <created>1731251463863</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1731251463863</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
+    <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="initial" />
+    <MESSAGE value="first pass debugging of database creation." />
+    <MESSAGE value="first analysis of matrix sizes in the ARC corpus." />
+    <MESSAGE value="bigger / smaller / same matrix examination part I" />
+    <MESSAGE value="analysis in README" />
+    <option name="LAST_COMMIT_MESSAGE" value="analysis in README" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/src/main/kotlin/DatabaseOps.kt</url>
+          <line>101</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
