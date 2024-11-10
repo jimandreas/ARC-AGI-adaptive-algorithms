@@ -21,6 +21,10 @@ internal class CompareMatrixSizesTest {
         findToSmaller()
         findToBigger()
         findTheSameSize()
+
+        val biggerAndSame = bigger.intersect(sameSize.toSet())
+        val smallerAndSame = smaller.intersect(sameSize.toSet())
+        println("biger and samesize task: $biggerAndSame, smaller and same task: $smallerAndSame")
     }
 
     private fun findToSmaller() {
@@ -30,7 +34,7 @@ internal class CompareMatrixSizesTest {
         val query = """
         SELECT COUNT(*), GROUP_CONCAT(task_id)
         FROM TrainExample
-        WHERE input_rows > output_rows AND input_cols > output_cols;
+        WHERE input_rows * input_cols > output_rows * output_cols;
     """
 
         val statement = connection.createStatement()
@@ -60,7 +64,7 @@ internal class CompareMatrixSizesTest {
         val query = """
         SELECT COUNT(*), GROUP_CONCAT(task_id)
         FROM TrainExample
-        WHERE input_rows < output_rows AND input_cols < output_cols;
+        WHERE input_rows * input_cols < output_rows * output_cols;
     """
 
         val statement = connection.createStatement()
@@ -91,7 +95,7 @@ internal class CompareMatrixSizesTest {
         val query = """
         SELECT COUNT(*), GROUP_CONCAT(task_id)
         FROM TrainExample
-        WHERE input_rows = output_rows AND input_cols = output_cols;
+        WHERE input_rows * input_cols = output_rows * output_cols;
     """
 
         val statement = connection.createStatement()

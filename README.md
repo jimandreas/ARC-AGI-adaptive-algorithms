@@ -12,10 +12,20 @@ In the training database, the number of Tasks where the size of the
 matrix is "smaller" versus "bigger" versus the "same size" from "input" to "output" 
 is:
 
-smaller size 83 bigger 25 same size 263 total 371
+A few statistical details on the ARC-AGI corpus.
 
-as there are 400 training Tasks, this result indicates that 29 fall out.  As expected the "same size"
-category dominates.  Have to look at the characteristics of the 29.
+There are 400 training Tasks. And multiple examples for each.  
+Of these the cell count goes like this: smaller size 102 bigger 
+36 same size 263 total 401.  Somehow 1 task had perhaps a example 
+that fit in more than one category.
+
+Further digging was successful.  The Task "ff28f65a" has one 
+example where the input size was the same size as the output size, 
+while *all* the other examples had a reduced cell count.
+
+All other Tasks appear to be consistent - they either have examples 
+where they have the same cell count input to output (the majority at 
+263 / 400 = 66%) or they get smaller (102 / 400 = 25.5%) or bigger (36 / 400 = 9%).
 
 ![LOGO HERE](/docs/images/logo.png)
 
