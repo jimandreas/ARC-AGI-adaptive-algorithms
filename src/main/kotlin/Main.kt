@@ -1,5 +1,12 @@
 package com.jimandreas
 
 fun main() {
-    println("Hello World!")
+//    val databasePath = "C:/a/j/kotlinIdea/kotlin/ARC-AGI-trainingDatabase"
+    val databasePath = "C:\\a\\j\\kotlinIdea\\ARC-AGI-database-analysis\\DB"
+
+
+
+
+    val dops = DatabaseOps()
+    dops.createDatabaseAndAddAllTaskData(databasePath)
 }
