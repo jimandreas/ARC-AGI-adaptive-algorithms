@@ -11,6 +11,10 @@ import java.sql.DriverManager
 
 internal class CompareMatrixSizesTest {
 
+    var bigger : MutableList<String> = mutableListOf()
+    var smaller : MutableList<String> = mutableListOf()
+    var sameSize : MutableList<String> = mutableListOf()
+
     @Test
     @DisplayName("Compare sizes of matrices in the training tasks")
     fun compareSizes() {
@@ -37,6 +41,8 @@ internal class CompareMatrixSizesTest {
             val taskIds = resultSet.getString(2)
             println("Number of examples: $count")
             println("Task IDs: $taskIds")
+
+            smaller = taskIds.split(",").distinct().toMutableList()
         }
 
 
@@ -66,6 +72,8 @@ internal class CompareMatrixSizesTest {
             val taskIds = resultSet.getString(2)
             println("Number of examples: $count")
             println("Task IDs: $taskIds")
+
+            bigger = taskIds.split(",").distinct().toMutableList()
         }
 
 
@@ -95,9 +103,16 @@ internal class CompareMatrixSizesTest {
             val taskIds = resultSet.getString(2)
             println("Number of examples: $count")
             println("Task IDs: $taskIds")
+
+            sameSize = taskIds.split(",").distinct().toMutableList()
         }
 
+        val smallerSize = smaller.size
+        val biggerSize = bigger.size
+        val sameSizeSize = sameSize.size
+        val total = smallerSize+biggerSize+sameSizeSize
 
+        println("smaller size $smallerSize bigger $biggerSize same size $sameSizeSize total $total")
 
         resultSet.close()
         statement.close()
