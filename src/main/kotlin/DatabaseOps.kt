@@ -3,14 +3,16 @@
     "ReplaceManualRangeWithIndicesCalls", "ReplaceSizeZeroCheckWithIsEmpty",
     "SameParameterValue", "UnnecessaryVariable"
 )
+
 package com.jimandreas
 
-    import kotlinx.serialization.json.Json
-    import okhttp3.OkHttpClient
-    import okhttp3.Request
-    import java.io.IOException
-    import java.sql.Connection
-    import java.sql.DriverManager
+import kotlinx.serialization.json.Json
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import java.io.IOException
+import java.sql.Connection
+import java.sql.DriverManager
+import java.sql.SQLException
 
 // ... (Your data classes for TaskCoordinateData, etc.) ...
 
@@ -31,14 +33,18 @@ class DatabaseOps {
         val url = "jdbc:sqlite:$databasePath"
         val connection = DriverManager.getConnection(url)
 
-        // Create the tables (use the SQL schema from the previous response)
-        connection.createStatement().execute(
-            """
+// ... inside createDatabaseAndAddAllTaskData function ...
+
+// Create the tables
+        try {
+            // connection.createStatement().execute(
+            val sqlCommandList = listOf(
+                """
 CREATE TABLE Task (
   task_id TEXT PRIMARY KEY,  -- Alphanumeric name of the task (e.g., '00d62c1b')
   version INTEGER NOT NULL   -- Schema version number (e.g., 1)
 );
-
+""", """
 CREATE TABLE TrainExample (
   task_id TEXT NOT NULL,
   example_id INTEGER NOT NULL,  -- Example number within the task (1, 2, 3, ...)
@@ -49,7 +55,7 @@ CREATE TABLE TrainExample (
   FOREIGN KEY (task_id) REFERENCES Task (task_id),
   PRIMARY KEY (task_id, example_id)
 );
-
+""", """
 CREATE TABLE TrainMatrix (
   task_id TEXT NOT NULL,
   example_id INTEGER NOT NULL,
@@ -59,7 +65,7 @@ CREATE TABLE TrainMatrix (
   value INTEGER NOT NULL,
   FOREIGN KEY (task_id, example_id) REFERENCES TrainExample (task_id, example_id)
 );
-
+""", """
 CREATE TABLE TestExample (
   task_id TEXT NOT NULL,
   example_id INTEGER NOT NULL,  -- Example number within the task (1, 2, 3, ...)
@@ -70,7 +76,7 @@ CREATE TABLE TestExample (
   FOREIGN KEY (task_id) REFERENCES Task (task_id),
   PRIMARY KEY (task_id, example_id)
 );
-
+""", """
 CREATE TABLE TestMatrix (
   task_id TEXT NOT NULL,
   example_id INTEGER NOT NULL,
@@ -81,7 +87,17 @@ CREATE TABLE TestMatrix (
   FOREIGN KEY (task_id, example_id) REFERENCES TestExample (task_id, example_id)
 );
 """
-        )
+            )
+
+            for (sql in sqlCommandList) {
+                connection.createStatement().execute(sql)
+            }
+            println("All tables created successfully.")
+
+        } catch (e: SQLException) {
+            println("Error creating tables: ${e.message}")
+        }
+
 
         val client = OkHttpClient()
         val request = Request.Builder()
@@ -145,7 +161,13 @@ CREATE TABLE TestMatrix (
         // ...
     }
 
-    fun insertMatrixData(connection: Connection, taskId: String, exampleId: Int, matrixType: String, matrix: List<List<Int>>) {
+    fun insertMatrixData(
+        connection: Connection,
+        taskId: String,
+        exampleId: Int,
+        matrixType: String,
+        matrix: List<List<Int>>
+    ) {
         val stmt = connection.prepareStatement(
             "INSERT INTO TrainMatrix (task_id, example_id, matrix_type, row, col, value) " +
                     "VALUES (?, ?, ?, ?, ?, ?)"
@@ -165,7 +187,6 @@ CREATE TABLE TestMatrix (
     }
 
 
-
     fun downloadAndParseTaskData(taskUrl: String): TaskCoordinateData {
         val client = OkHttpClient()
         val request = Request.Builder()
@@ -180,7 +201,6 @@ CREATE TABLE TestMatrix (
             throw IOException("Failed to download task data: ${response.code} - ${response.message}")
         }
     }
-
 
 
 }
