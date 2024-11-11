@@ -4,8 +4,8 @@
     "SameParameterValue", "UnnecessaryVariable"
 )
 
-package com.jimandreas
-
+import com.jimandreas.FileInfo
+import com.jimandreas.TaskCoordinateData
 import kotlinx.serialization.json.Json
 import okhttp3.OkHttpClient
 import okhttp3.Request
