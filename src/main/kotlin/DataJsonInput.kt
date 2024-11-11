@@ -8,6 +8,8 @@ package com.jimandreas
 
 import kotlinx.serialization.Serializable
 
+
+var listOfTaskData: MutableList<TaskCoordinateData> = mutableListOf()
 /*
  * comments on the JSON format:
  *    There is only ONE input/output pair for the test part of TrainingData.
@@ -17,7 +19,7 @@ import kotlinx.serialization.Serializable
 data class TaskCoordinateData(
     val train: List<MatrixDataInputAndOutput>,
     val test: List<MatrixDataInputAndOutput>,   // note that there sometimes MORE THAN ONE entry in this list!!
-    val name: String = ""
+    var name: String = ""
 )
 
 @Serializable

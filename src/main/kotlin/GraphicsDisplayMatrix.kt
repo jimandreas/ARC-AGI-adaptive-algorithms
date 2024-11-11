@@ -4,25 +4,20 @@
     "SameParameterValue", "UnnecessaryVariable"
 )
 
+import com.jimandreas.MatrixDataInputAndOutput
+import com.jimandreas.listOfTaskData
 import java.awt.Color
-import java.awt.GraphicsEnvironment
 import java.awt.GridLayout
 import java.awt.event.WindowAdapter
 import java.awt.event.WindowEvent
-import javax.swing.BorderFactory
-import javax.swing.JFrame
-import javax.swing.JPanel
-import javax.swing.SwingUtilities
+import javax.swing.*
 
 
 class GraphicsDisplayMatrix {
 
-    data class MatrixDataInputAndOutput(
-        val input: List<List<Int>>,
-        val output: List<List<Int>>
-    )
 
     fun sampleGraphics() {
+
         // Example matrices (replace with your actual data)
         val matrixData = MatrixDataInputAndOutput(
             input = listOf(
@@ -39,32 +34,109 @@ class GraphicsDisplayMatrix {
             )
         )
 
+        val train = listOf(
+            MatrixDataInputAndOutput(
+                input = listOf(
+                    listOf(0, 1, 1, 0),
+                    listOf(0, 1, 0, 0),
+                    listOf(0, 0, 2, 2),
+                    listOf(0, 0, 2, 0)
+                ),
+                output = listOf(
+                    listOf(0, 1, 1, 0),
+                    listOf(0, 1, 1, 0),
+                    listOf(0, 0, 2, 2),
+                    listOf(0, 0, 2, 2)
+                )
+            ),
+// ... more MatrixDataInputAndOutput objects ...
+        )
+
+//        SwingUtilities.invokeLater {
+//            createAndShowMatrix(matrixData)
+//        }
+
         SwingUtilities.invokeLater {
-            createAndShowGUI(matrixData)
+//            createAndShowGUI(train)
+            createAndShowGUI()
         }
     }
 
-    // experimental debugging
-    fun doit() {
+    fun createAndShowGUI() {
+        val frame = JFrame("ARC-AGI Matrix Visualization")
+        frame.defaultCloseOperation = JFrame.EXIT_ON_CLOSE
+        frame.addWindowListener(object : WindowAdapter() {
+            override fun windowClosing(e: WindowEvent) {
+                println("Window closing")
+                System.exit(0)
+            }
+        })
 
-        SwingUtilities.invokeLater {
-            val frame = JFrame()
-            val panel = JPanel()
-            panel.border = BorderFactory.createEmptyBorder(
-                30, //top
-                30, //bottom
-                10, //left
-                30
-            ) // right
+        val contentPane = frame.contentPane
+        contentPane.layout = GridLayout(1, 2) // 1 row, 2 columns for input and output
 
-            frame.add(panel)
-            frame.defaultCloseOperation = JFrame.EXIT_ON_CLOSE
-            frame.pack()
-            frame.isVisible = true
+        val inputPanel = JPanel()
+        val outputPanel = JPanel()
+
+        contentPane.add(inputPanel)
+        contentPane.add(outputPanel)
+
+        frame.pack()
+        frame.isVisible = true
+
+        //frame.repaint(0, 0, 500, 500 )
+
+        // Cycle through the training data
+        for (task in listOfTaskData) {
+
+            val exampleIterator = task.train.listIterator().withIndex()
+            while (exampleIterator.hasNext()) {
+                val currentTask = exampleIterator.next()
+                val currentTaskIndex = currentTask.index
+                val currentTaskMatrix = currentTask.value
+                Timer(2000) { // Change matrices every 2 seconds (adjust as needed)
+                    displayMatrices(
+                        currentTaskMatrix, inputPanel, outputPanel)
+                }.start()
+            }
         }
     }
+    fun displayMatrices(matrixData: MatrixDataInputAndOutput, inputPanel: JPanel, outputPanel: JPanel) {
+// Remove previous matrices
+        inputPanel.removeAll()
+        outputPanel.removeAll()
 
-    fun createAndShowGUI(matrixData: MatrixDataInputAndOutput) {
+        // Create and add new matrices
+        val inputMatrix = createMatrixPanel(matrixData.input)
+        val outputMatrix = createMatrixPanel(matrixData.output)
+        inputPanel.add(inputMatrix)
+        outputPanel.add(outputMatrix)
+
+        // Revalidate and repaint the panels
+        inputPanel.revalidate()
+        inputPanel.repaint()
+        outputPanel.revalidate()
+        outputPanel.repaint()
+    }
+
+    fun createMatrixPanel(matrix: List<List<Int>>): JPanel {
+        val panel = JPanel()
+        val rows = matrix.size
+        val cols = matrix[0].size
+        panel.layout = GridLayout(rows, cols)
+
+        for (row in matrix) {
+            for (value in row) {
+                val block = createColoredBlock(value)
+                panel.add(block)
+            }
+        }
+
+        return panel
+    }
+
+    /* from version 1
+    fun createAndShowMatrix(matrixData: MatrixDataInputAndOutput) {
 
         // Get the default GraphicsConfiguration
         val gc = GraphicsEnvironment.getLocalGraphicsEnvironment().defaultScreenDevice.defaultConfiguration
@@ -107,6 +179,8 @@ class GraphicsDisplayMatrix {
         return panel
     }
 
+     */
+
     fun createColoredBlock(value: Int): JPanel {
         val block = JPanel()
         block.background = when (value) {
@@ -124,4 +198,27 @@ class GraphicsDisplayMatrix {
         }
         return block
     }
+
+
+    // experimental debugging
+    fun doit() {
+
+        SwingUtilities.invokeLater {
+            val frame = JFrame()
+            val panel = JPanel()
+            panel.border = BorderFactory.createEmptyBorder(
+                30, //top
+                30, //bottom
+                10, //left
+                30
+            ) // right
+
+            frame.add(panel)
+            frame.defaultCloseOperation = JFrame.EXIT_ON_CLOSE
+            frame.pack()
+            frame.isVisible = true
+        }
+    }
 }
+
+

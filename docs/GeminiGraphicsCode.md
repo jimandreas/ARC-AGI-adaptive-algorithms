@@ -2,7 +2,15 @@
 
 ## The Prompt
 
-A matrix for ARC-AGI is represented as a List<List<Int>>.  The visual representation of the matrix are colored blocks - which vary in size according to the row and column count - the larger the count the smaller the block.   Please create a kotlin program that takes the Input and Output matrices as shown below and displays them as colored blocks on a Windows 10 window.  Do not use Android functionality.  We can work on an Android form of this later.  The input matrix should be shown on the left and the corresponding output matrix should be shown on the right.
+A matrix for ARC-AGI is represented as a List<List<Int>>.  
+The visual representation of the matrix are colored blocks -
+which vary in size according to the row and column count - 
+the larger the count the smaller the block.   Please create a kotlin 
+program that takes the Input and Output matrices as shown below and 
+displays them as colored blocks on a Windows 10 window.  Do not use 
+Android functionality.  We can work on an Android form of this later.  
+The input matrix should be shown on the left and the corresponding 
+output matrix should be shown on the right.
 
 Matrix definitions - there can be two to four of these as input:
 
