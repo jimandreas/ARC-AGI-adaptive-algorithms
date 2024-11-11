@@ -1,8 +1,12 @@
-This repo downloads the ARC-AGI corpus located at:
+# ARC AGI database analysis and graphical representation experiments
+
+## ARC AGI repo location
 
 https://github.com/fchollet/ARC-AGI
 
-into an SQLite database.  Note that training data ONLY is downloaded.
+## what this section does:
+
+It parses the JSON tasks into an SQLite database.  Note that training data ONLY is downloaded.
 
 Various examinations of the data are now underway.  Stay tuned.
 
@@ -27,5 +31,11 @@ All other Tasks appear to be consistent - they either have examples
 where they have the same cell count input to output (the majority at 
 263 / 400 = 66%) or they get smaller (102 / 400 = 25.5%) or bigger (36 / 400 = 9%).
 
+## Part 2
+
+A graphical representation of the training examples is now implemented.  This work is continuing.
+
+
 ![LOGO HERE](/docs/images/logo.png)
 
+[^ARCAGI] Abstraction and Reasoning Corpus for Artificial General Intelligence (ARC-AGI)
