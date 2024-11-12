@@ -6,98 +6,91 @@
 
 import com.jimandreas.MatrixDataInputAndOutput
 import com.jimandreas.listOfTaskData
+import com.jimandreas.trainingNames
 import java.awt.*
 import java.awt.event.WindowAdapter
 import java.awt.event.WindowEvent
 import javax.swing.*
 
-
 class GraphicsDisplayMatrix {
 
+    /**
+     * create a 4 row and 3 column set of panels.
+     *    The first two columns will contine the Train input and output
+     *    respectively.
+     *    The top right on the last column will for now be a placeholder for
+     *    the Test matrix.
+     *    The bottom right will contain the next button to go to the next Task.
+     */
 
-    fun sampleGraphics() {
+    val inputPanelList: MutableList<JPanel> = mutableListOf()
+    val outputPanelList: MutableList<JPanel> = mutableListOf()
+    lateinit var testPanel: JPanel
+    lateinit var buttonPanel: JPanel
 
-        // Example matrices (replace with your actual data)
-        val matrixData = MatrixDataInputAndOutput(
-            input = listOf(
-                listOf(0, 1, 2, 3),
-                listOf(4, 5, 6, 7),
-                listOf(8, 9, 0, 0),
-                listOf(0, 0, 2, 0)
-            ),
-            output = listOf(
-                listOf(0, 1, 1, 0),
-                listOf(0, 1, 1, 0),
-                listOf(0, 0, 2, 2),
-                listOf(0, 0, 2, 2)
-            )
-        )
+    fun setupGraphics() {
 
-        val train = listOf(
-            MatrixDataInputAndOutput(
-                input = listOf(
-                    listOf(0, 1, 1, 0),
-                    listOf(0, 1, 0, 0),
-                    listOf(0, 0, 2, 2),
-                    listOf(0, 0, 2, 0)
-                ),
-                output = listOf(
-                    listOf(0, 1, 1, 0),
-                    listOf(0, 1, 1, 0),
-                    listOf(0, 0, 2, 2),
-                    listOf(0, 0, 2, 2)
-                )
-            ),
-// ... more MatrixDataInputAndOutput objects ...
-        )
+        SwingUtilities.invokeAndWait {
+            val frame = JFrame("ARC-AGI Matrix Visualization")
+            frame.defaultCloseOperation = JFrame.EXIT_ON_CLOSE
+            //frame.size = Dimension(600, 800) // Set initial size
+            frame.preferredSize = Dimension(600, 800) // Set initial size
 
-//        SwingUtilities.invokeLater {
-//            createAndShowMatrix(matrixData)
-//        }
 
-        SwingUtilities.invokeLater {
-//            createAndShowGUI(train)
-            createAndShowGUI(listOfTaskData[0].train)
+            val contentPane = frame.contentPane
+            contentPane.layout = GridLayout(4, 3)
+
+            // create the components
+            for (row in 0..3) {
+                var p = JPanel()
+                //p.background = Color.RED
+                contentPane.add(p)
+                inputPanelList.add(p)
+
+                p = JPanel()
+                //p.background = Color.BLUE
+                contentPane.add(p)
+                outputPanelList.add(p)
+
+                if (row == 0) {
+                    p = JPanel()
+                    contentPane.add(p)
+                    testPanel = p
+                } else if (row == 1) {
+                    p = JPanel()
+                    contentPane.add(p)
+                    buttonPanel = p
+                } else {
+                    p = JPanel()
+                    p.background = Color.GREEN
+                    contentPane.add(p) //placeholder in third column
+                }
+            }
+//            val matrixPanel = JPanel()
+//            matrixPanel.layout = GridLayout(1, 3) // 1 row, 3 columns (input, output, test)
+//            val inputPanel = JPanel()
+//            val outputPanel = JPanel()
+//            val testPanel = JPanel() // For the "test" matrix later
+//            matrixPanel.add(inputPanel)
+//            matrixPanel.add(outputPanel)
+//            matrixPanel.add(testPanel)
+//            contentPane.add(matrixPanel, BorderLayout.CENTER)
+
+            //val buttonPanel = JPanel()
+            //buttonPanel.layout = FlowLayout(FlowLayout.RIGHT)
+            val nextButton = JButton("Next")
+            buttonPanel.add(nextButton)
+            //contentPane.add(buttonPanel, BorderLayout.SOUTH)
+
+            frame.pack()
+            frame.isVisible = true
+
+//            var currentDataIndex = 0
+//            nextButton.addActionListener {
+//                displayMatrices(train[currentDataIndex], inputPanel, outputPanel)
+//                currentDataIndex = (currentDataIndex + 1) % train.size
+//            }
         }
-    }
-
-
-
-    fun createAndShowGUI(train: List<MatrixDataInputAndOutput>) {
-        val frame = JFrame("ARC-AGI Matrix Visualization")
-        frame.defaultCloseOperation = JFrame.EXIT_ON_CLOSE
-        frame.preferredSize = Dimension(1000, 600) // Set initial size
-
-        val contentPane = frame.contentPane
-        contentPane.layout = BorderLayout()
-
-        val matrixPanel = JPanel()
-        matrixPanel.layout = GridLayout(1, 3) // 1 row, 3 columns (input, output, test)
-        val inputPanel = JPanel()
-        val outputPanel = JPanel()
-        val testPanel = JPanel() // For the "test" matrix later
-        matrixPanel.add(inputPanel)
-        matrixPanel.add(outputPanel)
-        matrixPanel.add(testPanel)
-        contentPane.add(matrixPanel, BorderLayout.CENTER)
-
-        val buttonPanel = JPanel()
-        buttonPanel.layout = FlowLayout(FlowLayout.RIGHT)
-        val nextButton = JButton("Next")
-        buttonPanel.add(nextButton)
-        contentPane.add(buttonPanel, BorderLayout.SOUTH)
-
-        frame.pack()
-        frame.isVisible = true
-
-        var currentDataIndex = 0
-        nextButton.addActionListener {
-            displayMatrices(train[currentDataIndex], inputPanel, outputPanel)
-            currentDataIndex = (currentDataIndex + 1) % train.size
-        }
-
-        // Display the first set of matrices initially
-        displayMatrices(train[currentDataIndex], inputPanel, outputPanel)
     }
 
     fun createAndShowGUIOLD() {
@@ -125,36 +118,54 @@ class GraphicsDisplayMatrix {
         //frame.repaint(0, 0, 500, 500 )
 
         // Cycle through the training data
-        for (task in listOfTaskData) {
-
-            val exampleIterator = task.train.listIterator().withIndex()
-            while (exampleIterator.hasNext()) {
-                val currentTask = exampleIterator.next()
-                val currentTaskIndex = currentTask.index
-                val currentTaskMatrix = currentTask.value
-                Timer(2000) { // Change matrices every 2 seconds (adjust as needed)
-                    displayMatrices(
-                        currentTaskMatrix, inputPanel, outputPanel)
-                }.start()
-            }
-        }
+//        for (task in listOfTaskData) {
+//
+//            val exampleIterator = task.train.listIterator().withIndex()
+//            while (exampleIterator.hasNext()) {
+//                val currentTask = exampleIterator.next()
+//                val currentTaskIndex = currentTask.index
+//                val currentTaskMatrix = currentTask.value
+//                Timer(2000) { // Change matrices every 2 seconds (adjust as needed)
+//                    displayMatrices(
+//                        currentTaskMatrix, inputPanel, outputPanel
+//                    )
+//                }.start()
+//            }
+//        }
     }
-    fun displayMatrices(matrixData: MatrixDataInputAndOutput, inputPanel: JPanel, outputPanel: JPanel) {
+
+    fun displayMatrices(train: List<MatrixDataInputAndOutput>) {
+
+        val trainIter = train.withIndex().iterator()
+        while (trainIter.hasNext()) {
+            val next = trainIter.next()
+            val matrixData = next.value
+            val index = next.index
+
+            // TODO : handle 5 or more Examples better, punt for now
+            if (index > 3) {
+                return
+            }
+
+            val inputPanel = inputPanelList[index]
+            val outputPanel = outputPanelList[index]
+
 // Remove previous matrices
-        inputPanel.removeAll()
-        outputPanel.removeAll()
+            inputPanel.removeAll()
+            outputPanel.removeAll()
 
-        // Create and add new matrices
-        val inputMatrix = createMatrixPanel(matrixData.input)
-        val outputMatrix = createMatrixPanel(matrixData.output)
-        inputPanel.add(inputMatrix)
-        outputPanel.add(outputMatrix)
+            // Create and add new matrices
+            val inputMatrix = createMatrixPanel(matrixData.input)
+            val outputMatrix = createMatrixPanel(matrixData.output)
+            inputPanel.add(inputMatrix)
+            outputPanel.add(outputMatrix)
 
-        // Revalidate and repaint the panels
-        inputPanel.revalidate()
-        inputPanel.repaint()
-        outputPanel.revalidate()
-        outputPanel.repaint()
+            // Revalidate and repaint the panels
+            inputPanel.revalidate()
+            inputPanel.repaint()
+            outputPanel.revalidate()
+            outputPanel.repaint()
+        }
     }
 
     fun createMatrixPanel(matrix: List<List<Int>>): JPanel {
@@ -257,6 +268,69 @@ class GraphicsDisplayMatrix {
             frame.isVisible = true
         }
     }
+
+    fun sampleGraphicsForTest() {
+
+        // Example matrices (replace with your actual data)
+        val matrixData = MatrixDataInputAndOutput(
+            input = listOf(
+                listOf(0, 1, 2, 3),
+                listOf(4, 5, 6, 7),
+                listOf(8, 9, 0, 0),
+                listOf(0, 0, 2, 0)
+            ),
+            output = listOf(
+                listOf(0, 1, 1, 0),
+                listOf(0, 1, 1, 0),
+                listOf(0, 0, 2, 2),
+                listOf(0, 0, 2, 2)
+            )
+        )
+
+        val train = listOf(
+            MatrixDataInputAndOutput(
+                input = listOf(
+                    listOf(0, 1, 1, 0),
+                    listOf(0, 1, 0, 0),
+                    listOf(0, 0, 2, 2),
+                    listOf(0, 0, 2, 0)
+                ),
+                output = listOf(
+                    listOf(0, 1, 1, 0),
+                    listOf(0, 1, 1, 0),
+                    listOf(0, 0, 2, 2),
+                    listOf(0, 0, 2, 2)
+                )
+            ),
+// ... more MatrixDataInputAndOutput objects ...
+        )
+
+//        SwingUtilities.invokeLater {
+//            createAndShowMatrix(matrixData)
+//        }
+
+//        SwingUtilities.invokeLater {
+////            createAndShowGUI(train)
+//            createAndShowGUI(listOfTaskData[0].train)
+//        }
+    }
 }
 
 
+/*
+Notes:
+adding a scrollable panel:
+https://stackoverflow.com/a/18408836/7061237
+JPanel mainPanel = new JPanel(); //This would be the base panel of your UI
+JPanel p1=new JPanel();
+JPanel p2=new JPanel();
+JPanel p3=new JPanel();
+JPanel p4=new JPanel();
+JPanel newPanel = new JPanel();
+newPanel.add(p1);
+newPanel.add(p2);
+newPanel.add(p3);
+newPanel.add(p4);
+JScrollPane pane = new JScrollPane(newPanel);
+mainPanel.add(pane);
+ */

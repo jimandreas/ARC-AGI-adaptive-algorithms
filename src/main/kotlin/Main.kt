@@ -11,7 +11,8 @@ fun main() {
 
     ReadTaskData()
     val graphics = GraphicsDisplayMatrix()
-    graphics.sampleGraphics()
+    graphics.setupGraphics()
+    graphics.displayMatrices(listOfTaskData[0].train)
 //    val dops = DatabaseOps()
 //    dops.createDatabaseAndAddAllTaskData(databasePath)
 }
