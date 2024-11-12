@@ -11,6 +11,7 @@ import java.awt.*
 import java.awt.event.WindowAdapter
 import java.awt.event.WindowEvent
 import javax.swing.*
+import javax.swing.border.Border
 
 class GraphicsDisplayMatrix {
 
@@ -245,6 +246,8 @@ class GraphicsDisplayMatrix {
             9 -> Color.decode("#870C25") // brown
             else -> Color.BLACK // Default color
         }
+        val border = BorderFactory.createLineBorder(Color.LIGHT_GRAY)
+        block.border = border
         return block
     }
 
