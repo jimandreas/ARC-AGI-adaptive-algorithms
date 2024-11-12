@@ -6,8 +6,7 @@
 
 import com.jimandreas.MatrixDataInputAndOutput
 import com.jimandreas.listOfTaskData
-import java.awt.Color
-import java.awt.GridLayout
+import java.awt.*
 import java.awt.event.WindowAdapter
 import java.awt.event.WindowEvent
 import javax.swing.*
@@ -58,11 +57,50 @@ class GraphicsDisplayMatrix {
 
         SwingUtilities.invokeLater {
 //            createAndShowGUI(train)
-            createAndShowGUI()
+            createAndShowGUI(listOfTaskData[0].train)
         }
     }
 
-    fun createAndShowGUI() {
+
+
+    fun createAndShowGUI(train: List<MatrixDataInputAndOutput>) {
+        val frame = JFrame("ARC-AGI Matrix Visualization")
+        frame.defaultCloseOperation = JFrame.EXIT_ON_CLOSE
+        frame.preferredSize = Dimension(1000, 600) // Set initial size
+
+        val contentPane = frame.contentPane
+        contentPane.layout = BorderLayout()
+
+        val matrixPanel = JPanel()
+        matrixPanel.layout = GridLayout(1, 3) // 1 row, 3 columns (input, output, test)
+        val inputPanel = JPanel()
+        val outputPanel = JPanel()
+        val testPanel = JPanel() // For the "test" matrix later
+        matrixPanel.add(inputPanel)
+        matrixPanel.add(outputPanel)
+        matrixPanel.add(testPanel)
+        contentPane.add(matrixPanel, BorderLayout.CENTER)
+
+        val buttonPanel = JPanel()
+        buttonPanel.layout = FlowLayout(FlowLayout.RIGHT)
+        val nextButton = JButton("Next")
+        buttonPanel.add(nextButton)
+        contentPane.add(buttonPanel, BorderLayout.SOUTH)
+
+        frame.pack()
+        frame.isVisible = true
+
+        var currentDataIndex = 0
+        nextButton.addActionListener {
+            displayMatrices(train[currentDataIndex], inputPanel, outputPanel)
+            currentDataIndex = (currentDataIndex + 1) % train.size
+        }
+
+        // Display the first set of matrices initially
+        displayMatrices(train[currentDataIndex], inputPanel, outputPanel)
+    }
+
+    fun createAndShowGUIOLD() {
         val frame = JFrame("ARC-AGI Matrix Visualization")
         frame.defaultCloseOperation = JFrame.EXIT_ON_CLOSE
         frame.addWindowListener(object : WindowAdapter() {
