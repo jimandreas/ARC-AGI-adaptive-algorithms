@@ -4,8 +4,6 @@
     "SameParameterValue", "UnnecessaryVariable"
 )
 
-import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
-import java.awt.BorderLayout
 import java.awt.Color
 import java.awt.Dimension
 import java.awt.GridLayout
@@ -26,9 +24,12 @@ class GraphicsDisplayMatrix {
 
     val inputPanelList: MutableList<JPanel> = mutableListOf()
     val outputPanelList: MutableList<JPanel> = mutableListOf()
+
+    // the special panel list is for experiments comparing input to output
+    val specialPanelList: MutableList<JPanel> = mutableListOf()
     lateinit var testPanel: JPanel
     lateinit var buttonPanel: JPanel
-    lateinit var nameField : JTextField
+    lateinit var nameField: JTextField
 
     fun setupGraphics() {
 
@@ -39,7 +40,7 @@ class GraphicsDisplayMatrix {
             frame.preferredSize = Dimension(700, 900) // Set initial size
 
             val contentPane = frame.contentPane
-            contentPane.layout = GridLayout(4, 3)
+            contentPane.layout = GridLayout(4, 4)
 
             // create the components
             for (row in 0..3) {
@@ -57,18 +58,31 @@ class GraphicsDisplayMatrix {
                 contentPane.add(p)
                 outputPanelList.add(p)
 
-                if (row == 0) {
-                    p = JPanel()
-                    contentPane.add(p)
-                    testPanel = p
-                } else if (row == 1) {
-                    p = JPanel()
-                    contentPane.add(p)
-                    buttonPanel = p
-                } else {
-                    p = JPanel()
-                    p.background = Color.GREEN
-                    contentPane.add(p) //placeholder in third column
+                p = JPanel()
+//                p.layout = BorderLayout()
+//                p.border = BorderFactory.createLineBorder(Color.LIGHT_GRAY, 4)
+                //p.background = Color.BLACK
+                contentPane.add(p)
+                specialPanelList.add(p)
+
+                when (row) {
+                    0 -> {
+                        p = JPanel()
+                        contentPane.add(p)
+                        testPanel = p
+                    }
+
+                    1 -> {
+                        p = JPanel()
+                        contentPane.add(p)
+                        buttonPanel = p
+                    }
+
+                    else -> {
+                        p = JPanel()
+                        p.background = Color.GREEN
+                        contentPane.add(p) //placeholder in third column
+                    }
                 }
             }
 
@@ -86,18 +100,78 @@ class GraphicsDisplayMatrix {
             nextButton.addActionListener {
                 curTaskIndex += 1
                 displayMatrices()
+
+                displaySpecialInformation()
             }
         }
+    }
+
+    fun displaySpecialInformation() {
+        clearSpecialPanels()
+
+        // get the Task info
+
+        val trainTask = listOfTaskData[curTaskIndex].train
+
+        // iterate through the examples
+
+        val trainIter = trainTask.withIndex().iterator()
+        while (trainIter.hasNext()) {
+            val next = trainIter.next()
+            val matrixData = next.value
+            val index = next.index
+
+            // TODO : handle 5 or more Examples better, punt for now
+            if (index > 3) {
+                return
+            }
+
+            // only do the difference function if the input and output
+            //  row and column count match
+
+            val inputList = matrixData.input
+            val outputList = matrixData.output
+
+            val rowCount = inputList.size
+            val colCount = inputList[0].size
+
+            if (rowCount != outputList.size || colCount != outputList[0].size) {
+                continue
+            }
+
+            val theSpecialMatrix : MutableList<List<Int>> = mutableListOf()
+
+            // create a difference matrix where -1 indicates differences between input and output
+            for (i in 0 until rowCount) {
+                val tempRow :MutableList<Int> = mutableListOf()
+                for (j in 0 until colCount) {
+                    if (inputList[i][j] != outputList[i][j]) {
+                        tempRow.add(-1)
+                    } else {
+                        tempRow.add(inputList[i][j])
+                    }
+                }
+                theSpecialMatrix.add(tempRow)
+            }
+
+            // A "special" Panel was created earlier - one for each task
+            val specialPanel = specialPanelList[index]
+            val specialMatrix = createMatrixPanel(theSpecialMatrix)
+            specialPanel.add(specialMatrix)
+            specialPanel.revalidate()
+            specialPanel.repaint()
+        }
+
     }
 
     fun displayMatrices() {
         clearAllPanels()
 
-        val train = listOfTaskData[curTaskIndex].train
+        val trainTask = listOfTaskData[curTaskIndex].train
 
         nameField.text = listOfTaskData[curTaskIndex].name
 
-        val trainIter = train.withIndex().iterator()
+        val trainIter = trainTask.withIndex().iterator()
         while (trainIter.hasNext()) {
             val next = trainIter.next()
             val matrixData = next.value
@@ -125,19 +199,6 @@ class GraphicsDisplayMatrix {
         }
     }
 
-    fun clearAllPanels() {
-
-        for (i in 0 .. 3) { // hardwired!  for four (zero based) Examples.
-            val inputPanel = inputPanelList[i]
-            val outputPanel = outputPanelList[i]
-
-            // Remove previous matrices
-            inputPanel.removeAll()
-            inputPanel.repaint()
-            outputPanel.removeAll()
-            outputPanel.repaint()
-        }
-    }
 
     fun createMatrixPanel(matrix: List<List<Int>>): JPanel {
         val panel = JPanel()
@@ -155,9 +216,10 @@ class GraphicsDisplayMatrix {
         return panel
     }
 
-    fun createColoredBlock(value: Int): JPanel {
+    fun createColoredBlock(cellValue: Int): JPanel {
         val block = JPanel()
-        block.background = when (value) {
+        // block.size = Dimension(5,5) no effect
+        block.background = when (cellValue) {
             0 -> Color.decode("#000")
             1 -> Color.decode("#0074D9") // blue
             2 -> Color.decode("#FF4136") // red
@@ -168,6 +230,7 @@ class GraphicsDisplayMatrix {
             7 -> Color.decode("#FF851B") // orange
             8 -> Color.decode("#7FDBFF") // teal
             9 -> Color.decode("#870C25") // brown
+            -1 -> Color.decode("#FFFFFF") // white for special
             else -> Color.BLACK // Default color
         }
         val border = BorderFactory.createLineBorder(Color.LIGHT_GRAY)
@@ -210,5 +273,28 @@ class GraphicsDisplayMatrix {
             )
         )
     }
-}
 
+    fun clearAllPanels() {
+
+        for (i in 0..3) { // hardwired!  for four (zero based) Examples.
+            val inputPanel = inputPanelList[i]
+            val outputPanel = outputPanelList[i]
+
+            // Remove previous matrices
+            inputPanel.removeAll()
+            inputPanel.repaint()
+            outputPanel.removeAll()
+            outputPanel.repaint()
+        }
+    }
+
+    fun clearSpecialPanels() {
+        for (i in 0..3) { // hardwired!  for four (zero based) Examples.
+            val specialPanel = specialPanelList[i]
+
+            // Remove previous matrices
+            specialPanel.removeAll()
+            specialPanel.repaint()
+        }
+    }
+}
