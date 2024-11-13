@@ -29,8 +29,9 @@ fun readTaskData() {
 
         taskData.name = name
 
-        // add the output matrix size as a sorting parameter
-        taskData.matrixSize = calculateMatrixSize(taskData.train)
+        // add the input and output matrix cell counts as a sorting parameters
+        taskData.inputMatrixCellCount = calculateMatrixInputCellCount(taskData.train)
+        taskData.outputMatrixCellCount = calculateMatrixOuputCellCount(taskData.train)
 
         listOfTaskData.add(taskData)
 
@@ -50,7 +51,21 @@ fun readTaskData() {
  * all the output matrices to a grand total for this task.
  * This provides a rough complexity parameter for later sorting.
  */
-private fun calculateMatrixSize(train: List<MatrixDataInputAndOutput>): Int {
+// TODO: there is certainly clever kotlin way of doing this but for now hack it
+private fun calculateMatrixInputCellCount(train: List<MatrixDataInputAndOutput>): Int {
+    var totalMatrixCells = 0
+    for (example in train) {
+        val matrix = example.input
+        val numRows = matrix.size
+        val numCols = matrix[0].size
+        val numMatrixCells = numRows * numCols
+        totalMatrixCells += numMatrixCells
+    }
+
+    return totalMatrixCells
+}
+
+private fun calculateMatrixOuputCellCount(train: List<MatrixDataInputAndOutput>): Int {
     var totalMatrixCells = 0
     for (example in train) {
         val matrix = example.output

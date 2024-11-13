@@ -1,6 +1,8 @@
 package com.jimandreas
 
+import ExperimentalDatasets
 import GraphicsDisplayMatrix
+import listOfTaskData
 import readTaskData
 
 fun main() {
@@ -9,12 +11,10 @@ fun main() {
 
     readTaskData()
 
-    // experimental analysis:
-    // sort the Task data by the total cell count of the output matrices
+    val dataSets = ExperimentalDatasets(listOfTaskData)
 
-    val tempList =  listOfTaskData.sortedBy { it.matrixSize }
-    listOfTaskData.clear()
-    listOfTaskData = tempList.toMutableList()
+    // hack in a test of the equal dataset
+    listOfTaskData = dataSets.taskDataSortedByEqualCellCount.toMutableList()
 
     val graphics = GraphicsDisplayMatrix()
     graphics.setupGraphics()

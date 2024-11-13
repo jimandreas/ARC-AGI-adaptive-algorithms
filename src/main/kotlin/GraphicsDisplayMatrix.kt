@@ -4,8 +4,7 @@
     "SameParameterValue", "UnnecessaryVariable"
 )
 
-import com.jimandreas.MatrixDataInputAndOutput
-import com.jimandreas.listOfTaskData
+import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
 import java.awt.Color
 import java.awt.Dimension
 import java.awt.GridLayout
@@ -38,19 +37,18 @@ class GraphicsDisplayMatrix {
             //frame.size = Dimension(600, 800) // Set initial size
             frame.preferredSize = Dimension(700, 900) // Set initial size
 
-
             val contentPane = frame.contentPane
             contentPane.layout = GridLayout(4, 3)
 
             // create the components
             for (row in 0..3) {
                 var p = JPanel()
-                //p.background = Color.RED
+                //p.background = Color.BLACK
                 contentPane.add(p)
                 inputPanelList.add(p)
 
                 p = JPanel()
-                //p.background = Color.BLUE
+                //p.background = Color.BLACK
                 contentPane.add(p)
                 outputPanelList.add(p)
 
