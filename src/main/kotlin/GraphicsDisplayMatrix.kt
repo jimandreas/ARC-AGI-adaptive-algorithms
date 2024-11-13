@@ -5,6 +5,7 @@
 )
 
 import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
+import java.awt.BorderLayout
 import java.awt.Color
 import java.awt.Dimension
 import java.awt.GridLayout
@@ -43,11 +44,15 @@ class GraphicsDisplayMatrix {
             // create the components
             for (row in 0..3) {
                 var p = JPanel()
+//                p.layout = BorderLayout()
+//                p.border = BorderFactory.createLineBorder(Color.LIGHT_GRAY, 4)
                 //p.background = Color.BLACK
                 contentPane.add(p)
                 inputPanelList.add(p)
 
                 p = JPanel()
+//                p.layout = BorderLayout()
+//                p.border = BorderFactory.createLineBorder(Color.LIGHT_GRAY, 4)
                 //p.background = Color.BLACK
                 contentPane.add(p)
                 outputPanelList.add(p)
