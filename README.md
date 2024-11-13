@@ -35,6 +35,10 @@ where they have the same cell count input to output (the majority at
 
 A graphical representation of the training examples is now implemented.  This work is continuing.
 
+One experimental example - a difference between input and output matrices for one example:
+
+![difference example](docs/images/differenceColumnExample.PNG)
+
 
 ![LOGO HERE](/docs/images/logo.png)
 
