@@ -36,7 +36,7 @@ class GraphicsDisplayMatrix {
             val frame = JFrame("ARC-AGI Matrix Visualization")
             frame.defaultCloseOperation = JFrame.EXIT_ON_CLOSE
             //frame.size = Dimension(600, 800) // Set initial size
-            frame.preferredSize = Dimension(600, 800) // Set initial size
+            frame.preferredSize = Dimension(700, 900) // Set initial size
 
 
             val contentPane = frame.contentPane
