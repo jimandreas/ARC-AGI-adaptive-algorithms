@@ -46,21 +46,72 @@ fun compareValueQuantities(taskData: TaskCoordinateData): Boolean {
     return true // Quantities match for all examples
 }
 
+fun findTasksWithOnlyAdditions(tasks: List<TaskCoordinateData>): List<TaskCoordinateData> {
+    val result = mutableListOf<TaskCoordinateData>()
+
+    for (task in tasks) {
+        var onlyAdditions = true
+
+        for (example in task.train) {
+            val inputValues = example.input.flatten().toSet()
+            val outputValues = example.output.flatten().toSet()
+
+            // Check if all input values are present in the output
+            if (!outputValues.containsAll(inputValues)) {
+                onlyAdditions = false
+                break
+            }
+
+            // Check if any new values were added in the output
+            if (outputValues.size <= inputValues.size) {
+                onlyAdditions = false
+                break
+            }
+
+            // Check if the input cells remain unchanged
+            for (i in example.input.indices) {
+                for (j in example.input[0].indices) {
+                    val inputValue = example.input[i][j]
+                    val outputValue = example.output[i][j]
+                    if (inputValue != 0 && inputValue != outputValue) {
+                        onlyAdditions = false
+                        break
+                    }
+                }
+                if (!onlyAdditions) break
+            }
+        }
+
+        if (onlyAdditions) {
+            result.add(task)
+        }
+    }
+
+    return result
+}
+
 
 class ExperimentalDatasets(taskData: List<TaskCoordinateData>) {
 
     val originalTaskData = taskData
+
     // experimental analysis:
     // sort the Task data by the total cell count of the output matrices
     val taskDataSortedByOutputCellCount: List<TaskCoordinateData>
-            = taskData.sortedBy { it.outputMatrixCellCount }
+    = taskData.sortedBy { it.outputMatrixCellCount }
+
     // sort the Task data by (1) equivalence of input and output cell counts
     // and (2) then the output matrix cell count
-    val taskDataSortedByEqualCellCount: List<TaskCoordinateData>
-            = taskData.filter { it.inputMatrixCellCount == it.outputMatrixCellCount}
-        .sortedBy { it.outputMatrixCellCount }
+    val taskDataSortedByEqualCellCount: List<TaskCoordinateData> =
+        taskData.filter { it.inputMatrixCellCount == it.outputMatrixCellCount }
+            .sortedBy { it.outputMatrixCellCount }
 
-    val taskDataWhereElementsAreIdendical : List<TaskCoordinateData>
-            = taskData.filter { compareValueQuantities(it) }
+    val taskDataWhereElementsAreIdentical: List<TaskCoordinateData>
+    = taskData.filter { compareValueQuantities(it) }
+
+    fun taskDataWhereThereAreOnlyAdditions( theList: List<TaskCoordinateData>)
+    : List<TaskCoordinateData> {
+        return (findTasksWithOnlyAdditions(theList))
+    }
 
 }

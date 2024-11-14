@@ -19,6 +19,15 @@ class CellTranslationsAnalysisTest {
         cellTranslations = CellTranslationsAnalysis()
     }
 
+    /**
+     * What is interesting -
+     *    The algorithm misses that a cell was added in the "output" matrix.
+     *    This doesn't register as a "translation" as it popped up in the
+     *    output and doesn't exist in the input.
+     *
+     *    Is this a "feature" or a "bug"?
+     *    I think I will add an override to see what happens when these "popups" are excluded.
+     */
     @Test
     @DisplayName("Basic test of cell translations analysis")
     fun cellTranslationsBasicTest() {
@@ -26,7 +35,7 @@ class CellTranslationsAnalysisTest {
             listOf(0, 5, 6, 6, 0)
         )
         val output = listOf( // identical
-            listOf(5, 6, 6, 0, 0) // shift by -1 X position
+            listOf(5, 6, 6, 0, 7) // shift by -1 X position, plus a popped up value
         )
         val t = TaskCoordinateData(
             listOf(MatrixDataInputAndOutput(

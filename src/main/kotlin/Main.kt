@@ -20,16 +20,24 @@ fun main() {
     val mirrorSolutionSurvey = MirrorMatrixSolution()
     mirrorSolutionSurvey.surveyTasksForMirroringSolutions()
 
-    // an experiment to sort for identical translations
-    val identicalTranslations = CellTranslationsAnalysis()
-    identicalTranslations.surveyTasksForIdenticalTranslations()
-
     // hack in a test of the equal dataset
     //listOfTaskData = dataSets.taskDataSortedByEqualCellCount.toMutableList()
 
     // hack - display only Tasks where input and ouput "populations" match
-    listOfTaskData = dataSets.taskDataWhereElementsAreIdendical.toMutableList()
+    listOfTaskData = dataSets.taskDataWhereElementsAreIdentical.toMutableList()
     println("${listOfTaskData.size}: number of input and ouput populations match")
+
+    // NOW do the translations analysis!!
+
+    // an experiment to sort for identical translations
+    val identicalTranslations = CellTranslationsAnalysis()
+    identicalTranslations.surveyTasksForIdenticalTranslations()
+
+    // hack the hack - scan for tasks where things are only added
+    val temp = dataSets.taskDataWhereThereAreOnlyAdditions(listOfTaskData)
+    println("${temp.size} - number of Tasks where things are only added")
+    listOfTaskData = temp.toMutableList()
+
     val graphics = GraphicsDisplayMatrix()
     graphics.setupGraphics()
     graphics.displayMatrices()
