@@ -33,17 +33,11 @@ fun readTaskData() {
         taskData.inputMatrixCellCount = calculateMatrixInputCellCount(taskData.train)
         taskData.outputMatrixCellCount = calculateMatrixOuputCellCount(taskData.train)
 
-        listOfTaskData.add(taskData)
-
-        // don't display / evaluate the evaluation data!!
-//    for (t in evaluationNames) {
-//        val filePath = "$pathPrefix$evaluationPrefix$t.json"
-//        openIt(filePath)
-//    }
+        tAllTaskData.add(taskData)
     }
     val endTime = System.currentTimeMillis()
     val elapsed = endTime - t
-    println("elapsed time = $elapsed in milliseconds")
+    if (verboseFlag) println("elapsed time = $elapsed in milliseconds")
 }
 
 /**

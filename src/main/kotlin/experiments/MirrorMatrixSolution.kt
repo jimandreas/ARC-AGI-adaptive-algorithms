@@ -7,7 +7,7 @@
 package experiments
 
 import TaskCoordinateData
-import listOfTaskData
+import tTaskDataToTest
 
 class MirrorMatrixSolution {
 
@@ -75,7 +75,7 @@ class MirrorMatrixSolution {
 
     fun surveyTasksForMirroringSolutions() {
 
-        for (task in listOfTaskData) {
+        for (task in tTaskDataToTest) {
             if (testVerticalMirroringSolution(task)) {
                 println("${task.name} Vertical mirroring solves this task!")
             }

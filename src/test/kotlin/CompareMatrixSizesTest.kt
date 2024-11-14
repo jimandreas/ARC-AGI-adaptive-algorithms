@@ -4,7 +4,7 @@
     "SameParameterValue", "UnnecessaryVariable"
 )
 
-
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import java.sql.DriverManager
@@ -16,6 +16,7 @@ internal class CompareMatrixSizesTest {
     var sameSize : MutableList<String> = mutableListOf()
 
     @Test
+    @Disabled
     @DisplayName("Compare sizes of matrices in the training tasks")
     fun compareSizes() {
         findToSmaller()

@@ -111,7 +111,7 @@ class GraphicsDisplayMatrix {
 
         // get the Task info
 
-        val trainTask = listOfTaskData[curTaskIndex].train
+        val trainTask = tTaskDataToTest[curTaskIndex].train
 
         // iterate through the examples
 
@@ -167,9 +167,9 @@ class GraphicsDisplayMatrix {
     fun displayMatrices() {
         clearAllPanels()
 
-        val trainTask = listOfTaskData[curTaskIndex].train
+        val trainTask = tTaskDataToTest[curTaskIndex].train
 
-        nameField.text = listOfTaskData[curTaskIndex].name
+        nameField.text = tTaskDataToTest[curTaskIndex].name
 
         val trainIter = trainTask.withIndex().iterator()
         while (trainIter.hasNext()) {

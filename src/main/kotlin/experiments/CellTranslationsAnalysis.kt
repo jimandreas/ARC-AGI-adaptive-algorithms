@@ -6,7 +6,7 @@
 package experiments
 
 import TaskCoordinateData
-import listOfTaskData
+import tTaskDataToTest
 
 class CellTranslationsAnalysis {
 
@@ -89,7 +89,7 @@ class CellTranslationsAnalysis {
 
     fun surveyTasksForIdenticalTranslations() {
 
-        for (task in listOfTaskData) {
+        for (task in tTaskDataToTest) {
             val t = findAndGroupTranslations(task)
             if (areAllTranslationsIdentical(t)) {
                 println("${task.name} All translations are identical!!!")

@@ -7,6 +7,7 @@
 import experiments.CellTranslationsAnalysis
 import experiments.ExperimentalDatasets
 import experiments.MirrorMatrixSolution
+val temp: MutableList<Int> = mutableListOf()
 
 fun main() {
 //    val databasePath = "C:/a/j/kotlinIdea/kotlin/ARC-AGI-trainingDatabase"
@@ -14,7 +15,10 @@ fun main() {
 
     readTaskData()
 
-    val dataSets = ExperimentalDatasets(listOfTaskData)
+    tTaskDataToTest = tAllTaskData
+
+    val dataSets = ExperimentalDatasets(tTaskDataToTest)
+    val originalList = tTaskDataToTest
 
     // an experiment to survey for mirror solutions
     val mirrorSolutionSurvey = MirrorMatrixSolution()
@@ -23,20 +27,21 @@ fun main() {
     // hack in a test of the equal dataset
     //listOfTaskData = dataSets.taskDataSortedByEqualCellCount.toMutableList()
 
+    // hack the hack - scan for tasks where things are only added
+    val temp = dataSets.taskDataWhereThereAreOnlyAdditions(
+        dataSets.taskSameMatrixSizes)
+    println("${temp.size} - number of Tasks where things are only added - equal cell counts")
+
     // hack - display only Tasks where input and ouput "populations" match
-    listOfTaskData = dataSets.taskDataWhereElementsAreIdentical.toMutableList()
-    println("${listOfTaskData.size}: number of input and ouput populations match")
+    val populationsMatch = dataSets.taskDataWhereElementAbundancesAreIdentical.toMutableList()
+    println("${populationsMatch.size}: number of input and ouput populations match")
 
-    // NOW do the translations analysis!!
-
+    tTaskDataToTest = populationsMatch
     // an experiment to sort for identical translations
     val identicalTranslations = CellTranslationsAnalysis()
     identicalTranslations.surveyTasksForIdenticalTranslations()
 
-    // hack the hack - scan for tasks where things are only added
-    val temp = dataSets.taskDataWhereThereAreOnlyAdditions(listOfTaskData)
-    println("${temp.size} - number of Tasks where things are only added")
-    listOfTaskData = temp.toMutableList()
+    tTaskDataToTest = temp.toMutableList() // only things added
 
     val graphics = GraphicsDisplayMatrix()
     graphics.setupGraphics()

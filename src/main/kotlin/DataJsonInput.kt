@@ -6,7 +6,10 @@
 
 import kotlinx.serialization.Serializable
 
-var listOfTaskData: MutableList<TaskCoordinateData> = mutableListOf()
+// the focus of the current test
+var tTaskDataToTest: MutableList<TaskCoordinateData> = mutableListOf()
+
+var tAllTaskData: MutableList<TaskCoordinateData> = mutableListOf()
 
 @Serializable
 data class TaskCoordinateData(
