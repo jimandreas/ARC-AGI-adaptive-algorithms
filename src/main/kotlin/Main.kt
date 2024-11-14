@@ -2,6 +2,7 @@ package com.jimandreas
 
 import ExperimentalDatasets
 import GraphicsDisplayMatrix
+import experiments.MirrorMatrixSolution
 import listOfTaskData
 import readTaskData
 
@@ -12,6 +13,10 @@ fun main() {
     readTaskData()
 
     val dataSets = ExperimentalDatasets(listOfTaskData)
+
+    // an experiment to survey for mirror solutions
+    val mirrorSolutionSurvey = MirrorMatrixSolution()
+    mirrorSolutionSurvey.surveyTasksForMirroringSolutions()
 
     // hack in a test of the equal dataset
     listOfTaskData = dataSets.taskDataSortedByEqualCellCount.toMutableList()
