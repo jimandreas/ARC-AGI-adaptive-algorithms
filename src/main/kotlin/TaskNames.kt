@@ -4,8 +4,6 @@
     "SameParameterValue", "UnnecessaryVariable"
 )
 
-package com.jimandreas
-
 const val pathPrefix = "C:/a/ARC-AGI/data/"
 const val evaluationPrefix = "evaluation/"
 const val trainingPrefix = "training/"

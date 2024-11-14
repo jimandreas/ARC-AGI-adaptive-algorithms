@@ -7,9 +7,11 @@
 import experiments.CellTranslationsAnalysis
 import experiments.ExperimentalDatasets
 import experiments.MirrorMatrixSolution
+
 val temp: MutableList<Int> = mutableListOf()
 
 fun main() {
+
 //    val databasePath = "C:/a/j/kotlinIdea/kotlin/ARC-AGI-trainingDatabase"
 //    val databasePath = "C:\\a\\j\\kotlinIdea\\ARC-AGI-database-analysis\\DB"
 
