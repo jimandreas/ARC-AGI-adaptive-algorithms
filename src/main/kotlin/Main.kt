@@ -4,6 +4,7 @@
     "SameParameterValue", "UnnecessaryVariable", "LocalVariableName", "PropertyName"
 )
 
+import experiments.CellTranslationsAnalysis
 import experiments.ExperimentalDatasets
 import experiments.MirrorMatrixSolution
 
@@ -18,6 +19,10 @@ fun main() {
     // an experiment to survey for mirror solutions
     val mirrorSolutionSurvey = MirrorMatrixSolution()
     mirrorSolutionSurvey.surveyTasksForMirroringSolutions()
+
+    // an experiment to sort for identical translations
+    val identicalTranslations = CellTranslationsAnalysis()
+    identicalTranslations.surveyTasksForIdenticalTranslations()
 
     // hack in a test of the equal dataset
     //listOfTaskData = dataSets.taskDataSortedByEqualCellCount.toMutableList()
