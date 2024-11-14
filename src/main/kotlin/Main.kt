@@ -1,10 +1,11 @@
-package com.jimandreas
+@file:Suppress(
+    "UNUSED_VARIABLE", "MemberVisibilityCanBePrivate", "unused",
+    "ReplaceManualRangeWithIndicesCalls", "ReplaceSizeZeroCheckWithIsEmpty",
+    "SameParameterValue", "UnnecessaryVariable", "LocalVariableName", "PropertyName"
+)
 
-import ExperimentalDatasets
-import GraphicsDisplayMatrix
+import experiments.ExperimentalDatasets
 import experiments.MirrorMatrixSolution
-import listOfTaskData
-import readTaskData
 
 fun main() {
 //    val databasePath = "C:/a/j/kotlinIdea/kotlin/ARC-AGI-trainingDatabase"
@@ -19,8 +20,11 @@ fun main() {
     mirrorSolutionSurvey.surveyTasksForMirroringSolutions()
 
     // hack in a test of the equal dataset
-    listOfTaskData = dataSets.taskDataSortedByEqualCellCount.toMutableList()
+    //listOfTaskData = dataSets.taskDataSortedByEqualCellCount.toMutableList()
 
+    // hack - display only Tasks where input and ouput "populations" match
+    listOfTaskData = dataSets.taskDataWhereElementsAreIdendical.toMutableList()
+    println("${listOfTaskData.size}: number of input and ouput populations match")
     val graphics = GraphicsDisplayMatrix()
     graphics.setupGraphics()
     graphics.displayMatrices()

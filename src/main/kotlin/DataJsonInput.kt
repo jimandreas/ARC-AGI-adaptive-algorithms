@@ -27,17 +27,3 @@ data class MatrixDataInputAndOutput(
 @Serializable
 data class FileInfo(val name: String, val download_url: String)
 
-class ExperimentalDatasets(taskData: List<TaskCoordinateData>) {
-
-    val originalTaskData = taskData
-    // experimental analysis:
-    // sort the Task data by the total cell count of the output matrices
-    val taskDataSortedByOutputCellCount: List<TaskCoordinateData>
-        = taskData.sortedBy { it.outputMatrixCellCount }
-    // sort the Task data by (1) equivalence of input and output cell counts
-    // and (2) then the output matrix cell count
-    val taskDataSortedByEqualCellCount: List<TaskCoordinateData>
-        = taskData.filter { it.inputMatrixCellCount == it.outputMatrixCellCount}
-        .sortedBy { it.outputMatrixCellCount }
-
-}
