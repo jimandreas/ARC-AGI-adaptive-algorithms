@@ -1,23 +1,3 @@
-/*
-plugins {
-    kotlin("jvm") version "2.0.20"
-}
-
-group = "com.jimandreas"
-version = "1.0-SNAPSHOT"
-
-repositories {
-    mavenCentral()
-}
-
-dependencies {
-    testImplementation(kotlin("test"))
-}
-
-tasks.test {
-    useJUnitPlatform()
-}*/
-
 plugins {
     kotlin("jvm") version "1.8.22" // Use the latest Kotlin version
     kotlin("plugin.serialization") version "2.0.21"
@@ -46,11 +26,37 @@ dependencies {
 
 }
 
-tasks.test {
-    useJUnitPlatform()
-}
+//tasks.test {
+//    useJUnitPlatform()
+//}
 
 kotlin {
     jvmToolchain(22) // Use Java 17 or higher
+}
+
+tasks {
+    test {
+        useJUnitPlatform()
+
+        addTestListener(object : TestListener {
+            override fun beforeSuite(suite: TestDescriptor) {}
+            override fun beforeTest(testDescriptor: TestDescriptor) {}
+            override fun afterTest(testDescriptor: TestDescriptor, result: TestResult) {}
+
+            override fun afterSuite(suite: TestDescriptor, result: TestResult) {
+                val suiteName = suite.name
+                println(suiteName)
+                if (suiteName.contains("Test Executor")) { // root suite
+                    println(
+                        "Test summary: ${result.testCount} tests, " +
+                                "${result.successfulTestCount} succeeded, " +
+                                "${result.failedTestCount} failed, " +
+                                "${result.skippedTestCount} skipped"
+                    )
+
+                }
+            }
+        })
+    }
 }
 

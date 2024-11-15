@@ -1,7 +1,9 @@
 @file:Suppress(
     "UNUSED_VARIABLE", "MemberVisibilityCanBePrivate", "unused",
     "ReplaceManualRangeWithIndicesCalls", "ReplaceSizeZeroCheckWithIsEmpty",
-    "SameParameterValue", "UnnecessaryVariable"
+    "SameParameterValue", "UnnecessaryVariable", "RedundantSuppression", "RedundantSuppression", "RedundantSuppression",
+    "RedundantSuppression", "RedundantSuppression", "RedundantSuppression", "RedundantSuppression",
+    "RedundantSuppression", "RedundantSuppression", "RedundantSuppression", "RedundantSuppression"
 )
 
 import org.junit.jupiter.api.Disabled

@@ -1,5 +1,5 @@
 @file:Suppress(
-    "UNUSED_VARIABLE", "MemberVisibilityCanBePrivate", "unused",
+    "RedundantSuppression", "UNUSED_VARIABLE", "MemberVisibilityCanBePrivate", "unused",
     "ReplaceManualRangeWithIndicesCalls", "ReplaceSizeZeroCheckWithIsEmpty",
     "SameParameterValue", "UnnecessaryVariable"
 )

@@ -1,12 +1,11 @@
 @file:Suppress(
-    "UNUSED_VARIABLE", "MemberVisibilityCanBePrivate", "unused",
+    "RedundantSuppression", "UNUSED_VARIABLE", "MemberVisibilityCanBePrivate", "unused",
     "ReplaceManualRangeWithIndicesCalls", "ReplaceSizeZeroCheckWithIsEmpty",
     "SameParameterValue", "UnnecessaryVariable", "LocalVariableName", "PropertyName"
 )
 
 import experiments.CellTranslationsAnalysis
 import experiments.ExperimentalDatasets
-import solutions.MirrorMatrixSolution
 import solutions.SolutionOrganizer
 
 val temp: MutableList<Int> = mutableListOf()
