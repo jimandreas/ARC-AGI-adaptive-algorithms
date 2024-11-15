@@ -41,6 +41,7 @@ class ExperimentalDatasets(taskData: List<TaskCoordinateData>) {
 		val tbigger = taskBiggerMatrixSizes.size
 		println("Reality check: smaller size quantity $tsmaller bigger $tbigger total ${tsmaller + tbigger} ")
 
+
 	}
 
 	// specialized subsets:
@@ -56,15 +57,17 @@ class ExperimentalDatasets(taskData: List<TaskCoordinateData>) {
 	val taskDataWhereElementAbundancesAreIdentical: List<TaskCoordinateData> =
 		taskData.filter { compareValueQuantities(it) }
 
-	fun taskDataWhereThereAreOnlyAdditions(theList: List<TaskCoordinateData>)
-			: List<TaskCoordinateData> {
-		return (findTasksWithOnlyAdditions(theList))
-	}
+	// tasks where cells are added in the output, otherwise nothing is changed.
+	val taskDataWhereThereAreOnlyAdditions  = findTasksWithOnlyAdditions(originalTaskData)
 
 	// experimental analysis:
 	// sort the Task data by the total cell count of the output matrices
 	val taskDataSortedByOutputCellCount: List<TaskCoordinateData> = taskData.sortedBy { it.outputMatrixCellCount }
 
+	init {
+		println("${taskDataWhereThereAreOnlyAdditions.size} - number of Tasks where things are only added")
+
+	}
 	/*
 	Gemini prompt: The data in the input and output matrices are
 	integers in the range of 0 to 9.  Please create a

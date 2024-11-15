@@ -23,31 +23,25 @@ fun main() {
     val dataSets = ExperimentalDatasets(tTaskDataToTest)
     val originalList = tTaskDataToTest
 
+    // this is now the master route to formally solving Tasks.
+    //    experimental stuff will still go in "experiments" randomly.
     val solutionOrganizer = SolutionOrganizer(dataSets)
-
     solutionOrganizer.trySolutions()
 
-    // hack in a test of the equal dataset
-    //listOfTaskData = dataSets.taskDataSortedByEqualCellCount.toMutableList()
-
-    // hack the hack - scan for tasks where things are only added
-    val temp = dataSets.taskDataWhereThereAreOnlyAdditions(
-        dataSets.taskSameMatrixSizes)
-    println("${temp.size} - number of Tasks where things are only added - equal cell counts")
 
     // hack - display only Tasks where input and ouput "populations" match
     val populationsMatch = dataSets.taskDataWhereElementAbundancesAreIdentical.toMutableList()
     println("${populationsMatch.size}: number of input and ouput populations match")
 
     tTaskDataToTest = populationsMatch
+
     // an experiment to sort for identical translations
     val identicalTranslations = CellTranslationsAnalysis()
     identicalTranslations.surveyTasksForIdenticalTranslations()
 
-    tTaskDataToTest = temp.toMutableList() // only things added
-
     // print solutions so far!
     prettyPrintSolutions(solvedTasks.toList())
+
     val graphics = GraphicsDisplayMatrix()
     graphics.setupGraphics()
     graphics.displayMatrices()
