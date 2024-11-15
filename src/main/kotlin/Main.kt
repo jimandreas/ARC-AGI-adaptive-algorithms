@@ -46,10 +46,18 @@ fun main() {
 
     tTaskDataToTest = temp.toMutableList() // only things added
 
+    // print solutions so far!
+    prettyPrintSolutions(solvedTasks.toList())
     val graphics = GraphicsDisplayMatrix()
     graphics.setupGraphics()
     graphics.displayMatrices()
 
 //    val dops = DatabaseOps()
 //    dops.createDatabaseAndAddAllTaskData(databasePath)
+}
+
+fun prettyPrintSolutions(solved: List<SolvedTasks>) {
+    for (s in solved) {
+        println("Task ${s.taskname} solved by ${s.solvedBy}")
+    }
 }

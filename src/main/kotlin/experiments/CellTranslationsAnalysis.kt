@@ -92,7 +92,7 @@ class CellTranslationsAnalysis {
         for (task in tTaskDataToTest) {
             val t = findAndGroupTranslations(task)
             if (areAllTranslationsIdentical(t)) {
-                println("${task.name} All translations are identical!!!")
+                println("${task.name} All translations are identical!!! (needs work)")
             }
         }
 

@@ -3,13 +3,13 @@
     "ReplaceManualRangeWithIndicesCalls", "ReplaceSizeZeroCheckWithIsEmpty",
     "SameParameterValue", "UnnecessaryVariable", "LocalVariableName", "PropertyName"
 )
-package experiments
 
-import solutions.MirrorMatrixSolution
+package solutions
+
+import compareMatrices
 import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Test
-
 import org.junit.jupiter.api.DisplayName
+import org.junit.jupiter.api.Test
 
 class MirrorMatrixSolutionTest {
 
@@ -44,7 +44,7 @@ class MirrorMatrixSolutionTest {
             listOf(0, 1, 0),
             listOf(0, 1, 2)
         )
-        val result = mirrorAlg.compareMatrices(output, expectedOutput)
+        val result = compareMatrices(output, expectedOutput)
 
         val failInput = listOf(
             listOf(0, 1, 2),
@@ -57,7 +57,7 @@ class MirrorMatrixSolutionTest {
         assert(result)
 
         val failOutput = mirrorAlg.mirrorMatrixVertically(failInput)
-        val failResult = mirrorAlg.compareMatrices(failOutput, expectedOutput)
+        val failResult = compareMatrices(failOutput, expectedOutput)
 
         assert(!failResult)
 
@@ -84,7 +84,7 @@ class MirrorMatrixSolutionTest {
             listOf(1, 0, 1),
             listOf(0, 1, 0),
         )
-        val result = mirrorAlg.compareMatrices(output, expectedOutput)
+        val result = compareMatrices(output, expectedOutput)
 
         val failInput = listOf(
             listOf(2, 0, 3),
@@ -95,9 +95,55 @@ class MirrorMatrixSolutionTest {
         assert(result)
 
         val failOutput = mirrorAlg.mirrorMatrixHorizontally(failInput)
-        val failResult = mirrorAlg.compareMatrices(failOutput, expectedOutput)
+        val failResult = compareMatrices(failOutput, expectedOutput)
 
         assert(!failResult)
 
+    }
+
+    @Test
+    fun mirrorMatrixDownwardDiagonalTest() {
+        val matrix = listOf(
+            listOf(1, 2, 3),
+            listOf(4, 5, 6),
+            listOf(7, 8, 9)
+        )
+
+        val result = mirrorAlg.mirrorMatrixDownwardDiagonal(matrix)
+
+        println("Mirrored Downward:")
+        println(result)
+
+        val matrixExpected = listOf(
+            listOf(1, 4, 7),
+            listOf(2, 5, 8),
+            listOf(3, 6, 9)
+        )
+
+        val areTheyEqual = compareMatrices(result, matrixExpected)
+        println("are they equal? $areTheyEqual")
+
+    }
+
+    @Test
+    fun mirrorMatrixUpwardDiagonalTest() {
+        val matrix = listOf(
+            listOf(1, 2, 3),
+            listOf(4, 5, 6),
+            listOf(7, 8, 9)
+        )
+
+        val mirroredUpward = mirrorAlg.mirrorMatrixUpwardDiagonal(matrix)
+        println("Mirrored Upward:")
+        println(mirroredUpward)
+
+        val matrixExpected = listOf(
+            listOf(9, 6, 3),
+            listOf(8, 5, 2),
+            listOf(7, 4, 1)
+        )
+
+        val areTheyEqual = compareMatrices(mirroredUpward, matrixExpected)
+        println("are they equal? $areTheyEqual")
     }
 }

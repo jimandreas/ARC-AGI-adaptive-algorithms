@@ -11,6 +11,8 @@ var tTaskDataToTest: MutableList<TaskCoordinateData> = mutableListOf()
 
 var tAllTaskData: MutableList<TaskCoordinateData> = mutableListOf()
 
+
+
 @Serializable
 data class TaskCoordinateData(
     val train: List<MatrixDataInputAndOutput>,
@@ -29,4 +31,11 @@ data class MatrixDataInputAndOutput(
 // Data class to represent the file information from the GitHub API
 @Serializable
 data class FileInfo(val name: String, val download_url: String)
+
+data class SolvedTasks(
+    val task: TaskCoordinateData,
+    val taskname: String,
+    val solvedBy: String
+)
+var solvedTasks: MutableList<SolvedTasks> = mutableListOf()
 
