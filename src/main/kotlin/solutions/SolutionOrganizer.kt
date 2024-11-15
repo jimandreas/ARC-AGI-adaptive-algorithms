@@ -8,7 +8,12 @@ package solutions
 
 import experiments.ExperimentalDatasets
 
-class SolutionOrganizer(ed: ExperimentalDatasets) {
+class SolutionOrganizer(val ed: ExperimentalDatasets) {
+
+    fun trySolutions() {
+        val mms = MirrorMatrixSolution(ed)
+        mms.surveyTasksForMirroringSolutions()
+    }
 
 
 }

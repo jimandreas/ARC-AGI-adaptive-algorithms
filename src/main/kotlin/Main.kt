@@ -7,6 +7,7 @@
 import experiments.CellTranslationsAnalysis
 import experiments.ExperimentalDatasets
 import solutions.MirrorMatrixSolution
+import solutions.SolutionOrganizer
 
 val temp: MutableList<Int> = mutableListOf()
 
@@ -22,9 +23,9 @@ fun main() {
     val dataSets = ExperimentalDatasets(tTaskDataToTest)
     val originalList = tTaskDataToTest
 
-    // an experiment to survey for mirror solutions
-    val mirrorSolutionSurvey = MirrorMatrixSolution()
-    mirrorSolutionSurvey.surveyTasksForMirroringSolutions()
+    val solutionOrganizer = SolutionOrganizer(dataSets)
+
+    solutionOrganizer.trySolutions()
 
     // hack in a test of the equal dataset
     //listOfTaskData = dataSets.taskDataSortedByEqualCellCount.toMutableList()

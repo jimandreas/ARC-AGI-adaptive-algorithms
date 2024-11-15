@@ -10,7 +10,7 @@ import TaskCoordinateData
 import experiments.ExperimentalDatasets
 import tTaskDataToTest
 
-class MirrorMatrixSolution(ed: ExperimentalDatasets) {
+class MirrorMatrixSolution(val ed: ExperimentalDatasets) {
 
     fun mirrorMatrixVertically(matrix: List<List<Int>>): List<List<Int>> {
         return matrix.reversed()
@@ -76,7 +76,9 @@ class MirrorMatrixSolution(ed: ExperimentalDatasets) {
 
     fun surveyTasksForMirroringSolutions() {
 
-        for (task in tTaskDataToTest) {
+        val taskDataList = ed.taskSquareMatrix
+
+        for (task in taskDataList) {
             if (testVerticalMirroringSolution(task)) {
                 println("${task.name} Vertical mirroring solves this task!")
             }
