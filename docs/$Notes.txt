@@ -1,0 +1,37 @@
+Notes text file
+
+Task decomposition
+
+tAllTaskData - all data read in from training (or later - evaluation) (DataJsonInput)
+
+further partitioning in FilterTasksBasedOnCriteria.kt:
+
+==================
+SAME SIZE
+taskSameMatrixSize - input and output cell counts are equal
+
+Further breakdown follows
+==================
+NOT SAME SIZE
+taskNotSameMatrixSize - checked to see if Same and Not Same add to 400 tasks - they do.
+
+further divided into:
+---------------------
+SMALLER
+taskSmallerMatrixSize - there are 36 of these
+strategy notes here:
+
+BIGGER
+taskBiggerMatrixSizes - there are 102 of these
+strategy notes here:
+---------------------
+
+==================================
+VARIOUS FOCUSED SOLUTION STATEGIES
+==================================
+
+Mirroring -
+  criteria - input and output matrixes equal
+  horizontal and vertical mirroring
+  sub-criteria - diagonal mirroring
+    matrix must be square

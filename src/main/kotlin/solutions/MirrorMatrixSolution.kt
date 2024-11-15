@@ -4,12 +4,13 @@
     "SameParameterValue", "UnnecessaryVariable", "LocalVariableName", "PropertyName"
 )
 
-package experiments
+package solutions
 
 import TaskCoordinateData
+import experiments.ExperimentalDatasets
 import tTaskDataToTest
 
-class MirrorMatrixSolution {
+class MirrorMatrixSolution(ed: ExperimentalDatasets) {
 
     fun mirrorMatrixVertically(matrix: List<List<Int>>): List<List<Int>> {
         return matrix.reversed()

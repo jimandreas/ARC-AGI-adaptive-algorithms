@@ -6,7 +6,7 @@
 
 import experiments.CellTranslationsAnalysis
 import experiments.ExperimentalDatasets
-import experiments.MirrorMatrixSolution
+import solutions.MirrorMatrixSolution
 
 val temp: MutableList<Int> = mutableListOf()
 

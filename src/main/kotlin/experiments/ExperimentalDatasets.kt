@@ -23,13 +23,31 @@ class ExperimentalDatasets(taskData: List<TaskCoordinateData>) {
         taskData.filter { it.inputMatrixCellCount != it.outputMatrixCellCount }
             .sortedBy { it.outputMatrixCellCount }
 
-    // now see if the size of the above to lists adds to 400 - the number of training tasks
+    val taskSmallerMatrixSizes: List<TaskCoordinateData> =
+        taskNotSameMatrixSizes.filter { it.inputMatrixCellCount < it.outputMatrixCellCount }
+            .sortedBy { it.outputMatrixCellCount }
 
-    init {
+    val taskBiggerMatrixSizes: List<TaskCoordinateData> =
+        taskNotSameMatrixSizes.filter { it.inputMatrixCellCount > it.outputMatrixCellCount }
+            .sortedBy { it.outputMatrixCellCount }
+
+    // now see if the size of the above to lists adds to 400 - the number of training tasks
+    init {  // reality check.
         val tss = taskSameMatrixSizes.size
         val tnss = taskNotSameMatrixSizes.size
-        println("equal sized tasks quantity $tss not same $tnss total ${tss + tnss} ")
+        println("Reality check: equal sized tasks quantity $tss not same $tnss total ${tss + tnss} ")
+        // also check to see if the small/bigger add to tnss
+        val tsmaller = taskSmallerMatrixSizes.size
+        val tbigger = taskBiggerMatrixSizes.size
+        println("Reality check: smaller size quantity $tsmaller bigger $tbigger total ${tsmaller + tbigger} ")
+
     }
+
+    // specialized subsets:
+
+    // square matrix - used for mirroring, ...
+    val taskSquareMatrix: List<TaskCoordinateData> = filterTasksForSquareMatrices(taskSameMatrixSizes)
+
 
     // this filter is really for comparing the abundance of the
     //   element values from the input to the output.
@@ -45,8 +63,7 @@ class ExperimentalDatasets(taskData: List<TaskCoordinateData>) {
 
     // experimental analysis:
     // sort the Task data by the total cell count of the output matrices
-    val taskDataSortedByOutputCellCount: List<TaskCoordinateData>
-     = taskData.sortedBy { it.outputMatrixCellCount }
+    val taskDataSortedByOutputCellCount: List<TaskCoordinateData> = taskData.sortedBy { it.outputMatrixCellCount }
 
     /*
     Gemini prompt: The data in the input and output matrices are
@@ -124,6 +141,24 @@ class ExperimentalDatasets(taskData: List<TaskCoordinateData>) {
             if (onlyAdditions) {
                 result.add(task)
             }
+        }
+        return result
+    }
+
+    fun filterTasksForSquareMatrices(tasks: List<TaskCoordinateData>): List<TaskCoordinateData> {
+        val result = mutableListOf<TaskCoordinateData>()
+        for (task in tasks) {
+            for (example in task.train) {
+                val inputRowSize = example.input.size
+                val outputRowSize = example.output.size
+                val inputColSize = example.input[0].size
+                val outputColSize = example.output[0].size
+
+                if ((inputRowSize != inputColSize) || (outputRowSize != outputColSize)) {
+                    continue
+                }
+            }
+            result.add(task)
         }
         return result
     }
