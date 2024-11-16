@@ -1,4 +1,4 @@
-# ARC AGI database analysis and graphical representation experiments
+# ARC AGI adaptive algorithms and raphical representation experiments
 
 ## ARC AGI repo location
 
