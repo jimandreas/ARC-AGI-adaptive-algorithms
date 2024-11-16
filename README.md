@@ -1,4 +1,4 @@
-# ARC AGI adaptive algorithms and raphical representation experiments
+# ARC AGI adaptive algorithms and graphical representation experiments
 
 ## ARC AGI repo location
 
@@ -19,5 +19,3 @@ Attempting to solve categories of the ARC AGI puzzles.
 7 puzzles solved - 1.75% [Nov 2024]
 
 ![LOGO HERE](/docs/images/logo.png)
-
-[^ARCAGI] Abstraction and Reasoning Corpus for Artificial General Intelligence (ARC-AGI)
