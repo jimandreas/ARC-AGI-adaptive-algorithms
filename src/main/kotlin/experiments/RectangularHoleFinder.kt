@@ -14,10 +14,18 @@ class RectangularHoleFinder {
 	}
 
 	// This is version 2 of the hole finder from Google Gemini
+	//   Plus debugging and refinement added.
+	//   The hole must be COMPLETELY SURROUNDED by non-zero values!
 
 	fun findRectangularHoles(matrix: List<List<Int>>): List<Set<Pair<Int, Int>>> {
 		val rows = matrix.size
-		val cols = matrix.firstOrNull()?.size ?: 0
+		val cols = matrix[0].size
+
+		// the matrix must be at least a 3x3 in size to surround a hole!
+		if ((rows < 3) || (cols < 3)) {
+			return(listOf())
+		}
+
 		val visited = mutableSetOf<Pair<Int, Int>>()
 		val holes = mutableListOf<Set<Pair<Int, Int>>>()
 
@@ -83,8 +91,8 @@ class RectangularHoleFinder {
 			return true
 		}
 
-		for (row in 0 until rows) {
-			for (col in 0 until cols) {
+		for (row in 1 until rows -1) {
+			for (col in 1 until cols-1) {
 				if (isValid(row, col)) {
 					val hole = exploreHole(row, col)
 					if (isEnclosedRectangular(hole)) {

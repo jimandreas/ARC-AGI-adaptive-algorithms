@@ -10,15 +10,14 @@ package experiments
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
-import kotlin.math.exp
 
-class RectangularHoleFinderTest {
+class RectangularHoleFinderGrokVersionTest {
 
-	lateinit var rectangularHoleFinder: RectangularHoleFinder
+	lateinit var rectangularHoleFinderGrok: RectangularHoleFinderGrokVersion
 
 	@BeforeEach
 	fun setUp() {
-		rectangularHoleFinder = RectangularHoleFinder()
+		rectangularHoleFinderGrok = RectangularHoleFinderGrokVersion()
 	}
 
 	@Test
@@ -31,8 +30,9 @@ class RectangularHoleFinderTest {
 			listOf(1, 1, 1, 1, 1)
 		)
 
-		val holes = rectangularHoleFinder.findRectangularHoles(matrix)
-		println(holes)  // Output: [[(1, 1), (1, 2), (2, 1), (2, 2)]]
+		val result = rectangularHoleFinderGrok.findEnclosedRectangle(matrix)
+		println(result)
+
 	}
 
 	@Test
@@ -44,29 +44,30 @@ class RectangularHoleFinderTest {
 			listOf(7, 7, 7)
 		)
 
-		val holes = rectangularHoleFinder.findRectangularHoles(matrix)
-		assert(holes.isEmpty())
+		val result1 = rectangularHoleFinderGrok.findEnclosedRectangle(matrix)
+		println(result1)
 
 		val matrix2 = listOf(
 			listOf(7, 7, 7),
 			listOf(7, 0, 7),
 			listOf(7, 7, 7)
 		)
-		val holes2 = rectangularHoleFinder.findRectangularHoles(matrix2)
+		val result2 = rectangularHoleFinderGrok.findEnclosedRectangle(matrix2)
+		println(result2)
 
-		val expectedResult: List<Set<Pair<Int, Int>>> = listOf(setOf(Pair(1, 1)))
-		if (expectedResult == holes2) {
-			println("yup")
-		}
-		println(holes2)
+//		val expectedResult: List<Set<Pair<Int, Int>>> = listOf(setOf(Pair(1, 1)))
+//		if (expectedResult == holes2) {
+//			println("yup")
+//		}
+//		println(holes2)
 
 		val matrix3 = listOf(
 			listOf(0,0,0),
 			listOf(0,0,0),
 			listOf(0,0,0)
 		)
-		val holes3 = rectangularHoleFinder.findRectangularHoles(matrix3)
-		println("number 3: ${holes3}")
+		val result3 = rectangularHoleFinderGrok.findEnclosedRectangle(matrix3)
+		println(result3)
 
 	}
 }
