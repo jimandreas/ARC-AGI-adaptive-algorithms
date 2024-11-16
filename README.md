@@ -16,7 +16,7 @@ One experimental example - a difference between input and output matrices for on
 
 Attempting to solve categories of the ARC AGI puzzles.
 
-Current status: 7 of 400 puzzles solved - 0.02% [Nov 2024]
+7 puzzles solved - 1.75% [Nov 2024]
 
 ![LOGO HERE](/docs/images/logo.png)
 
