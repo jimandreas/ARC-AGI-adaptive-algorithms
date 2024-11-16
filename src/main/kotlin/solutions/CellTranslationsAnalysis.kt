@@ -4,11 +4,35 @@
 	"SameParameterValue", "UnnecessaryVariable", "LocalVariableName", "PropertyName"
 )
 
-package experiments
+package solutions
 
+import SolvedTasks
 import TaskCoordinateData
-import tTaskDataToTest
+import experiments.ExperimentalDatasets
+import solvedTasks
 
+/**
+ * The filter has found where the input and output matrix cell populations
+ * are identical. The change from input to output matrices appears to be
+ * mostly a matter of some cells "translating" from one location to
+ * another in the matrix. Please write a function that (1) lists the
+ * translations in a data structure sorted by cell content (ignore cells
+ * with zero as the content), and (2) groups the "x" and "y" directions
+ * identical translations, and (3) provide a count of the quantity of translations
+ * in the group.
+ */
+
+/**
+ * Notes:
+ * There are tons of translation "types" here:
+ * uniform direction - all colors, one color
+ * "in direction of" - move in direction of something (one color to another)
+ * "go to corners of"
+ * "go to interior of", etc
+ * Easy to eyeball with the visualization.   Harder to formally filter.
+ *
+ * These patterns will need a big of work to deduce from the translation data!
+ */
 class CellTranslationsAnalysis {
 
 	data class Translation(
@@ -18,6 +42,12 @@ class CellTranslationsAnalysis {
 		val toCol: Int,
 		val value: Int
 	)
+
+	lateinit var ed: ExperimentalDatasets
+
+	fun setExperimentalDatasets(edIn: ExperimentalDatasets) {
+		ed = edIn
+	}
 
 	fun findAndGroupTranslations(taskData: TaskCoordinateData): Map<Int, Map<Pair<Int, Int>, Int>> {
 		val translationsByValue = mutableMapOf<Int, MutableMap<Pair<Int, Int>, Int>>()
@@ -89,12 +119,21 @@ class CellTranslationsAnalysis {
 		return allTranslations.size == 1
 	}
 
-	fun surveyTasksForIdenticalTranslations() {
+	/**
+	 * begin working through various translation "strategies"
+	 *    to look for solutions.
+	 */
+	fun surveyTranslations() {
+		surveyTasksForIdenticalTranslations()
+	}
 
-		for (task in tTaskDataToTest) {
+	// look for Tasks where all blocks move uniformly in some direction
+	fun surveyTasksForIdenticalTranslations() {
+		for (task in ed.taskDataWhereElementAbundancesAreIdentical) {
 			val t = findAndGroupTranslations(task)
 			if (areAllTranslationsIdentical(t)) {
 				println("${task.name} All translations are identical!!!")
+				solvedTasks.add(SolvedTasks(task, task.name,"identical translations"))
 			}
 		}
 	}

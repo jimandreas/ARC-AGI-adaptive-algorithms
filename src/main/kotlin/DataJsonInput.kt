@@ -7,7 +7,7 @@
 import kotlinx.serialization.Serializable
 
 // the focus of the current test
-var tTaskDataToTest: MutableList<TaskCoordinateData> = mutableListOf()
+var tTaskDataToDisplayInGUI: MutableList<TaskCoordinateData> = mutableListOf()
 
 var tAllTaskData: MutableList<TaskCoordinateData> = mutableListOf()
 

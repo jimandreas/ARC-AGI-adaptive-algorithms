@@ -2,7 +2,7 @@
     "UNUSED_VARIABLE", "MemberVisibilityCanBePrivate", "unused",
     "ReplaceManualRangeWithIndicesCalls", "ReplaceSizeZeroCheckWithIsEmpty",
     "SameParameterValue", "UnnecessaryVariable", "LocalVariableName", "PropertyName", "RedundantSuppression",
-    "RedundantSuppression", "RedundantSuppression", "RedundantSuppression", "RedundantSuppression",
+    
     "RedundantSuppression", "RedundantSuppression"
 )
 
