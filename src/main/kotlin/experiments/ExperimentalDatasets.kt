@@ -11,8 +11,6 @@ import TaskCoordinateData
 
 class ExperimentalDatasets(taskData: List<TaskCoordinateData>) {
 
-	val originalTaskData = taskData
-
 	// sort the Task data by (1) equivalence of input and output cell counts
 	// and (2) then the output matrix cell count
 	val taskSameMatrixSizes: List<TaskCoordinateData> =
@@ -58,7 +56,7 @@ class ExperimentalDatasets(taskData: List<TaskCoordinateData>) {
 		taskData.filter { compareValueQuantities(it) }
 
 	// tasks where cells are added in the output, otherwise nothing is changed.
-	val taskDataWhereThereAreOnlyAdditions  = findTasksWithOnlyAdditions(originalTaskData)
+	val taskDataWhereThereAreOnlyAdditions  = findTasksWithOnlyAdditions(taskData)
 
 	// experimental analysis:
 	// sort the Task data by the total cell count of the output matrices
@@ -68,6 +66,28 @@ class ExperimentalDatasets(taskData: List<TaskCoordinateData>) {
 		println("${taskDataWhereThereAreOnlyAdditions.size} - number of Tasks where things are only added")
 
 	}
+
+	// survey the data for rectangular holes
+    // the list is accumulated in taskDataWithRectangularHoles
+	val taskDataWithRectangularHoles: MutableList<TaskCoordinateData> = mutableListOf()
+	init {
+		val rectangularHoleFinder = RectangularHoleFinder()
+		for (t in taskData) {
+			var holeFound = true
+			for (example in t.train) {
+				val result = rectangularHoleFinder.findRectangularHoles(example.input)
+				if (result.isEmpty()) {
+					holeFound = false
+				}
+			}
+			if (holeFound) {
+				taskDataWithRectangularHoles.add(t)
+			}
+		}
+	}
+
+
+
 	/*
 	Gemini prompt: The data in the input and output matrices are
 	integers in the range of 0 to 9.  Please create a

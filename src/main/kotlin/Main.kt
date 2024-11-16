@@ -15,20 +15,24 @@ fun main() {
 //    val databasePath = "C:\\a\\j\\kotlinIdea\\ARC-AGI-database-analysis\\DB"
 
     readTaskData()
-    val dataSets = ExperimentalDatasets(tAllTaskData)
+    val ed = ExperimentalDatasets(tAllTaskData)
 
     // this is now the master route to formally solving Tasks.
     //    experimental stuff will still go in "experiments" randomly.
-    val solutionOrganizer = SolutionOrganizer(dataSets)
+    val solutionOrganizer = SolutionOrganizer(ed)
     solutionOrganizer.trySolutions()
 
     // hack - display only Tasks where input and ouput "populations" match
-    val populationsMatch = dataSets.taskDataWhereElementAbundancesAreIdentical.toMutableList()
+    val populationsMatch = ed.taskDataWhereElementAbundancesAreIdentical.toMutableList()
     println("${populationsMatch.size}: number of input and ouput populations match")
-    tTaskDataToDisplayInGUI = populationsMatch
 
     // print solutions so far!
     prettyPrintSolutions(solvedTasks.toList())
+
+    // set up the data for the graphical view
+
+    //tTaskDataToDisplayInGUI = populationsMatch
+    tTaskDataToDisplayInGUI = ed.taskDataWithRectangularHoles
 
     val graphics = GraphicsDisplayMatrix()
     graphics.setupGraphics()
