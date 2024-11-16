@@ -135,7 +135,8 @@ println(holes)  // Output: [[(1, 1), (1, 2), (2, 1), (2, 2)]]
 
 ## Revision 1 - Prompt
 
-Please revise the algorithm so that the hole with values = 0 MUST BE ENCLOSED by non-zero values in the matrix.
+Please revise the algorithm so that the hole with values = 0 MUST BE ENCLOSED 
+by non-zero values in the matrix.
 
 ## Google Gemini code
 
@@ -269,3 +270,18 @@ println(holes2)  // Output: []
 In the second example (matrix2), the hole is not fully enclosed 
 because it extends to the right edge of the matrix. Therefore, the 
 function correctly returns an empty list.
+
+## COMMENTS
+
+This is the first time that the Google Gemini code has bugs.   For example 
+it finds a rectangular hole in the following matrix even though the prompt
+states that the hole must be surrounded by non-zero values.  So manual
+debugging is required.
+
+```
+val matrix = listOf(
+    listOf(0, 7, 7),
+    listOf(7, 7, 7),
+    listOf(7, 7, 7)
+)
+```

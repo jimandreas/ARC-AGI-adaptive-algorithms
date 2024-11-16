@@ -2,18 +2,14 @@
 	"UNUSED_VARIABLE", "MemberVisibilityCanBePrivate", "unused",
 	"ReplaceManualRangeWithIndicesCalls", "ReplaceSizeZeroCheckWithIsEmpty",
 	"SameParameterValue", "UnnecessaryVariable", "LocalVariableName", "PropertyName", "RedundantSuppression",
-	 "RedundantSuppression", "UNUSED_EXPRESSION"
+	"RedundantSuppression", "UNUSED_EXPRESSION"
 )
 
 package experiments
 
-import MatrixDataInputAndOutput
-import TaskCoordinateData
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
-import solutions.CellTranslationsAnalysis
-import verboseFlag
 
 class RectangularHoleFinderTest {
 
@@ -36,5 +32,18 @@ class RectangularHoleFinderTest {
 
 		val holes = rectangularHoleFinder.findRectangularHoles(matrix)
 		println(holes)  // Output: [[(1, 1), (1, 2), (2, 1), (2, 2)]]
+	}
+
+	@Test
+	@DisplayName("followon testing of rectangular holes")
+	fun nextRectangularHoleTest() {
+		val matrix = listOf(
+			listOf(0, 7, 7),
+			listOf(7, 7, 7),
+			listOf(7, 7, 7)
+		)
+
+		val holes = rectangularHoleFinder.findRectangularHoles(matrix)
+		println(holes)
 	}
 }

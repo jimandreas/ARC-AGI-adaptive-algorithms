@@ -8,6 +8,7 @@ package experiments
 
 
 import TaskCoordinateData
+import verboseFlag
 
 class ExperimentalDatasets(taskData: List<TaskCoordinateData>) {
 
@@ -78,6 +79,8 @@ class ExperimentalDatasets(taskData: List<TaskCoordinateData>) {
 				val result = rectangularHoleFinder.findRectangularHoles(example.input)
 				if (result.isEmpty()) {
 					holeFound = false
+				} else {
+					if (verboseFlag) ("Hole Found ${t.name}")
 				}
 			}
 			if (holeFound) {

@@ -13,16 +13,7 @@ class RectangularHoleFinder {
 		ed = edIn
 	}
 
-	data class TaskCoordinateData(
-		val train: List<MatrixDataInputAndOutput>,
-		val test: List<MatrixDataInputAndOutput>,
-		var name: String = ""
-	)
-
-	data class MatrixDataInputAndOutput(
-		val input: List<List<Int>>,
-		val output: List<List<Int>>
-	)
+	// This is version 2 of the hole finder from Google Gemini
 
 	fun findRectangularHoles(matrix: List<List<Int>>): List<Set<Pair<Int, Int>>> {
 		val rows = matrix.size
@@ -58,12 +49,29 @@ class RectangularHoleFinder {
 			return hole
 		}
 
-		fun isRectangular(hole: Set<Pair<Int, Int>>): Boolean {
+		fun isEnclosedRectangular(hole: Set<Pair<Int, Int>>): Boolean {
 			val minRow = hole.minOf { it.first }
 			val maxRow = hole.maxOf { it.first }
 			val minCol = hole.minOf { it.second }
 			val maxCol = hole.maxOf { it.second }
 
+			// Check top and bottom edges
+			for (c in minCol..maxCol) {
+				if (minRow > 0 && matrix[minRow - 1][c] == 0 ||
+					maxRow < rows - 1 && matrix[maxRow + 1][c] == 0) {
+					return false
+				}
+			}
+
+			// Check left and right edges
+			for (r in minRow..maxRow) {
+				if (minCol > 0 && matrix[r][minCol - 1] == 0 ||
+					maxCol < cols - 1 && matrix[r][maxCol + 1] == 0) {
+					return false
+				}
+			}
+
+			// Check if all cells within the bounding box are in the hole
 			for (r in minRow..maxRow) {
 				for (c in minCol..maxCol) {
 					if (r to c !in hole) {
@@ -71,6 +79,7 @@ class RectangularHoleFinder {
 					}
 				}
 			}
+
 			return true
 		}
 
@@ -78,7 +87,7 @@ class RectangularHoleFinder {
 			for (col in 0 until cols) {
 				if (isValid(row, col)) {
 					val hole = exploreHole(row, col)
-					if (isRectangular(hole)) {
+					if (isEnclosedRectangular(hole)) {
 						holes.add(hole)
 					}
 				}
