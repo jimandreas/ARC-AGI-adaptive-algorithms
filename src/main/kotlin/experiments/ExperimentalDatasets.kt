@@ -48,7 +48,6 @@ class ExperimentalDatasets(taskData: List<TaskCoordinateData>) {
 	// square matrix - used for mirroring, ...
 	val taskSquareMatrix: List<TaskCoordinateData> = filterTasksForSquareMatrices(taskSameMatrixSizes)
 
-
 	// this filter is really for comparing the abundance of the
 	//   element values from the input to the output.
 	//   If the abundance matches, i.e. the same number of 1's, 2's etc,
