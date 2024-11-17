@@ -26,12 +26,8 @@ dependencies {
 
 }
 
-//tasks.test {
-//    useJUnitPlatform()
-//}
-
 kotlin {
-    jvmToolchain(22) // Use Java 17 or higher
+    jvmToolchain(20) // Use Java 17 or higher
 }
 
 tasks {
