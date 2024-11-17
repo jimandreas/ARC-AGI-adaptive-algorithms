@@ -6,108 +6,64 @@
 
 package entities
 
-import com.jimandreas.*
-import com.jimandreas.entities.BlockCompletion
-import com.jimandreas.entities.BlockUtilities
-import kotlinx.serialization.json.Json
-import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
-import java.io.File
+import utils.splitStringIntoPairs
+import kotlin.test.assertEquals
 
 internal class BlockUtilitiesTest {
 
-    val pp = PrintUtilities()
-    val blockUtil = BlockUtilities()
-    val blockCompletion = BlockCompletion()
+    lateinit var blockUtil: BlockUtilities
 
     @BeforeEach
     fun setUp() {
-        // do something
-    }
-
-    @AfterEach
-    fun cleanHeap() {
-        // release the task global data structure to prevent memory leak
-        //   and reset the analysis
-        taskTrainDataList.clear()
-        taskTestDataList.clear()
-    }
-
-    // NOTES: good but the tasks are more oriented to "hollowness" than "blockiness"
-
-    @Test
-    @DisplayName("examine blocks in on task")
-    fun testBlockRecognizerOnOneTask() {
-//        val t = "05f2a901" // https://arc-visualizations.github.io/05f2a901.html
-//        val t = "a5313dff" // https://arc-visualizations.github.io/a5313dff.html
-        val t = "3aa6fb7a" // https://arc-visualizations.github.io/3aa6fb7a.html
-        val filePath = "$pathPrefix$trainingPrefix$t.json"
-        openIt(t, filePath)
-
-
+        blockUtil = BlockUtilities()
     }
 
     @Test
-    @DisplayName("scan blocks in all tasks")
-    fun scanBlocksInAllTasks() {
-        println("touching ${trainingNames.size} training tasks and ${evaluationNames.size} evaluation tasks")
-        for (t in trainingNames) {
-            val filePath = "$pathPrefix$trainingPrefix$t.json"
-            openIt(t, filePath)
-        }
+    @DisplayName("basic block test")
+    fun basicBlockTest() {
+        val matrix = listOf(
+            listOf(0, 1, 1, 0, 0),
+            listOf(0, 1, 1, 0, 0),
+            listOf(0, 0, 0, 2, 2),
+            listOf(0, 0, 2, 2, 0),
+            listOf(0, 0, 0, 0, 0)
+        )
 
-        for (t in evaluationNames) {
-            val filePath = "$pathPrefix$evaluationPrefix$t.json"
-            openIt(t, filePath)
-        }
+        val rectangularBlocks = blockUtil.findConnectedBlockInMatrix(matrix)
+//        for (coordinates in rectangularBlocks) {
+//            println("Coordinates: $coordinates")
+//        }
+
+        val expectedString1 = "(0, 1), (0, 2), (1, 1), (1, 2)"
+        val expectedString2 = "(2, 3), (2, 4), (3, 2), (3, 3)"
+        val expectedPairList1 = splitStringIntoPairs(expectedString1)
+        val expectedPairList2 = splitStringIntoPairs(expectedString2)
+        val expectedList = listOf(expectedPairList1, expectedPairList2)
+        assertEquals(rectangularBlocks, expectedList)
     }
 
-    private fun openIt(name: String, path: String) {
+    @Test
+    @DisplayName("Test rectangular block checker function")
+    fun testRectangularBlockChecker() {
+        // string1 is rectangular, and string 2 is not.
+        val blockToTestString1 = "(0, 1), (0, 2), (1, 1), (1, 2)"
+        val blockToTestString2 = "(2, 3), (2, 4), (3, 2), (3, 3)"
+        val blockToTestPairList1 = splitStringIntoPairs(blockToTestString1)
+        val blockToTestPairList2 = splitStringIntoPairs(blockToTestString2)
 
-        val file = File(path)
-        val exists = file.exists()
-        val isAFile = file.isFile
-        val canRead = file.canRead()
+        val result1 = blockUtil.verifyRectangularBlock(blockToTestPairList1)
+        assert(result1)
 
-        if (!(exists && isAFile && canRead)) {
-            throw Exception("file not found.")
-        }
+        val result2 = blockUtil.verifyRectangularBlock(blockToTestPairList2)
+        assert(!result2)
 
-        lateinit var myData : TaskCoordinateData
-
-        try {
-            myData = Json.decodeFromString<TaskCoordinateData>(file.readText())
-        } catch (e: Exception) {
-            println("ERROR on json decode on file: $path")
-        }
-
-        for (d in myData.train) {
-            val blocks = blockUtil.findRectangularBlocks(d.input)
-
-            println("$name ${blocks.size}")
-
-            val bIter = blocks.iterator().withIndex()
-            while (bIter.hasNext()) {
-                val bData = bIter.next()
-                val setOfPairs = bData.value
-                val validFlag = blockUtil.verifyRectangularBlock(setOfPairs)
-
-                println("valid block: $validFlag")
-
-                val isHollow = blockUtil.isBlockHollow(d.input, setOfPairs)
-
-                println("hollow: $isHollow")
-
-                val completionSet = blockCompletion.completeRectangularBlock(setOfPairs)
-
-                println(completionSet)
-            }
-        }
-
-//        println("\n")
-//        pp.prettyPrintOneMatrixWithEntityDesignation(d, entities)
-//        println("Done\n")
     }
+
+
+
+
+
 }

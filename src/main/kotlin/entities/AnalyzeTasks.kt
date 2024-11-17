@@ -7,13 +7,17 @@
 package entities
 
 import TaskCoordinateData
-
-import experiments.*
+import experiments.ExperimentalDatasets
 
 class AnalyzeTasks {
 
+	lateinit var ed: ExperimentalDatasets
+
+	fun setExperimentalDatasets(edIn: ExperimentalDatasets) {
+		ed = edIn
+	}
+
 	val blockUtil = BlockUtilities()
-	val blockCompletion = BlockCompletion()
 	val entityUtilities = EntityUtilities()
 
 	// results are accumulated in taskTrainingDataList
@@ -55,40 +59,7 @@ class AnalyzeTasks {
 			trainExample.pointDifferenceSet = entityUtilities.findMatrixDifferences(
 				trainExample.input.matrix, trainExample.output.matrix
 			)
-
 		}
-
-		// save the test and the filename
-
-		// first assemble the matrice data
-		// and output data into the taskTrainDataList
-		// NOTE that the "output" here is the answer key!!
-
-		for (i in 0 until td.test.size) {
-
-			val testMatrixData = td.test[i]
-			val dataForOneExampleInput = DataForOneTrainExample()
-			dataForOneExampleInput.matrix = testMatrixData.input
-
-			val dataForOneExampleOutput = DataForOneTrainExample()
-			dataForOneExampleOutput.matrix = testMatrixData.output
-
-
-			val dio = NameAndTest(
-				dataForOneExampleInput,
-				dataForOneExampleOutput,
-				td.name
-			)
-
-			taskTestDataList.add(dio)
-		}
-
-		// now characterize each test input (the output must be generated and compare to the ANSWER matrix!
-
-		for (trainExample in taskTestDataList) {
-			analyzeTrainingInputOrOutput(trainExample.input)
-		}
-
 	}
 
 	/*
@@ -96,7 +67,7 @@ class AnalyzeTasks {
 	 */
 	fun analyzeTrainingInputOrOutput(oneTrainInstance: DataForOneTrainExample) {
 		val matrix = oneTrainInstance.matrix
-		val blocks = blockUtil.findRectangularBlocks(matrix)
+		val blocks = blockUtil.findConnectedBlockInMatrix(matrix)
 
 		//pp.prettyPrintOneMatrixWithEntityDesignation(matrix, blocks)
 
@@ -114,7 +85,7 @@ class AnalyzeTasks {
 
 			//println("hollow: $isHollow")
 
-			val completionSet = blockCompletion.completeRectangularBlock(setOfPairs)
+			val completionSet = completeRectangularBlock(setOfPairs)
 
 			//println(completionSet)
 
@@ -125,8 +96,27 @@ class AnalyzeTasks {
 				missingCoordinates = completionSet
 			)
 			oneTrainInstance.blockInfoList.add(bi)
-
-			//pp.prettyPrintBlockInfo(bi)
 		}
+	}
+
+	fun completeRectangularBlock(blockCoordinates: Set<Pair<Int, Int>>): Set<Pair<Int, Int>> {
+		if (blockCoordinates.isEmpty()) return emptySet() // Nothing to complete
+
+		val minRow = blockCoordinates.minOf { it.first }
+		val maxRow = blockCoordinates.maxOf { it.first }
+		val minCol = blockCoordinates.minOf { it.second }
+		val maxCol = blockCoordinates.maxOf { it.second }
+
+		val missingCoordinates = mutableSetOf<Pair<Int, Int>>()
+
+		for (row in minRow..maxRow) {
+			for (col in minCol..maxCol) {
+				if (Pair(row, col) !in blockCoordinates) {
+					missingCoordinates.add(Pair(row, col))
+				}
+			}
+		}
+
+		return missingCoordinates
 	}
 }

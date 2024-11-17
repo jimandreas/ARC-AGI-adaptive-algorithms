@@ -5,6 +5,8 @@
 )
 package experiments
 
+import entities.taskTrainDataList
+
 class SimpleSolutionSurvey {
 
     /**

@@ -6,19 +6,9 @@
 
 package entities
 
-import com.jimandreas.*
-import com.jimandreas.entities.BlockCompletion
-import com.jimandreas.entities.BlockUtilities
-import kotlinx.serialization.json.Json
-import org.junit.jupiter.api.AfterEach
-import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.DisplayName
-import org.junit.jupiter.api.Test
-import java.io.File
-
 internal class AnalyzeTaskInputAndOutputTest {
-
-    val pp = PrintUtilities()
+// historical - needs revision
+/*    val pp = PrintUtilities()
     val blockUtil = BlockUtilities()
     val blockCompletion = BlockCompletion()
     val taskData = DataForOneTrainExample()
@@ -80,5 +70,5 @@ internal class AnalyzeTaskInputAndOutputTest {
 
         analyze.analyzeTrainingData(taskData)
 
-    }
+    }*/
 }

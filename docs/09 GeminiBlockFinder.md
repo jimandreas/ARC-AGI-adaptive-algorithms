@@ -1,10 +1,16 @@
-# Google Gemini Code
+# Google Gemini Block finder
 
-## Block finder
+## The prompt:
 
-The Gemini prompt:
+Please assume kotlin. A matrix is given in the form of integers in List<List<Int>>. 
+Therefore it is a two dimensional matrix. Assume an int with value of zero is a 
+background. The desired function returns a set of (row, column) pairs.  
+The function should scan the matrix and return regions that define a 
+rectangular block of identical values.  The pairs defining the block 
+should have all the identical value.  The boundaries of the block can 
+be the edge of the matrix or cells with other values than that of the blocks.
 
-**Please assume kotlin. A matrix is given in the form of integers in List<List<Int>>. Therefore it is a two dimensional matrix.  Assume an int with value of zero is a background. The desired function returns a set of (row, column) pairs.  The function should scan the matrix and return regions that define a rectangular block of identical values.  The pairs defining the block should have all the identical value.  The boundaries of the block can be the edge of the matrix or cells with other values than that of the blocks.**
+## The Gemini Code
 
 ```
 fun findRectangularBlocks(matrix: List<List<Int>>): List<Set<Pair<Int, Int>>> {
@@ -55,11 +61,12 @@ fun exploreBlock(
 }
 ```
 
-## Verification function
+## Verification function -The Gemini Prompt:
 
-The Gemini Prompt:
+Good - please create a function that takes the ouput of this function and 
+verifies that the block is rectangular.
 
-**Good - please create a function that takes the ouput of this function and verifies that the block is rectangular.**
+## Gemini code
 
 ```
 fun verifyRectangularBlock(blockCoordinates: Set<Pair<Int, Int>>): Boolean {
@@ -110,11 +117,13 @@ Use code with caution.
 This will now print whether each detected block is rectangular or not, along with the other information.
 ```
 
-## Hollow test
+## Hollow test - The Prompt:
 
-The Prompt:
+Good, assume the block test is true. Please examine the block to see if it is hollow
+that is it has a boundary of the block value, but there is an "interior" 
+to the block with another value.  Return true if the block is hollow.
 
-**Good, assume the block test is true.  Please examine the block to see if it is hollow - that is it has a boundary of the block value, but there is an "interior" to the block with another value.  Return true if the block is hollow.**
+## Gemini code
 
 ```
 fun isBlockHollow(matrix: List<List<Int>>, blockCoordinates: Set<Pair<Int, Int>>): Boolean {
@@ -172,7 +181,9 @@ This will now print whether each detected rectangular block is hollow or solid.
 
 ## Block Completion
 
-The Prompt:
+(the prompt was not saved)
+
+## Gemini code
 
 ```
 fun completeRectangularBlock(blockCoordinates: Set<Pair<Int, Int>>): Set<Pair<Int, Int>> {
