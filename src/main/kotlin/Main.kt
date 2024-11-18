@@ -31,9 +31,10 @@ fun main() {
 
     // set up the data for the graphical view
 
-    //tTaskDataToDisplayInGUI = populationsMatch
+    tTaskDataToDisplayInGUI = populationsMatch
+
     //tTaskDataToDisplayInGUI = ed.taskDataWithRectangularHoles
-    tTaskDataToDisplayInGUI = ed.taskWithTranslations
+    //tTaskDataToDisplayInGUI = ed.taskWithTranslations
 
     val graphics = GraphicsDisplayMatrix()
     graphics.setupGraphics()

@@ -35,3 +35,23 @@ Mirroring -
   horizontal and vertical mirroring
   sub-criteria - diagonal mirroring
     matrix must be square
+
+Rotation -
+  rotate the outer ring of the matrix cw or ccw
+
+Interesting examples of Tasks with identical cell counts:
+025d127b   blocks move right - not all same amount
+05f2a901   red blocks move down, right, up
+25ff71a9   all blocks move down by same amount!
+1e0a9b12   all blocks move down
+3906de3d   red blocks move up
+
+-----------
+Translation
+-----------
+Rather difficult because it depends on "what" is translated.
+Individual pixel movement is hard - because often it is in the
+context of block movements or other larger abstract shapes.
+Perhaps use the "block finder" to look for blocks in the input and
+then try to identify identical blocks in the output, and look at
+the translation, if any, of the various blocks.

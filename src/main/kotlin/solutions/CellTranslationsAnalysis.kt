@@ -95,6 +95,9 @@ class CellTranslationsAnalysis {
 						val xTranslation = to.second - from.second
 						val yTranslation = to.first - from.first
 
+						if ((xTranslation == 0) && (yTranslation == 0)) {
+							continue
+						}
 						translationsByValue.getOrPut(value) { mutableMapOf() }
 							.compute(Pair(xTranslation, yTranslation)) { _, count -> (count ?: 0) + 1 }
 					}
@@ -149,6 +152,9 @@ class CellTranslationsAnalysis {
 				solvedTasks.add(SolvedTasks(task, task.name,"identical translations"))
 			}
 
+			if (task.name == "3906de3d") {
+				println("3906de3d here now")
+			}
 			if (isEntireMapConsistent(t)) {
 				println("${task.name} All translations are consistent!!!")
 				ed.taskWithTranslations.add(task)
