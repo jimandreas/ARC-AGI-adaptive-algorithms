@@ -12,6 +12,11 @@ import verboseFlag
 
 class ExperimentalDatasets(taskData: List<TaskCoordinateData>) {
 
+	// other datasets produced as side effects of survey algos
+	// filled in by CellTranslationsAnalysis
+	var taskWithTranslations: MutableList<TaskCoordinateData> = mutableListOf()
+
+
 	// sort the Task data by (1) equivalence of input and output cell counts
 	// and (2) then the output matrix cell count
 	val taskSameMatrixSizes: List<TaskCoordinateData> =

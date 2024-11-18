@@ -9,6 +9,7 @@ package solutions
 import SolvedTasks
 import TaskCoordinateData
 import experiments.ExperimentalDatasets
+import solutions.utilities.isEntireListConsistent
 import solvedTasks
 
 /**
@@ -49,6 +50,13 @@ class CellTranslationsAnalysis {
 		ed = edIn
 	}
 
+	/**
+	 * look at all training input and output matrices and
+	 *    collect "approximately" where things have moved.
+	 *    This is set up as a map of (1) key the integer cell value
+	 *    and (2) the row/col offset of the move, and
+	 *    (3) the number of times this has been observed.
+	 */
 	fun findAndGroupTranslations(taskData: TaskCoordinateData): Map<Int, Map<Pair<Int, Int>, Int>> {
 		val translationsByValue = mutableMapOf<Int, MutableMap<Pair<Int, Int>, Int>>()
 
@@ -125,16 +133,27 @@ class CellTranslationsAnalysis {
 	 */
 	fun surveyTranslations() {
 		surveyTasksForIdenticalTranslations()
+
 	}
 
 	// look for Tasks where all blocks move uniformly in some direction
 	fun surveyTasksForIdenticalTranslations() {
 		for (task in ed.taskDataWhereElementAbundancesAreIdentical) {
+
+			// here is the "movement" analysis
 			val t = findAndGroupTranslations(task)
+
+			// now check to see if they are all the same
 			if (areAllTranslationsIdentical(t)) {
 				println("${task.name} All translations are identical!!!")
 				solvedTasks.add(SolvedTasks(task, task.name,"identical translations"))
 			}
+
+			if (isEntireListConsistent(t)) {
+				println("${task.name} All translations are consistent!!!")
+				ed.taskWithTranslations.add(task)
+			}
 		}
 	}
+
 }

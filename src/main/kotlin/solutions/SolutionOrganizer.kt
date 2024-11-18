@@ -17,7 +17,7 @@ class SolutionOrganizer(val ed: ExperimentalDatasets) {
         mms.setExperimentalDatasets(ed)  // this makes it easier for unit tests
         mms.surveyTasksForMirroringSolutions()
 
-        // solutions where cells are "simply" moved.
+        // solutions where cells are translated
         val cellTranslations = CellTranslationsAnalysis()
         cellTranslations.setExperimentalDatasets(ed)
         cellTranslations.surveyTranslations()

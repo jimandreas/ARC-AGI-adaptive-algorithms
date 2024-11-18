@@ -53,8 +53,8 @@ in the list to the next.
  *             is found, it immediately returns false.
  *     This ensures consistency not only within each map but across all maps in the list.
  */
-fun isEntireListConsistent(groupedTranslationsList: List<Map<Int, Map<Pair<Int, Int>, Int>>>): Boolean {
-	if (groupedTranslationsList.isEmpty()) return true
+fun isEntireListConsistent(groupedTranslationsMap: Map<Int, Map<Pair<Int, Int>, Int>>): Boolean {
+	if (groupedTranslationsMap.isEmpty()) return true
 
 	fun extractDirection(pair: Pair<Int, Int>): Pair<Int, Int> {
 		val rowSign = when {
@@ -77,16 +77,15 @@ fun isEntireListConsistent(groupedTranslationsList: List<Map<Int, Map<Pair<Int, 
 	}
 
 	var referenceDirection: Pair<Int, Int>? = null
-	for (translations in groupedTranslationsList) {
-		for (movements in translations.values) {
-			val firstMovement = movements.keys.firstOrNull() ?: continue
-			if (referenceDirection == null) {
-				referenceDirection = extractDirection(firstMovement)
-			} else {
-				if (!isConsistentDirection(referenceDirection, firstMovement)) return false
-			}
-			if (!movements.keys.all { isConsistentDirection(firstMovement, it) }) return false
+	for (movements in groupedTranslationsMap.values) {
+		val firstMovement = movements.keys.firstOrNull() ?: continue
+		if (referenceDirection == null) {
+			referenceDirection = extractDirection(firstMovement)
+		} else {
+			if (!isConsistentDirection(referenceDirection, firstMovement)) return false
 		}
+		if (!movements.keys.all { isConsistentDirection(firstMovement, it) }) return false
 	}
+
 	return true
 }
