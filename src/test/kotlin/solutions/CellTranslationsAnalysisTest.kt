@@ -1,18 +1,10 @@
-@file:Suppress(
-	"UNUSED_VARIABLE", "MemberVisibilityCanBePrivate", "unused",
-	"ReplaceManualRangeWithIndicesCalls", "ReplaceSizeZeroCheckWithIsEmpty",
-	"SameParameterValue", "UnnecessaryVariable", "LocalVariableName", "PropertyName", "RedundantSuppression",
-	 "RedundantSuppression", "UNUSED_EXPRESSION"
-)
-
-package experiments
+package solutions
 
 import MatrixDataInputAndOutput
 import TaskCoordinateData
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
-import solutions.CellTranslationsAnalysis
 import verboseFlag
 
 class CellTranslationsAnalysisTest {
