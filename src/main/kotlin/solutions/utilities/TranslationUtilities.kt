@@ -25,19 +25,6 @@ in the list to the next.
  */
 
 /**
- * Checks if all movements in all groupedTranslations maps are uniformly
- * in one direction across the entire list.
- * Uniform direction here means that all movements, across all maps,
- * are either both positive, both negative, or both zero for both coordinates.
- *
- * @param groupedTranslationsList A list of maps where:
- *   - Each map has an outer key as an index of an array element that has moved.
- *   - The value is another map where:
- *     - The key is a Pair<Int, Int> representing row and column movement.
- *     - The value is the count of how many times this movement occurred.
- *
- * @return Boolean indicating if all movements in all maps are consistent in direction.
- *
  * Explanation:
  *
  *     extractDirection: This function simplifies the pair into a direction by
@@ -53,7 +40,7 @@ in the list to the next.
  *             is found, it immediately returns false.
  *     This ensures consistency not only within each map but across all maps in the list.
  */
-fun isEntireListConsistent(groupedTranslationsMap: Map<Int, Map<Pair<Int, Int>, Int>>): Boolean {
+fun isEntireMapConsistent(groupedTranslationsMap: Map<Int, Map<Pair<Int, Int>, Int>>): Boolean {
 	if (groupedTranslationsMap.isEmpty()) return true
 
 	fun extractDirection(pair: Pair<Int, Int>): Pair<Int, Int> {

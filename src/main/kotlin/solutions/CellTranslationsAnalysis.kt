@@ -9,7 +9,7 @@ package solutions
 import SolvedTasks
 import TaskCoordinateData
 import experiments.ExperimentalDatasets
-import solutions.utilities.isEntireListConsistent
+import solutions.utilities.isEntireMapConsistent
 import solvedTasks
 
 /**
@@ -149,7 +149,7 @@ class CellTranslationsAnalysis {
 				solvedTasks.add(SolvedTasks(task, task.name,"identical translations"))
 			}
 
-			if (isEntireListConsistent(t)) {
+			if (isEntireMapConsistent(t)) {
 				println("${task.name} All translations are consistent!!!")
 				ed.taskWithTranslations.add(task)
 			}
