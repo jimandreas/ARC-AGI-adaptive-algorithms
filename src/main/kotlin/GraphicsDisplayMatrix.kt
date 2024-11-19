@@ -4,6 +4,7 @@
     "SameParameterValue", "UnnecessaryVariable"
 )
 
+import entities.TaskAbstractions
 import entities.taskAbstractionsList
 import java.awt.Color
 import java.awt.Dimension
@@ -120,7 +121,7 @@ class GraphicsDisplayMatrix {
         while (trainIter.hasNext()) {
             val next = trainIter.next()
             val matrixData = next.value
-            val index = next.index
+            val index = next.index   // index is the number of the Example in the Task
 
             // TODO : handle 5 or more Examples better, punt for now
             if (index > 3) {
@@ -140,18 +141,67 @@ class GraphicsDisplayMatrix {
                 continue
             }
 
-            findAbstractionsData(task)
-            displayDifferencesFromInputToOutput(rowCount, colCount, inputList, outputList, index)
+            val abstractionsListForTask = findAbstractionsData(task)
+            if (abstractionsListForTask == null) {
+                println("couldn't find abstraction for ${task.name}")
+                continue
+            }
+            val abstractionsInputAndOuput = abstractionsListForTask.abstractionsList[index]
+            val blocksListForInput = abstractionsInputAndOuput.input.blocks
+            val matrixList = reconstructMatrix(
+                rowCount,
+                colCount,
+                blocksListForInput)
+
+            displayBlocksInMatrix(rowCount, colCount, matrixList, index )
+            //displayDifferencesFromInputToOutput(rowCount, colCount, inputList, outputList, index)
         }
 
     }
 
-    private fun findAbstractionsData(task: TaskCoordinateData) {
+    private fun findAbstractionsData(task: TaskCoordinateData): TaskAbstractions? {
         for (item in taskAbstractionsList) {
             if (item.taskData == task) {
                 println("Found Abstraction: ${task.name}")
+                return item
             }
         }
+        return null
+    }
+
+    private fun displayBlocksInMatrix(
+        rowCount: Int,
+        colCount: Int,
+        reconstructedMatrix: List<List<Int>>,
+        index: Int
+    ) {
+        val theSpecialMatrix: MutableList<List<Int>> = mutableListOf()
+
+        val specialMatrix = createMatrixPanel(reconstructedMatrix)
+
+        // A "special" Panel was created earlier - one for each task
+        val specialPanel = specialPanelList[index]
+        specialPanel.add(specialMatrix)
+        specialPanel.revalidate()
+        specialPanel.repaint()
+    }
+
+    // reconstruct matrix from block data - coded by Google Gemin
+    private fun reconstructMatrix(
+        rowCount: Int,
+        columnCount: Int,
+        points: List<Set<Pair<Int, Int>>>): List<List<Int>> {
+        // Initialize the matrix with all cells set to 0
+        val matrix = MutableList(rowCount) { MutableList(columnCount) { 0 } }
+
+        // Add the points to the matrix with value -1
+        for (pointSet in points) {
+            for ((row, col) in pointSet) {
+                matrix[row][col] = -1
+            }
+        }
+
+        return matrix
     }
 
     private fun displayDifferencesFromInputToOutput(
