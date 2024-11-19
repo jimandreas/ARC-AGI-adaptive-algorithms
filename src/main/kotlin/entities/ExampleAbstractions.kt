@@ -1,5 +1,7 @@
 package entities
 
+import TaskCoordinateData
+
 /**
  * A "Block" is a collection of matrix entries with the same color (non-zero) value.
  * The block does not have to be rectangular.
@@ -22,21 +24,28 @@ data class BlockInfo(
  The blockInfoList are the blocks after subsequent analysis.
 */
 
-class DataForOneTrainExample {
+class MatrixAbstractions {
     var matrix: List<List<Int>> = emptyList()
     var blocks: List<Set<Pair<Int, Int>>> = emptyList()
     var blockInfoList : MutableList<BlockInfo> = mutableListOf()
-
 }
 
 // the pair for one example - input and output
-data class DataInputOutput(
-    val input: DataForOneTrainExample,
-    val output: DataForOneTrainExample,
+//  contains the Task data as an embedded data class
+data class AbstractionsInInputAndOutput(
+    val input: MatrixAbstractions,
+    val output: MatrixAbstractions,
 
     var equalSizedMatrices: Boolean = false,
     // holds the coords where input does not equal output
     var pointDifferenceSet : Set<Pair<Int, Int>> = emptySet()
 )
 
-val taskTrainDataList : MutableList<DataInputOutput> = mutableListOf()
+// maintain the association between the Task Data and the
+//   abstraction analysis data
+data class TaskAbstractions(
+    val taskData: TaskCoordinateData,
+    val abstractionsList: MutableList<AbstractionsInInputAndOutput>
+)
+
+val taskAbstractionsList: MutableList<TaskAbstractions> = mutableListOf()

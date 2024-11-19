@@ -4,6 +4,7 @@
     "SameParameterValue", "UnnecessaryVariable"
 )
 
+import entities.taskAbstractionsList
 import java.awt.Color
 import java.awt.Dimension
 import java.awt.GridLayout
@@ -110,7 +111,7 @@ class GraphicsDisplayMatrix {
         clearSpecialPanels()
 
         // get the Task info
-
+        val task = tTaskDataToDisplayInGUI[curTaskIndex]
         val trainTask = tTaskDataToDisplayInGUI[curTaskIndex].train
 
         // iterate through the examples
@@ -139,29 +140,48 @@ class GraphicsDisplayMatrix {
                 continue
             }
 
-            val theSpecialMatrix : MutableList<List<Int>> = mutableListOf()
-
-            // create a difference matrix where -1 indicates differences between input and output
-            for (i in 0 until rowCount) {
-                val tempRow :MutableList<Int> = mutableListOf()
-                for (j in 0 until colCount) {
-                    if (inputList[i][j] != outputList[i][j]) {
-                        tempRow.add(-1)
-                    } else {
-                        tempRow.add(inputList[i][j])
-                    }
-                }
-                theSpecialMatrix.add(tempRow)
-            }
-
-            // A "special" Panel was created earlier - one for each task
-            val specialPanel = specialPanelList[index]
-            val specialMatrix = createMatrixPanel(theSpecialMatrix)
-            specialPanel.add(specialMatrix)
-            specialPanel.revalidate()
-            specialPanel.repaint()
+            findAbstractionsData(task)
+            displayDifferencesFromInputToOutput(rowCount, colCount, inputList, outputList, index)
         }
 
+    }
+
+    private fun findAbstractionsData(task: TaskCoordinateData) {
+        for (item in taskAbstractionsList) {
+            if (item.taskData == task) {
+                println("Found Abstraction: ${task.name}")
+            }
+        }
+    }
+
+    private fun displayDifferencesFromInputToOutput(
+        rowCount: Int,
+        colCount: Int,
+        inputList: List<List<Int>>,
+        outputList: List<List<Int>>,
+        index: Int
+    ) {
+        val theSpecialMatrix: MutableList<List<Int>> = mutableListOf()
+
+        // create a difference matrix where -1 indicates differences between input and output
+        for (i in 0 until rowCount) {
+            val tempRow: MutableList<Int> = mutableListOf()
+            for (j in 0 until colCount) {
+                if (inputList[i][j] != outputList[i][j]) {
+                    tempRow.add(-1)
+                } else {
+                    tempRow.add(inputList[i][j])
+                }
+            }
+            theSpecialMatrix.add(tempRow)
+        }
+
+        // A "special" Panel was created earlier - one for each task
+        val specialPanel = specialPanelList[index]
+        val specialMatrix = createMatrixPanel(theSpecialMatrix)
+        specialPanel.add(specialMatrix)
+        specialPanel.revalidate()
+        specialPanel.repaint()
     }
 
     fun displayMatrices() {

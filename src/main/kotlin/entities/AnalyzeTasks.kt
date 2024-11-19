@@ -20,22 +20,26 @@ class AnalyzeTasks {
 	val blockUtil = BlockUtilities()
 	val entityUtilities = EntityUtilities()
 
-	// results are accumulated in taskTrainingDataList
+	// results are accumulated in taskAbstractionsList
 
 	fun analyzeTrainingData(td: TaskCoordinateData) {
 
-		// first assemble the training input and output data into the taskTrainDataList
+		val abstractionsList: MutableList<AbstractionsInInputAndOutput> = mutableListOf()
+
+		// assemble the training input and output data
+		// into the MatrixAbstractions data structure
+
 		for (i in 0 until td.train.size) {
 
 			val mdata = td.train[i]
-			val dataForOneExampleInput = DataForOneTrainExample()
+			val dataForOneExampleInput = MatrixAbstractions()
 			dataForOneExampleInput.matrix = mdata.input
 
-			val dataForOneExampleOutput = DataForOneTrainExample()
+			val dataForOneExampleOutput = MatrixAbstractions()
 			dataForOneExampleOutput.matrix = mdata.output
 
 
-			val dio = DataInputOutput(
+			val dio = AbstractionsInInputAndOutput(
 				dataForOneExampleInput, dataForOneExampleOutput
 			)
 
@@ -48,28 +52,31 @@ class AnalyzeTasks {
 			) {
 				dio.equalSizedMatrices = true
 			}
-			taskTrainDataList.add(dio)
+			abstractionsList.add(dio)
 		}
 
 		// now characterize each input and each output
 
-		for (trainExample in taskTrainDataList) {
-			analyzeTrainingInputOrOutput(trainExample.input)
-			analyzeTrainingInputOrOutput(trainExample.output)
+		for (trainExample in abstractionsList) {
+			analyzeExampleInputOrOutput(trainExample.input)
+			analyzeExampleInputOrOutput(trainExample.output)
 			trainExample.pointDifferenceSet = entityUtilities.findMatrixDifferences(
 				trainExample.input.matrix, trainExample.output.matrix
 			)
 		}
+
+		// now associate the abstractions with the given Task
+
+		val taskAbstractions = TaskAbstractions(td, abstractionsList)
+		taskAbstractionsList.add(taskAbstractions)
 	}
 
 	/*
-	 * for one training input or output
+	 * for one example input or output
 	 */
-	fun analyzeTrainingInputOrOutput(oneTrainInstance: DataForOneTrainExample) {
+	fun analyzeExampleInputOrOutput(oneTrainInstance: MatrixAbstractions) {
 		val matrix = oneTrainInstance.matrix
 		val blocks = blockUtil.findConnectedBlockInMatrix(matrix)
-
-		//pp.prettyPrintOneMatrixWithEntityDesignation(matrix, blocks)
 
 		oneTrainInstance.blocks = blocks
 		val bIter = blocks.iterator().withIndex()

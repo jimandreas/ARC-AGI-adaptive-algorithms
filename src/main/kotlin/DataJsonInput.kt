@@ -11,8 +11,6 @@ var tTaskDataToDisplayInGUI: MutableList<TaskCoordinateData> = mutableListOf()
 
 var tAllTaskData: MutableList<TaskCoordinateData> = mutableListOf()
 
-
-
 @Serializable
 data class TaskCoordinateData(
     val train: List<MatrixDataInputAndOutput>,

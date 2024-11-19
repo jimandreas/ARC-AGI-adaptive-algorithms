@@ -8,6 +8,7 @@ package experiments
 
 
 import TaskCoordinateData
+import entities.AnalyzeTasks
 import verboseFlag
 
 class ExperimentalDatasets(taskData: List<TaskCoordinateData>) {
@@ -45,7 +46,11 @@ class ExperimentalDatasets(taskData: List<TaskCoordinateData>) {
 		val tbigger = taskBiggerMatrixSizes.size
 		println("Reality check: smaller size quantity $tsmaller bigger $tbigger total ${tsmaller + tbigger} ")
 
-
+		val analyze = AnalyzeTasks()
+		// now do abstraction analysis on the Tasks with the same Matrix sizes
+		for (t in taskSameMatrixSizes) {
+			analyze.analyzeTrainingData(t)
+		}
 	}
 
 	// specialized subsets:
