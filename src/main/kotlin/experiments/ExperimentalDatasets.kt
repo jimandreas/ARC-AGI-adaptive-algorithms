@@ -17,7 +17,6 @@ class ExperimentalDatasets(taskData: List<TaskCoordinateData>) {
 	// filled in by CellTranslationsAnalysis
 	var taskWithTranslations: MutableList<TaskCoordinateData> = mutableListOf()
 
-
 	// sort the Task data by (1) equivalence of input and output cell counts
 	// and (2) then the output matrix cell count
 	val taskSameMatrixSizes: List<TaskCoordinateData> =
@@ -71,13 +70,11 @@ class ExperimentalDatasets(taskData: List<TaskCoordinateData>) {
 	// experimental analysis:
 	// sort the Task data by the total cell count of the output matrices
 	val taskDataSortedByOutputCellCount: List<TaskCoordinateData> = taskData.sortedBy { it.outputMatrixCellCount }
-
 	init {
 		println("${taskDataWhereThereAreOnlyAdditions.size} - number of Tasks where things are only added")
-
 	}
 
-	// survey the data for rectangular holes
+	/*// survey the data for rectangular holes
     // the list is accumulated in taskDataWithRectangularHoles
 	val taskDataWithRectangularHoles: MutableList<TaskCoordinateData> = mutableListOf()
 	init {
@@ -96,7 +93,7 @@ class ExperimentalDatasets(taskData: List<TaskCoordinateData>) {
 				taskDataWithRectangularHoles.add(t)
 			}
 		}
-	}
+	}*/
 
 
 

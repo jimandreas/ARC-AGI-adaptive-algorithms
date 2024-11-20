@@ -23,15 +23,15 @@ fun main() {
     solutionOrganizer.trySolutions()
 
     // hack - display only Tasks where input and ouput "populations" match
-    val populationsMatch = ed.taskDataWhereElementAbundancesAreIdentical.toMutableList()
-    println("${populationsMatch.size}: number of input and ouput populations match")
+//    val populationsMatch = ed.taskDataWhereElementAbundancesAreIdentical.toMutableList()
+//    println("${populationsMatch.size}: number of input and ouput populations match")
 
     // print solutions so far!
     prettyPrintSolutions(solvedTasks.toList())
 
     // set up the data for the graphical view
 
-    tTaskDataToDisplayInGUI = populationsMatch
+    tTaskDataToDisplayInGUI = ed.taskSameMatrixSizes.toMutableList()
 
     //tTaskDataToDisplayInGUI = ed.taskDataWithRectangularHoles
     //tTaskDataToDisplayInGUI = ed.taskWithTranslations

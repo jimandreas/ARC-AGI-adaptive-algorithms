@@ -186,18 +186,17 @@ class GraphicsDisplayMatrix {
         specialPanel.repaint()
     }
 
-    // reconstruct matrix from block data - coded by Google Gemin
+    // reconstruct matrix from block data - coded by Google Gemini
     private fun reconstructMatrix(
         rowCount: Int,
         columnCount: Int,
-        points: List<Set<Pair<Int, Int>>>): List<List<Int>> {
+        points: List<Pair<Int, Set<Pair<Int, Int>>>>): List<List<Int>> {
         // Initialize the matrix with all cells set to 0
         val matrix = MutableList(rowCount) { MutableList(columnCount) { 0 } }
 
-        // Add the points to the matrix with value -1
         for (pointSet in points) {
-            for ((row, col) in pointSet) {
-                matrix[row][col] = -1
+            for ((row, col) in pointSet.second) {
+                matrix[row][col] = pointSet.first // the color of the block
             }
         }
 

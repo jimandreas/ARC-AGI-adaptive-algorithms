@@ -26,7 +26,8 @@ data class BlockInfo(
 
 class MatrixAbstractions {
     var matrix: List<List<Int>> = emptyList()
-    var blocks: List<Set<Pair<Int, Int>>> = emptyList()
+    // structure - pair of color of block with set of block coords
+    var blocks: List<Pair<Int, Set<Pair<Int, Int>>>> = emptyList()
     var blockInfoList : MutableList<BlockInfo> = mutableListOf()
 }
 

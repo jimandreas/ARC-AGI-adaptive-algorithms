@@ -55,3 +55,33 @@ context of block movements or other larger abstract shapes.
 Perhaps use the "block finder" to look for blocks in the input and
 then try to identify identical blocks in the output, and look at
 the translation, if any, of the various blocks.
+
+--------------------
+Block identification
+--------------------
+Block transformation and representation appears to be a
+very good abstraction base.
+By visually inspecting blocks in the input and then "eyeballing"
+the output, one notices various subcategories:
+1) "non blocks" tend to morph from intput to output:
+ a) in color
+ b) in position
+
+2) blocks themselves reposition
+
+3) blocks change color (and maybe reposition)
+
+4) blocks vanish
+
+5) NB - there is a sensitivity to the block analysis -
+     cells on the diagonal are most often NOT included
+     in the block abstraction.   But sometimes are
+     included in the greater group (like for
+     rectangular fills.
+
+6) replication / tiling / mirroring
+     blocks are replicated or mirrored or used for
+     tiling in some tasks.
+
+
+

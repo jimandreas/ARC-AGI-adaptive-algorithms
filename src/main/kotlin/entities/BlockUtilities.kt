@@ -10,8 +10,8 @@ class BlockUtilities {
 
 	// see GeminiBlockFinder.md
 
-	fun findConnectedBlockInMatrix(matrix: List<List<Int>>): List<Set<Pair<Int, Int>>> {
-		val blocks = mutableListOf<Set<Pair<Int, Int>>>()
+	fun findConnectedBlockInMatrix(matrix: List<List<Int>>): List<Pair<Int, Set<Pair<Int, Int>>>> {
+		val blocks = mutableListOf<Pair<Int, Set<Pair<Int, Int>>>>()
 		val numRows = matrix.size
 		val numCols = matrix[0].size
 		val visited = mutableSetOf<Pair<Int, Int>>()
@@ -20,9 +20,14 @@ class BlockUtilities {
 			for (col in 0 until numCols) {
 				if (matrix[row][col] != 0 && Pair(row, col) !in visited) {
 					val blockCoordinates = mutableSetOf<Pair<Int, Int>>()
-					exploreBlock(matrix, row, col, matrix[row][col], blockCoordinates, visited)
+					val targetValue = matrix[row][col]
+					exploreBlock(matrix,
+						row, col,
+						targetValue,
+						blockCoordinates,
+						visited)
 					if (blockCoordinates.size > 1) { // Only add if it's a block (more than one cell)
-						blocks.add(blockCoordinates)
+						blocks.add(Pair(targetValue, blockCoordinates))
 					}
 				}
 			}
