@@ -1,16 +1,22 @@
 @file:Suppress(
 	"UNUSED_VARIABLE", "MemberVisibilityCanBePrivate", "unused",
 	"ReplaceManualRangeWithIndicesCalls", "ReplaceSizeZeroCheckWithIsEmpty",
-	"SameParameterValue", "UnnecessaryVariable"
+	"SameParameterValue", "UnnecessaryVariable", "KotlinConstantConditions"
 )
 
 package entities
+
+import MatrixAbstractions
+import kotlin.collections.List
 
 class BlockUtilities {
 
 	// see GeminiBlockFinder.md
 
-	fun findConnectedBlockInMatrix(matrix: List<List<Int>>): List<Pair<Int, Set<Pair<Int, Int>>>> {
+	fun findConnectedBlocksInMatrix(
+		oneTrainInstance: MatrixAbstractions, scanDiagonals: Boolean = false) {
+
+		val matrix = oneTrainInstance.matrix
 		val blocks = mutableListOf<Pair<Int, Set<Pair<Int, Int>>>>()
 		val numRows = matrix.size
 		val numCols = matrix[0].size
@@ -25,15 +31,18 @@ class BlockUtilities {
 						row, col,
 						targetValue,
 						blockCoordinates,
-						visited)
+						visited,
+						scanDiagonals)
 					if (blockCoordinates.size > 1) { // Only add if it's a block (more than one cell)
-						blocks.add(Pair(targetValue, blockCoordinates))
+						oneTrainInstance.blocks.add(Pair(targetValue, blockCoordinates))
+						continue
 					}
+					// this is a point
+					var point = Pair(targetValue, Pair(row, col))
+					oneTrainInstance.points.add(point)
 				}
 			}
 		}
-
-		return blocks
 	}
 
 	private fun exploreBlock(
@@ -42,7 +51,8 @@ class BlockUtilities {
 		col: Int,
 		targetValue: Int,
 		blockCoordinates: MutableSet<Pair<Int, Int>>,
-		visited: MutableSet<Pair<Int, Int>>
+		visited: MutableSet<Pair<Int, Int>>,
+		scanDiagonals: Boolean
 	) {
 		val numRows = matrix.size
 		val numCols = matrix[0].size
@@ -55,15 +65,18 @@ class BlockUtilities {
 			visited.add(Pair(row, col))
 			blockCoordinates.add(Pair(row, col))
 
-			exploreBlock(matrix, row + 1, col, targetValue, blockCoordinates, visited)
-			exploreBlock(matrix, row - 1, col, targetValue, blockCoordinates, visited)
-			exploreBlock(matrix, row, col + 1, targetValue, blockCoordinates, visited)
-			exploreBlock(matrix, row, col - 1, targetValue, blockCoordinates, visited)
+			exploreBlock(matrix, row + 1, col, targetValue, blockCoordinates, visited, scanDiagonals)
+			exploreBlock(matrix, row - 1, col, targetValue, blockCoordinates, visited, scanDiagonals)
+			exploreBlock(matrix, row, col + 1, targetValue, blockCoordinates, visited, scanDiagonals)
+			exploreBlock(matrix, row, col - 1, targetValue, blockCoordinates, visited, scanDiagonals)
 
-			exploreBlock(matrix, row + 1, col + 1, targetValue, blockCoordinates, visited)
-			exploreBlock(matrix, row - 1, col - 1, targetValue, blockCoordinates, visited)
-			exploreBlock(matrix, row + 1, col - 1, targetValue, blockCoordinates, visited)
-			exploreBlock(matrix, row - 1, col + 1, targetValue, blockCoordinates, visited)
+			if (scanDiagonals) {
+				exploreBlock(matrix, row + 1, col + 1, targetValue, blockCoordinates, visited, scanDiagonals)
+				exploreBlock(matrix, row - 1, col - 1, targetValue, blockCoordinates, visited, scanDiagonals)
+				exploreBlock(matrix, row + 1, col - 1, targetValue, blockCoordinates, visited, scanDiagonals)
+				exploreBlock(matrix, row - 1, col + 1, targetValue, blockCoordinates, visited, scanDiagonals)
+			}
+
 		}
 	}
 

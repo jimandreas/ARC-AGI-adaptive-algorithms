@@ -32,7 +32,7 @@ internal class BlockUtilitiesTest {
             listOf(0, 0, 0, 0, 0)
         )
 
-        val rectangularBlocks = blockUtil.findConnectedBlockInMatrix(matrix)
+        val rectangularBlocks = blockUtil.findConnectedBlocksInMatrix(matrix)
 //        for (coordinates in rectangularBlocks) {
 //            println("Coordinates: $coordinates")
 //        }

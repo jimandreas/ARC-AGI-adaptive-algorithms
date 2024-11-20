@@ -6,8 +6,13 @@
 
 package entities
 
+import AbstractionsInInputAndOutput
+import BlockInfo
+import MatrixAbstractions
+import TaskAbstractions
 import TaskCoordinateData
 import experiments.ExperimentalDatasets
+import taskAbstractionsList
 
 class AnalyzeTasks {
 
@@ -76,9 +81,8 @@ class AnalyzeTasks {
 	 */
 	fun analyzeExampleInputOrOutput(oneTrainInstance: MatrixAbstractions) {
 		val matrix = oneTrainInstance.matrix
-		val blocks = blockUtil.findConnectedBlockInMatrix(matrix)
-
-		oneTrainInstance.blocks = blocks
+		blockUtil.findConnectedBlocksInMatrix(oneTrainInstance)
+		val blocks = oneTrainInstance.blocks
 		val bIter = blocks.iterator().withIndex()
 
 		while (bIter.hasNext()) {

@@ -6,7 +6,7 @@
 
 package experiments
 
-import entities.taskAbstractionsList
+import taskAbstractionsList
 
 class BlockCompletionSurvey {
 

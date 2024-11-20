@@ -1,6 +1,4 @@
-package entities
-
-import TaskCoordinateData
+import javax.swing.text.MutableAttributeSet
 
 /**
  * A "Block" is a collection of matrix entries with the same color (non-zero) value.
@@ -27,7 +25,8 @@ data class BlockInfo(
 class MatrixAbstractions {
     var matrix: List<List<Int>> = emptyList()
     // structure - pair of color of block with set of block coords
-    var blocks: List<Pair<Int, Set<Pair<Int, Int>>>> = emptyList()
+    var blocks: MutableList<Pair<Int, Set<Pair<Int, Int>>>> = mutableListOf()
+    var points: MutableList<Pair<Int, Pair<Int, Int>>> = mutableListOf()
     var blockInfoList : MutableList<BlockInfo> = mutableListOf()
 }
 

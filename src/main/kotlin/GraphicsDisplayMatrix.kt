@@ -4,8 +4,6 @@
     "SameParameterValue", "UnnecessaryVariable"
 )
 
-import entities.TaskAbstractions
-import entities.taskAbstractionsList
 import java.awt.Color
 import java.awt.Dimension
 import java.awt.GridLayout
@@ -148,10 +146,12 @@ class GraphicsDisplayMatrix {
             }
             val abstractionsInputAndOuput = abstractionsListForTask.abstractionsList[index]
             val blocksListForInput = abstractionsInputAndOuput.input.blocks
+            val pointsListForInput = abstractionsInputAndOuput.input.points
             val matrixList = reconstructMatrix(
                 rowCount,
                 colCount,
-                blocksListForInput)
+                blocksListForInput,
+                pointsListForInput)
 
             displayBlocksInMatrix(rowCount, colCount, matrixList, index )
             //displayDifferencesFromInputToOutput(rowCount, colCount, inputList, outputList, index)
@@ -186,18 +186,26 @@ class GraphicsDisplayMatrix {
         specialPanel.repaint()
     }
 
-    // reconstruct matrix from block data - coded by Google Gemini
+    // reconstruct matrix from block and point data - coded by Google Gemini
+    //    added point list to the reconstruction
     private fun reconstructMatrix(
         rowCount: Int,
         columnCount: Int,
-        points: List<Pair<Int, Set<Pair<Int, Int>>>>): List<List<Int>> {
+        blocks: List<Pair<Int, Set<Pair<Int, Int>>>>,
+        points: List<Pair<Int, Pair<Int, Int>>>): List<List<Int>> {
         // Initialize the matrix with all cells set to 0
         val matrix = MutableList(rowCount) { MutableList(columnCount) { 0 } }
 
-        for (pointSet in points) {
+        for (pointSet in blocks) {
             for ((row, col) in pointSet.second) {
                 matrix[row][col] = pointSet.first // the color of the block
             }
+        }
+
+        for (point in points) {
+            val row = point.second.first
+            val col = point.second.second
+            matrix[row][col] = point.first // the color of the point
         }
 
         return matrix

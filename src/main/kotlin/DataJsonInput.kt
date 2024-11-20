@@ -26,9 +26,7 @@ data class MatrixDataInputAndOutput(
     val output: List<List<Int>>
 )
 
-// Data class to represent the file information from the GitHub API
-@Serializable
-data class FileInfo(val name: String, val download_url: String)
+
 
 data class SolvedTasks(
     val task: TaskCoordinateData,

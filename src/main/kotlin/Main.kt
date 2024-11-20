@@ -40,7 +40,7 @@ fun main() {
     graphics.setupGraphics()
     graphics.displayMatrices()
 
-//    val dops = DatabaseOps()
+//    val dops = databaseSQLite.DatabaseOps()
 //    dops.createDatabaseAndAddAllTaskData(databasePath)
 }
 
