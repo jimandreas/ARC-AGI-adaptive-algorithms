@@ -6,10 +6,12 @@
 
 package entities
 
+import MatrixAbstractions
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import utils.splitStringIntoPairs
+import kotlin.math.exp
 import kotlin.test.assertEquals
 
 internal class BlockUtilitiesTest {
@@ -32,16 +34,22 @@ internal class BlockUtilitiesTest {
             listOf(0, 0, 0, 0, 0)
         )
 
-        val rectangularBlocks = blockUtil.findConnectedBlocksInMatrix(matrix)
+        val oneTrainInstance = MatrixAbstractions()
+        oneTrainInstance.matrix = matrix
+        blockUtil.findConnectedBlocksInMatrix(oneTrainInstance)
 //        for (coordinates in rectangularBlocks) {
 //            println("Coordinates: $coordinates")
 //        }
+
+        val rectangularBlocks = oneTrainInstance.blocks
 
         val expectedString1 = "(0, 1), (0, 2), (1, 1), (1, 2)"
         val expectedString2 = "(2, 3), (2, 4), (3, 2), (3, 3)"
         val expectedPairList1 = splitStringIntoPairs(expectedString1)
         val expectedPairList2 = splitStringIntoPairs(expectedString2)
-        val expectedList = listOf(expectedPairList1, expectedPairList2)
+        val expectedList: MutableList<Pair<Int, Set<Pair<Int, Int>>>> = mutableListOf()
+        expectedList.add(Pair(1, expectedPairList1))  // color is "1"
+        expectedList.add(Pair(2, expectedPairList2))  // color is "2"
         assertEquals(rectangularBlocks, expectedList)
     }
 
