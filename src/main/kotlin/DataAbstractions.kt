@@ -22,11 +22,25 @@ data class BlockInfo(
  The blockInfoList are the blocks after subsequent analysis.
 */
 
+data class Block(val color: Int, val coordinates: Set<Pair<Int, Int>>)
+data class Point(val color: Int, val coordinate: Pair<Int, Int>)
+
+/**
+ * this is the abstraction for one matrix (input or output)
+ * for one Example.   There are more than one Example per Task.
+ * It is also the abstraction for the input matrix for the
+ * Test instance - there may be more than one!!
+ *
+ * The matrix is converted to Blocks and Points.
+ */
 class MatrixAbstractions {
     var matrix: List<List<Int>> = emptyList()
-    // structure - pair of color of block with set of block coords
-    var blocks: MutableList<Pair<Int, Set<Pair<Int, Int>>>> = mutableListOf()
-    var points: MutableList<Pair<Int, Pair<Int, Int>>> = mutableListOf()
+
+    var blocks: MutableList<Block> = mutableListOf()
+    var points: MutableList<Point> = mutableListOf()
+
+    var blocksOld: MutableList<Pair<Int, Set<Pair<Int, Int>>>> = mutableListOf()
+    var pointsOld: MutableList<Pair<Int, Pair<Int, Int>>> = mutableListOf()
     var blockInfoList : MutableList<BlockInfo> = mutableListOf()
 }
 

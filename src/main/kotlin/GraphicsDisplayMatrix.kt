@@ -191,21 +191,21 @@ class GraphicsDisplayMatrix {
     private fun reconstructMatrix(
         rowCount: Int,
         columnCount: Int,
-        blocks: List<Pair<Int, Set<Pair<Int, Int>>>>,
-        points: List<Pair<Int, Pair<Int, Int>>>): List<List<Int>> {
+        blocks: List<Block>,
+        points: List<Point>): List<List<Int>> {
         // Initialize the matrix with all cells set to 0
         val matrix = MutableList(rowCount) { MutableList(columnCount) { 0 } }
 
         for (pointSet in blocks) {
-            for ((row, col) in pointSet.second) {
-                matrix[row][col] = pointSet.first // the color of the block
+            for ((row, col) in pointSet.coordinates) {
+                matrix[row][col] = pointSet.color
             }
         }
 
         for (point in points) {
-            val row = point.second.first
-            val col = point.second.second
-            matrix[row][col] = point.first // the color of the point
+            val row = point.coordinate.first
+            val col = point.coordinate.second
+            matrix[row][col] = point.color
         }
 
         return matrix

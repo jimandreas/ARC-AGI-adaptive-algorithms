@@ -88,7 +88,7 @@ class AnalyzeTasks {
 		while (bIter.hasNext()) {
 			val bData = bIter.next()
 			val block = bData.value
-			val setOfPairs = block.second
+			val setOfPairs = block.coordinates
 			val validFlag = blockUtil.verifyRectangularBlock(setOfPairs)
 
 			//println("valid block: $validFlag")

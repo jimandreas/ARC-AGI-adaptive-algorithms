@@ -6,7 +6,9 @@
 
 package entities
 
+import Block
 import MatrixAbstractions
+import Point
 import kotlin.collections.List
 
 class BlockUtilities {
@@ -17,7 +19,7 @@ class BlockUtilities {
 		oneTrainInstance: MatrixAbstractions, scanDiagonals: Boolean = false) {
 
 		val matrix = oneTrainInstance.matrix
-		val blocks = mutableListOf<Pair<Int, Set<Pair<Int, Int>>>>()
+		val blocks = mutableListOf<Block>()
 		val numRows = matrix.size
 		val numCols = matrix[0].size
 		val visited = mutableSetOf<Pair<Int, Int>>()
@@ -34,12 +36,15 @@ class BlockUtilities {
 						visited,
 						scanDiagonals)
 					if (blockCoordinates.size > 1) { // Only add if it's a block (more than one cell)
-						oneTrainInstance.blocks.add(Pair(targetValue, blockCoordinates))
+						val b = Block(color = targetValue,
+							coordinates = blockCoordinates)
+						oneTrainInstance.blocks.add(b)
 						continue
 					}
 					// this is a point
-					var point = Pair(targetValue, Pair(row, col))
-					oneTrainInstance.points.add(point)
+					val p = Point(color = targetValue,
+						coordinate = Pair(row, col))
+					oneTrainInstance.points.add(p)
 				}
 			}
 		}

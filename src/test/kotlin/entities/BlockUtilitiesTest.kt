@@ -6,6 +6,7 @@
 
 package entities
 
+import Block
 import MatrixAbstractions
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
@@ -47,9 +48,10 @@ internal class BlockUtilitiesTest {
         val expectedString2 = "(2, 3), (2, 4), (3, 2), (3, 3)"
         val expectedPairList1 = splitStringIntoPairs(expectedString1)
         val expectedPairList2 = splitStringIntoPairs(expectedString2)
-        val expectedList: MutableList<Pair<Int, Set<Pair<Int, Int>>>> = mutableListOf()
-        expectedList.add(Pair(1, expectedPairList1))  // color is "1"
-        expectedList.add(Pair(2, expectedPairList2))  // color is "2"
+        val expectedList: MutableList<Block> = mutableListOf()
+        expectedList.add(Block(color = 1, coordinates = expectedPairList1))
+        expectedList.add(Block(color = 2, coordinates = expectedPairList2))
+
         assertEquals(rectangularBlocks, expectedList)
     }
 
