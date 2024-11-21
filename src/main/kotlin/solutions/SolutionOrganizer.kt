@@ -22,8 +22,11 @@ class SolutionOrganizer(val ed: ExperimentalDatasets) {
         cellTranslations.setExperimentalDatasets(ed)
         cellTranslations.surveyTranslations()
 
-        val t = BlockAndPointTransformations()
-        val result = t.scanTransformations()
+        val tbp = TransformationsBlockAndPoint()
+        val result = tbp.scanTransformations()
+
+        val ttm = TransformationBlockAndPointToMatrix()
+        val result2 = ttm.scanTransformations()
 
     }
 

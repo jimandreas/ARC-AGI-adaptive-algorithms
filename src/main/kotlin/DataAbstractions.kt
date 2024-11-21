@@ -39,8 +39,6 @@ class MatrixAbstractions {
     var blocks: MutableList<Block> = mutableListOf()
     var points: MutableList<Point> = mutableListOf()
 
-    var blocksOld: MutableList<Pair<Int, Set<Pair<Int, Int>>>> = mutableListOf()
-    var pointsOld: MutableList<Pair<Int, Pair<Int, Int>>> = mutableListOf()
     var blockInfoList : MutableList<BlockInfo> = mutableListOf()
 }
 
