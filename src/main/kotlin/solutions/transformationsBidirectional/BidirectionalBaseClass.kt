@@ -51,5 +51,6 @@ class TestTrans() : BidirectionalBaseClass() {
 }
 
 val bidiTransformList: List<BidirectionalBaseClass> = listOf(
-	TestTrans()
+	TestTrans(),
+	BidiFullRowColoring()
 )
