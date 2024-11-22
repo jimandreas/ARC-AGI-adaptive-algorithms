@@ -26,12 +26,13 @@ data class MatrixDataInputAndOutput(
     val output: List<List<Int>>
 )
 
-
+data class SolutionMatrix(val solution: List<List<Int>>)
 
 data class SolvedTasks(
     val task: TaskCoordinateData,
     val taskname: String,
-    val solvedBy: String
+    val solvedBy: String,
+    val solutionMatrices: MutableList<SolutionMatrix> = mutableListOf()
 )
 var solvedTasks: MutableList<SolvedTasks> = mutableListOf()
 

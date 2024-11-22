@@ -12,7 +12,11 @@ package solutions
 import Block
 import MatrixDataInputAndOutput
 import Point
+import SolutionMatrix
+import SolvedTasks
+import solvedTasks
 import taskAbstractionsList
+import kotlin.Int
 import kotlin.collections.List
 
 class TransformationBlockAndPointToMatrix {
@@ -30,8 +34,36 @@ class TransformationBlockAndPointToMatrix {
 		): List<List<Int>>
 	}
 
+	object ExtendPointDownward : TransformationToMatrix() {
+		override val name = "SOL-TXTM Extend point downward"
+
+		override fun apply(input: Pair<List<Block>, List<Point>>, size: Pair<Int, Int>): List<List<Int>> {
+
+			val rowCount = size.first
+			val colCount = size.second
+			val points = input.second
+
+			// coded by Google Gemini
+			// Initialize the matrix with all cells set to 0
+			val matrix = MutableList(rowCount) { MutableList(colCount) { 0 } }
+
+			// Place points and fill downwards
+			for (point in points) {
+				val (row, col) = point.coordinate
+				// Place the point in the matrix
+				matrix[row][col] = point.color
+
+				// Fill downwards
+				for (r in row + 1 until rowCount) {
+					matrix[r][col] = point.color
+				}
+			}
+			return matrix
+		}
+	}
+
 	object ColorByMajority : TransformationToMatrix() {
-		override val name = "SOL-TXTM01 Create an output matrix that is colored by the majority of input cell colors"
+		override val name = "SOL-TXTM Create an output matrix that is colored by the majority of input cell colors"
 
 		override fun apply(input: Pair<List<Block>, List<Point>>, size: Pair<Int, Int>): List<List<Int>> {
 
@@ -69,13 +101,8 @@ class TransformationBlockAndPointToMatrix {
 	}
 
 	val transformations = listOf(
-		ColorByMajority
-	)
-
-	data class Example(
-		val input: Pair<List<Block>, List<Point>>,
-		val output: Pair<List<Block>, List<Point>>,
-		val originalMatrices: MatrixDataInputAndOutput
+		ColorByMajority,
+		ExtendPointDownward
 	)
 
 	/**
@@ -93,20 +120,32 @@ class TransformationBlockAndPointToMatrix {
 		return outputMatrix
 	}
 
+	data class Example(
+		val input: Pair<List<Block>, List<Point>>,
+		val output: Pair<List<Block>, List<Point>>,
+		val originalMatrices: MatrixDataInputAndOutput
+	)
+
 	/**
 	 * for each task that has been broken down into Blocks and Points,
 	 * see if that Task can be solved by various Transformations.
 	 * Check the first example for validity, then verify
 	 * the validity with the subsequent examples.
 	 */
-	fun scanTransformations(): Boolean {
+	fun scanTransformations() {
 
-		for (atask in taskAbstractionsList) {
+		val theList = taskAbstractionsList // for debugging visibility
+		for (atask in theList) {
 			val taskName = atask.taskData.name
 
 			if (taskName == "5582e5ca") {
 				println("we have 5582e5ca")
 			}
+
+			if (taskName == "d037b0a7") { // Extend points downward test case
+				println("we have d037b0a7")
+			}
+
 			val numExamples = atask.abstractionsList.size
 			val taskCoordinateData = atask.taskData
 
@@ -161,6 +200,9 @@ class TransformationBlockAndPointToMatrix {
 
 						// re-create the test "key" matrix and compare to the real thing
 						//   Do this for all test matrix input and output pairs
+
+						val solutionMatrices = mutableListOf<SolutionMatrix>()
+
 						for (j in 0 until taskCoordinateData.test.size) {
 							val abstraction3 = atask.abstractionsInTestMatrices[j]
 							val inputBlocks3 = abstraction3.blocks
@@ -178,15 +220,25 @@ class TransformationBlockAndPointToMatrix {
 								success = false
 								break
 							}
+							// record the solution matrix
+							solutionMatrices.add(SolutionMatrix(resultMatrix3))
 						}
-						println("Transform ${t.name} - VERIFIED!!")
-						return true
+						println("Transform ${t.name} for $taskName - VERIFIED!!")
+
+						val solved = SolvedTasks(
+							atask.taskData,
+							taskName,
+							"vertical mirroring",
+							solutionMatrices)
+
+						solvedTasks.add(solved)
+
+						break
 					}
 					// continue looping through the transformations
 				}
 			}
 		}
-		return false
 	}
 }
 
