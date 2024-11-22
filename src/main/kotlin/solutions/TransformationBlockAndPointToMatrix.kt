@@ -228,7 +228,7 @@ class TransformationBlockAndPointToMatrix {
 						val solved = SolvedTasks(
 							atask.taskData,
 							taskName,
-							"vertical mirroring",
+							t.name,
 							solutionMatrices)
 
 						solvedTasks.add(solved)

@@ -27,7 +27,9 @@ fun main() {
 //    println("${populationsMatch.size}: number of input and ouput populations match")
 
     // print solutions so far!
+    println("==== MAIN.KT ============================")
     prettyPrintSolutions(solvedTasks.toList())
+    println("==== MAIN.KT ============================")
 
     // set up the data for the graphical view
 

@@ -7,17 +7,30 @@
 // note that part of this code follows an example by Google Gemini
 // see docs/10 GeminiTransformTestArchitecture.md FMI
 
+// note that these transformations work in a uni-directional
+// manner - inspection / transformation of the input blocks and points
+// to a supposed solution with output blocks and points
+// that are then compared to the earlier assembled output blocks and points.
+
+// a transform that iterates over all input / output and forms a model
+//    is BEYOND the scope of this Transformation set.  Stay tuned.
+
 package solutions
 
 import Block
 import Point
+import SolutionMatrix
+import SolvedTasks
+import solutions.utilities.recreateMatrix
+import solvedTasks
 import taskAbstractionsList
 
 class TransformationsBlockAndPoint {
 
 	data class ExampleBlockAndPoint(
 		val input: Pair<List<Block>, List<Point>>,
-		val output: Pair<List<Block>, List<Point>>)
+		val output: Pair<List<Block>, List<Point>>
+	)
 
 	sealed class Transformation {
 		abstract val name: String
@@ -25,7 +38,7 @@ class TransformationsBlockAndPoint {
 	}
 
 	object ShiftBlocksDown : Transformation() {
-		override val name = "SOL-TX01 Shift blocks down one cell"
+		override val name = "SOL-TX Shift blocks down one cell"
 
 		override fun apply(input: Pair<List<Block>, List<Point>>): Pair<List<Block>, List<Point>> {
 			val (blocks, points) = input
@@ -37,7 +50,7 @@ class TransformationsBlockAndPoint {
 	}
 
 	object ShiftBlocksLeft : Transformation() {
-		override val name = "SOL-TX02 Shift blocks left one cell"
+		override val name = "SOL-TX Shift blocks left one cell"
 
 		override fun apply(input: Pair<List<Block>, List<Point>>): Pair<List<Block>, List<Point>> {
 			val (blocks, points) = input
@@ -49,7 +62,7 @@ class TransformationsBlockAndPoint {
 	}
 
 	object ColorBlocksByFirstPoint : Transformation() {
-		override val name = "SOL-TX03 Color all blocks based on the color of the first point"
+		override val name = "SOL-TX Color all blocks based on the color of the first point"
 
 		override fun apply(input: Pair<List<Block>, List<Point>>): Pair<List<Block>, List<Point>> {
 			val (blocks, points) = input
@@ -81,8 +94,14 @@ class TransformationsBlockAndPoint {
 	 * Check the first example for validity, then verify
 	 * the validity with the subsequent examples.
 	 */
-	fun scanTransformations(): Boolean {
-		for (atask in taskAbstractionsList) {
+	fun scanTransformations() {
+		val theList = taskAbstractionsList // for debugging visibility
+		for (atask in theList) {
+			val taskName = atask.taskData.name
+
+			if (taskName == "0d3d703e") {
+				println("we have 0d3d703e") // mapping of colors
+			}
 			val numExamples = atask.abstractionsList.size
 
 			val taskCoordinateData = atask.taskData
@@ -115,9 +134,8 @@ class TransformationsBlockAndPoint {
 
 			for (t in transformations) {
 				if (testTransformation(t, example)) {
-					//println("Transform ${t.name} - TRANSFORMATION SUCCESS!!")
 
-					// check remaining examples using the same transformation
+					// OK it worked. check remaining examples using the same transformation
 
 					var success = true
 					for (j in 1 until numExamples) {
@@ -142,21 +160,61 @@ class TransformationsBlockAndPoint {
 							}
 						}
 					}
-					if (success) {
-						// success ! all subsequent transformations worked on this task
-						println("Transform ${t.name} - TRANSFORMATION SUCCESS on *all* Examples!!")
-						// TODO: confirm the transformation by checking the test matrix - To be continued
-						return true
+					// success ! all subsequent transformations worked on this task
+
+					println("Transform ${t.name} - WORKED - continuing")
+
+					// re-create the test "key" matrix and compare to the real thing
+					//   Do this for all test matrix input and output pairs
+
+					val solutionMatrices = mutableListOf<SolutionMatrix>()
+
+					for (j in 0 until taskCoordinateData.test.size) {
+
+						val abstraction3 = atask.abstractionsInTestMatrices[j]
+						val inputBlocks3 = abstraction3.blocks
+						val inputPoints3 = abstraction3.points
+
+						val originalTestMatrixInputAndOutput3 = taskCoordinateData.test[j]
+
+						// note - this is the test "key" -
+						val outputMatrix3 = originalMatrixInputAndOutput.output
+						val outputRowCount3 = outputMatrix3.size
+						val outputColCount3 = outputMatrix3[j].size
+
+						val input3 = Pair(inputBlocks3, inputPoints3)
+
+						val transformedInput = t.apply(input3)
+
+						val resultMatrix3 = recreateMatrix(
+							outputRowCount3,
+							outputColCount3,
+							transformedInput.first, // blocks
+							transformedInput.second
+						) // points
+
+						if (resultMatrix3 != originalTestMatrixInputAndOutput3.output) {
+							success = false
+							break
+						}
+						// record the solution matrix
+						solutionMatrices.add(SolutionMatrix(resultMatrix3))
 					}
-					// continue looping through the transformations
+					println("Transform ${t.name} for $taskName - VERIFIED!!")
+
+					val solved = SolvedTasks(
+						atask.taskData,
+						taskName,
+						t.name,
+						solutionMatrices
+					)
+
+					solvedTasks.add(solved)
+
+					break
 				}
+				// continue looping through the transformations
 			}
 		}
-		return false
 	}
 }
-
-
-
-
-

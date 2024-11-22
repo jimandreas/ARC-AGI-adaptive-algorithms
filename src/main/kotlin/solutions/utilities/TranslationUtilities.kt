@@ -1,5 +1,8 @@
 package solutions.utilities
 
+import Block
+import Point
+
 
 /*
 
@@ -75,4 +78,44 @@ fun isEntireMapConsistent(groupedTranslationsMap: Map<Int, Map<Pair<Int, Int>, I
 	}
 
 	return true
+}
+
+/**
+There are two Kotlin data structures that contain information on a
+matrix.  They are lists of the following two kotlin data classes:
+
+data class Block(val color: Int, val coordinates: Set<Pair<Int, Int>>)
+data class Point(val color: Int, val coordinate: Pair<Int, Int>)
+
+please take these lists and also the numRow and numCol parameters
+and recreate the list as a List<List<Int>> and fill non-specified
+cells with the "color" of 0.   The colors, that is the Int values
+for the Block and Point entities are specified in the data class.
+
+ Code created by Google Gemini follows:
+ */
+fun recreateMatrix(
+	numRow: Int,
+	numCol: Int,
+	blocks: List<Block>,
+	points: List<Point>
+): List<List<Int>> {
+
+	// Initialize the matrix with all cells set to 0
+	val matrix = MutableList(numRow) { MutableList(numCol) { 0 } }
+
+	// Fill in the blocks
+	for (block in blocks) {
+		for ((row, col) in block.coordinates) {
+			matrix[row][col] = block.color
+		}
+	}
+
+	// Fill in the points
+	for (point in points) {
+		val (row, col) = point.coordinate
+		matrix[row][col] = point.color
+	}
+
+	return matrix
 }
