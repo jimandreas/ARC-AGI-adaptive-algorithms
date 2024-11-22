@@ -70,9 +70,23 @@ class AnalyzeTasks {
 			)
 		}
 
-		// now associate the abstractions with the given Task
+		val abstractionsInTestMatrices: MutableList<MatrixAbstractions> = mutableListOf()
+		for (i in 0 until td.test.size) {
+			val mdata = td.test[i]
+			val dataForTestInstanceInput = MatrixAbstractions()
+			dataForTestInstanceInput.matrix = mdata.input
+			analyzeExampleInputOrOutput(dataForTestInstanceInput)
+			abstractionsInTestMatrices.add(dataForTestInstanceInput)
+		}
 
-		val taskAbstractions = TaskAbstractions(td, abstractionsList)
+		// now associate the abstractions with the given Task
+		//    and the abstractions for the Test input matrices
+
+		val taskAbstractions = TaskAbstractions(
+			td,
+			abstractionsList,
+			abstractionsInTestMatrices)
+
 		taskAbstractionsList.add(taskAbstractions)
 	}
 

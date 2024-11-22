@@ -57,7 +57,8 @@ data class AbstractionsInInputAndOutput(
 //   abstraction analysis data
 data class TaskAbstractions(
     val taskData: TaskCoordinateData,
-    val abstractionsList: MutableList<AbstractionsInInputAndOutput>
+    val abstractionsList: MutableList<AbstractionsInInputAndOutput>,
+    val abstractionsInTestMatrices: MutableList<MatrixAbstractions>
 )
 
 val taskAbstractionsList: MutableList<TaskAbstractions> = mutableListOf()

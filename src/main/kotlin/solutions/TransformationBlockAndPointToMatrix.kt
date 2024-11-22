@@ -157,8 +157,29 @@ class TransformationBlockAndPointToMatrix {
 					}
 					if (success) {
 						// success ! all subsequent transformations worked on this task
-						println("Transform ${t.name} - TRANSFORMATION TO MATRIX SUCCESS on *all* Examples!!")
-						// TODO: confirm the transformation by checking the test matrix - To be continued
+						println("Transform ${t.name} - WORKED - continuing")
+
+						// re-create the test "key" matrix and compare to the real thing
+						//   Do this for all test matrix input and output pairs
+						for (j in 0 until taskCoordinateData.test.size) {
+							val abstraction3 = atask.abstractionsInTestMatrices[j]
+							val inputBlocks3 = abstraction3.blocks
+							val inputPoints3 = abstraction3.points
+							val originalTestMatrixInputAndOutput3 = taskCoordinateData.test[j]
+							// note - this is the test "key" -
+							val outputMatrix3 = originalMatrixInputAndOutput.output
+							val outputRowCount3 = outputMatrix3.size
+							val outputColCount3 = outputMatrix3[j].size
+							val size3 = Pair(outputRowCount3, outputColCount3)
+							val	input3 = Pair(inputBlocks3, inputPoints3)
+
+							val resultMatrix3 = testTransformation(t, input3, size3)
+							if (resultMatrix3 != originalTestMatrixInputAndOutput3.output) {
+								success = false
+								break
+							}
+						}
+						println("Transform ${t.name} - VERIFIED!!")
 						return true
 					}
 					// continue looping through the transformations
