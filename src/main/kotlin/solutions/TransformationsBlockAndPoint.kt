@@ -24,6 +24,7 @@ import SolvedTasks
 import solutions.utilities.recreateMatrix
 import solvedTasks
 import taskAbstractionsList
+import kotlin.compareTo
 
 class TransformationsBlockAndPoint {
 
@@ -34,13 +35,21 @@ class TransformationsBlockAndPoint {
 
 	sealed class Transformation {
 		abstract val name: String
-		abstract fun apply(input: Pair<List<Block>, List<Point>>): Pair<List<Block>, List<Point>>
+		abstract fun apply(
+			input: Pair<List<Block>, List<Point>>,
+			numRows: Int,
+			numCols: Int
+		): Pair<List<Block>, List<Point>>
 	}
 
 	object ShiftBlocksDown : Transformation() {
 		override val name = "SOL-TX Shift blocks down one cell"
 
-		override fun apply(input: Pair<List<Block>, List<Point>>): Pair<List<Block>, List<Point>> {
+		override fun apply(
+			input: Pair<List<Block>, List<Point>>,
+			numRows: Int,
+			numCols: Int
+		): Pair<List<Block>, List<Point>> {
 			val (blocks, points) = input
 			val transformedBlocks = blocks.map { block ->
 				block.copy(coordinates = block.coordinates.map { (row, col) -> Pair(row + 1, col) }.toSet())
@@ -52,7 +61,11 @@ class TransformationsBlockAndPoint {
 	object ShiftBlocksLeft : Transformation() {
 		override val name = "SOL-TX Shift blocks left one cell"
 
-		override fun apply(input: Pair<List<Block>, List<Point>>): Pair<List<Block>, List<Point>> {
+		override fun apply(
+			input: Pair<List<Block>, List<Point>>,
+			numRows: Int,
+			numCols: Int
+		): Pair<List<Block>, List<Point>> {
 			val (blocks, points) = input
 			val transformedBlocks = blocks.map { block ->
 				block.copy(coordinates = block.coordinates.map { (row, col) -> Pair(row, col - 1) }.toSet())
@@ -64,7 +77,11 @@ class TransformationsBlockAndPoint {
 	object ColorBlocksByFirstPoint : Transformation() {
 		override val name = "SOL-TX Color all blocks based on the color of the first point"
 
-		override fun apply(input: Pair<List<Block>, List<Point>>): Pair<List<Block>, List<Point>> {
+		override fun apply(
+			input: Pair<List<Block>, List<Point>>,
+			numRows: Int,
+			numCols: Int
+		): Pair<List<Block>, List<Point>> {
 			val (blocks, points) = input
 			val firstPointColor = points.firstOrNull()?.color ?: return input // Handle case with no points
 			val transformedBlocks = blocks.map { block ->
@@ -74,14 +91,51 @@ class TransformationsBlockAndPoint {
 		}
 	}
 
+	/*
+
+	this one needs to wait - as the biggest block is important -
+	but the remainder of the matrix needs to be colored to some
+	value only indicated by the output matrix
+	see 25d8a9c8
+
+	object BiggestBlock : Transformation() {
+		override val name = "SOL-TX Find Biggest Block"
+
+		override fun apply(
+			input: Pair<List<Block>, List<Point>>,
+			numRows: Int,
+			numCols: Int
+		): Pair<List<Block>, List<Point>> {
+
+			val blocks = input.first
+			val defaultResult = Pair(listOf<Block>(), listOf<Point>())
+			// Filter blocks with size greater than numRow
+			val filteredBlocks = blocks.filter { it.coordinates.size > numRows }
+
+			// Return null if no blocks meet the criteria
+			if (filteredBlocks.isEmpty()) return defaultResult
+
+			// Find the biggest block among the filtered ones
+			var filtered = filteredBlocks.maxByOrNull { it.coordinates.size }
+
+			val retVal = Pair(filteredBlocks, listOf<Point>())
+			return retVal
+		}
+	}*/
+
 	val transformations = listOf(
 		ShiftBlocksLeft,
 		ShiftBlocksDown,
 		ColorBlocksByFirstPoint
 	)
 
-	fun testTransformation(transformation: Transformation, e: ExampleBlockAndPoint): Boolean {
-		val transformedInput = transformation.apply(e.input)
+	fun testTransformation(
+		transformation: Transformation,
+		e: ExampleBlockAndPoint,
+		numRows: Int,
+		numCols: Int
+	): Boolean {
+		val transformedInput = transformation.apply(e.input, numRows, numCols)
 		if (transformedInput != e.output) {
 			return false
 		}
@@ -132,34 +186,37 @@ class TransformationsBlockAndPoint {
 				output = Pair(outputBlocks, outputPoints)
 			)
 
+			val numRows = originalMatrixInputAndOutput.input.size
+			val numCols = originalMatrixInputAndOutput.input[0].size
 			for (t in transformations) {
-				if (testTransformation(t, example)) {
+				if (testTransformation(t, example, numRows, numCols)) {
 
 					// OK it worked. check remaining examples using the same transformation
 
 					var success = true
 					for (j in 1 until numExamples) {
-						if (testTransformation(t, example)) {
 
-							val originalMatrixInputAndOutput2 = taskCoordinateData.train[j]
-							val abstraction2 = atask.abstractionsList[j]
-							val inputBlocks2 = abstraction.input.blocks
-							val inputPoints2 = abstraction.input.points
+						val originalMatrixInputAndOutput2 = taskCoordinateData.train[j]
+						val abstraction2 = atask.abstractionsList[j]
+						val inputBlocks2 = abstraction.input.blocks
+						val inputPoints2 = abstraction.input.points
 
-							val outputBlocks2 = abstraction.output.blocks
-							val outputPoints2 = abstraction.output.points
+						val outputBlocks2 = abstraction.output.blocks
+						val outputPoints2 = abstraction.output.points
 
-							val example2 = ExampleBlockAndPoint(
-								input = Pair(inputBlocks2, inputPoints2),
-								output = Pair(outputBlocks2, outputPoints2)
-							)
+						val example2 = ExampleBlockAndPoint(
+							input = Pair(inputBlocks2, inputPoints2),
+							output = Pair(outputBlocks2, outputPoints2)
+						)
 
-							if (!testTransformation(t, example2)) {
-								success = false
-								break  // failed on subsequent test
-							}
+						val numRows2 = originalMatrixInputAndOutput2.input.size
+						val numCols2 = originalMatrixInputAndOutput2.input[0].size
+						if (!testTransformation(t, example2, numRows2, numCols2)) {
+							success = false
+							break  // failed on subsequent test
 						}
 					}
+
 					// success ! all subsequent transformations worked on this task
 
 					println("Transform ${t.name} - WORKED - continuing")
@@ -184,7 +241,9 @@ class TransformationsBlockAndPoint {
 
 						val input3 = Pair(inputBlocks3, inputPoints3)
 
-						val transformedInput = t.apply(input3)
+						val numRows3 = originalTestMatrixInputAndOutput3.input.size
+						val numCols3 = originalTestMatrixInputAndOutput3.input[0].size
+						val transformedInput = t.apply(input3, numRows3, numCols3)
 
 						val resultMatrix3 = recreateMatrix(
 							outputRowCount3,
