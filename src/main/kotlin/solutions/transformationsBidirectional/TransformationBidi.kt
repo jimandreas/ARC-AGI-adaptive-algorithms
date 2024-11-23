@@ -15,7 +15,8 @@ class TransformationBidi {
 
 	val bidiTransformList: List<BidirectionalBaseClass> = listOf(
 		TestTrans(),
-		BidiFullRowColoring()
+		BidiFullRowColoring(),
+		BidiBasicTranslations()
 	)
 	/**
 	 * Scan the tasks but look at both the input and output data
@@ -28,6 +29,10 @@ class TransformationBidi {
 		val theList = taskAbstractionsList // for debugging visibility
 		for (atask in theList) {
 			val taskName = atask.taskData.name
+
+			if (taskName == "25ff71a9") {
+				println("We have $taskName")
+			}
 
 			if (taskName == "d037b0a7") { // Extend points downward test case
 				println("we have d037b0a7")

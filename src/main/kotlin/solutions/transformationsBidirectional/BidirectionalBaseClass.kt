@@ -9,8 +9,8 @@ import Block
 import Point
 
 abstract class BidirectionalBaseClass {
-	var blockList: List<Block> = listOf()
-	var pointList: List<Point> = listOf()
+	var inputBlockList: List<Block> = listOf()
+	var inputPointList: List<Point> = listOf()
 
 	var outputBlockList: List<Block> = listOf()
 	var outputPointList: List<Point> = listOf()
@@ -18,8 +18,8 @@ abstract class BidirectionalBaseClass {
 	abstract val name: String
 
 	fun setInput(inputBlockList: List<Block>, inputPointList: List<Point>) {
-		blockList = inputBlockList
-		pointList = inputPointList
+		this@BidirectionalBaseClass.inputBlockList = inputBlockList
+		this@BidirectionalBaseClass.inputPointList = inputPointList
 	}
 
 	fun setOutput(

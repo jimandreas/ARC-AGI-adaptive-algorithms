@@ -107,6 +107,7 @@ fun recreateMatrix(
 	// Fill in the blocks
 	for (block in blocks) {
 		for ((row, col) in block.coordinates) {
+			if ((row > numRow-1) || (col > numCol-1)) return emptyList()
 			matrix[row][col] = block.color
 		}
 	}
@@ -114,6 +115,7 @@ fun recreateMatrix(
 	// Fill in the points
 	for (point in points) {
 		val (row, col) = point.coordinate
+		if ((row > numRow-1) || (col > numCol-1)) return emptyList()
 		matrix[row][col] = point.color
 	}
 

@@ -1,7 +1,6 @@
 package solutions.transformationsBidirectional
 
 import Block
-import Point
 import solutions.utilities.recreateMatrix
 
 class BidiFullRowColoring : BidirectionalBaseClass() {
@@ -11,7 +10,7 @@ class BidiFullRowColoring : BidirectionalBaseClass() {
 	var outputColor = -1
 
 	override fun testTransform(): List<List<Int>> {
-		val blocks = findBlocksSpanningEntireRow(outputMatrix, blockList)
+		val blocks = findBlocksSpanningEntireRow(outputMatrix, inputBlockList)
 		if (!blocks.isEmpty() && !outputBlockList.isEmpty()) {
 			val firstOutputBlock = outputBlockList[0]
 			val thisExampleOutputColor = firstOutputBlock.color
@@ -36,7 +35,7 @@ class BidiFullRowColoring : BidirectionalBaseClass() {
 	override fun returnTestOutput(): List<List<Int>> {
 		// note that the output matrix here is the
 		//   cached output matrix from the last example!!
-		val blocks = findBlocksSpanningEntireRow(outputMatrix, blockList)
+		val blocks = findBlocksSpanningEntireRow(outputMatrix, inputBlockList)
 		if (!blocks.isEmpty()) {
 			val changeBlocks = changeBlockColor(blocks, outputColor)
 			val outputMatrix = recreateMatrix(
