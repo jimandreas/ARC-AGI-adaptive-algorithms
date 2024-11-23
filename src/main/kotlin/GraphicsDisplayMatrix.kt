@@ -162,7 +162,7 @@ class GraphicsDisplayMatrix {
     private fun findAbstractionsData(task: TaskCoordinateData): TaskAbstractions? {
         for (item in taskAbstractionsList) {
             if (item.taskData == task) {
-                println("Found Abstraction: ${task.name}")
+                //println("Found Abstraction: ${task.name}")
                 return item
             }
         }

@@ -7,6 +7,7 @@
 package solutions
 
 import experiments.ExperimentalDatasets
+import solutions.transformationsBidirectional.TransformationBidi
 
 class SolutionOrganizer(val ed: ExperimentalDatasets) {
 
@@ -23,10 +24,13 @@ class SolutionOrganizer(val ed: ExperimentalDatasets) {
         cellTranslations.surveyTranslations()
 
         val tbp = TransformationsBlockAndPoint()
-        val result = tbp.scanTransformations()
+        tbp.scanTransformations()
 
         val ttm = TransformationBlockAndPointToMatrix()
-        val result2 = ttm.scanTransformations()
+        ttm.scanTransformations()
+
+        val tbidi = TransformationBidi()
+        tbidi.scanBidiTransformations()
 
     }
 

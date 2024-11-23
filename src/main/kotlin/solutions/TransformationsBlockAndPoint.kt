@@ -24,7 +24,6 @@ import SolvedTasks
 import solutions.utilities.recreateMatrix
 import solvedTasks
 import taskAbstractionsList
-import kotlin.compareTo
 
 class TransformationsBlockAndPoint {
 
