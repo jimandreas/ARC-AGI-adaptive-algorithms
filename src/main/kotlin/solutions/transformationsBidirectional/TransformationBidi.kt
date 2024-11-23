@@ -17,7 +17,8 @@ class TransformationBidi {
 		TestTrans(),
 		BidiFullRowColoring(),
 		BidiBasicTranslations(),
-		BidiColumnColoringMapping()
+		BidiColumnColoringMapping(),
+		BidiConnectPairsOfPoints()
 	)
 	/**
 	 * Scan the tasks but look at both the input and output data
@@ -31,8 +32,8 @@ class TransformationBidi {
 		for (atask in theList) {
 			val taskName = atask.taskData.name
 
-			if (taskName == "0d3d703e") {
-				println("We have $taskName") // color mapping test case
+			if (taskName == "1f876c06") {
+				println("We have $taskName") // connect pairs of points
 			}
 
 			val numExamples = atask.abstractionsList.size
