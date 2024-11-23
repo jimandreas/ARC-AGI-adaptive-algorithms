@@ -16,7 +16,8 @@ class TransformationBidi {
 	val bidiTransformList: List<BidirectionalBaseClass> = listOf(
 		TestTrans(),
 		BidiFullRowColoring(),
-		BidiBasicTranslations()
+		BidiBasicTranslations(),
+		BidiColumnColoringMapping()
 	)
 	/**
 	 * Scan the tasks but look at both the input and output data
@@ -30,12 +31,8 @@ class TransformationBidi {
 		for (atask in theList) {
 			val taskName = atask.taskData.name
 
-			if (taskName == "25ff71a9") {
-				println("We have $taskName")
-			}
-
-			if (taskName == "d037b0a7") { // Extend points downward test case
-				println("we have d037b0a7")
+			if (taskName == "0d3d703e") {
+				println("We have $taskName") // color mapping test case
 			}
 
 			val numExamples = atask.abstractionsList.size
@@ -45,14 +42,16 @@ class TransformationBidi {
 				var success = true
 				for (j in 0 until numExamples) {
 
+					val originalMatrixInputAndOutput = originalTaskData.train[j]
+
 					val abstraction = atask.abstractionsList[j]
 					val inputBlocks = abstraction.input.blocks
 					val inputPoints = abstraction.input.points
-					t.setInput(inputBlocks, inputPoints)
+					val inputMatrix = originalMatrixInputAndOutput.input
+					t.setInput(inputBlocks, inputPoints, inputMatrix)
 
 					val outputBlocks = abstraction.output.blocks
 					val outputPoints = abstraction.output.points
-					val originalMatrixInputAndOutput = originalTaskData.train[j]
 					val outputMatrix = originalMatrixInputAndOutput.output
 					t.setOutput(outputBlocks, outputPoints, outputMatrix)
 
@@ -73,12 +72,14 @@ class TransformationBidi {
 
 					for (j in 0 until originalTaskData.test.size) {
 
+						val originalTestMatrixInputAndOutput3 = originalTaskData.test[j]
 						val abstraction3 = atask.abstractionsInTestMatrices[j]
 						val inputBlocks3 = abstraction3.blocks
 						val inputPoints3 = abstraction3.points
-						t.setInput(inputBlocks3, inputPoints3)
+						val inputMatrix = originalTestMatrixInputAndOutput3.input
+						t.setInput(inputBlocks3, inputPoints3, inputMatrix)
 
-						val originalTestMatrixInputAndOutput3 = originalTaskData.test[j]
+
 						// note - this is the test "key" -
 						val outputMatrix3 = originalTestMatrixInputAndOutput3.output
 

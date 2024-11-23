@@ -1,10 +1,15 @@
+@file:Suppress(
+	"RedundantSuppression", "UNUSED_VARIABLE", "MemberVisibilityCanBePrivate", "unused",
+	"ReplaceManualRangeWithIndicesCalls", "ReplaceSizeZeroCheckWithIsEmpty",
+	"SameParameterValue", "UnnecessaryVariable", "LocalVariableName", "PropertyName"
+)
 package solutions.transformationsBidirectional
 
 import Block
 import solutions.utilities.recreateMatrix
 
 class BidiFullRowColoring : BidirectionalBaseClass() {
-	override val name: String = "Full row blocks transform"
+	override val name: String = "BIDI Full row blocks transform"
 
 	var outputColorSet = false
 	var outputColor = -1

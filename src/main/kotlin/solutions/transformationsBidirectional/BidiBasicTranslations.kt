@@ -10,7 +10,7 @@ import Block
 import solutions.utilities.recreateMatrix
 
 class BidiBasicTranslations : BidirectionalBaseClass() {
-	override var name: String = "Translate blocks by "
+	override var name: String = "BIDI Translate blocks by "
 	var originalName = name
 
 	var solutionFound = false

@@ -11,15 +11,19 @@ import Point
 abstract class BidirectionalBaseClass {
 	var inputBlockList: List<Block> = listOf()
 	var inputPointList: List<Point> = listOf()
+	var inputMatrix: List<List<Int>> = listOf()
 
 	var outputBlockList: List<Block> = listOf()
 	var outputPointList: List<Point> = listOf()
 	var outputMatrix: List<List<Int>> = listOf()
 	abstract val name: String
 
-	fun setInput(inputBlockList: List<Block>, inputPointList: List<Point>) {
-		this@BidirectionalBaseClass.inputBlockList = inputBlockList
-		this@BidirectionalBaseClass.inputPointList = inputPointList
+	fun setInput(inputBlockListIn: List<Block>,
+	             inputPointListIn: List<Point>,
+				 inputMatrixIn: List<List<Int>>) {
+		inputBlockList = inputBlockListIn
+		inputPointList = inputPointListIn
+		inputMatrix = inputMatrixIn
 	}
 
 	fun setOutput(

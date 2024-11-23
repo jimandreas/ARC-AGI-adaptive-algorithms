@@ -124,7 +124,7 @@ class TransformationsBlockAndPoint {
 
 	val transformations = listOf(
 		ShiftBlocksLeft,
-		ShiftBlocksDown,
+		//ShiftBlocksDown,  // solved in a more general way in Bidi
 		ColorBlocksByFirstPoint
 	)
 
