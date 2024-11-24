@@ -168,8 +168,8 @@ fun getOrientation(points: List<Point>): Char? {
 For a list of Blocks,
 1 - verify that all blocks have the same color.
 2 - split each block vertically to create two new lists of blocks.
-The top list vertical size should be rounded up, so that if a block has
-a height of 7, the top list should have a block of height 4, and the bottom of height 3.
+The top list vertical size should be rounded down, so that if a block has
+a height of 7, the top list should have a block of height 3, and the bottom of height 4.
 Return the pair of block lists with the top blocks as first, and the bottom blocks as
 second in the pair.
 
@@ -189,14 +189,73 @@ fun splitBlocksVertically(blocks: List<Block>): Pair<List<Block>, List<Block>> {
 		val rows = block.coordinates.map { it.first }
 		val minRow = rows.minOrNull()!!
 		val maxRow = rows.maxOrNull()!!
-		val midRow = ceil((minRow + maxRow) / 2.0).toInt()
+		var midRow = ceil((minRow + maxRow) / 2.0).toInt()
+		// adjust for even count of blocks
+		if ((maxRow - minRow + 1) % 2 == 0) {
+			midRow = midRow-1
+		}
 
-		val topCoordinates = block.coordinates.filter { it.first < midRow }.toSet()
-		val bottomCoordinates = block.coordinates.filter { it.first >= midRow }.toSet()
+		val topCoordinates = block.coordinates.filter { it.first <= midRow }.toSet()
+		val bottomCoordinates = block.coordinates.filter { it.first > midRow }.toSet()
 
 		topBlocks.add(Block(block.color, topCoordinates))
 		bottomBlocks.add(Block(block.color, bottomCoordinates))
 	}
 
 	return Pair(topBlocks, bottomBlocks)
+}
+
+/**
+in Kotlin given two arrays in the form List<List<Int>>,
+please create a function to "prettyprint" that is format
+and output in rows and columns and, if the matrix is smaller
+than 10x10, include indexes on the left for rows and add an
+index of single digits at the bottom for columns - and then
+show with an "X" where there is a difference between the two
+matrices and a "O" where the matrices are the same.
+
+ Gemini code follows:
+ */
+fun prettyPrintMatrixDiff(matrix1: List<List<Int>>, matrix2: List<List<Int>>) {
+	val numRows = matrix1.size
+	val numCols = matrix1[0].size
+
+	// Ensure matrices have the same dimensions
+	if (numRows != matrix2.size || numCols != matrix2[0].size) {
+		println("Matrices must have the same dimensions")
+		return
+	}
+
+	// Print column indices if matrix is smaller than 10x10
+	if (numRows < 10 && numCols < 10) {
+		print("   ")
+		for (j in 0 until numCols) {
+			print(" $j")
+		}
+		println()
+	}
+
+	// Print rows with differences marked
+	for (i in 0 until numRows) {
+		if (numRows < 10 && numCols < 10) {
+			print("$i  ") // Print row index
+		}
+		for (j in 0 until numCols) {
+			if (matrix1[i][j] == matrix2[i][j]) {
+				print(" O")
+			} else {
+				print(" X")
+			}
+		}
+		println()
+	}
+
+	// Print column indices if matrix is smaller than 10x10
+	if (numRows < 10 && numCols < 10) {
+		print("   ")
+		for (j in 0 until numCols) {
+			print(" $j")
+		}
+		println()
+	}
 }

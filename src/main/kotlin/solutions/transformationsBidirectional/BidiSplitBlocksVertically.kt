@@ -13,7 +13,7 @@ import solutions.utilities.recreateMatrix
 import solutions.utilities.splitBlocksVertically
 
 // example: ce9e57f2
-
+//   oops the top should have the majority, not the bottom!
 class BidiSplitBlocksVertically : BidirectionalBaseClass() {
 	override val name: String = "BIDI split blocks vertically"
 

@@ -8,6 +8,7 @@ package solutions.transformationsBidirectional
 
 import SolutionMatrix
 import SolvedTasks
+import solutions.utilities.prettyPrintMatrixDiff
 import solvedTasks
 import taskAbstractionsList
 
@@ -23,6 +24,7 @@ class TransformationBidi {
 		BidiChangeBlockColoringBasedOnPoint(),
 		BidiSplitBlocksVertically()
 	)
+
 	/**
 	 * Scan the tasks but look at both the input and output data
 	 * for the Examples.  The various transformations save
@@ -63,6 +65,9 @@ class TransformationBidi {
 
 					val resultMatrix = t.testTransform()
 					if (resultMatrix != originalMatrixInputAndOutput.output) {
+						if ((taskName == "ce9e57f2") && (t.name == "BIDI split blocks vertically" )) {
+							prettyPrintMatrixDiff(resultMatrix, originalMatrixInputAndOutput.output)
+						}
 						success = false
 						break
 					}
