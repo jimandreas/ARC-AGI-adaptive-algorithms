@@ -88,5 +88,9 @@ the output, one notices various subcategories:
 TODO
 ===================
 -> rotate a square matrix, see ed36ccf7
+-> color all blocks but not points, see 67385a82
+-> a1570a43 - a "centering" task - interesting!
+
+
 
 

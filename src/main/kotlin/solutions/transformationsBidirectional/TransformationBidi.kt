@@ -18,7 +18,10 @@ class TransformationBidi {
 		BidiFullRowColoring(),
 		BidiBasicTranslations(),
 		BidiColumnColoringMapping(),
-		BidiConnectPairsOfPoints()
+		BidiConnectPairsOfPoints(),
+		BidiChangeBlockColoring(),
+		BidiChangeBlockColoringBasedOnPoint(),
+		BidiSplitBlocksVertically()
 	)
 	/**
 	 * Scan the tasks but look at both the input and output data
@@ -32,14 +35,16 @@ class TransformationBidi {
 		for (atask in theList) {
 			val taskName = atask.taskData.name
 
-			if (taskName == "1f876c06") {
-				println("We have $taskName") // connect pairs of points
+			if (taskName == "ce9e57f2") {
+				println("We have $taskName") // split blocks vertically
 			}
 
 			val numExamples = atask.abstractionsList.size
 			val originalTaskData = atask.taskData
 
 			for (t in bidiTransformList) {
+				t.resetState()
+				t.taskName = taskName
 				var success = true
 				for (j in 0 until numExamples) {
 

@@ -6,6 +6,7 @@
 package solutions.transformationsBidirectional
 
 import Block
+import solutions.utilities.changeBlockColor
 import solutions.utilities.recreateMatrix
 
 class BidiFullRowColoring : BidirectionalBaseClass() {
@@ -14,6 +15,9 @@ class BidiFullRowColoring : BidirectionalBaseClass() {
 	var outputColorSet = false
 	var outputColor = -1
 
+	override fun resetState() {
+		outputColorSet = false
+	}
 	override fun testTransform(): List<List<Int>> {
 		val blocks = findBlocksSpanningEntireRow(outputMatrix, inputBlockList)
 		if (!blocks.isEmpty() && !outputBlockList.isEmpty()) {
@@ -84,7 +88,5 @@ class BidiFullRowColoring : BidirectionalBaseClass() {
 		return result
 	}
 
-	fun changeBlockColor(blocks: List<Block>, newColor: Int): List<Block> {
-		return blocks.map { it.copy(color = newColor) }
-	}
+
 }

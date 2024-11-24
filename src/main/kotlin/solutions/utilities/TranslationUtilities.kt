@@ -2,6 +2,7 @@ package solutions.utilities
 
 import Block
 import Point
+import kotlin.math.ceil
 
 
 /*
@@ -120,4 +121,82 @@ fun recreateMatrix(
 	}
 
 	return matrix
+}
+
+/**
+ * change all block colors to the new color
+ */
+fun changeBlockColor(blocks: List<Block>, newColor: Int): List<Block> {
+	return blocks.map { it.copy(color = newColor) }
+}
+
+/**
+ * find a non-matching color in a block list
+ */
+fun findOtherColor(blocks: List<Block>, findColor: Int): Int {
+	for (b in blocks) {
+		if (b.color != findColor) {
+			return b.color
+		}
+	}
+	return findColor
+}
+
+/**
+In Kotlin, for a given List<Point>, please return the character
+"H" if the points lie on a row in the matrix, and a "V" if the
+points lie in a column.
+Gemini code follows
+ */
+fun getOrientation(points: List<Point>): Char? {
+	if (points.isEmpty()) return null
+
+	val firstRow = points[0].coordinate.first
+	val firstCol = points[0].coordinate.second
+
+	if (points.all { it.coordinate.first == firstRow }) {
+		return 'H' // All points have the same row
+	} else if (points.all { it.coordinate.second == firstCol }) {
+		return 'V' // All points have the same column
+	}
+
+	return null // Points are not all in the same row or column
+}
+
+
+/**
+For a list of Blocks,
+1 - verify that all blocks have the same color.
+2 - split each block vertically to create two new lists of blocks.
+The top list vertical size should be rounded up, so that if a block has
+a height of 7, the top list should have a block of height 4, and the bottom of height 3.
+Return the pair of block lists with the top blocks as first, and the bottom blocks as
+second in the pair.
+
+Gemini code follows: */
+fun splitBlocksVertically(blocks: List<Block>): Pair<List<Block>, List<Block>> {
+	if (blocks.isEmpty()) return Pair(emptyList(), emptyList())
+
+	val firstColor = blocks[0].color
+	if (blocks.any { it.color != firstColor }) {
+		return Pair(emptyList(), emptyList())  // colors don't match
+	}
+
+	val topBlocks = mutableListOf<Block>()
+	val bottomBlocks = mutableListOf<Block>()
+
+	for (block in blocks) {
+		val rows = block.coordinates.map { it.first }
+		val minRow = rows.minOrNull()!!
+		val maxRow = rows.maxOrNull()!!
+		val midRow = ceil((minRow + maxRow) / 2.0).toInt()
+
+		val topCoordinates = block.coordinates.filter { it.first < midRow }.toSet()
+		val bottomCoordinates = block.coordinates.filter { it.first >= midRow }.toSet()
+
+		topBlocks.add(Block(block.color, topCoordinates))
+		bottomBlocks.add(Block(block.color, bottomCoordinates))
+	}
+
+	return Pair(topBlocks, bottomBlocks)
 }

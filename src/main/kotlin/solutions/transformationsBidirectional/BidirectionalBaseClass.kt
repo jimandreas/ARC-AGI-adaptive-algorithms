@@ -17,6 +17,9 @@ abstract class BidirectionalBaseClass {
 	var outputPointList: List<Point> = listOf()
 	var outputMatrix: List<List<Int>> = listOf()
 	abstract val name: String
+	var taskName: String = ""
+
+	open fun resetState() {}
 
 	fun setInput(inputBlockListIn: List<Block>,
 	             inputPointListIn: List<Point>,
