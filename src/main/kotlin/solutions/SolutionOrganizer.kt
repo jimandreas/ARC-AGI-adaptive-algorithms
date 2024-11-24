@@ -26,8 +26,8 @@ class SolutionOrganizer(val ed: ExperimentalDatasets) {
         val tbp = TransformationsBlockAndPoint()
         tbp.scanTransformations()
 
-        val ttm = TransformationBlockAndPointToMatrix()
-        ttm.scanTransformations()
+//        val ttm = TransformationBlockAndPointToMatrix()
+//        ttm.scanTransformations()
 
         val tbidi = TransformationBidi()
         tbidi.scanBidiTransformations()

@@ -50,6 +50,7 @@ class TransformationBlockAndPointToMatrix {
 			// Place points and fill downwards
 			for (point in points) {
 				val (row, col) = point.coordinate
+				if ((row > rowCount - 1) || (col > colCount - 1)) continue
 				// Place the point in the matrix
 				matrix[row][col] = point.color
 

@@ -22,7 +22,8 @@ class TransformationBidi {
 		BidiConnectPairsOfPoints(),
 		BidiChangeBlockColoring(),
 		BidiChangeBlockColoringBasedOnPoint(),
-		BidiSplitBlocksVertically()
+		BidiSplitBlocksVertically(),
+		BidiPatternMatching()
 	)
 
 	/**
@@ -37,8 +38,8 @@ class TransformationBidi {
 		for (atask in theList) {
 			val taskName = atask.taskData.name
 
-			if (taskName == "ce9e57f2") {
-				println("We have $taskName") // split blocks vertically
+			if (taskName == "27a28665") {
+				println("We have $taskName") //
 			}
 
 			val numExamples = atask.abstractionsList.size
@@ -74,7 +75,7 @@ class TransformationBidi {
 				}
 				if (success) {
 					// success ! all subsequent transformations worked on this task
-					println("TxBIDI ${t.name} - WORKED - continuing")
+					// println("TxBIDI ${t.name} - WORKED - continuing")
 
 					// re-create the test "key" matrix and compare to the real thing
 					//   Do this for all test matrix input and output pairs
@@ -102,17 +103,18 @@ class TransformationBidi {
 						// record the solution matrix
 						solutionMatrices.add(SolutionMatrix(resultMatrix3))
 					}
-					println("TxBIDI ${t.name} for $taskName - VERIFIED!!")
+					if (success) {
+						println("TxBIDI ${t.name} for $taskName - VERIFIED!!")
 
-					val solved = SolvedTasks(
-						atask.taskData,
-						taskName,
-						t.name,
-						solutionMatrices
-					)
-					solvedTasks.add(solved)
-					break
-
+						val solved = SolvedTasks(
+							atask.taskData,
+							taskName,
+							t.name,
+							solutionMatrices
+						)
+						solvedTasks.add(solved)
+						break
+					}
 				}
 				// continue looping through the transformations
 			}

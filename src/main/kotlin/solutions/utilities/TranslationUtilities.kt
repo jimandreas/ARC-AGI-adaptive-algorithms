@@ -1,3 +1,8 @@
+@file:Suppress(
+	"RedundantSuppression", "UNUSED_VARIABLE", "MemberVisibilityCanBePrivate", "unused",
+	"ReplaceManualRangeWithIndicesCalls", "ReplaceSizeZeroCheckWithIsEmpty",
+	"SameParameterValue", "UnnecessaryVariable", "LocalVariableName", "PropertyName"
+)
 package solutions.utilities
 
 import Block
@@ -258,4 +263,42 @@ fun prettyPrintMatrixDiff(matrix1: List<List<Int>>, matrix2: List<List<Int>>) {
 		}
 		println()
 	}
+}
+
+/**
+In Kotlin, for an input pair of List<Block> and List<Point>,
+create a fun to find the list entry that matches in the
+following data structure:
+
+List<Pair<List<Block>, List<Point>>>
+
+and return the Pair<List<Block>, List<Point>> that matches.
+
+Good but I messed up.   What I need is the index into the list where
+the match occurred, rather than the matching entry.  Please revise the function.
+
+
+Ooops I forgot the clarify again.  The search should ignore the colors
+of the blocks and points, and only compare them based on their coordinate(s).
+ */
+
+fun findMatchingEntryIndex(
+	inputBlocks: List<Block>,
+	inputPoints: List<Point>,
+	data: List<Pair<List<Block>, List<Point>>>
+): Int? {
+
+	val inputBlockCoordinates = inputBlocks.flatMap { it.coordinates }.toSet()
+	val inputPointCoordinates = inputPoints.map { it.coordinate }.toSet()
+
+	for ((index, entry) in data.withIndex()) {
+		val (blocks, points) = entry
+		val blockCoordinates = blocks.flatMap { it.coordinates }.toSet()
+		val pointCoordinates = points.map { it.coordinate }.toSet()
+
+		if (blockCoordinates == inputBlockCoordinates && pointCoordinates == inputPointCoordinates) {
+			return index
+		}
+	}
+	return null
 }

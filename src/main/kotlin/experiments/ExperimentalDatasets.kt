@@ -46,7 +46,11 @@ class ExperimentalDatasets(taskData: List<TaskCoordinateData>) {
 
 		val analyze = AnalyzeTasks()
 		// now do abstraction analysis on the Tasks with the same Matrix sizes
-		for (t in taskSameMatrixSizes) {
+//		for (t in taskSameMatrixSizes) {
+//			analyze.analyzeTrainingData(t)
+//		}
+
+		for (t in taskData) {
 			analyze.analyzeTrainingData(t)
 		}
 	}
