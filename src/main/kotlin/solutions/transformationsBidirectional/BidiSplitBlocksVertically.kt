@@ -6,7 +6,6 @@
 
 package solutions.transformationsBidirectional
 
-import Block
 import solutions.utilities.changeBlockColor
 import solutions.utilities.findOtherColor
 import solutions.utilities.recreateMatrix
@@ -69,8 +68,8 @@ class BidiSplitBlocksVertically : BidirectionalBaseClass() {
 		val combinedBlocks = topBlocks + changeBlocks
 
 		val outputMatrix = recreateMatrix(
-			outputMatrix.size,
-			outputMatrix[0].size,
+			inputMatrix.size,
+			inputMatrix[0].size,
 			combinedBlocks,
 			emptyList()
 		)

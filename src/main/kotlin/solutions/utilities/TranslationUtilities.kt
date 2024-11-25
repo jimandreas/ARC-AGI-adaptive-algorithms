@@ -8,10 +8,7 @@ package solutions.utilities
 import Block
 import Point
 import kotlin.math.ceil
-
-
 /*
-
 DIRECTION CONSISTENCY CHECK -
 
 Grok prompts:
@@ -222,6 +219,11 @@ matrices and a "O" where the matrices are the same.
  Gemini code follows:
  */
 fun prettyPrintMatrixDiff(matrix1: List<List<Int>>, matrix2: List<List<Int>>) {
+	if (matrix1.isEmpty() || matrix2.isEmpty()) {
+		println("NO DIFF for empty matrices")
+		return
+	}
+
 	val numRows = matrix1.size
 	val numCols = matrix1[0].size
 
@@ -277,12 +279,13 @@ and return the Pair<List<Block>, List<Point>> that matches.
 Good but I messed up.   What I need is the index into the list where
 the match occurred, rather than the matching entry.  Please revise the function.
 
-
 Ooops I forgot the clarify again.  The search should ignore the colors
 of the blocks and points, and only compare them based on their coordinate(s).
+
+ Gemini code follows:
  */
 
-fun findMatchingEntryIndex(
+fun findMatchingEntryIndex(  // based only on coordinates, return index
 	inputBlocks: List<Block>,
 	inputPoints: List<Point>,
 	data: List<Pair<List<Block>, List<Point>>>
@@ -296,7 +299,8 @@ fun findMatchingEntryIndex(
 		val blockCoordinates = blocks.flatMap { it.coordinates }.toSet()
 		val pointCoordinates = points.map { it.coordinate }.toSet()
 
-		if (blockCoordinates == inputBlockCoordinates && pointCoordinates == inputPointCoordinates) {
+		if (blockCoordinates == inputBlockCoordinates
+			&& pointCoordinates == inputPointCoordinates) {
 			return index
 		}
 	}

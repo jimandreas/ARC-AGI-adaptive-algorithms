@@ -23,8 +23,12 @@ class TransformationBidi {
 		BidiChangeBlockColoring(),
 		BidiChangeBlockColoringBasedOnPoint(),
 		BidiSplitBlocksVertically(),
-		BidiPatternMatching()
+		BidiPatternMatching(),
+		BidiColorByMajority(),
+		BidiFillPointsDownward()
 	)
+
+	val winners : MutableList<BidirectionalBaseClass> = mutableListOf()
 
 	/**
 	 * Scan the tasks but look at both the input and output data
@@ -38,8 +42,8 @@ class TransformationBidi {
 		for (atask in theList) {
 			val taskName = atask.taskData.name
 
-			if (taskName == "27a28665") {
-				println("We have $taskName") //
+			if (taskName == "5582e5ca") {
+				println("We have $taskName") // color by majority
 			}
 
 			val numExamples = atask.abstractionsList.size
@@ -66,9 +70,6 @@ class TransformationBidi {
 
 					val resultMatrix = t.testTransform()
 					if (resultMatrix != originalMatrixInputAndOutput.output) {
-						if ((taskName == "ce9e57f2") && (t.name == "BIDI split blocks vertically" )) {
-							prettyPrintMatrixDiff(resultMatrix, originalMatrixInputAndOutput.output)
-						}
 						success = false
 						break
 					}
@@ -98,6 +99,11 @@ class TransformationBidi {
 						val resultMatrix3 = t.returnTestOutput()
 						if (resultMatrix3 != originalTestMatrixInputAndOutput3.output) {
 							success = false
+
+							if ((taskName == "ce9e57f2") && (t.name == "BIDI split blocks vertically" )) {
+								prettyPrintMatrixDiff(resultMatrix3, originalTestMatrixInputAndOutput3.output)
+							}
+
 							break
 						}
 						// record the solution matrix
@@ -113,11 +119,23 @@ class TransformationBidi {
 							solutionMatrices
 						)
 						solvedTasks.add(solved)
+						winners.add(t)
 						break
 					}
 				}
 				// continue looping through the transformations
 			}
+		}
+
+		// see which transforms are the slackers
+
+		val losers = bidiTransformList.filter { !winners.contains(it)}
+		println("==============")
+		println("   losers     ")
+		println("==============")
+		for (l in losers) {
+			val name = l.name
+			println(name)
 		}
 	}
 }

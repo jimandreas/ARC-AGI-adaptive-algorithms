@@ -13,11 +13,8 @@ import solutions.utilities.recreateMatrix
 
 class BidiChangeBlockColoringBasedOnPoint : BidirectionalBaseClass() {
 	override val name: String = "BIDI change block coloring based on point"
-	var outputColorSet = false
-	var outputColor = -1
 
 	override fun resetState() {
-		outputColorSet = false
 	}
 	override fun testTransform(): List<List<Int>> {
 
@@ -31,9 +28,8 @@ class BidiChangeBlockColoringBasedOnPoint : BidirectionalBaseClass() {
 		}
 
 		val thePointColor = inputPointList[0].color
-		outputColor = thePointColor
 
-		val changeBlocks = changeBlockColor(inputBlockList, outputColor)
+		val changeBlocks = changeBlockColor(inputBlockList, thePointColor)
 		val outputMatrix = recreateMatrix(
 			inputMatrix.size,
 			inputMatrix[0].size,
@@ -58,7 +54,9 @@ class BidiChangeBlockColoringBasedOnPoint : BidirectionalBaseClass() {
 			return emptyList()
 		}
 
-		val changeBlocks = changeBlockColor(inputBlockList, outputColor)
+		val thePointColor = inputPointList[0].color
+
+		val changeBlocks = changeBlockColor(inputBlockList, thePointColor)
 		val outputMatrix = recreateMatrix(
 			inputMatrix.size,
 			inputMatrix[0].size,
@@ -66,8 +64,5 @@ class BidiChangeBlockColoringBasedOnPoint : BidirectionalBaseClass() {
 			emptyList() // point drops out
 		)
 		return outputMatrix
-
 	}
-
-
 }
