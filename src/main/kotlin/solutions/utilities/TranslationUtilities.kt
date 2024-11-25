@@ -8,6 +8,8 @@ package solutions.utilities
 import Block
 import Point
 import kotlin.math.ceil
+import kotlin.ranges.rangeTo
+
 /*
 DIRECTION CONSISTENCY CHECK -
 
@@ -305,4 +307,87 @@ fun findMatchingEntryIndex(  // based only on coordinates, return index
 		}
 	}
 	return null
+}
+
+/**
+In Kotlin, the Block data structure has a color Int and a
+set of row/col coordinates for points in an matrix.
+
+data class Block(val color: Int, val coordinates: Set<Pair<Int, Int>>)
+
+Please create a function that scans the coordinates to see if
+they enclose a non-zero point in the matrix.   Please return the
+coordinates of the enclosed point as a Pair<Int,Int> and
+null if no enclosed point is found.  Note that the block might be
+irregular, but the block matrix elements should completely surround the point.
+ */
+
+// note that this checks to see if the enclosed point is non-zero
+fun findEnclosedPoint(block: Block, matrix: List<List<Int>>): Pair<Int, Int>? {
+	val rows = block.coordinates.map { it.first }
+	val cols = block.coordinates.map { it.second }
+	val minRow = rows.minOrNull()!!
+	val maxRow = rows.maxOrNull()!!
+	val minCol = cols.minOrNull()!!
+	val maxCol = cols.maxOrNull()!!
+
+	for (r in minRow + 1..maxRow - 1) {  // Start from the second row and go to the second-to-last
+		for (c in minCol + 1..maxCol - 1) { // Start from the second col and go to the second-to-last
+			if (Pair(r, c) !in block.coordinates && matrix[r][c] != 0) {
+				// Found a non-zero point not in the block's coordinates
+				// Now check if it's fully surrounded
+				if (isPointEnclosed(r, c, block.coordinates)) {
+					return Pair(r, c)
+				}
+			}
+		}
+	}
+
+	return null // No enclosed point found
+}
+
+fun isPointEnclosed(row: Int, col: Int, blockCoordinates: Set<Pair<Int, Int>>): Boolean {
+	// Check if all 4-neighbors are in the block's coordinates
+	return (row - 1 to col) in blockCoordinates &&
+			(row + 1 to col) in blockCoordinates &&
+			(row to col - 1) in blockCoordinates &&
+			(row to col + 1) in blockCoordinates
+}
+
+/**
+In Kotlin, the Block data structure has a color Int and a set
+of row/col coordinates for points in an matrix, and the Point
+data structure has a color Int and a single row/col
+coordinate.
+
+data class Block(val color: Int, val coordinates: Set<Pair<Int, Int>>)
+data class Point(val color: Int, val coordinate: Pair<Int, Int>)
+
+The desired function takes a block and it represents an extent of a
+region in a matrix.  It might not have all the points in it that are
+in the region in the matrix.   Please examine the points to see if
+they are also located in the same region in the matrix.  Count the
+points that also exist in the same region and return the number of
+points that are in the same region.
+Gemini code follows:
+ */
+
+fun countPointsInRegion(block: Block, points: List<Point>): Int {
+	// Find the bounding box of the block
+	val rows = block.coordinates.map { it.first }
+	val cols = block.coordinates.map { it.second }
+	val minRow = rows.minOrNull()!!
+	val maxRow = rows.maxOrNull()!!
+	val minCol = cols.minOrNull()!!
+	val maxCol = cols.maxOrNull()!!
+
+	var count = 0
+	for (point in points) {
+		val (row, col) = point.coordinate
+		// Check if the point is within the bounding box of the block
+		if (row in minRow..maxRow && col in minCol..maxCol) {
+			count++
+		}
+	}
+	return count
 }

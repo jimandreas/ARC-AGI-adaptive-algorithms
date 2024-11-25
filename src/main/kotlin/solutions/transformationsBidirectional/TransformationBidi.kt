@@ -25,7 +25,11 @@ class TransformationBidi {
 		BidiSplitBlocksVertically(),
 		BidiPatternMatching(),
 		BidiColorByMajority(),
-		BidiFillPointsDownward()
+		BidiFillPointsDownward(),
+		// start of Tasks where the output is smaller
+		SmallerHollowBlock(),
+		SmallerBlockEnclosingPoint(),
+		SmallerCountPointsInBlocksMaxWins()
 	)
 
 	val winners : MutableList<BidirectionalBaseClass> = mutableListOf()
@@ -42,8 +46,8 @@ class TransformationBidi {
 		for (atask in theList) {
 			val taskName = atask.taskData.name
 
-			if (taskName == "5582e5ca") {
-				println("We have $taskName") // color by majority
+			if (taskName == "d9fac9be") {
+				println("We have $taskName") // hollow block enclosing point
 			}
 
 			val numExamples = atask.abstractionsList.size

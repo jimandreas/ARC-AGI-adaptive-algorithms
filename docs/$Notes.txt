@@ -90,6 +90,8 @@ TODO
 -> rotate a square matrix, see ed36ccf7
 -> color all blocks but not points, see 67385a82
 -> a1570a43 - a "centering" task - interesting!
+-> 239be575 - connections between blocks - need some sort of connection protocol
+-> 44f52bb0 - a curious case where counting blocks on the borders seems to be the key
 
 
 

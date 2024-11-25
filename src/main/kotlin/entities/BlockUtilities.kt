@@ -91,10 +91,17 @@ class BlockUtilities {
 	 *
 	 * Explanation:
 	 *
-	 * Handle empty set: If the input blockCoordinates is empty, it returns false because an empty set cannot form a rectangle.
-	 * Find boundaries: It calculates the minimum and maximum row and column values from the set of coordinates. This defines the bounding box of the potential rectangle.
-	 * Iterate and check: It iterates through all the cells within the calculated bounding box. If any cell within these boundaries is not present in the blockCoordinates set, it means the shape is not a complete rectangle, so it returns false.
-	 * Return true: If all cells within the bounds are found in the set, it means the block is rectangular, and the function returns true.
+	 * Handle empty set: If the input blockCoordinates is empty, it returns false
+	 * because an empty set cannot form a rectangle.
+	 * Find boundaries: It calculates the minimum and maximum row and
+	 * column values from the set of coordinates. This defines the bounding
+	 * box of the potential rectangle.
+	 * Iterate and check: It iterates through all the cells within the calculated
+	 * bounding box. If any cell within these boundaries is not present in the
+	 * blockCoordinates set, it means the shape is not a complete rectangle,
+	 * so it returns false.
+	 * Return true: If all cells within the bounds are found in the set,
+	 * it means the block is rectangular, and the function returns true.
 	 * How to use it with the previous function:
 	 */
 

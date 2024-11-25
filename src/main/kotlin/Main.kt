@@ -33,11 +33,12 @@ fun main() {
 
     // set up the data for the graphical view
 
-    tTaskDataToDisplayInGUI = ed.taskSameMatrixSizes.toMutableList()
+//    tTaskDataToDisplayInGUI = ed.taskSameMatrixSizes.toMutableList()
 
     //tTaskDataToDisplayInGUI = ed.taskDataWithRectangularHoles
     //tTaskDataToDisplayInGUI = ed.taskWithTranslations
 
+    tTaskDataToDisplayInGUI = ed.taskDataSortedByOutputCellCount.toMutableList()
     val graphics = GraphicsDisplayMatrix()
     graphics.setupGraphics()
     graphics.displayMatrices()
