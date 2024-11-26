@@ -3,12 +3,12 @@
 	"ReplaceManualRangeWithIndicesCalls", "ReplaceSizeZeroCheckWithIsEmpty",
 	"SameParameterValue", "UnnecessaryVariable", "LocalVariableName", "PropertyName"
 )
+
 package solutions.utilities
 
 import Block
 import Point
 import kotlin.math.ceil
-import kotlin.ranges.rangeTo
 
 /*
 DIRECTION CONSISTENCY CHECK -
@@ -97,7 +97,7 @@ and recreate the list as a List<List<Int>> and fill non-specified
 cells with the "color" of 0.   The colors, that is the Int values
 for the Block and Point entities are specified in the data class.
 
- Code created by Google Gemini follows:
+Code created by Google Gemini follows:
  */
 fun recreateMatrix(
 	numRow: Int,
@@ -112,7 +112,7 @@ fun recreateMatrix(
 	// Fill in the blocks
 	for (block in blocks) {
 		for ((row, col) in block.coordinates) {
-			if ((row > numRow-1) || (col > numCol-1)) return emptyList()
+			if ((row > numRow - 1) || (col > numCol - 1)) return emptyList()
 			matrix[row][col] = block.color
 		}
 	}
@@ -120,7 +120,7 @@ fun recreateMatrix(
 	// Fill in the points
 	for (point in points) {
 		val (row, col) = point.coordinate
-		if ((row > numRow-1) || (col > numCol-1)) return emptyList()
+		if ((row > numRow - 1) || (col > numCol - 1)) return emptyList()
 		matrix[row][col] = point.color
 	}
 
@@ -196,7 +196,7 @@ fun splitBlocksVertically(blocks: List<Block>): Pair<List<Block>, List<Block>> {
 		var midRow = ceil((minRow + maxRow) / 2.0).toInt()
 		// adjust for even count of blocks
 		if ((maxRow - minRow + 1) % 2 == 0) {
-			midRow = midRow-1
+			midRow = midRow - 1
 		}
 
 		val topCoordinates = block.coordinates.filter { it.first <= midRow }.toSet()
@@ -218,7 +218,7 @@ index of single digits at the bottom for columns - and then
 show with an "X" where there is a difference between the two
 matrices and a "O" where the matrices are the same.
 
- Gemini code follows:
+Gemini code follows:
  */
 fun prettyPrintMatrixDiff(matrix1: List<List<Int>>, matrix2: List<List<Int>>) {
 	if (matrix1.isEmpty() || matrix2.isEmpty()) {
@@ -284,7 +284,7 @@ the match occurred, rather than the matching entry.  Please revise the function.
 Ooops I forgot the clarify again.  The search should ignore the colors
 of the blocks and points, and only compare them based on their coordinate(s).
 
- Gemini code follows:
+Gemini code follows:
  */
 
 fun findMatchingEntryIndex(  // based only on coordinates, return index
@@ -302,7 +302,8 @@ fun findMatchingEntryIndex(  // based only on coordinates, return index
 		val pointCoordinates = points.map { it.coordinate }.toSet()
 
 		if (blockCoordinates == inputBlockCoordinates
-			&& pointCoordinates == inputPointCoordinates) {
+			&& pointCoordinates == inputPointCoordinates
+		) {
 			return index
 		}
 	}
@@ -458,4 +459,93 @@ fun aggregateColorQuantities(blocks: List<Block>, points: List<Point>): Map<Int,
 
 	// Sort the map in descending order by quantity
 	return colorCounts.entries.sortedByDescending { it.value }.associate { it.toPair() }
+}
+
+
+/**
+For a given matrix in Kotlin as a List<List<Int>>
+and a given list of Block as given below,
+return a 1 if each block has coordinates that span an
+entire row of the matrix, and a 2 if each block has
+coordinates that span an entire column of the matrix.
+Return 0 if neither case is true.
+
+REVISED with this functionality: returns the
+indicator -
+0 - no spanning values
+1 - for column spanning,
+2 - for row spanning, and
+list of colors that span a column or row
+ */
+
+
+fun checkBlockSpan(matrix: List<List<Int>>, blocks: List<Block>): Pair<Int, List<Int>> {
+	val numRows = matrix.size
+	val numCols = matrix[0].size
+
+	val colorList: MutableList<Int> = mutableListOf()
+
+	val isColSpan = blocks.all { block ->
+		val byColumns = block.coordinates.map { it.second }
+		val occurrences = countOccurrences(byColumns)
+		val maxNumber = getMaxCountFromMap(occurrences)
+		if (maxNumber == numRows) {
+			colorList.add(block.color)
+		}
+		maxNumber == numRows
+	}
+
+	val isRowSpan = blocks.all { block ->
+		val byRows = block.coordinates.map { it.first }
+		val occurrences = countOccurrences(byRows)
+		val maxNumber = getMaxCountFromMap(occurrences)
+		if (maxNumber == numCols) {
+			colorList.add(block.color)
+		}
+		maxNumber == numCols
+	}
+
+	return when {
+		isColSpan -> Pair(1, colorList.toList())
+		isRowSpan -> Pair(2, colorList.toList())
+		else -> Pair(0, emptyList())
+	}
+}
+
+/**
+ In kotlin I have an ArrayList of Ints and I want to count how many
+ 0's, 1's, 2's etc are in the list.    How do I count these occurrences?
+
+ Gemini: Count occurrences: For each item, it uses counts.getOrDefault(item, 0)
+ to get the current count of that item in the map (defaulting to 0 if not found)
+ and increments it by 1.
+ */
+fun countOccurrences(list: List<Int>): Map<Int, Int> {
+	val counts = mutableMapOf<Int, Int>()
+	for (item in list) {
+		counts[item] = counts.getOrDefault(item, 0) + 1
+	}
+	return counts
+}
+
+/**
+    This function, getMaxCountFromMap, takes a Map<Int, Int>
+    (where the keys are numbers and the values are their counts)
+    as input and returns the maximum count.
+ */
+fun getMaxCountFromMap(counts: Map<Int, Int>): Int {
+	return counts.values.maxOrNull() ?: 0
+}
+
+/**
+Please convert a List<Int> to a List<List<Int>>
+ Gemini:
+ map { listOf(it) }: This uses the map function to
+transform each element (it) in the inputList into a
+new list containing only that element (listOf(it)).
+This creates a list of single-element lists.
+ */
+
+fun convertList(inputList: List<Int>): List<List<Int>> {
+	return inputList.map { listOf(it) }
 }

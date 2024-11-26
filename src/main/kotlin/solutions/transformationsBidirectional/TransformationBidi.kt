@@ -32,7 +32,8 @@ class TransformationBidi {
 		SmallerHollowBlock(),
 		SmallerBlockEnclosingPoint(),
 		SmallerCountPointsInBlocksMaxWins(),
-		SmallerColorCountSummary()
+		SmallerColorCountSummary(),
+		SmallerColorBandRepresentation()
 	)
 
 	val winners : MutableList<BidirectionalBaseClass> = mutableListOf()
@@ -49,8 +50,8 @@ class TransformationBidi {
 		for (atask in theList) {
 			val taskName = atask.taskData.name
 
-			if (taskName == "d9fac9be") {
-				println("We have $taskName") // hollow block enclosing point
+			if (taskName == "4be741c5") {
+				println("We have $taskName") // color band summary
 			}
 
 			val numExamples = atask.abstractionsList.size
