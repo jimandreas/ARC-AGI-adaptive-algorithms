@@ -56,3 +56,4 @@ fun prettyPrintSolutions(solved: List<SolvedTasks>) {
         println("Task ${s.taskname} solved by ${s.solvedBy}")
     }
 }
+

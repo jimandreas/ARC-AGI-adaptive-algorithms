@@ -26,10 +26,13 @@ class TransformationBidi {
 		BidiPatternMatching(),
 		BidiColorByMajority(),
 		BidiFillPointsDownward(),
+		// other transforms
+		RotateSquareBlock(),
 		// start of Tasks where the output is smaller
 		SmallerHollowBlock(),
 		SmallerBlockEnclosingPoint(),
-		SmallerCountPointsInBlocksMaxWins()
+		SmallerCountPointsInBlocksMaxWins(),
+		SmallerColorCountSummary()
 	)
 
 	val winners : MutableList<BidirectionalBaseClass> = mutableListOf()

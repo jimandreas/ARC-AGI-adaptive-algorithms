@@ -87,11 +87,12 @@ the output, one notices various subcategories:
 ===================
 TODO
 ===================
--> rotate a square matrix, see ed36ccf7
+-> rotate a square matrix, see ed36ccf7  DONE
 -> color all blocks but not points, see 67385a82
 -> a1570a43 - a "centering" task - interesting!
 -> 239be575 - connections between blocks - need some sort of connection protocol
 -> 44f52bb0 - a curious case where counting blocks on the borders seems to be the key
+-> f9012d9b - a nice tiling completion problem
 
 
 

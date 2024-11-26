@@ -30,6 +30,7 @@ class GraphicsDisplayMatrix {
     lateinit var testPanel: JPanel
     lateinit var buttonPanel: JPanel
     lateinit var nameField: JTextField
+    lateinit var solvedText: JTextField
 
     fun setupGraphics() {
 
@@ -91,6 +92,11 @@ class GraphicsDisplayMatrix {
 
             val nextButton = JButton("Next")
             buttonPanel.add(nextButton)
+
+            solvedText = JTextField("PLACEHOLDER")
+            buttonPanel.add(solvedText)
+
+
             //contentPane.add(buttonPanel, BorderLayout.SOUTH)
 
 
@@ -248,6 +254,8 @@ class GraphicsDisplayMatrix {
 
         nameField.text = tTaskDataToDisplayInGUI[curTaskIndex].name
 
+        solvedText.text = prettyPrintSolution(tTaskDataToDisplayInGUI[curTaskIndex].name)
+
         val trainIter = trainTask.withIndex().iterator()
         while (trainIter.hasNext()) {
             val next = trainIter.next()
@@ -373,5 +381,15 @@ class GraphicsDisplayMatrix {
             specialPanel.removeAll()
             specialPanel.repaint()
         }
+    }
+
+    fun prettyPrintSolution(taskName: String):String {
+        for (s in solvedTasks) {
+            if (taskName == s.taskname) {
+                val retString = "$taskName: ${s.solvedBy}"
+                return retString
+            }
+        }
+        return "$taskName: NO SOLUTION"
     }
 }

@@ -391,3 +391,71 @@ fun countPointsInRegion(block: Block, points: List<Point>): Int {
 	}
 	return count
 }
+
+/**
+
+For a given matrix in kotlin of the form List<List<Int>>,
+create a function to rotate the outer rows and columns either
+clockwise (with an input parameter 0) or counterclockwise
+(with an input parameter of 1).  Return the rotated matrix.
+
+Oops sorry that I was not clear on my specifications.
+The matrix should be rotated 90 degrees, for a clockwise
+rotation the top row should be rotated to form the right column, etc.
+For counterclockwise, the top row should be rotated to form the left column.
+ */
+fun rotateMatrix(matrix: List<List<Int>>, direction: Int): List<List<Int>> {
+	if (matrix.isEmpty()) return matrix
+
+	val numRows = matrix.size
+	val numCols = matrix[0].size
+
+	// Create a new matrix with swapped dimensions
+	val rotatedMatrix = MutableList(numCols) { MutableList(numRows) { 0 } }
+
+	if (direction == 0) { // Clockwise
+		for (i in 0 until numRows) {
+			for (j in 0 until numCols) {
+				rotatedMatrix[j][numRows - 1 - i] = matrix[i][j]
+			}
+		}
+	} else { // Counterclockwise
+		for (i in 0 until numRows) {
+			for (j in 0 until numCols) {
+				rotatedMatrix[numCols - 1 - j][i] = matrix[i][j]
+			}
+		}
+	}
+
+	return rotatedMatrix
+}
+
+/**
+
+For a give list of Block and list of Point data classes,
+create a function to aggregate the quantity of cells of
+each color.  Count the number of each color in the Set<Pair, Pair> coordinates
+for the Block data class, and add the number of Point that have the same color.
+Return a descending sorted map of color to quantity.
+
+data class Block(val color: Int, val coordinates: Set<Pair<Int, Int>>)
+data class Point(val color: Int, val coordinate: Pair<Int, Int>)
+
+ */
+
+fun aggregateColorQuantities(blocks: List<Block>, points: List<Point>): Map<Int, Int> {
+	val colorCounts = mutableMapOf<Int, Int>()
+
+	// Count colors from blocks
+	for (block in blocks) {
+		colorCounts[block.color] = (colorCounts[block.color] ?: 0) + block.coordinates.size
+	}
+
+	// Count colors from points
+	for (point in points) {
+		colorCounts[point.color] = (colorCounts[point.color] ?: 0) + 1
+	}
+
+	// Sort the map in descending order by quantity
+	return colorCounts.entries.sortedByDescending { it.value }.associate { it.toPair() }
+}
