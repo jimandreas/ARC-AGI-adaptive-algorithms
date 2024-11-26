@@ -528,6 +528,8 @@ fun countOccurrences(list: List<Int>): Map<Int, Int> {
 	return counts
 }
 
+
+
 /**
     This function, getMaxCountFromMap, takes a Map<Int, Int>
     (where the keys are numbers and the values are their counts)
@@ -548,4 +550,40 @@ This creates a list of single-element lists.
 
 fun convertList(inputList: List<Int>): List<List<Int>> {
 	return inputList.map { listOf(it) }
+}
+
+/**
+
+I have two data classes in Kotlin - a list of Block and a list of Point.
+Please create a function that returns the number of unique colors
+when both lists are aggregated.
+ */
+
+fun uniqueColors(blocks: List<Block>, points: List<Point>): Int {
+	val blockColors = blocks.map { it.color }
+	val pointColors = points.map { it.color }
+	return (blockColors + pointColors).distinct().size
+}
+
+/**
+Now please create a function that, assuming there is only
+one color, counts the coordinate Pairs in the list of Block
+and Point data class lists and returns a Pair with the color
+value and the count of coordinate Pairs.
+ Gemini code follows:
+ */
+fun countCoordinatesWithSingleColor(blocks: List<Block>, points: List<Point>): Pair<Int, Int> {
+//	require(blocks.all { it.color == blocks.first().color }
+//			&& points.all { it.color == points.first().color }) {
+//		"All blocks and points must have the same color"
+//	}
+
+	val color = blocks.firstOrNull()?.color ?: points.firstOrNull()?.color
+	if (color == null) {
+		return Pair(0, 0)
+	}
+	val blockCoordinatesCount = blocks.sumOf { it.coordinates.size }
+	val pointCoordinatesCount = points.size
+
+	return Pair(color, blockCoordinatesCount + pointCoordinatesCount)
 }

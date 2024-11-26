@@ -93,6 +93,7 @@ TODO
 -> 239be575 - connections between blocks - need some sort of connection protocol
 -> 44f52bb0 - a curious case where counting blocks on the borders seems to be the key
 -> f9012d9b - a nice tiling completion problem
+-> f2829549 - one of the partitioning problems (vertical blue bar separates things to compare)
 
 
 

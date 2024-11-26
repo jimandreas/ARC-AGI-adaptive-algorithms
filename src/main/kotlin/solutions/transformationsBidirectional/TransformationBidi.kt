@@ -33,7 +33,8 @@ class TransformationBidi {
 		SmallerBlockEnclosingPoint(),
 		SmallerCountPointsInBlocksMaxWins(),
 		SmallerColorCountSummary(),
-		SmallerColorBandRepresentation()
+		SmallerColorBandRepresentation(),
+		SmallerSimpleColorCount()
 	)
 
 	val winners : MutableList<BidirectionalBaseClass> = mutableListOf()
@@ -50,7 +51,7 @@ class TransformationBidi {
 		for (atask in theList) {
 			val taskName = atask.taskData.name
 
-			if (taskName == "4be741c5") {
+			if (taskName == "d631b094") {
 				println("We have $taskName") // color band summary
 			}
 
