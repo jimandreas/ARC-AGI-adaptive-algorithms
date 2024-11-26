@@ -34,7 +34,9 @@ class TransformationBidi {
 		SmallerCountPointsInBlocksMaxWins(),
 		SmallerColorCountSummary(),
 		SmallerColorBandRepresentation(),
-		SmallerSimpleColorCount()
+		SmallerSimpleColorCount(),
+		BiggestBlock(),
+		ReturnTopTwoByTwo()
 	)
 
 	val winners : MutableList<BidirectionalBaseClass> = mutableListOf()
