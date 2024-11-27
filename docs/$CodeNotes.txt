@@ -1,0 +1,23 @@
+Code Notes
+==========
+
+Some cool Gemini created code samples:
+
+ScanMatrixWithThreeByThreeViewport.kt
+	fun hasNonZeroRowsAndCols(viewport: List<List<Int>>): Boolean {
+		if (viewport.any { row -> row.all { it != 0 } } || // Check rows
+			(0..2).any { col -> viewport.all { row -> row[col] != 0 } }) { // Check columns
+			return true
+		}
+
+checks a 3x3 matrix for all values of non-zero.  I like the (0..2).any concept. Wow!
+
+Grok: various list fill approaches:
+
+If you want to create a list with repeated elements, you can use:
+val list = List(4) { 5 }
+This creates a list with 4 elements, all initialized to 5.
+
+3. Using MutableList with fill
+val mutableList = MutableList(4) { 0 }.apply { fill(5) }
+

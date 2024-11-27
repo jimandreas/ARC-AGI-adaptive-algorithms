@@ -6,11 +6,6 @@
 
 package solutions.transformationsBidirectional
 
-import Block
-import entities.BlockUtilities
-import solutions.utilities.countPointsInRegion
-import java.util.Collections.list
-
 // example 1fad071e  block count reporter
 //   make this a bit more general - look for an output that is a List<List<Int>
 //  that is a horizontal block one cell high
