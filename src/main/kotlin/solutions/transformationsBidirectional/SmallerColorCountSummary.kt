@@ -15,7 +15,7 @@ import solutions.utilities.findEnclosedPoint
 //   return a stacked color set based on quantity
 
 class SmallerColorCountSummary : BidirectionalBaseClass() {
-	override val name: String = "**** SMALLER color count summary ******"
+	override val name: String = "SMALLER color count summary"
 
 	override fun resetState() {
 	}

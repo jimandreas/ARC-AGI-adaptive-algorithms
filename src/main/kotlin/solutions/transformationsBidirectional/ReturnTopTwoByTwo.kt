@@ -19,7 +19,7 @@ import solutions.utilities.uniqueColors
 //   return top two by two matrix from input matrix
 
 class ReturnTopTwoByTwo : BidirectionalBaseClass() {
-	override val name: String = "**** return top 2x2 ****"
+	override val name: String = "return top 2x2"
 
 	override fun resetState() {
 	}

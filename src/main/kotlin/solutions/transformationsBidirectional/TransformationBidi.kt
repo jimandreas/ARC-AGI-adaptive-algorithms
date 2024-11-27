@@ -36,7 +36,9 @@ class TransformationBidi {
 		SmallerColorBandRepresentation(),
 		SmallerSimpleColorCount(),
 		BiggestBlock(),
-		ReturnTopTwoByTwo()
+		ReturnTopTwoByTwo(),
+		SmallerBottomThreeColorBlocks(),
+		SmallerCountBlocksOfGivenColor()
 	)
 
 	val winners : MutableList<BidirectionalBaseClass> = mutableListOf()
@@ -53,8 +55,8 @@ class TransformationBidi {
 		for (atask in theList) {
 			val taskName = atask.taskData.name
 
-			if (taskName == "d631b094") {
-				println("We have $taskName") // color band summary
+			if (taskName == "1fad071e") {
+				println("We have $taskName") // block count reporter
 			}
 
 			val numExamples = atask.abstractionsList.size

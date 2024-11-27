@@ -6,20 +6,14 @@
 
 package solutions.transformationsBidirectional
 
-import Block
-import entities.BlockUtilities
-import solutions.utilities.aggregateColorQuantities
 import solutions.utilities.countCoordinatesWithSingleColor
-import solutions.utilities.countOccurrences
-import solutions.utilities.findEnclosedPoint
-import solutions.utilities.getMaxCountFromMap
 import solutions.utilities.uniqueColors
 
 // example: d631b094
 //   return count of colors as List<List<Int>> of the single color
 
 class SmallerSimpleColorCount : BidirectionalBaseClass() {
-	override val name: String = "**** SMALLER simple color count ******"
+	override val name: String = "SMALLER simple color count"
 
 	override fun resetState() {
 	}

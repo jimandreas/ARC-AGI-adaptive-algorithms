@@ -13,7 +13,7 @@ import solutions.utilities.convertList
 //   return a stacked color set based on bands of color with directionality
 
 class SmallerColorBandRepresentation : BidirectionalBaseClass() {
-	override val name: String = "**** SMALLER color band summary ******"
+	override val name: String = "SMALLER color band summary"
 
 	override fun resetState() {
 	}

@@ -19,7 +19,7 @@ import solutions.utilities.uniqueColors
 //   return biggest block as colored 2x2 matrix
 
 class BiggestBlock : BidirectionalBaseClass() {
-	override val name: String = "**** biggest block ****"
+	override val name: String = "biggest block"
 
 	override fun resetState() {
 	}

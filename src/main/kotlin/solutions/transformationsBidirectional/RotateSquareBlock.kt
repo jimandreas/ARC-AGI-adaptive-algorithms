@@ -11,7 +11,7 @@ import solutions.utilities.rotateMatrix
 // example:  ed36ccf7
 
 class RotateSquareBlock : BidirectionalBaseClass() {
-	override val name: String = "******** rotation of the matrix *******"
+	override val name: String = "rotation of the matrix"
 	var rotationSet = false
 	var rotation = 0
 
