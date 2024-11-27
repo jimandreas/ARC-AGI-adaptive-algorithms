@@ -602,3 +602,47 @@ fun getSubmatrix(matrix: List<List<Int>>, rowCount: Int, colCount: Int): List<Li
 
 	return matrix.subList(0, rowCount).map { it.subList(0, colCount) }
 }
+
+/**
+For a given Kotlin matrix of form List<List<Int>> that is evenly partitioned
+into rowRegions and colRegions, please map the cells and return the majority 
+cell value in a new List<List<Int>> - where each entry in the new list
+is the majority cell value in the respective region.
+
+ Gemini code follows:
+ */
+fun getMajorityValuesInRegions(
+	matrix: List<List<Int>>,
+	rowRegions: Int,
+	colRegions: Int
+): List<List<Int>> {
+
+	val numRows = matrix.size
+	val numCols = matrix[0].size
+	val rowRegionSize = numRows / rowRegions
+	val colRegionSize = numCols / colRegions
+
+	val majorityValues = MutableList(rowRegions) { MutableList(colRegions) { 0 } }
+
+	for (i in 0 until rowRegions) {
+		for (j in 0 until colRegions) {
+			val regionValues = mutableListOf<Int>()
+			for (row in i * rowRegionSize until (i + 1) * rowRegionSize) {
+				for (col in j * colRegionSize until (j + 1) * colRegionSize) {
+					regionValues.add(matrix[row][col])
+				}
+			}
+			majorityValues[i][j] = findMajorityValue(regionValues)
+		}
+	}
+
+	return majorityValues
+}
+
+fun findMajorityValue(values: List<Int>): Int {
+	val counts = mutableMapOf<Int, Int>()
+	for (value in values) {
+		counts[value] = (counts[value] ?: 0) + 1
+	}
+	return counts.maxByOrNull { it.value }?.key ?: 0
+}

@@ -4,15 +4,16 @@
 	"SameParameterValue", "UnnecessaryVariable", "LocalVariableName", "PropertyName"
 )
 
-package solutions.transformations.samesize
+
+package solutions.transformations.smaller
 
 import solutions.transformations.BidirectionalBaseClass
+import solutions.utilities.getMajorityValuesInRegions
 
 // example: 5614dbcf  region representation with noise
 //   for an nxn output matrix look at the input matrix for
 // regional color mappings with noise presence
-//   input matrix must be some multiple of output matrix
-
+//   input matrix must be some multiple of output matrixpackage solutions.transformations.smaller
 
 class RegionRepresentationWithNoise : BidirectionalBaseClass() {
 	override val name: String = "**** regional color mapping with noise"
@@ -20,8 +21,8 @@ class RegionRepresentationWithNoise : BidirectionalBaseClass() {
 	var matrixMutipleChecked = false
 	var rowCount = 0
 	var colCount = 0
-	var rowMultiple = 0
-	var colMultiple = 0
+	var rowRegionCount = 0
+	var colRegionCount = 0
 
 	override fun resetState() {
 		matrixMutipleChecked = false
@@ -40,12 +41,17 @@ class RegionRepresentationWithNoise : BidirectionalBaseClass() {
 				return emptyList()
 			}
 			matrixMutipleChecked = true
-			rowMultiple = inputMatrix.size / rowCount
-			colMultiple = inputMatrix[0].size / colCount
+			rowRegionCount = inputMatrix.size / rowCount
+			colRegionCount = inputMatrix[0].size / colCount
 		}
 
-		// to be continued
-		return emptyList() // TODO finish this
+		val retList = getMajorityValuesInRegions(
+			matrix = inputMatrix,
+			rowRegions = rowRegionCount,
+			colRegions = colRegionCount
+		)
+
+		return retList
 	}
 
 	override fun returnTestOutput(): List<List<Int>> {
