@@ -4,10 +4,32 @@
 	"SameParameterValue", "UnnecessaryVariable", "RedundantIf"
 )
 
-package solutions.transformationsBidirectional
+package solutions.transformations
 
 import SolutionMatrix
 import SolvedTasks
+import solutions.transformations.samesize.BidiBasicSpatialTranslations
+import solutions.transformations.samesize.BidiChangeBlockColoring
+import solutions.transformations.samesize.BidiChangeBlockColoringBasedOnPoint
+import solutions.transformations.samesize.BidiColorByMajority
+import solutions.transformations.samesize.BidiColumnColoringMapping
+import solutions.transformations.samesize.BidiConnectPairsOfPoints
+import solutions.transformations.samesize.BidiFillPointsDownward
+import solutions.transformations.samesize.BidiFullRowColoring
+import solutions.transformations.samesize.BidiPatternMatching
+import solutions.transformations.samesize.BidiSplitBlocksVertically
+import solutions.transformations.samesize.BiggestBlock
+import solutions.transformations.samesize.RotateSquareBlock
+import solutions.transformations.samesize.ScanMatrixWithThreeByThreeViewport
+import solutions.transformations.smaller.ReturnTopTwoByTwo
+import solutions.transformations.smaller.SmallerBlockEnclosingPoint
+import solutions.transformations.smaller.SmallerBottomThreeColorBlocks
+import solutions.transformations.smaller.SmallerColorBandRepresentation
+import solutions.transformations.smaller.SmallerColorCountSummary
+import solutions.transformations.smaller.SmallerCountBlocksOfGivenColor
+import solutions.transformations.smaller.SmallerCountPointsInBlocksMaxWins
+import solutions.transformations.smaller.SmallerHollowBlock
+import solutions.transformations.smaller.SmallerSimpleColorCount
 import solutions.utilities.prettyPrintMatrixDiff
 import solvedTasks
 import taskAbstractionsList
@@ -17,7 +39,7 @@ class TransformationBidi {
 	val bidiTransformList: List<BidirectionalBaseClass> = listOf(
 		TestTrans(),
 		BidiFullRowColoring(),
-		BidiBasicTranslations(),
+		BidiBasicSpatialTranslations(),
 		BidiColumnColoringMapping(),
 		BidiConnectPairsOfPoints(),
 		BidiChangeBlockColoring(),

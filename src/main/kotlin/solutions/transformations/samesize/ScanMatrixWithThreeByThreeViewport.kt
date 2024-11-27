@@ -4,7 +4,9 @@
 	"SameParameterValue", "UnnecessaryVariable", "LocalVariableName", "PropertyName"
 )
 
-package solutions.transformationsBidirectional
+package solutions.transformations.samesize
+
+import solutions.transformations.BidirectionalBaseClass
 
 // example: 2013d3e2  sliding 3x3 window fill
 //   return the upper left 3x3 that has one filled row or column

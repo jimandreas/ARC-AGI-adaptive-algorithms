@@ -3,20 +3,13 @@
 	"ReplaceManualRangeWithIndicesCalls", "ReplaceSizeZeroCheckWithIsEmpty",
 	"SameParameterValue", "UnnecessaryVariable", "LocalVariableName", "PropertyName"
 )
+package solutions.transformations.smaller
 
-package solutions.transformationsBidirectional
-
-import Block
-import entities.BlockUtilities
-import solutions.utilities.aggregateColorQuantities
-import solutions.utilities.countCoordinatesWithSingleColor
-import solutions.utilities.countOccurrences
-import solutions.utilities.findEnclosedPoint
-import solutions.utilities.getMaxCountFromMap
-import solutions.utilities.uniqueColors
+import solutions.transformations.BidirectionalBaseClass
 
 // example: d10ecb37
 //   return top two by two matrix from input matrix
+// REVISE to return the size of the output matrix (parametric driven)
 
 class ReturnTopTwoByTwo : BidirectionalBaseClass() {
 	override val name: String = "return top 2x2"

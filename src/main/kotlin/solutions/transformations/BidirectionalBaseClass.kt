@@ -3,7 +3,7 @@
 	"ReplaceManualRangeWithIndicesCalls", "ReplaceSizeZeroCheckWithIsEmpty",
 	"SameParameterValue", "UnnecessaryVariable", "LocalVariableName", "PropertyName"
 )
-package solutions.transformationsBidirectional
+package solutions.transformations
 
 import Block
 import Point

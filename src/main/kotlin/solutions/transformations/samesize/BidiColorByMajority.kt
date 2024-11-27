@@ -4,7 +4,10 @@
 	"SameParameterValue", "UnnecessaryVariable", "LocalVariableName", "PropertyName"
 )
 
-package solutions.transformationsBidirectional
+package solutions.transformations.samesize
+
+import solutions.transformations.BidirectionalBaseClass
+import kotlin.collections.iterator
 
 // example: 5582e5ca
 

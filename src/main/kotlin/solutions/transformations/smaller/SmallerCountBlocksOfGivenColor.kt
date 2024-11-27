@@ -4,7 +4,9 @@
 	"SameParameterValue", "UnnecessaryVariable", "LocalVariableName", "PropertyName"
 )
 
-package solutions.transformationsBidirectional
+package solutions.transformations.smaller
+
+import solutions.transformations.BidirectionalBaseClass
 
 // example 1fad071e  block count reporter
 //   make this a bit more general - look for an output that is a List<List<Int>

@@ -4,16 +4,9 @@
 	"SameParameterValue", "UnnecessaryVariable", "LocalVariableName", "PropertyName"
 )
 
-package solutions.transformationsBidirectional
+package solutions.transformations.samesize
 
-import Block
-import entities.BlockUtilities
-import solutions.utilities.aggregateColorQuantities
-import solutions.utilities.countCoordinatesWithSingleColor
-import solutions.utilities.countOccurrences
-import solutions.utilities.findEnclosedPoint
-import solutions.utilities.getMaxCountFromMap
-import solutions.utilities.uniqueColors
+import solutions.transformations.BidirectionalBaseClass
 
 // example: 445eab21
 //   return biggest block as colored 2x2 matrix

@@ -4,11 +4,10 @@
 	"SameParameterValue", "UnnecessaryVariable", "LocalVariableName", "PropertyName"
 )
 
-package solutions.transformationsBidirectional
+package solutions.transformations.smaller
 
+import solutions.transformations.BidirectionalBaseClass
 import solutions.utilities.aggregateColorQuantities
-import solutions.utilities.countCoordinatesWithSingleColor
-import solutions.utilities.uniqueColors
 
 // example: f8b3ba0a
 //   return colors as List<List<Int>> of the bottom three(?) color block counts

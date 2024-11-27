@@ -4,10 +4,11 @@
 	"SameParameterValue", "UnnecessaryVariable", "LocalVariableName", "PropertyName"
 )
 
-package solutions.transformationsBidirectional
+package solutions.transformations.smaller
 
 import Block
 import entities.BlockUtilities
+import solutions.transformations.BidirectionalBaseClass
 import solutions.utilities.findEnclosedPoint
 
 // example: d9fac9be

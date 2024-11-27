@@ -4,8 +4,9 @@
 	"SameParameterValue", "UnnecessaryVariable", "LocalVariableName", "PropertyName"
 )
 
-package solutions.transformationsBidirectional
+package solutions.transformations.samesize
 
+import solutions.transformations.BidirectionalBaseClass
 import solutions.utilities.rotateMatrix
 
 // example:  ed36ccf7

@@ -3,9 +3,11 @@
 	"ReplaceManualRangeWithIndicesCalls", "ReplaceSizeZeroCheckWithIsEmpty",
 	"SameParameterValue", "UnnecessaryVariable", "LocalVariableName", "PropertyName"
 )
-package solutions.transformationsBidirectional
+
+package solutions.transformations.samesize
 
 import Block
+import solutions.transformations.BidirectionalBaseClass
 import solutions.utilities.recreateMatrix
 
 // example: 0d3d703e

@@ -4,7 +4,9 @@
 	"SameParameterValue", "UnnecessaryVariable", "LocalVariableName", "PropertyName"
 )
 
-package solutions.transformationsBidirectional
+package solutions.transformations.samesize
+
+import solutions.transformations.BidirectionalBaseClass
 
 // example: d037b0a7
 

@@ -3,12 +3,14 @@
 	"ReplaceManualRangeWithIndicesCalls", "ReplaceSizeZeroCheckWithIsEmpty",
 	"SameParameterValue", "UnnecessaryVariable", "LocalVariableName", "PropertyName"
 )
-package solutions.transformationsBidirectional
 
-import Block
+package solutions.transformations.samesize
+
 import Point
+import solutions.transformations.BidirectionalBaseClass
 import solutions.utilities.recreateMatrix
 import kotlin.collections.groupingBy
+import kotlin.collections.iterator
 
 // example: 1f876c06
 class BidiConnectPairsOfPoints : BidirectionalBaseClass() {

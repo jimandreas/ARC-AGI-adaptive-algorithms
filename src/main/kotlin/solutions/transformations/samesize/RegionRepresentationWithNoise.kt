@@ -4,7 +4,9 @@
 	"SameParameterValue", "UnnecessaryVariable", "LocalVariableName", "PropertyName"
 )
 
-package solutions.transformationsBidirectional
+package solutions.transformations.samesize
+
+import solutions.transformations.BidirectionalBaseClass
 
 // example: 5614dbcf  region representation with noise
 //   for an nxn output matrix look at the input matrix for
@@ -42,6 +44,7 @@ class RegionRepresentationWithNoise : BidirectionalBaseClass() {
 			colMultiple = inputMatrix[0].size / colCount
 		}
 
+		// to be continued
 		return emptyList() // TODO finish this
 	}
 

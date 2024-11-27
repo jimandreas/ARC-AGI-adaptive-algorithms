@@ -4,10 +4,11 @@
 	"SameParameterValue", "UnnecessaryVariable", "LocalVariableName", "PropertyName"
 )
 
-package solutions.transformationsBidirectional
+package solutions.transformations.smaller
 
 import Block
 import entities.BlockUtilities
+import solutions.transformations.BidirectionalBaseClass
 
 // example: b9b7f026
 //   looking for a single hollow block among filled block

@@ -7,7 +7,7 @@
 package solutions
 
 import experiments.ExperimentalDatasets
-import solutions.transformationsBidirectional.TransformationBidi
+import solutions.transformations.TransformationBidi
 
 class SolutionOrganizer(val ed: ExperimentalDatasets) {
 

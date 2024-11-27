@@ -4,9 +4,10 @@
 	"SameParameterValue", "UnnecessaryVariable", "LocalVariableName", "PropertyName"
 )
 
-package solutions.transformationsBidirectional
+package solutions.transformations.samesize
 
 import Block
+import solutions.transformations.BidirectionalBaseClass
 import solutions.utilities.getOrientation
 import solutions.utilities.recreateMatrix
 
@@ -16,8 +17,8 @@ import solutions.utilities.recreateMatrix
 // example 5168d44c - include the points (but don't translate them)
 //   somehow have to capture directionality context for this one!!
 
-class BidiBasicTranslations : BidirectionalBaseClass() {
-	override var name: String = "BIDI Translate blocks by "
+class BidiBasicSpatialTranslations : BidirectionalBaseClass() {
+	override var name: String = "BIDI Translate blocks spatial by "
 	var originalName = name
 
 	//var solutionFound = false
