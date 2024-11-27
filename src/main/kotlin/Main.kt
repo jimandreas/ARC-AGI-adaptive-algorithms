@@ -53,7 +53,7 @@ fun prettyPrintSolutions(solved: List<SolvedTasks>) {
 
     println("${solved.size} puzzles solved - ${percentageText}%")
     for (s in solved) {
-        println("Task ${s.taskname} solved by ${s.solvedBy}")
+        println("Task ${s.taskname} : ${s.solvedBy}")
     }
 }
 

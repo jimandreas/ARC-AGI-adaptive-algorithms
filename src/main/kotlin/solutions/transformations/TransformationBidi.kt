@@ -21,7 +21,7 @@ import solutions.transformations.samesize.BidiSplitBlocksVertically
 import solutions.transformations.samesize.BiggestBlock
 import solutions.transformations.samesize.RotateSquareBlock
 import solutions.transformations.samesize.ScanMatrixWithThreeByThreeViewport
-import solutions.transformations.smaller.ReturnTopTwoByTwo
+import solutions.transformations.smaller.ReturnTopCorner
 import solutions.transformations.smaller.SmallerBlockEnclosingPoint
 import solutions.transformations.smaller.SmallerBottomThreeColorBlocks
 import solutions.transformations.smaller.SmallerColorBandRepresentation
@@ -58,7 +58,7 @@ class TransformationBidi {
 		SmallerColorBandRepresentation(),
 		SmallerSimpleColorCount(),
 		BiggestBlock(),
-		ReturnTopTwoByTwo(),
+		ReturnTopCorner(),
 		SmallerBottomThreeColorBlocks(),
 		SmallerCountBlocksOfGivenColor(),
 		ScanMatrixWithThreeByThreeViewport()

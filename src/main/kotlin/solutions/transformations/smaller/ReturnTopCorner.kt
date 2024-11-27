@@ -6,24 +6,32 @@
 package solutions.transformations.smaller
 
 import solutions.transformations.BidirectionalBaseClass
+import solutions.utilities.getSubmatrix
 
 // example: d10ecb37
 //   return top two by two matrix from input matrix
 // REVISE to return the size of the output matrix (parametric driven)
 
-class ReturnTopTwoByTwo : BidirectionalBaseClass() {
-	override val name: String = "return top 2x2"
+class ReturnTopCorner : BidirectionalBaseClass() {
+	override val name: String = "return top corner submatrix"
+
+	var matrixDimensionsSaved = false
+	var rowCount = 0
+	var colCount = 0
 
 	override fun resetState() {
+		matrixDimensionsSaved = false
 	}
 
 	override fun testTransform(): List<List<Int>> {
-		if (inputMatrix.size < 2 || inputMatrix[0].size < 2) {
-			return emptyList()
+
+		if (!matrixDimensionsSaved) {
+			matrixDimensionsSaved = true
+			rowCount = outputMatrix.size
+			colCount = outputMatrix[0].size
 		}
-		val retArray = listOf(listOf(inputMatrix[0][0], inputMatrix[0][1]),
-			listOf(inputMatrix[1][0], inputMatrix[1][1]))
-		return retArray
+		val retMatrix = getSubmatrix(inputMatrix, rowCount, colCount)
+		return retMatrix
 
 	}
 

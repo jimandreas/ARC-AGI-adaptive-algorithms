@@ -587,3 +587,18 @@ fun countCoordinatesWithSingleColor(blocks: List<Block>, points: List<Point>): P
 
 	return Pair(color, blockCoordinatesCount + pointCoordinatesCount)
 }
+
+/**
+for a given rowCount and colCount and the kotlin matrix
+List<List<Int>>,  return a submatrix from the top left
+origin of size rowCount and colCount in the form List<List<Int>>.
+Return the emptyList() if the given matrix is smaller than rowCount or colCount.
+ Gemini code follows:
+ */
+fun getSubmatrix(matrix: List<List<Int>>, rowCount: Int, colCount: Int): List<List<Int>> {
+	if (matrix.size < rowCount || matrix[0].size < colCount) {
+		return emptyList()
+	}
+
+	return matrix.subList(0, rowCount).map { it.subList(0, colCount) }
+}
