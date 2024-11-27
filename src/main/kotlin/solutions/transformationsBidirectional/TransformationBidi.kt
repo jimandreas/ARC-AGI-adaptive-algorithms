@@ -38,7 +38,8 @@ class TransformationBidi {
 		BiggestBlock(),
 		ReturnTopTwoByTwo(),
 		SmallerBottomThreeColorBlocks(),
-		SmallerCountBlocksOfGivenColor()
+		SmallerCountBlocksOfGivenColor(),
+		ScanMatrixWithThreeByThreeViewport()
 	)
 
 	val winners : MutableList<BidirectionalBaseClass> = mutableListOf()
@@ -55,8 +56,8 @@ class TransformationBidi {
 		for (atask in theList) {
 			val taskName = atask.taskData.name
 
-			if (taskName == "1fad071e") {
-				println("We have $taskName") // block count reporter
+			if (taskName == "2013d3e2") {
+				println("We have $taskName") // 3x3 viewport scan
 			}
 
 			val numExamples = atask.abstractionsList.size
