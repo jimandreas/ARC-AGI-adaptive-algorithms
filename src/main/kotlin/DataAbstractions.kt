@@ -1,5 +1,3 @@
-import javax.swing.text.MutableAttributeSet
-
 /**
  * A "Block" is a collection of matrix entries with the same color (non-zero) value.
  * The block does not have to be rectangular.

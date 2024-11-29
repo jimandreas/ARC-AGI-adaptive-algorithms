@@ -35,7 +35,7 @@ class TransformationBidi {
 		SmallerBlockEnclosingPoint(),
 		SmallerCountPointsInBlocksMaxWins(),
 		SmallerColorCountSummary(),
-		SmallerColorBandRepresentation(),
+		S10ColorBandRepresentation(),
 		SmallerSimpleColorCount(),
 		BiggestBlock(),
 		ReturnTopCorner(),

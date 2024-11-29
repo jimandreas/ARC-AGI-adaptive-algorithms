@@ -13,7 +13,7 @@ import solutions.utilities.convertList
 // example: 4be741c5
 //   return a stacked color set based on bands of color with directionality
 
-class SmallerColorBandRepresentation : BidirectionalBaseClass() {
+class S10ColorBandRepresentation : BidirectionalBaseClass() {
 	override val name: String = "SMALLER color band summary"
 
 	override fun resetState() {
