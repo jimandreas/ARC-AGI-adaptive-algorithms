@@ -605,7 +605,7 @@ fun getSubmatrix(matrix: List<List<Int>>, rowCount: Int, colCount: Int): List<Li
 
 /**
 For a given Kotlin matrix of form List<List<Int>> that is evenly partitioned
-into rowRegions and colRegions, please map the cells and return the majority 
+into rowRegions and colRegions, please map the cells and return the majority
 cell value in a new List<List<Int>> - where each entry in the new list
 is the majority cell value in the respective region.
 
@@ -646,3 +646,4 @@ fun findMajorityValue(values: List<Int>): Int {
 	}
 	return counts.maxByOrNull { it.value }?.key ?: 0
 }
+

@@ -38,7 +38,16 @@ fun main() {
     //tTaskDataToDisplayInGUI = ed.taskDataWithRectangularHoles
     //tTaskDataToDisplayInGUI = ed.taskWithTranslations
 
-    tTaskDataToDisplayInGUI = ed.taskDataSortedByOutputCellCount.toMutableList()
+    // show only unsolved tasks
+    tTaskDataToDisplayInGUI.clear()
+    for (t in ed.taskDataSortedByOutputCellCount) {
+        val found = solvedTasks.filter { it.task.name == t.name }
+        if (found.isEmpty()) {
+            tTaskDataToDisplayInGUI.add(t)
+        }
+    }
+
+
     val graphics = GraphicsDisplayMatrix()
     graphics.setupGraphics()
     graphics.displayMatrices()

@@ -11,8 +11,7 @@ import MatrixAbstractions
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
-import utils.splitStringIntoPairs
-import kotlin.math.exp
+import testUtilityFunctions.splitStringIntoPairs
 import kotlin.test.assertEquals
 
 internal class BlockUtilitiesTest {
