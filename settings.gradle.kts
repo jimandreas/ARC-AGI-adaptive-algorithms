@@ -1,2 +1,4 @@
-rootProject.name = "ARC-AGI-database-analysis"
+
+
+rootProject.name = "ARC-AGI-adaptive-algorithms"
 

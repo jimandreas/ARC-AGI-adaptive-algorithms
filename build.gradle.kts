@@ -1,6 +1,6 @@
 plugins {
-    kotlin("jvm") version "2.0.21"
-    kotlin("plugin.serialization") version "2.0.21"
+    kotlin("jvm") version "2.0.20"
+    kotlin("plugin.serialization") version "2.0.20"
 }
 
 group = "com.jimandreas"
@@ -23,6 +23,7 @@ dependencies {
     testImplementation("org.jetbrains.kotlin:kotlin-test:1.6.0")
     testImplementation(platform("org.junit:junit-bom:5.8.1"))
     testImplementation("org.junit.jupiter:junit-jupiter:5.8.2")
+	implementation(kotlin("stdlib-jdk8"))
 
 }
 
