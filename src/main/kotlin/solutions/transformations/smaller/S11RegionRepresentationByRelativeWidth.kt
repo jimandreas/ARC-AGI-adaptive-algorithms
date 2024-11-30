@@ -16,7 +16,7 @@ import solutions.utilities.reduceMatrix
 // sort blocks to horizontal bands
 
 
-class SmallerRegionRepresentationByRelativeWidth : BidirectionalBaseClass() {
+class S11SmallerRegionRepresentationByRelativeWidth : BidirectionalBaseClass() {
 	override val name: String = "**** region representation by width"
 
 

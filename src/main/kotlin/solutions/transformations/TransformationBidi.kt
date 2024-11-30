@@ -43,7 +43,8 @@ class TransformationBidi {
 		SmallerCountBlocksOfGivenColor(),
 		ScanMatrixWithThreeByThreeViewport(),
 		RegionRepresentationWithNoise(),
-		SmallerRegionRepresentationByRelativeWidth()
+		S11SmallerRegionRepresentationByRelativeWidth(),
+		S12CollageWIthGreyCenterBlock()
 
 	)
 
@@ -61,8 +62,8 @@ class TransformationBidi {
 		for (atask in theList) {
 			val taskName = atask.taskData.name
 
-			if (taskName == "90c28cc7") {
-				println("We have $taskName") // bands of blocks
+			if (taskName == "137eaa0f") {
+				println("We have $taskName") // collage of blocks with grey point
 			}
 
 			val numExamples = atask.abstractionsList.size
