@@ -9,6 +9,7 @@ package solutions.transformations.smaller
 import Block
 import solutions.transformations.BidirectionalBaseClass
 import solutions.utilities.convertBlocksToMatrix
+import solutions.utilities.reduceMatrix
 
 // example: 90c28cc7 region representation by width
 //   for a point free set of blocks,
@@ -30,7 +31,9 @@ class SmallerRegionRepresentationByRelativeWidth : BidirectionalBaseClass() {
 		val sortedList = sortToHorizontalBandsOfBlocks(inputBlockList)
 
 		val orderedBlockList = convertBackToBlockList(sortedList)
-		val retArray = convertBlocksToMatrix(orderedBlockList)
+		val tempArray = convertBlocksToMatrix(orderedBlockList)
+		val retArray = reduceMatrix(tempArray)
+
 		return retArray
 	}
 
