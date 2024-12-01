@@ -49,7 +49,8 @@ class TransformationBidi {
 		S13SmallestEnclosingRectangle(),
 		S14FindUniqueBlock(),
 		S15FindSymmetricBlock(),
-		S16FindTheBigBlock()
+		S16FindTheBigBlock(),
+		S17TheMostWins()
 
 	)
 
@@ -67,8 +68,8 @@ class TransformationBidi {
 		for (atask in theList) {
 			val taskName = atask.taskData.name
 
-			if (taskName == "72ca375d") {
-				println("We have $taskName") // find symmetric block
+			if (taskName == "39a8645d") {
+				println("We have $taskName") // majority wins
 			}
 
 			val numExamples = atask.abstractionsList.size
