@@ -13,7 +13,7 @@ import solutions.transformations.BidirectionalBaseClass
 // example: 137eaa0f collage with grey center block
 
 class S12CollageWIthGreyCenterBlock : BidirectionalBaseClass() {
-	override val name: String = "**** collage with grey center block"
+	override val name: String = "collage with grey center block"
 
 	val greyPoint = 5 // HARDWIRED!!
 

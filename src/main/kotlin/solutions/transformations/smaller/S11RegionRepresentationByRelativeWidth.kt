@@ -17,7 +17,7 @@ import solutions.utilities.reduceMatrix
 
 
 class S11SmallerRegionRepresentationByRelativeWidth : BidirectionalBaseClass() {
-	override val name: String = "**** region representation by width"
+	override val name: String = "region representation by width"
 
 
 	override fun resetState() {

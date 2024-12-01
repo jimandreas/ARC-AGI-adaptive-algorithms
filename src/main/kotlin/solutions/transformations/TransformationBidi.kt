@@ -48,7 +48,8 @@ class TransformationBidi {
 		S12CollageWIthGreyCenterBlock(),
 		S13SmallestEnclosingRectangle(),
 		S14FindUniqueBlock(),
-		S15FindSymmetricBlock()
+		S15FindSymmetricBlock(),
+		S16FindTheBigBlock()
 
 	)
 

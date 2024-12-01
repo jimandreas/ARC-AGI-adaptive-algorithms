@@ -16,7 +16,7 @@ import solutions.utilities.getMajorityValuesInRegions
 //   input matrix must be some multiple of output matrixpackage solutions.transformations.smaller
 
 class RegionRepresentationWithNoise : BidirectionalBaseClass() {
-	override val name: String = "**** regional color mapping with noise"
+	override val name: String = "regional color mapping with noise"
 
 	var matrixMutipleChecked = false
 	var rowCount = 0

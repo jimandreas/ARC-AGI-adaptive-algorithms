@@ -18,7 +18,7 @@ import solutions.utilities.relocateToOrigin
 // example: 72ca375d find symmetric block
 
 class S15FindSymmetricBlock : BidirectionalBaseClass() {
-	override val name: String = "**** find symmetric block"
+	override val name: String = "find symmetric block"
 
 	var checkedOutput = false
 	override fun resetState() {

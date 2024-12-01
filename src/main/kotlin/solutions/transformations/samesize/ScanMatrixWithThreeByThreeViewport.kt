@@ -13,7 +13,7 @@ import solutions.transformations.BidirectionalBaseClass
 
 
 class ScanMatrixWithThreeByThreeViewport : BidirectionalBaseClass() {
-	override val name: String = "**** scan matrix with 3x3 viewport"
+	override val name: String = "scan matrix with 3x3 viewport"
 
 	var outputMatrixChecked = false
 	override fun resetState() {
