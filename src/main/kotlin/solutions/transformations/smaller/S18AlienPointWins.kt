@@ -13,10 +13,10 @@ import solutions.transformations.BidirectionalBaseClass
 import solutions.utilities.recreateMatrix
 import solutions.utilities.relocateToOrigin
 
-// example: 39a8645d The Most Wins
+// example: 5117e062 The Alien Point Wins
 
-class S17TheMostWins : BidirectionalBaseClass() {
-	override val name: String = "**** the most wins"
+class S18AlienPointWins : BidirectionalBaseClass() {
+	override val name: String = "**** the block with the alien point wins"
 
 	var checkedOutput = false
 	override fun resetState() {
@@ -26,61 +26,60 @@ class S17TheMostWins : BidirectionalBaseClass() {
 	override fun testTransform(): List<List<Int>> {
 
 		// redo the block abstraction allowing diagonals
+		//  AND allowing multi-color
 		val n = MatrixAbstractions()
 		val bu = BlockUtilities()
 		n.matrix = inputMatrix
 		bu.findConnectedBlocksInMatrix(
 			n,
-			scanDiagonals = true,
-			requireSameColor = true
+			scanDiagonals = false,
+			requireSameColor = false
 		)
 
 		if (n.blocks.size == 0) {
 			return emptyList()
 		}
 
-		// a count of how many of this Block is present
-		data class Candidates(var votes: Int, val theBlock: Block)
-		val majorityWins: MutableList<Candidates> = mutableListOf()
-
-		// relocate each block and look to see if it already has been seen
+		// relocate each block and scan it for an alien color
 
 		var foundOne = false
-		for (thisBlock in n.blocks) {
-			val relocatedBlock = relocateToOrigin(thisBlock)
+		var theBlock = n.blocks[0]
 
-			var found = false
-			for (i in 0 until majorityWins.size) {
-				val scanThis = majorityWins[i]
-				val votingBlock = scanThis.votes
-				if (relocatedBlock.coordinates == scanThis.theBlock.coordinates) {
-					var count = scanThis.votes
-					count = count+1
-					majorityWins[i].votes = count
-					found = true
+		for (thisBlock in n.blocks) {
+
+			val baseColor = thisBlock.color
+			for (entry in thisBlock.coordinates) {
+				val row = entry.first
+				val col = entry.second
+				if (inputMatrix[row][col] != baseColor) {
+					// found an alien color!!
+					foundOne = true
+					theBlock = thisBlock
+					break
 				}
 			}
-			if (!found) {
-				majorityWins.add(Candidates(1, relocatedBlock))
-				foundOne = true
+			if (foundOne) {
+				break
 			}
 		}
 
-		val maxVotesCandidate = majorityWins.maxByOrNull { it.votes }
-		if (!foundOne  || maxVotesCandidate == null) {
+		if (!foundOne) {
 			return emptyList()
 		}
 
-		val blockCoordinates = maxVotesCandidate.theBlock.coordinates
+		val relocatedBlock = relocateToOrigin(theBlock)
+
+		val blockCoordinates = relocatedBlock.coordinates
 		val minRow = blockCoordinates.minOf { it.first }
 		val maxRow = blockCoordinates.maxOf { it.first }
 		val minCol = blockCoordinates.minOf { it.second }
 		val maxCol = blockCoordinates.maxOf { it.second }
 
 		val retMatrix = recreateMatrix(
-			maxRow+1,
-			maxCol+1,
-			listOf(maxVotesCandidate.theBlock), emptyList())
+			maxRow + 1,
+			maxCol + 1,
+			listOf(relocatedBlock), emptyList()
+		)
 		return retMatrix
 
 	}

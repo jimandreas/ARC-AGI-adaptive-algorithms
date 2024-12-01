@@ -50,7 +50,8 @@ class TransformationBidi {
 		S14FindUniqueBlock(),
 		S15FindSymmetricBlock(),
 		S16FindTheBigBlock(),
-		S17TheMostWins()
+		S17TheMostWins(),
+		S18AlienPointWins()
 
 	)
 
