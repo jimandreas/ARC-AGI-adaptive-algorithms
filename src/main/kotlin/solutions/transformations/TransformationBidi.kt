@@ -13,6 +13,7 @@ import solutions.transformations.smaller.*
 import solutions.utilities.prettyPrintMatrixDiff
 import solvedTasks
 import taskAbstractionsList
+import unSolvedTasks
 
 class TransformationBidi {
 
@@ -46,7 +47,8 @@ class TransformationBidi {
 		S11SmallerRegionRepresentationByRelativeWidth(),
 		S12CollageWIthGreyCenterBlock(),
 		S13SmallestEnclosingRectangle(),
-		S14FindUniqueBlock()
+		S14FindUniqueBlock(),
+		S15FindSymmetricBlock()
 
 	)
 
@@ -64,8 +66,8 @@ class TransformationBidi {
 		for (atask in theList) {
 			val taskName = atask.taskData.name
 
-			if (taskName == "88a62173") {
-				println("We have $taskName") // find unique block
+			if (taskName == "72ca375d") {
+				println("We have $taskName") // find symmetric block
 			}
 
 			val numExamples = atask.abstractionsList.size
@@ -97,9 +99,6 @@ class TransformationBidi {
 					}
 				}
 				if (success) {
-					// success ! all subsequent transformations worked on this task
-					// println("TxBIDI ${t.name} - WORKED - continuing")
-
 					// re-create the test "key" matrix and compare to the real thing
 					//   Do this for all test matrix input and output pairs
 
@@ -125,7 +124,6 @@ class TransformationBidi {
 							if ((taskName == "ce9e57f2") && (t.name == "BIDI split blocks vertically" )) {
 								prettyPrintMatrixDiff(resultMatrix3, originalTestMatrixInputAndOutput3.output)
 							}
-
 							break
 						}
 						// record the solution matrix
@@ -143,6 +141,14 @@ class TransformationBidi {
 						solvedTasks.add(solved)
 						winners.add(t)
 						break
+					} else {
+						val solved = SolvedTasks(
+							atask.taskData,
+							taskName,
+							t.name,
+							solutionMatrices
+						)
+						unSolvedTasks.add(solved)
 					}
 				}
 				// continue looping through the transformations

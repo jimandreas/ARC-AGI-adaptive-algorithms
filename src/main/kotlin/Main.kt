@@ -31,6 +31,11 @@ fun main() {
     prettyPrintSolutions(solvedTasks.toList())
     println("==== MAIN.KT ============================")
 
+/*    // print unsolved Tasks so far!
+    println("==== !!!!! UNSOLVED ============================")
+    prettyPrintSolutions(unSolvedTasks.toList())
+    println("==== !!!!! UNSOLVED ============================")*/
+
     // set up the data for the graphical view
 
 //    tTaskDataToDisplayInGUI = ed.taskSameMatrixSizes.toMutableList()

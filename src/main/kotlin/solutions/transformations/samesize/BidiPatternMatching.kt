@@ -13,7 +13,7 @@ import solutions.utilities.findMatchingEntryIndex
 
 // example: 27a28665
 //    basically accumulate the examples as the patterns.
-//    then match the test input mattern and return the associate result.
+//    then match the test input pattern and return the associate result.
 
 class BidiPatternMatching : BidirectionalBaseClass() {
 	override val name: String = "BIDI pattern matching"

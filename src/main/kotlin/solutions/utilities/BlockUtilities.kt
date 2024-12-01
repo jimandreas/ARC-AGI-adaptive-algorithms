@@ -204,12 +204,7 @@ the list.  Please return the unique block as relocated to the (0,0) origin.
 Gemini code follows
  */
 fun findUniqueBlock(blocks: List<Block>): Pair<Int, Block> {
-	fun relocateToOrigin(block: Block): Block {
-		val minRow = block.coordinates.minOf { it.first }
-		val minCol = block.coordinates.minOf { it.second }
-		val relocatedCoordinates = block.coordinates.map { (row, col) -> Pair(row - minRow, col - minCol) }.toSet()
-		return Block(block.color, relocatedCoordinates)
-	}
+
 
 	val relocatedBlocks = blocks.map { relocateToOrigin(it) }
 	val uniqueBlock = relocatedBlocks.groupBy{ it }.values.singleOrNull {
@@ -220,4 +215,77 @@ fun findUniqueBlock(blocks: List<Block>): Pair<Int, Block> {
 	}
 
 	return Pair(1, uniqueBlock)
+}
+
+
+/**
+In kotlin a Block are defined in a list of the following data structure.
+Please create a function that examines each Block in the list.  One of
+the Block will have "symmetric" points in it - that is, if the points
+in the right half of the coordinate set are mirrored the will be identical
+to the points in the left half.  Please return the block that is symmetric.
+ Gemini code follows:
+ */
+fun findSymmetricBlock(blocks: List<Block>): Block? {
+	for (block in blocks) {
+		val coords = block.coordinates
+		if (coords.isEmpty() || coords.size % 2 != 0) continue // Skip empty or odd-sized blocks
+
+		val minCol = coords.minOf { it.second }
+		val maxCol = coords.maxOf { it.second }
+		val midCol = (minCol + maxCol) / 2
+
+		val leftHalf = coords.filter { it.second <= midCol }
+		val rightHalf = coords.filter { it.second > midCol }
+
+		if (leftHalf.size != rightHalf.size) continue
+
+		val mirroredRightHalf = rightHalf.map { Pair(it.first, 2 * midCol - it.second) }.toSet()
+		if (leftHalf == mirroredRightHalf) return block
+	}
+	return null
+}
+
+/**
+ * relocate a Block to begin at 0,0
+ */
+fun relocateToOrigin(block: Block): Block {
+	val minRow = block.coordinates.minOf { it.first }
+	val minCol = block.coordinates.minOf { it.second }
+	val relocatedCoordinates = block.coordinates.map { (row, col) -> Pair(row - minRow, col - minCol) }.toSet()
+	return Block(block.color, relocatedCoordinates)
+}
+
+/**
+In kotlin an entity is defined by a set of row and column coordinates
+as given in Set<Pair<Int, Int>>.
+Please create a function that determine if the figure has horizontal
+symmetry - that is: the right side is a mirror image of the left side.
+Return true if the figure is symmetric, and false otherwise.
+
+ GROK code follows:
+ */
+fun hasHorizontalSymmetry(coordinates: Set<Pair<Int, Int>>): Boolean {
+	if (coordinates.isEmpty()) return true // An empty set is symmetric by definition
+
+	// Find the minimum and maximum x-coordinates to determine the central y-line
+	val colCoords = coordinates.map { it.second}.toSet()
+	val minCol = colCoords.minOrNull() ?: return true
+	val maxCol = colCoords.maxOrNull() ?: return true
+	val centerColumn = (minCol + maxCol) / 2.0f
+
+	// Check if there is a clear center line
+	if (centerColumn != (minCol + maxCol) / 2.0f) {
+		return false // No clear center for symmetry
+	}
+
+	// For each point, check if its mirrored counterpart exists
+	for ((row, col) in coordinates) {
+		val mirroredCol = (2 * centerColumn - col).toInt()
+		if (!coordinates.contains(Pair(row, mirroredCol))) {
+			return false
+		}
+	}
+
+	return true
 }

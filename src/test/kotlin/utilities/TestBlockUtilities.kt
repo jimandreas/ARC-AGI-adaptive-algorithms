@@ -7,11 +7,13 @@
 package utilities
 
 import Block
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import solutions.utilities.calculateWeights
 import solutions.utilities.convertBlocksToMatrix
 import solutions.utilities.findOptimalTotalWeight
+import solutions.utilities.hasHorizontalSymmetry
 import kotlin.test.assertEquals
 
 
@@ -44,5 +46,57 @@ internal class TestBlockUtilities {
 		assertEquals(matrix, expectedList)
 	}
 
+
+	@Test
+	@DisplayName("test symmetry 1")
+	fun testSymmetry1() {
+		val figure = setOf(Pair(0, 0), Pair(0, 1))
+		val result = hasHorizontalSymmetry(figure)
+		assertTrue(result)
+	}
+
+	@Test
+	@DisplayName("test symmetry 2")
+	fun testSymmetry2() {
+		val figure = setOf(
+			Pair(0, 0), Pair(0, 1),
+			Pair(1, 0), Pair(1, 1)
+		)
+		val result = hasHorizontalSymmetry(figure)
+		assertTrue(result)
+	}
+
+	@Test
+	@DisplayName("test symmetry 3")
+	fun testSymmetry3() {
+		val figure = setOf(
+			Pair(0, 0), Pair(0, 1), Pair(0, 2), Pair(0, 3),
+			Pair(1, 1), Pair(1, 2)
+		)
+		val result = hasHorizontalSymmetry(figure)
+		assertTrue(result)
+	}
+
+	@Test
+	@DisplayName("test symmetry 4")
+	fun testSymmetry4() {
+		val figure = setOf(
+			Pair(0, 0), Pair(0, 1), Pair(0, 2), Pair(0, 3),
+			Pair(1, 1), Pair(1, 2), Pair(1, 3)
+		)
+		val result = hasHorizontalSymmetry(figure)
+		assertEquals(result, false)
+	}
+
+	@Test
+	@DisplayName("test symmetry 5")
+	fun testSymmetry5() {
+		val figure = setOf(
+			Pair(0, 0), Pair(0, 1), Pair(0, 2),
+			Pair(1, 1)
+		)
+		val result = hasHorizontalSymmetry(figure)
+		assertTrue(result)
+	}
 
 }

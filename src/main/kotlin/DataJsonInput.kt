@@ -35,4 +35,6 @@ data class SolvedTasks(
     val solutionMatrices: MutableList<SolutionMatrix> = mutableListOf()
 )
 var solvedTasks: MutableList<SolvedTasks> = mutableListOf()
+// list of Tasks where the final test failed!
+var unSolvedTasks: MutableList<SolvedTasks> = mutableListOf()
 
