@@ -44,7 +44,8 @@ class TransformationBidi {
 		ScanMatrixWithThreeByThreeViewport(),
 		RegionRepresentationWithNoise(),
 		S11SmallerRegionRepresentationByRelativeWidth(),
-		S12CollageWIthGreyCenterBlock()
+		S12CollageWIthGreyCenterBlock(),
+		S13SmallestEnclosingRectangle()
 
 	)
 
@@ -62,8 +63,8 @@ class TransformationBidi {
 		for (atask in theList) {
 			val taskName = atask.taskData.name
 
-			if (taskName == "137eaa0f") {
-				println("We have $taskName") // collage of blocks with grey point
+			if (taskName == "a740d043") {
+				println("We have $taskName") // min bounding box
 			}
 
 			val numExamples = atask.abstractionsList.size

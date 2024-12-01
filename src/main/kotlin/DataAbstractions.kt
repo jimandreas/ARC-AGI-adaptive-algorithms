@@ -1,3 +1,9 @@
+@file:Suppress(
+    "RedundantSuppression", "UNUSED_VARIABLE", "MemberVisibilityCanBePrivate", "unused",
+    "ReplaceManualRangeWithIndicesCalls", "ReplaceSizeZeroCheckWithIsEmpty",
+    "SameParameterValue", "UnnecessaryVariable", "LocalVariableName", "PropertyName"
+)
+
 /**
  * A "Block" is a collection of matrix entries with the same color (non-zero) value.
  * The block does not have to be rectangular.
@@ -23,6 +29,7 @@ data class BlockInfo(
 data class Block(val color: Int, val coordinates: Set<Pair<Int, Int>>)
 data class Point(val color: Int, val coordinate: Pair<Int, Int>)
 
+data class BoundingBox( val minRow: Int, val minCol: Int, val maxRow: Int, val maxCol: Int)
 /**
  * this is the abstraction for one matrix (input or output)
  * for one Example.   There are more than one Example per Task.
