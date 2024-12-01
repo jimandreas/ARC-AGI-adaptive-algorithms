@@ -194,3 +194,31 @@ private fun countGroups(list: List<Int>): Pair<Int, List<Int>> {
 	}
 	return Pair(count, listMembers)
 }
+
+/**
+In kotlin a Block are defined in a list of the following data structure.
+Please create a function that compares the Block data in the list, and
+finds the unique Block.  I recommend relocating each Block to the matrix (0,0) origin
+and then comparing each block to all the others.   There should be one unique block in
+the list.  Please return the unique block as relocated to the (0,0) origin.
+
+Gemini code follows
+ */
+fun findUniqueBlock(blocks: List<Block>): Pair<Int, Block> {
+	fun relocateToOrigin(block: Block): Block {
+		val minRow = block.coordinates.minOf { it.first }
+		val minCol = block.coordinates.minOf { it.second }
+		val relocatedCoordinates = block.coordinates.map { (row, col) -> Pair(row - minRow, col - minCol) }.toSet()
+		return Block(block.color, relocatedCoordinates)
+	}
+
+	val relocatedBlocks = blocks.map { relocateToOrigin(it) }
+	val uniqueBlock = relocatedBlocks.groupBy{ it }.values.singleOrNull {
+		it.size == 1 }?.first()
+
+	if (uniqueBlock == null) {
+		return Pair(0, Block(0, setOf(Pair(0,0))))
+	}
+
+	return Pair(1, uniqueBlock)
+}

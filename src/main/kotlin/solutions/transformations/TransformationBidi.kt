@@ -45,7 +45,8 @@ class TransformationBidi {
 		RegionRepresentationWithNoise(),
 		S11SmallerRegionRepresentationByRelativeWidth(),
 		S12CollageWIthGreyCenterBlock(),
-		S13SmallestEnclosingRectangle()
+		S13SmallestEnclosingRectangle(),
+		S14FindUniqueBlock()
 
 	)
 
@@ -63,8 +64,8 @@ class TransformationBidi {
 		for (atask in theList) {
 			val taskName = atask.taskData.name
 
-			if (taskName == "a740d043") {
-				println("We have $taskName") // min bounding box
+			if (taskName == "88a62173") {
+				println("We have $taskName") // find unique block
 			}
 
 			val numExamples = atask.abstractionsList.size
