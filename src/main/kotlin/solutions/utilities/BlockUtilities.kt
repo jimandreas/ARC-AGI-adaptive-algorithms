@@ -7,7 +7,6 @@
 package solutions.utilities
 
 import Block
-import kotlin.compareTo
 
 /**
 In Kotlin a Block data structure is given below, and there is a List<List<Block>> that forms
