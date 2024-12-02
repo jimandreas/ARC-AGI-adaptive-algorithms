@@ -10,7 +10,7 @@ import Block
 import MatrixAbstractions
 import entities.BlockUtilities
 import solutions.transformations.BidirectionalBaseClass
-import solutions.utilities.findMajorityColor
+import solutions.utilities.findMajorityColorBasedOnCoordinates
 import solutions.utilities.recreateMatrix
 import solutions.utilities.relocateToOrigin
 
@@ -26,9 +26,9 @@ class S20BlockTaggedByAlienPoint : BidirectionalBaseClass() {
 
 	override fun testTransform(): List<List<Int>> {
 
-		if (taskName == "48d8fb45") {
-			println("here now")
-		}
+//		if (taskName == "48d8fb45") {
+//			println("here now")
+//		}
 
 		// redo the block abstraction allowing diagonals
 		//  AND allowing multi-color
@@ -57,7 +57,7 @@ class S20BlockTaggedByAlienPoint : BidirectionalBaseClass() {
 		for (thisBlock in n.blocks) {
 
 			// exclude the alien color!!
-			val baseColor = findMajorityColor(inputMatrix, thisBlock.coordinates)
+			val baseColor = findMajorityColorBasedOnCoordinates(inputMatrix, thisBlock.coordinates)
 			//val baseColor = thisBlock.color
 			for (entry in thisBlock.coordinates) {
 				val row = entry.first

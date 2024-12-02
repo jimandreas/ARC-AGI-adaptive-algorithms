@@ -363,7 +363,7 @@ coordinates into a matrix List<List<Int>> - please provide a
 means to determine the majority matrix values referred to by the Set.
  GROK code follows:
  */
-fun findMajorityColor(matrix: List<List<Int>>, coordinates: Set<Pair<Int, Int>>): Int {
+fun findMajorityColorBasedOnCoordinates(matrix: List<List<Int>>, coordinates: Set<Pair<Int, Int>>): Int {
 	// Map coordinates to matrix values
 	val values = coordinates.map { (row, col) -> matrix[row][col] }
 
@@ -382,3 +382,30 @@ fun findMajorityColor(matrix: List<List<Int>>, coordinates: Set<Pair<Int, Int>>)
 	// If there's a tie for the majority, return one of them (you might want to implement a tie-breaker)
 	return majorityCandidates.keys.first()
 }
+
+/**
+ * Finds the majority value in the matrix, excluding zeros.
+ * If no majority exists (all values are equal or there's a tie),
+ * it will return one of the most frequent values arbitrarily.
+ * GROK code
+ */
+fun findMajorityColorInMatrix(matrix: List<List<Int>>): Int {
+	// Flatten the matrix and filter out zeros
+	val values = matrix.flatten().filter { it != 0 }
+
+	// Count occurrences of each value
+	val valueCounts = values.groupingBy { it }.eachCount()
+
+	// If all values are zero or there are no values, return 0 or handle appropriately
+	if (valueCounts.isEmpty()) return 0
+
+	// Find the maximum count
+	val maxCount = valueCounts.values.maxOrNull() ?: 0
+
+	// Filter values with the max count
+	val majorityCandidates = valueCounts.filter { it.value == maxCount }
+
+	// Return one of the majority candidates. In case of a tie, this might not be deterministic.
+	return majorityCandidates.keys.first()
+}
+

@@ -53,7 +53,8 @@ class TransformationBidi {
 		S17TheMostWins(),
 		S18AlienPointWins(),
 		S19FindSmallestRearrangement(),
-		S20BlockTaggedByAlienPoint()
+		S20BlockTaggedByAlienPoint(),
+		S21QuantizeAndSummarize()
 
 	)
 
