@@ -356,3 +356,29 @@ fun translateBlockBy(block: Block, rd: Int, cd: Int): Block {
 
 	return newBlock
 }
+
+/**
+In Kotlin I have a Set<Pair<Int, Int>> - that are row and col
+coordinates into a matrix List<List<Int>> - please provide a
+means to determine the majority matrix values referred to by the Set.
+ GROK code follows:
+ */
+fun findMajorityColor(matrix: List<List<Int>>, coordinates: Set<Pair<Int, Int>>): Int {
+	// Map coordinates to matrix values
+	val values = coordinates.map { (row, col) -> matrix[row][col] }
+
+	// Count occurrences of each value
+	val valueCounts = values.groupingBy { it }.eachCount()
+
+	// If there's only one unique value, return it
+	if (valueCounts.size == 1) return values.first()
+
+	// Find the maximum count
+	val maxCount = valueCounts.values.maxOrNull() ?: 0
+
+	// Filter values with the max count
+	val majorityCandidates = valueCounts.filter { it.value == maxCount }
+
+	// If there's a tie for the majority, return one of them (you might want to implement a tie-breaker)
+	return majorityCandidates.keys.first()
+}

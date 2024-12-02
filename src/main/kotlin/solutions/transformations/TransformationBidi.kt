@@ -52,7 +52,8 @@ class TransformationBidi {
 		S16FindTheBigBlock(),
 		S17TheMostWins(),
 		S18AlienPointWins(),
-		S19FindSmallestRearrangement()
+		S19FindSmallestRearrangement(),
+		S20BlockTaggedByAlienPoint()
 
 	)
 
