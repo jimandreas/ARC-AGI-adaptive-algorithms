@@ -138,7 +138,7 @@ fun reduceMatrix(matrix: List<List<Int>>): List<List<Int>> {
 
 	// now force the lists to have maxColors numbers of columns
 
-	val retList : MutableList<List<Int>> = mutableListOf()
+	val retList: MutableList<List<Int>> = mutableListOf()
 	for (row in 0 until matrix.size) {
 		var rowList: MutableList<Int> = mutableListOf()
 		val listContents = countGroups(matrix[row])
@@ -147,7 +147,7 @@ fun reduceMatrix(matrix: List<List<Int>>): List<List<Int>> {
 
 		// if only one color, then duplicate to the max size
 		if (numColors == 1) {
-			rowList = MutableList(maxColors) { matrix[row].first()}
+			rowList = MutableList(maxColors) { matrix[row].first() }
 		} else {
 			if (numColors == 2) {
 				val color1 = theColors[0]
@@ -179,8 +179,8 @@ fun reduceMatrix(matrix: List<List<Int>>): List<List<Int>> {
 }
 
 private fun countGroups(list: List<Int>): Pair<Int, List<Int>> {
-	if (list.isEmpty()) return Pair(0,emptyList())
-	val listMembers : MutableList<Int> = mutableListOf()
+	if (list.isEmpty()) return Pair(0, emptyList())
+	val listMembers: MutableList<Int> = mutableListOf()
 	var count = 1
 	var prev = list[0]
 	listMembers.add(prev)
@@ -207,11 +207,12 @@ fun findUniqueBlock(blocks: List<Block>): Pair<Int, Block> {
 
 
 	val relocatedBlocks = blocks.map { relocateToOrigin(it) }
-	val uniqueBlock = relocatedBlocks.groupBy{ it }.values.singleOrNull {
-		it.size == 1 }?.first()
+	val uniqueBlock = relocatedBlocks.groupBy { it }.values.singleOrNull {
+		it.size == 1
+	}?.first()
 
 	if (uniqueBlock == null) {
-		return Pair(0, Block(0, setOf(Pair(0,0))))
+		return Pair(0, Block(0, setOf(Pair(0, 0))))
 	}
 
 	return Pair(1, uniqueBlock)
@@ -224,7 +225,7 @@ Please create a function that examines each Block in the list.  One of
 the Block will have "symmetric" points in it - that is, if the points
 in the right half of the coordinate set are mirrored the will be identical
 to the points in the left half.  Please return the block that is symmetric.
- Gemini code follows:
+Gemini code follows:
  */
 fun findSymmetricBlock(blocks: List<Block>): Block? {
 	for (block in blocks) {
@@ -263,13 +264,13 @@ Please create a function that determine if the figure has horizontal
 symmetry - that is: the right side is a mirror image of the left side.
 Return true if the figure is symmetric, and false otherwise.
 
- GROK code follows:
+GROK code follows:
  */
 fun hasHorizontalSymmetry(coordinates: Set<Pair<Int, Int>>): Boolean {
 	if (coordinates.isEmpty()) return true // An empty set is symmetric by definition
 
 	// Find the minimum and maximum x-coordinates to determine the central y-line
-	val colCoords = coordinates.map { it.second}.toSet()
+	val colCoords = coordinates.map { it.second }.toSet()
 	val minCol = colCoords.minOrNull() ?: return true
 	val maxCol = colCoords.maxOrNull() ?: return true
 	val centerColumn = (minCol + maxCol) / 2.0f
@@ -288,4 +289,70 @@ fun hasHorizontalSymmetry(coordinates: Set<Pair<Int, Int>>): Boolean {
 	}
 
 	return true
+}
+
+data class OpeningDirection(
+	val vertical: VerticalDirection = VerticalDirection.NA,
+	val horizontal: HorizontalDirection = HorizontalDirection.NA
+)
+
+enum class VerticalDirection {
+	UP, DOWN, NA
+}
+
+enum class HorizontalDirection {
+	LEFT, RIGHT, NA
+}
+
+
+fun findOpeningDirection(coordinates: Set<Pair<Int, Int>>): OpeningDirection {
+	if (coordinates.isEmpty()) {
+		return OpeningDirection() // Handle empty input
+	}
+
+	val minRow = coordinates.minOf { it.first }
+	val maxRow = coordinates.maxOf { it.first }
+	val minCol = coordinates.minOf { it.second }
+	val maxCol = coordinates.maxOf { it.second }
+
+	// Generate all possible coordinates within the rectangle
+	val allCoordinates = mutableSetOf<Pair<Int, Int>>()
+	for (row in minRow..maxRow) {
+		for (col in minCol..maxCol) {
+			allCoordinates.add(Pair(row, col))
+		}
+	}
+
+	// Find the missing coordinates
+	val missingCoordinates = allCoordinates - coordinates
+
+	if (missingCoordinates.isEmpty()) {
+		return OpeningDirection() // No missing coordinates, it's already a rectangle
+	}
+
+	// Determine the opening direction based on missing coordinates
+	val vertical = when {
+		missingCoordinates.all { it.first == minRow } -> VerticalDirection.UP
+		missingCoordinates.all { it.first == maxRow } -> VerticalDirection.DOWN
+		else -> VerticalDirection.NA
+	}
+
+	val horizontal = when {
+		missingCoordinates.all { it.second == minCol } -> HorizontalDirection.LEFT
+		missingCoordinates.all { it.second == maxCol } -> HorizontalDirection.RIGHT
+		else -> HorizontalDirection.NA
+	}
+
+	return OpeningDirection(vertical, horizontal)
+}
+
+/**
+ * just shove a block by rd and cd
+ */
+fun translateBlockBy(block: Block, rd: Int, cd: Int): Block {
+	val newBlock = block.copy(coordinates = block.coordinates.map {
+		(row, col) -> Pair(row + rd, col + cd) }
+			.toSet())
+
+	return newBlock
 }

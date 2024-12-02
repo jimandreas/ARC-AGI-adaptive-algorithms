@@ -51,7 +51,8 @@ class TransformationBidi {
 		S15FindSymmetricBlock(),
 		S16FindTheBigBlock(),
 		S17TheMostWins(),
-		S18AlienPointWins()
+		S18AlienPointWins(),
+		S19FindSmallestRearrangement()
 
 	)
 
@@ -69,9 +70,9 @@ class TransformationBidi {
 		for (atask in theList) {
 			val taskName = atask.taskData.name
 
-			if (taskName == "39a8645d") {
-				println("We have $taskName") // majority wins
-			}
+//			if (taskName == "39a8645d") {
+//				println("We have $taskName") // majority wins
+//			}
 
 			val numExamples = atask.abstractionsList.size
 			val originalTaskData = atask.taskData
