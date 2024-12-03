@@ -7,6 +7,7 @@
 package solutions.utilities
 
 import Block
+import kotlin.collections.MutableList
 
 /**
 In Kotlin a Block data structure is given below, and there is a List<List<Block>> that forms
@@ -409,3 +410,71 @@ fun findMajorityColorInMatrix(matrix: List<List<Int>>): Int {
 	return majorityCandidates.keys.first()
 }
 
+
+/**
+ Quantize
+
+ Take the smallest block and use it as the quanta.
+ Create a matrix using this block as a chunk to form an abstraction of
+ the blocks.
+ */
+
+fun quantize(bl: List<Block>, retColor: Int): List<List<Int>> {
+
+	if (bl.isEmpty()) {
+		return emptyList()
+	}
+
+	val blocksSortedBySize = bl.sortedBy { it.coordinates.size }
+	val blockCoordinates = blocksSortedBySize[0].coordinates
+
+	val minRow = blockCoordinates.minOf { it.first }
+	val maxRow = blockCoordinates.maxOf { it.first }
+	val minCol = blockCoordinates.minOf { it.second }
+	val maxCol = blockCoordinates.maxOf { it.second }
+
+	val rowQ = maxRow - minRow + 1
+	val colQ = maxCol - minCol + 1
+	if (rowQ <= 0 || colQ <= 0) {
+		return emptyList()
+	}
+
+	val allBlockCoordinates = bl.flatMap { it.coordinates }.sortedBy { it.first }
+	var maxRowGroup = allBlockCoordinates.maxOf { it.first } +1
+	var maxColGroup = allBlockCoordinates.maxOf { it.second }+1
+
+	val rowQuadrants = maxRowGroup / rowQ
+	val colQuadrants = maxColGroup / colQ
+
+	var outputMatrix = MutableList(rowQuadrants) { MutableList(colQuadrants) { 0 } }
+	for (row in 0 until rowQuadrants) {
+		for (col in 0 until colQuadrants) {
+			val baseRow = row * rowQ
+			val baseCol = col * colQ
+			if (coordsPresent(allBlockCoordinates, baseRow, baseCol, rowQ, colQ)) {
+				outputMatrix[row][col] = retColor
+			}
+		}
+	}
+
+	return outputMatrix
+
+}
+
+/**
+ * return true if the coords set have all coords in the region provided
+ */
+private fun coordsPresent(
+	coords: List<Pair<Int, Int>>,
+	baseRow: Int, baseCol: Int,
+	rowQ: Int, colQ: Int): Boolean {
+
+	for (row in baseRow until baseRow + rowQ) {
+		for (col in baseCol until baseCol + colQ) {
+			if (!coords.contains(Pair(row, col))) {
+				return false
+			}
+		}
+	}
+	return true
+}

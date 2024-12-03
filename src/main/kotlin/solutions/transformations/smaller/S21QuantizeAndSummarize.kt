@@ -8,7 +8,9 @@ package solutions.transformations.smaller
 
 import Block
 import solutions.transformations.BidirectionalBaseClass
+import solutions.utilities.findMajorityColorBasedOnCoordinates
 import solutions.utilities.findMajorityColorInMatrix
+import solutions.utilities.quantize
 import solutions.utilities.translateBlockBy
 
 // example: 5ad4f10b quantize and summarize with largest common denominator
@@ -30,7 +32,18 @@ class S21QuantizeAndSummarize : BidirectionalBaseClass() {
 			println("here now")
 		}
 
-		val majorityColor = findMajorityColorInMatrix(inputMatrix)
+		if (inputPointList.isEmpty()) {
+			return emptyList()
+		}
+		// oddly for this task the return color is the color of a point
+		//   TODO: color - Probably could make this more parametric (?)
+		val retColor = inputPointList[0].color
+
+		val allCoords = inputBlockList.flatMap { it.coordinates }
+		if (allCoords.isEmpty()) {
+			return emptyList()
+		}
+		val majorityColor = findMajorityColorBasedOnCoordinates(inputMatrix, allCoords.toSet())
 
 		val blocksFiltered = inputBlockList.filter { it.color == majorityColor }
 		if (blocksFiltered.isEmpty()) {
@@ -38,18 +51,19 @@ class S21QuantizeAndSummarize : BidirectionalBaseClass() {
 		}
 
 		val allBlockCoordinates = blocksFiltered.flatMap { it.coordinates }
-		val minRow = allBlockCoordinates.minOf { it.first }
-		val minCol = allBlockCoordinates.minOf { it.second }
+		var minRow = allBlockCoordinates.minOf { it.first }
+		var minCol = allBlockCoordinates.minOf { it.second }
 
-		val newBlockList : MutableList<Block> = mutableListOf()
+		// move the GROUP of blocks to the upper left origin
+		//   based on minRow and minCol
+		val newBlockList: MutableList<Block> = mutableListOf()
 		for (b in blocksFiltered) {
 			newBlockList.add(translateBlockBy(b, -minRow, -minCol))
 		}
 
+		val retMatrix = quantize(newBlockList, retColor)
 
-		//val blocksSortedBySize = blocksFiltered.sortedBy { it.coordinates.size }
-
-		return emptyList()
+		return retMatrix
 	}
 
 
