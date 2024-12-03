@@ -10,6 +10,7 @@ import solutions.transformations.BidirectionalBaseClass
 
 // example: d0f5fe59 count blocks
 
+
 class S26CountBlocks : BidirectionalBaseClass() {
 	override val name: String = "**** count blocks"
 

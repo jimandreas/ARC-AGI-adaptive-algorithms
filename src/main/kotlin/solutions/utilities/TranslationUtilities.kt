@@ -604,6 +604,32 @@ fun getSubmatrix(matrix: List<List<Int>>, rowCount: Int, colCount: Int): List<Li
 }
 
 /**
+for a given rowCount and colCount and the kotlin matrix
+List<List<Int>>,  return a submatrix from the top right region of
+the matrix of  size rowCount and colCount in the form List<List<Int>>.
+Return the emptyList() if the given matrix is smaller than rowCount or colCount.
+Gemini code follows:
+ */
+
+fun topRightSubmatrix(matrix: List<List<Int>>, rowCount: Int, colCount: Int): List<List<Int>> {
+	val rows = matrix.size
+	val cols = matrix[0].size
+
+	if (rows < rowCount || cols < colCount) {
+		return emptyList() // Not enough rows or columns in the original matrix
+	}
+
+	val startRow = 0
+	val endRow = rowCount - 1
+	val startCol = cols - colCount
+	val endCol = cols - 1
+
+	return matrix.subList(startRow, endRow + 1).map {
+		row -> row.subList(startCol, endCol + 1)
+	}
+}
+
+/**
 For a given Kotlin matrix of form List<List<Int>> that is evenly partitioned
 into rowRegions and colRegions, please map the cells and return the majority
 cell value in a new List<List<Int>> - where each entry in the new list

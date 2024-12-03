@@ -39,7 +39,7 @@ class TransformationBidi {
 		S10ColorBandRepresentation(),
 		SmallerSimpleColorCount(),
 		BiggestBlock(),
-		ReturnTopCorner(),
+		S06ReturnTopCorner(),
 		SmallerBottomThreeColorBlocks(),
 		SmallerCountBlocksOfGivenColor(),
 		ScanMatrixWithThreeByThreeViewport(),
