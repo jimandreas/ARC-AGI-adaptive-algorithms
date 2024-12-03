@@ -56,7 +56,8 @@ class TransformationBidi {
 		S20BlockTaggedByAlienPoint(),
 		S21QuantizeAndSummarize(),
 		S22BlocksToPointsTiling(),
-		S23TwoBlocksCompleteARectangle()
+		S23TwoBlocksCompleteARectangle(),
+		S24PointsToSerpentine()
 
 	)
 
