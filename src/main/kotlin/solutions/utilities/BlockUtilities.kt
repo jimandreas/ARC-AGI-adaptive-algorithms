@@ -259,6 +259,28 @@ fun relocateToOrigin(block: Block): Block {
 }
 
 /**
+I have a List<Block> in Kotlin. Please create a function to translate their
+row and column coordinate data so that the group is now based at the 0,0 origin.
+ Gemini code follows:
+ */
+
+fun translateBlocksToOrigin(blocks: List<Block>): List<Block> {
+	if (blocks.isEmpty()) return emptyList()
+
+	// Find the minimum row and column across all blocks
+	val minRow = blocks.flatMap { it.coordinates }.minOf { it.first }
+	val minCol = blocks.flatMap { it.coordinates }.minOf { it.second }
+
+	// Translate each block to the origin
+	return blocks.map { block ->
+		val translatedCoordinates = block.coordinates.map { (row, col) ->
+			Pair(row - minRow, col - minCol)
+		}.toSet()
+		Block(block.color, translatedCoordinates)
+	}
+}
+
+/**
 In kotlin an entity is defined by a set of row and column coordinates
 as given in Set<Pair<Int, Int>>.
 Please create a function that determine if the figure has horizontal

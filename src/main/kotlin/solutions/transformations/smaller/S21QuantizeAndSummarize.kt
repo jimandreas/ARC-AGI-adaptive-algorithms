@@ -16,7 +16,7 @@ import solutions.utilities.translateBlockBy
 // example: 5ad4f10b quantize and summarize with largest common denominator
 
 class S21QuantizeAndSummarize : BidirectionalBaseClass() {
-	override val name: String = "**** quantize and summarize"
+	override val name: String = "quantize and summarize"
 
 	var checkedOutput = false
 	override fun resetState() {

@@ -16,7 +16,7 @@ import solutions.utilities.relocateToOrigin
 // example: 5117e062 The Alien Point Wins
 
 class S18AlienPointWins : BidirectionalBaseClass() {
-	override val name: String = "**** the block with the alien point wins"
+	override val name: String = "the block with the alien point wins"
 
 	var checkedOutput = false
 	override fun resetState() {

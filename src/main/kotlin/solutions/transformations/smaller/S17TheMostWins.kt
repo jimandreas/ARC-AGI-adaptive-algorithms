@@ -16,7 +16,7 @@ import solutions.utilities.relocateToOrigin
 // example: 39a8645d The Most Wins
 
 class S17TheMostWins : BidirectionalBaseClass() {
-	override val name: String = "**** the most wins"
+	override val name: String = "the most wins"
 
 	var checkedOutput = false
 	override fun resetState() {

@@ -17,7 +17,7 @@ import solutions.utilities.relocateToOrigin
 // example: 48d8fb45 tagged block by alien point
 
 class S20BlockTaggedByAlienPoint : BidirectionalBaseClass() {
-	override val name: String = "**** the alien point is excised and block returned"
+	override val name: String = "the alien point is excised and block returned"
 
 	var checkedOutput = false
 	override fun resetState() {

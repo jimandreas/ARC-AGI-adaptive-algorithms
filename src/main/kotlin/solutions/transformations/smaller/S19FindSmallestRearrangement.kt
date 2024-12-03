@@ -19,7 +19,7 @@ import solutions.utilities.translateBlockBy
 // example: a61ba2ce find smallest rearrangement
 
 class S19FindSmallestRearrangement : BidirectionalBaseClass() {
-	override val name: String = "**** rearrange the blocks to the smallest connected rearragement"
+	override val name: String = "rearrange the blocks to the smallest connected rearragement"
 
 	var checkedOutput = false
 	override fun resetState() {

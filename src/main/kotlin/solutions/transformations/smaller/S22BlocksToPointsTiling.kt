@@ -11,7 +11,7 @@ import solutions.transformations.BidirectionalBaseClass
 // example: e9afcf9a blocks to points tiling
 
 class S22BlocksToPointsTiling : BidirectionalBaseClass() {
-	override val name: String = "**** blocks to points tiling"
+	override val name: String = "blocks to points tiling"
 
 	var checkedOutput = false
 	var isBlockToPointsConversion = false

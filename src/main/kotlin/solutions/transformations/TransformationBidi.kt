@@ -55,7 +55,8 @@ class TransformationBidi {
 		S19FindSmallestRearrangement(),
 		S20BlockTaggedByAlienPoint(),
 		S21QuantizeAndSummarize(),
-		S22BlocksToPointsTiling()
+		S22BlocksToPointsTiling(),
+		S23TwoBlocksCompleteARectangle()
 
 	)
 
