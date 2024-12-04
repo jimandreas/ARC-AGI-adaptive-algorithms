@@ -261,7 +261,7 @@ fun relocateToOrigin(block: Block): Block {
 /**
 I have a List<Block> in Kotlin. Please create a function to translate their
 row and column coordinate data so that the group is now based at the 0,0 origin.
- Gemini code follows:
+Gemini code follows:
  */
 
 fun translateBlocksToOrigin(blocks: List<Block>): List<Block> {
@@ -373,18 +373,29 @@ fun findOpeningDirection(coordinates: Set<Pair<Int, Int>>): OpeningDirection {
  * just shove a block by rd and cd
  */
 fun translateBlockBy(block: Block, rd: Int, cd: Int): Block {
-	val newBlock = block.copy(coordinates = block.coordinates.map {
-		(row, col) -> Pair(row + rd, col + cd) }
-			.toSet())
+	val newBlock = block.copy(coordinates = block.coordinates.map { (row, col) -> Pair(row + rd, col + cd) }
+		.toSet())
 
 	return newBlock
+}
+
+/**
+ * shove a list of Block
+ */
+fun translateBlockListBy(blockList: List<Block>, rd: Int, cd: Int): List<Block> {
+	val retList : MutableList<Block> = mutableListOf()
+	for (b in blockList) {
+		val newb = translateBlockBy(b, rd, cd)
+		retList.add(newb)
+	}
+	return retList
 }
 
 /**
 In Kotlin I have a Set<Pair<Int, Int>> - that are row and col
 coordinates into a matrix List<List<Int>> - please provide a
 means to determine the majority matrix values referred to by the Set.
- GROK code follows:
+GROK code follows:
  */
 fun findMajorityColorBasedOnCoordinates(matrix: List<List<Int>>, coordinates: Set<Pair<Int, Int>>): Int {
 	// Map coordinates to matrix values
@@ -434,11 +445,11 @@ fun findMajorityColorInMatrix(matrix: List<List<Int>>): Int {
 
 
 /**
- Quantize
+Quantize
 
- Take the smallest block and use it as the quanta.
- Create a matrix using this block as a chunk to form an abstraction of
- the blocks.
+Take the smallest block and use it as the quanta.
+Create a matrix using this block as a chunk to form an abstraction of
+the blocks.
  */
 
 fun quantize(bl: List<Block>, retColor: Int): List<List<Int>> {
@@ -462,8 +473,8 @@ fun quantize(bl: List<Block>, retColor: Int): List<List<Int>> {
 	}
 
 	val allBlockCoordinates = bl.flatMap { it.coordinates }.sortedBy { it.first }
-	var maxRowGroup = allBlockCoordinates.maxOf { it.first } +1
-	var maxColGroup = allBlockCoordinates.maxOf { it.second }+1
+	var maxRowGroup = allBlockCoordinates.maxOf { it.first } + 1
+	var maxColGroup = allBlockCoordinates.maxOf { it.second } + 1
 
 	val rowQuadrants = maxRowGroup / rowQ
 	val colQuadrants = maxColGroup / colQ
@@ -489,7 +500,8 @@ fun quantize(bl: List<Block>, retColor: Int): List<List<Int>> {
 private fun coordsPresent(
 	coords: List<Pair<Int, Int>>,
 	baseRow: Int, baseCol: Int,
-	rowQ: Int, colQ: Int): Boolean {
+	rowQ: Int, colQ: Int
+): Boolean {
 
 	for (row in baseRow until baseRow + rowQ) {
 		for (col in baseCol until baseCol + colQ) {
@@ -509,9 +521,9 @@ line of connected points along a row or column that span the
 matrix completely horizontally or vertically and return a list
 of those coordinates.  Return emptyList if no line is found.
 
- NOTE: I like how it fills in a test set in the
- "horizontalLine" and "verticalLine" below.
- GROK code follows:
+NOTE: I like how it fills in a test set in the
+"horizontalLine" and "verticalLine" below.
+GROK code follows:
  */
 
 fun findSpanningLine(coordinates: Set<Pair<Int, Int>>, rowSize: Int, colSize: Int): List<Pair<Int, Int>> {
@@ -558,8 +570,8 @@ fun findSpanningLineWithBUMP(coordinates: Set<Pair<Int, Int>>, rowSize: Int, col
 
 			// look for exactly one point on either side of this line
 			//   start with one below - if not at bottom
-			if (row != rowSize-1) {
-				val testLine = (0 until colSize).map { col -> Pair(row+1, col) }.toSet()
+			if (row != rowSize - 1) {
+				val testLine = (0 until colSize).map { col -> Pair(row + 1, col) }.toSet()
 				val testPoints = theRest.intersect(testLine).map { it.second }
 				if (testPoints.size != 1) {
 					continue
@@ -571,7 +583,7 @@ fun findSpanningLineWithBUMP(coordinates: Set<Pair<Int, Int>>, rowSize: Int, col
 			}
 			// continue with one above, if not at top
 			if (row != 0) {
-				val testLine = (0 until colSize).map { col -> Pair(row-1, col) }.toSet()
+				val testLine = (0 until colSize).map { col -> Pair(row - 1, col) }.toSet()
 				val testPoints = theRest.intersect(testLine).map { it.second }
 				if (testPoints.size != 1) {
 					continue
@@ -595,8 +607,8 @@ fun findSpanningLineWithBUMP(coordinates: Set<Pair<Int, Int>>, rowSize: Int, col
 
 			// look for exactly one point on either side of this line
 			//   start with one below - if not at right side
-			if (col != colSize-1) {
-				val testLine = (0 until rowSize).map { row -> Pair(row, col+1) }.toSet()
+			if (col != colSize - 1) {
+				val testLine = (0 until rowSize).map { row -> Pair(row, col + 1) }.toSet()
 				val testPoints = theRest.intersect(testLine).map { it.first }
 				if (testPoints.size != 1) {
 					continue
@@ -608,7 +620,7 @@ fun findSpanningLineWithBUMP(coordinates: Set<Pair<Int, Int>>, rowSize: Int, col
 			}
 			// continue with one above, if not at left side
 			if (col != 0) {
-				val testLine = (0 until colSize).map { row -> Pair(row, col-1) }.toSet()
+				val testLine = (0 until colSize).map { row -> Pair(row, col - 1) }.toSet()
 				val testPoints = theRest.intersect(testLine).map { it.first }
 				if (testPoints.size != 1) {
 					continue
@@ -621,4 +633,40 @@ fun findSpanningLineWithBUMP(coordinates: Set<Pair<Int, Int>>, rowSize: Int, col
 		}
 	}
 	return false
+}
+
+/**
+Please provide a function that takes a matrix and a list of Block,
+as well as two Pairs - Pair(baseRow, baseCol) and Pair(endRow, endCol)
+that define a subregion within the matrix.   The goal is to
+iterate through the list of Block and find Block entries that
+have coordinate points within the subregion.  Modify the list of Block
+so that only Block entries that have coordinates in the subregion are
+returned, and that the coordinates of the Block entries are also clipped to
+the boundaries of the subregion.   Return the emptyList() if there are
+no blocks with coordinates in the subregion.
+ */
+fun clipBlocksToSubregion(
+	matrix: List<List<Int>>,
+	blocks: List<Block>,
+	base: Pair<Int, Int>,
+	end: Pair<Int, Int>
+): List<Block> {
+
+	val (baseRow, baseCol) = base
+	val (endRow, endCol) = end
+
+	val clippedBlocks = blocks.mapNotNull { block ->
+		val clippedCoordinates = block.coordinates.filter { (row, col) ->
+			row in baseRow..endRow && col in baseCol..endCol
+		}.toSet()
+
+		if (clippedCoordinates.isNotEmpty()) {
+			Block(block.color, clippedCoordinates)
+		} else {
+			null // Remove blocks with no coordinates in the subregion
+		}
+	}
+
+	return if (clippedBlocks.isEmpty()) emptyList() else clippedBlocks
 }
