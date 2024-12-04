@@ -500,3 +500,125 @@ private fun coordsPresent(
 	}
 	return true
 }
+
+/**
+I have a set of row and col coordinates in Kotlin in the form of
+coordinates: Set<Pair<Int, Int>> in a matrix of rowSize and
+colSize dimensions.   Please create a function that finds a
+line of connected points along a row or column that span the
+matrix completely horizontally or vertically and return a list
+of those coordinates.  Return emptyList if no line is found.
+
+ NOTE: I like how it fills in a test set in the
+ "horizontalLine" and "verticalLine" below.
+ GROK code follows:
+ */
+
+fun findSpanningLine(coordinates: Set<Pair<Int, Int>>, rowSize: Int, colSize: Int): List<Pair<Int, Int>> {
+	// Check for horizontal line
+	for (row in 0 until rowSize) {
+		val horizontalLine = (0 until colSize).map { col -> Pair(row, col) }.toSet()
+		if (coordinates.containsAll(horizontalLine)) {
+			return horizontalLine.toList()
+		}
+	}
+
+	// Check for vertical line
+	for (col in 0 until colSize) {
+		val verticalLine = (0 until rowSize).map { row -> Pair(row, col) }.toSet()
+		if (coordinates.containsAll(verticalLine)) {
+			return verticalLine.toList()
+		}
+	}
+
+	// No spanning line found
+	return emptyList()
+}
+
+/**
+I have a set of row and col coordinates in Kotlin in the form of
+coordinates: Set<Pair<Int, Int>> in a matrix of rowSize and
+colSize dimensions.   Please create a function that finds a
+line of connected points along a row or column that span the
+matrix completely horizontally or vertically and return a list
+of those coordinates.  Return emptyList if no line is found.
+ */
+// GROK - HACKED to look for L
+fun findSpanningLineWithBUMP(coordinates: Set<Pair<Int, Int>>, rowSize: Int, colSize: Int): Boolean {
+	if (rowSize < 3 || colSize < 3) {
+		return false
+	}
+	// Check for horizontal line
+	for (row in 0 until rowSize) {
+		val horizontalLine = (0 until colSize).map { col -> Pair(row, col) }.toSet()
+		if (coordinates.containsAll(horizontalLine)) {
+			// It is horizontal.
+
+			val theRest = coordinates - horizontalLine
+
+			// look for exactly one point on either side of this line
+			//   start with one below - if not at bottom
+			if (row != rowSize-1) {
+				val testLine = (0 until colSize).map { col -> Pair(row+1, col) }.toSet()
+				val testPoints = theRest.intersect(testLine).map { it.second }
+				if (testPoints.size != 1) {
+					continue
+				}
+				val singleValue = testPoints[0]
+				if (singleValue == 0 || singleValue == colSize - 1) {
+					return true
+				}
+			}
+			// continue with one above, if not at top
+			if (row != 0) {
+				val testLine = (0 until colSize).map { col -> Pair(row-1, col) }.toSet()
+				val testPoints = theRest.intersect(testLine).map { it.second }
+				if (testPoints.size != 1) {
+					continue
+				}
+				val singleValue = testPoints[0]
+				if (singleValue == 0 || singleValue == colSize - 1) {
+					return true
+				}
+			}
+		}
+	}
+
+	// Check for vertical line
+	for (col in 0 until colSize) {
+		val verticalLine = (0 until rowSize).map { row -> Pair(row, col) }.toSet()
+		if (coordinates.containsAll(verticalLine)) {
+
+			// It is vertical
+
+			val theRest = coordinates - verticalLine
+
+			// look for exactly one point on either side of this line
+			//   start with one below - if not at right side
+			if (col != colSize-1) {
+				val testLine = (0 until rowSize).map { row -> Pair(row, col+1) }.toSet()
+				val testPoints = theRest.intersect(testLine).map { it.first }
+				if (testPoints.size != 1) {
+					continue
+				}
+				val singleValue = testPoints[0]
+				if (singleValue == 0 || singleValue == rowSize - 1) {
+					return true
+				}
+			}
+			// continue with one above, if not at left side
+			if (col != 0) {
+				val testLine = (0 until colSize).map { row -> Pair(row, col-1) }.toSet()
+				val testPoints = theRest.intersect(testLine).map { it.first }
+				if (testPoints.size != 1) {
+					continue
+				}
+				val singleValue = testPoints[0]
+				if (singleValue == 0 || singleValue == rowSize - 1) {
+					return true
+				}
+			}
+		}
+	}
+	return false
+}

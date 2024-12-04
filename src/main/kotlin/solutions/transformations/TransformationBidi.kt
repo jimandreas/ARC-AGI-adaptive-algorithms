@@ -59,7 +59,8 @@ class TransformationBidi {
 		S23TwoBlocksCompleteARectangle(),
 		S24PointsToSerpentine(),
 		S25RepeatedMatrixPatterns(),
-		S26CountBlocks()
+		S26CountBlocks(),
+		S27TheDanteExperience()
 
 	)
 

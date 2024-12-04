@@ -10,9 +10,7 @@ import Block
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
-import solutions.utilities.calculateWeights
 import solutions.utilities.convertBlocksToMatrix
-import solutions.utilities.findOptimalTotalWeight
 import solutions.utilities.hasHorizontalSymmetry
 import kotlin.test.assertEquals
 
