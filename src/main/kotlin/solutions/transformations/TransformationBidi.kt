@@ -62,7 +62,8 @@ class TransformationBidi {
 		S26CountBlocks(),
 		S27TheDanteExperience(),
 		E01PointToRowColorMapping(),
-		E02MajorityBlockWins()
+		E02MajorityBlockWins(),
+		S28QuantizeBlocks()
 
 	)
 
