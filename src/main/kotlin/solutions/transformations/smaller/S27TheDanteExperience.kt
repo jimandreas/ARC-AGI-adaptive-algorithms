@@ -13,7 +13,7 @@ import solutions.utilities.findSpanningLineWithBUMP
 import solutions.utilities.translateBlockListBy
 
 // example: S27 662c240a The Dante Experience (an L pattern)
-//
+//    see also 94f9d214 (?)
 
 class S27TheDanteExperience : BidirectionalBaseClass() {
 	override val name: String = "**** The Dante Experience"
