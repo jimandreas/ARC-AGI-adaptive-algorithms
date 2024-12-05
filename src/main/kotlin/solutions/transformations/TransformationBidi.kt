@@ -60,7 +60,8 @@ class TransformationBidi {
 		S24PointsToSerpentine(),
 		S25RepeatedMatrixPatterns(),
 		S26CountBlocks(),
-		S27TheDanteExperience()
+		S27TheDanteExperience(),
+		E01PointToRowColorMapping()
 
 	)
 
