@@ -148,15 +148,15 @@ class CellTranslationsAnalysis {
 
 			// now check to see if they are all the same
 			if (areAllTranslationsIdentical(t)) {
-				println("${task.name} All translations are identical!!!")
+				//println("${task.name} All translations are identical!!!")
 				solvedTasks.add(SolvedTasks(task, task.name,"identical translations"))
 			}
 
 			if (task.name == "3906de3d") {
-				println("3906de3d here now")
+				//println("3906de3d here now")
 			}
 			if (isEntireMapConsistent(t)) {
-				println("${task.name} All translations are consistent!!!")
+				//println("${task.name} All translations are consistent!!!")
 				ed.taskWithTranslations.add(task)
 			}
 		}

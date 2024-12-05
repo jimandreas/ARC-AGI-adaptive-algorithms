@@ -573,12 +573,11 @@ fun findSpanningLineWithBUMP(coordinates: Set<Pair<Int, Int>>, rowSize: Int, col
 			if (row != rowSize - 1) {
 				val testLine = (0 until colSize).map { col -> Pair(row + 1, col) }.toSet()
 				val testPoints = theRest.intersect(testLine).map { it.second }
-				if (testPoints.size != 1) {
-					continue
-				}
-				val singleValue = testPoints[0]
-				if (singleValue == 0 || singleValue == colSize - 1) {
-					return true
+				if (testPoints.size == 1) {
+					val singleValue = testPoints[0]
+					if (singleValue == 0 || singleValue == colSize - 1) {
+						return true
+					}
 				}
 			}
 			// continue with one above, if not at top
@@ -606,19 +605,18 @@ fun findSpanningLineWithBUMP(coordinates: Set<Pair<Int, Int>>, rowSize: Int, col
 			val theRest = coordinates - verticalLine
 
 			// look for exactly one point on either side of this line
-			//   start with one below - if not at right side
+			//   start with one to right - if not at right side
 			if (col != colSize - 1) {
 				val testLine = (0 until rowSize).map { row -> Pair(row, col + 1) }.toSet()
 				val testPoints = theRest.intersect(testLine).map { it.first }
-				if (testPoints.size != 1) {
-					continue
-				}
-				val singleValue = testPoints[0]
-				if (singleValue == 0 || singleValue == rowSize - 1) {
-					return true
+				if (testPoints.size == 1) {
+					val singleValue = testPoints[0]
+					if (singleValue == 0 || singleValue == rowSize - 1) {
+						return true
+					}
 				}
 			}
-			// continue with one above, if not at left side
+			// continue with one to left, if not at the left side
 			if (col != 0) {
 				val testLine = (0 until colSize).map { row -> Pair(row, col - 1) }.toSet()
 				val testPoints = theRest.intersect(testLine).map { it.first }

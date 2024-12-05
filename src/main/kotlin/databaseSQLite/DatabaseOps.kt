@@ -96,7 +96,7 @@ CREATE TABLE TestMatrix (
             for (sql in sqlCommandList) {
                 connection.createStatement().execute(sql)
             }
-            println("All tables created successfully.")
+            // println("All tables created successfully.")
 
         } catch (e: SQLException) {
             println("Error creating tables: ${e.message}")

@@ -142,7 +142,7 @@ class TransformationBidi {
 						solutionMatrices.add(SolutionMatrix(resultMatrix3))
 					}
 					if (success) {
-						println("TxBIDI ${t.name} for $taskName - VERIFIED!!")
+//						println("TxBIDI ${t.name} for $taskName - VERIFIED!!")
 
 						val solved = SolvedTasks(
 							atask.taskData,

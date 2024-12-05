@@ -33,7 +33,7 @@ class S27TheDanteExperience : BidirectionalBaseClass() {
 	override fun testTransform(): List<List<Int>> {
 
 		if (taskName == "662c240a") {
-			println("here now")
+			// println("here now")
 		}
 		val inputRows = inputMatrix.size
 		val inputCols = inputMatrix[0].size
@@ -95,7 +95,10 @@ class S27TheDanteExperience : BidirectionalBaseClass() {
 			}
 		}
 		if  (tiledHorizontal) {
-
+			// TODO : complete horizontal tiling
+			println("============================")
+			println("COMPLETE HORIZONTAL TILING!!")
+			println("============================")
 		}
 
 		return emptyList()

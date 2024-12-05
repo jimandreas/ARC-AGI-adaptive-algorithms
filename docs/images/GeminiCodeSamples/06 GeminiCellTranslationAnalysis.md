@@ -147,7 +147,7 @@ fun main() {
     val allIdentical = areAllTranslationsIdentical(groupedTranslations)
 
     if (allIdentical) {
-        println("All translations are identical.")
+        // println("All translations are identical.")
     } else {
         println("Translations are not identical.")
     }

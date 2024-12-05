@@ -23,7 +23,7 @@ class S25RepeatedMatrixPatterns : BidirectionalBaseClass() {
 	override fun testTransform(): List<List<Int>> {
 
 		if (taskName == "7b7f7511") {
-			println("here now")
+			// println("here now")
 		}
 
 		val tryColumn = findRepeatingColumnPattern(inputMatrix)

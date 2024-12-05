@@ -124,5 +124,28 @@ internal class TestLookForL {
 		assertTrue(r)
 	}
 
+	@Test
+	@DisplayName("test look for block with an L middle fail case4")
+	fun testLookForLmiddlegoodCase4() {
+		// vertical line at col 1 with bump to left 662c240a
+		val coords = setOf(
+			Pair(0, 1), Pair(1, 1), Pair(2, 1), Pair(0,0),
+		)
+		val r = findSpanningLineWithBUMP(coords, 3, 3)
+		assertTrue(r)
+	}
+
+	@Test
+	@DisplayName("test look for block with an L middle fail case4")
+	fun testLookForLmiddlefailCase5() {
+		// vertical line at col 1 with bump to left 662c240a
+		val coords = setOf(
+			Pair(0, 1), Pair(1, 1), Pair(2, 1),
+			Pair(1,0), // bump in middle, should fail
+		)
+		val r = findSpanningLineWithBUMP(coords, 3, 3)
+		assertFalse(r)
+	}
+
 
 }
