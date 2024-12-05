@@ -61,7 +61,8 @@ class TransformationBidi {
 		S25RepeatedMatrixPatterns(),
 		S26CountBlocks(),
 		S27TheDanteExperience(),
-		E01PointToRowColorMapping()
+		E01PointToRowColorMapping(),
+		E02MajorityBlockWins()
 
 	)
 

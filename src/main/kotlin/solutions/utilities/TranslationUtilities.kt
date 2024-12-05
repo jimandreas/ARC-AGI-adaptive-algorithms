@@ -103,11 +103,12 @@ fun recreateMatrix(
 	numRow: Int,
 	numCol: Int,
 	blocks: List<Block>,
-	points: List<Point>
+	points: List<Point>,
+	fillColor:Int  = 0
 ): List<List<Int>> {
 
 	// Initialize the matrix with all cells set to 0
-	val matrix = MutableList(numRow) { MutableList(numCol) { 0 } }
+	val matrix = MutableList(numRow) { MutableList(numCol) { fillColor } }
 
 	// Fill in the blocks
 	for (block in blocks) {
