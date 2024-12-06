@@ -21,3 +21,8 @@ This creates a list with 4 elements, all initialized to 5.
 3. Using MutableList with fill
 val mutableList = MutableList(4) { 0 }.apply { fill(5) }
 
+	val minRow = coordinates.minOf { it.first }
+	val maxRow = coordinates.maxOf { it.first }
+	val minCol = coordinates.minOf { it.second }
+	val maxCol = coordinates.maxOf { it.second }
+

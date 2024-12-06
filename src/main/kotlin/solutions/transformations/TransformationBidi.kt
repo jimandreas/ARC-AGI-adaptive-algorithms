@@ -69,7 +69,8 @@ class TransformationBidi {
 		P01PatternMatching(),
 		P02CommonPoints(),
 		S30BlockConnection(),
-		S31FindUniqueBlockColorDontCare()
+		S31FindUniqueBlockColorDontCare(),
+		S32SmallestBlockWins()
 
 	)
 
