@@ -11,18 +11,16 @@ import BoundingBox
 import Point
 import kotlin.math.max
 import kotlin.math.min
-import kotlin.math.pow
-import kotlin.math.roundToInt
 
 /**
- simply change cells with the "from" value to the "to" value in the
- matrix and return the new matrix.
+simply change cells with the "from" value to the "to" value in the
+matrix and return the new matrix.
  */
-fun changeMatrixColor(from:Int, to:Int, matrix: List<List<Int>>):List<List<Int>> {
+fun changeMatrixColor(from: Int, to: Int, matrix: List<List<Int>>): List<List<Int>> {
 
-	val newMatrix : MutableList<MutableList<Int>> = mutableListOf()
+	val newMatrix: MutableList<MutableList<Int>> = mutableListOf()
 	for (row in 0 until matrix.size) {
-		val newRow : MutableList<Int> = mutableListOf()
+		val newRow: MutableList<Int> = mutableListOf()
 		for (col in 0 until matrix[0].size) {
 			if (matrix[row][col] == from) {
 				newRow.add(to)
@@ -80,11 +78,11 @@ fun returnSubmatrix(matrix: List<List<Int>>, bb: BoundingBox): List<List<Int>> {
 		return emptyList()
 	}
 
-	val newMatrix : MutableList<MutableList<Int>> = mutableListOf()
+	val newMatrix: MutableList<MutableList<Int>> = mutableListOf()
 	for (row in bb.minRow..bb.maxRow) {
-		val newRow : MutableList<Int> = mutableListOf()
+		val newRow: MutableList<Int> = mutableListOf()
 		for (col in bb.minCol..bb.maxCol) {
-				newRow.add(matrix[row][col])
+			newRow.add(matrix[row][col])
 		}
 		newMatrix.add(newRow)
 	}
@@ -99,13 +97,14 @@ Please create a function that begins with the point provided
 and then finds the extent of this non-zero
 region and returns this sub-matrix in the form of List<List<Int>>
 
- GROK code follows
+GROK code follows
  */
 fun findNonZeroRegionFromPoint(matrix: List<List<Int>>, startRow: Int, startCol: Int): List<List<Int>> {
 	if (matrix.isEmpty() || matrix[0].isEmpty() ||
 		startRow < 0 || startRow >= matrix.size ||
 		startCol < 0 || startCol >= matrix[0].size ||
-		matrix[startRow][startCol] == 0) {
+		matrix[startRow][startCol] == 0
+	) {
 		return emptyList()
 	}
 
@@ -153,7 +152,7 @@ fun findNonZeroRegionFromPoint(matrix: List<List<Int>>, startRow: Int, startCol:
 Please examine the matrix provided in Kotlin by List<List<Int>>
 and return true of the matrix contents have right to left symmetry -
 that is - the left side of the matrix is a mirror image of the right side.
- GROK code follows
+GROK code follows
  */
 
 fun isMatrixSymmetric(matrix: List<List<Int>>): Boolean {
@@ -200,9 +199,9 @@ fun invertMatrix(m: List<List<Int>>): List<List<Int>> {
 		theColor = colMap.elementAt(1)
 	}
 
-	val retList : MutableList<MutableList<Int>> = mutableListOf()
+	val retList: MutableList<MutableList<Int>> = mutableListOf()
 	for (row in 0 until rowCount) {
-		val rowList : MutableList<Int> = mutableListOf()
+		val rowList: MutableList<Int> = mutableListOf()
 		for (col in 0 until colCount) {
 			if (m[row][col] == 0) {
 				rowList.add(theColor)
@@ -223,11 +222,13 @@ These indicate partitions in the matrix.
 Please create a function that breaks up the matrix into
 partitions and returns a List<List<List<Int>>>
 of the partitions.
- GROK code follows:
+GROK code follows:
  */
-fun partitionMatrix(matrix: List<List<Int>>,
-                    colorSpecified:Boolean = false,
-					partitionColor: Int = 0): List<List<List<Int>>> {
+fun partitionMatrix(
+	matrix: List<List<Int>>,
+	colorSpecified: Boolean = false,
+	partitionColor: Int = 0
+): List<List<List<Int>>> {
 	if (matrix.isEmpty() || matrix[0].isEmpty()) {
 		return emptyList()
 	}
@@ -240,7 +241,7 @@ fun partitionMatrix(matrix: List<List<Int>>,
 	for (col in 0 until cols) {
 		// Check if this column is a partition (i.e., all elements are non-zero)
 		if (colorSpecified) {
-			if (matrix.all { it[col] != 0 && it[col] == partitionColor}) {
+			if (matrix.all { it[col] != 0 && it[col] == partitionColor }) {
 				if (col > startCol) {
 					// Extract the partition from startCol to col-1
 					val partition = matrix.map { it.subList(startCol, col) }
@@ -294,7 +295,11 @@ two matrices have a matching value.  Return the emptyList() for any errors.
 GROK code follows:
  */
 
-fun compareMatricesAndReturnMatchingPoints(matrix1: List<List<Int>>, matrix2: List<List<Int>>, returnColor: Int): List<List<Int>> {
+fun compareMatricesAndReturnMatchingPoints(
+	matrix1: List<List<Int>>,
+	matrix2: List<List<Int>>,
+	returnColor: Int
+): List<List<Int>> {
 	// Check if matrices are of the same size
 	if (matrix1.size != matrix2.size || matrix1.isEmpty()) {
 		return emptyList()
@@ -338,7 +343,7 @@ steps are valid.
 
 data class Block(val color: Int, val coordinates: Set<Pair<Int, Int>>)
 
- GROK code follows:
+GROK code follows:
  */
 fun connectionBetweenTwoBlocks(matrix: List<List<Int>>, block1: Block, block2: Block): Boolean {
 	// Helper function to check if coordinates are within the matrix bounds
@@ -353,7 +358,8 @@ fun connectionBetweenTwoBlocks(matrix: List<List<Int>>, block1: Block, block2: B
 			if (isValid(next.first, next.second) &&
 				//matrix[next.first][next.second] == block1.color &&
 				matrix[next.first][next.second] != 0 &&
-				next !in visited) {
+				next !in visited
+			) {
 
 				if (dfs(next, visited + next)) {
 					return true
@@ -388,10 +394,50 @@ fun isSquare(coords: Set<Pair<Int, Int>>): Boolean {
 	val maxY = coords.maxOf { it.second }
 
 	if (coords.contains(Pair(minX + 1, minY))) {
-		if (coords.contains(Pair(minX, minY+1))) {
+		if (coords.contains(Pair(minX, minY + 1))) {
 			return true
 		}
 	}
 	return false
 
 }
+
+/**
+A function is passed in two Kotlin arrays in the form List<List<Int>>.
+Compare the two arrays and return the two colors that are swapped between
+the lists as a Pair.
+
+Gemini code follows:
+ */
+fun findSwappedColors(array1: List<List<Int>>, array2: List<List<Int>>): List<Pair<Int, Int>> {
+	if (array1.size != array2.size || array1[0].size != array2[0].size) {
+		return emptyList()
+	}
+
+	var firstColor = -1
+	var secondColor = -1
+
+	for (i in array1.indices) {
+		for (j in array1[i].indices) {
+			if (array1[i][j] != array2[i][j]) {
+				if (firstColor == -1) {
+					firstColor = array1[i][j]
+					secondColor = array2[i][j]
+				} else if ((firstColor == array2[i][j] && secondColor == array1[i][j])
+					|| (secondColor == array2[i][j] && firstColor == array1[i][j]))
+				{
+					return listOf(Pair(firstColor, secondColor))
+				} else {
+					return emptyList()
+				}
+			}
+		}
+	}
+
+	if (firstColor == -1) {
+		return emptyList()
+	}
+
+	return listOf(Pair(firstColor, secondColor))
+}
+

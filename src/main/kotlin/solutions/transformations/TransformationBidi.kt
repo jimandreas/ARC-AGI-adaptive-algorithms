@@ -70,7 +70,8 @@ class TransformationBidi {
 		P02CommonPoints(),
 		S30BlockConnection(),
 		S31FindUniqueBlockColorDontCare(),
-		S32SmallestBlockWins()
+		S32SmallestBlockWins(),
+		E03ColorSwap()
 
 	)
 
