@@ -89,3 +89,60 @@ fun returnSubmatrix(matrix: List<List<Int>>, bb: BoundingBox): List<List<Int>> {
 	return newMatrix
 
 }
+
+/**
+The row and col coordinates of a point to small region of non-zero values in
+a matrix in the Kotlin form of List<List<Int>>.
+Please create a function that begins with the point provided
+and then finds the extent of this non-zero
+region and returns this sub-matrix in the form of List<List<Int>>
+
+ GROK code follows
+ */
+fun findNonZeroRegionFromPoint(matrix: List<List<Int>>, startRow: Int, startCol: Int): List<List<Int>> {
+	if (matrix.isEmpty() || matrix[0].isEmpty() ||
+		startRow < 0 || startRow >= matrix.size ||
+		startCol < 0 || startCol >= matrix[0].size ||
+		matrix[startRow][startCol] == 0) {
+		return emptyList()
+	}
+
+	val rows = matrix.size
+	val cols = matrix[0].size
+	val visited = Array(rows) { BooleanArray(cols) }
+	var minRow = rows
+	var maxRow = 0
+	var minCol = cols
+	var maxCol = 0
+
+	// Depth-first search to find all connected non-zero elements
+	fun dfs(row: Int, col: Int) {
+		if (row < 0 || col < 0 || row >= rows || col >= cols || visited[row][col] || matrix[row][col] == 0) {
+			return
+		}
+
+		visited[row][col] = true
+		minRow = minOf(minRow, row)
+		maxRow = maxOf(maxRow, row)
+		minCol = minOf(minCol, col)
+		maxCol = maxOf(maxCol, col)
+
+		dfs(row + 1, col)   // Down
+		dfs(row - 1, col)   // Up
+		dfs(row, col + 1)   // Right
+		dfs(row, col - 1)   // Left
+	}
+
+	// Start DFS from the given point
+	dfs(startRow, startCol)
+
+	// If no non-zero elements were found (shouldn't happen here but included for robustness)
+	if (minRow > maxRow || minCol > maxCol) {
+		return emptyList()
+	}
+
+	// Extract the sub-matrix
+	return matrix.subList(minRow, maxRow + 1).map { row ->
+		row.subList(minCol, maxCol + 1)
+	}
+}

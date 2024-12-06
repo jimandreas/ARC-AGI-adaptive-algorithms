@@ -7,20 +7,19 @@
 package solutions.transformations.smaller
 
 import solutions.transformations.BidirectionalBaseClass
+import solutions.utilities.findNonZeroRegionFromPoint
 import solutions.utilities.translateBlocksToOrigin
 
 // example: 6ecd11f4 quantize to index
 
 
 class S28QuantizeBlocks : BidirectionalBaseClass() {
-	override val name: String = "**** quantize to index"
+	override val name: String = "quantize to index"
 
 	var checkedOutput = false
-	var quantaInRegion = -1
 
 	override fun resetState() {
 		checkedOutput = false
-		quantaInRegion = -1
 	}
 
 	override fun testTransform(): List<List<Int>> {
@@ -29,19 +28,20 @@ class S28QuantizeBlocks : BidirectionalBaseClass() {
 			println("here now")
 		}
 
-		// record the "quanta" - the size of the input square
-		//   that represents a point in the output matrix
-		if (!checkedOutput) {
-			if (outputMatrix.size != outputMatrix[0].size) {
-				return emptyList()
-			}
-			quantaInRegion = outputMatrix.size
-			checkedOutput = true
-		}
-
-		if (inputBlockList.isEmpty()) {
+		if (inputBlockList.isEmpty() || inputPointList.isEmpty()) {
 			return emptyList()
 		}
+
+		val aPointCoord = inputPointList[0].coordinate
+		val colorKeyMatrix = findNonZeroRegionFromPoint(inputMatrix, aPointCoord.first, aPointCoord.second)
+		if (colorKeyMatrix.isEmpty()) {
+			return emptyList()
+		}
+		if (colorKeyMatrix.size != colorKeyMatrix[0].size) {  // the key matrix must be square
+			return emptyList()
+		}
+		val quantaInRegion = colorKeyMatrix.size // will correspond to output matrix size, hopefully
+
 		val biggestBlock = inputBlockList.sortedByDescending { it.coordinates.size }
 		val quantColor = biggestBlock[0].color
 
@@ -64,25 +64,23 @@ class S28QuantizeBlocks : BidirectionalBaseClass() {
 		for (row in 0 until quantaInRegion) {
 			for (col in 0 until quantaInRegion) {
 				if (coords.contains(Pair(row * divisorRow, col * divisorCol))) {
-					retList[row][col] = 1
+					retList[row][col] = colorKeyMatrix[row][col]
 				} else {
 					retList[row][col] = 0
 				}
 			}
 		}
-		println(retList)
 
-
-
-
-
-		return emptyList()
+		return retList
 	}
 
 
 	override fun returnTestOutput(): List<List<Int>> {
 		return testTransform()  // test is identical
 	}
+
+
+
 
 
 }
