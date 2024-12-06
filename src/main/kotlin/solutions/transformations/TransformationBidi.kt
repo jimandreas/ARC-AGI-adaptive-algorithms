@@ -66,7 +66,8 @@ class TransformationBidi {
 		E02MajorityBlockWins(),
 		S28QuantizeBlocks(),
 		S29RightLeftSymmetric(),
-		P01PatternMatching()
+		P01PatternMatching(),
+		P02CommonPoints()
 
 	)
 

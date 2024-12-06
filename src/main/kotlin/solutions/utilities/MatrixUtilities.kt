@@ -223,7 +223,9 @@ partitions and returns a List<List<List<Int>>>
 of the partitions.
  GROK code follows:
  */
-fun partitionMatrix(matrix: List<List<Int>>): List<List<List<Int>>> {
+fun partitionMatrix(matrix: List<List<Int>>,
+                    colorSpecified:Boolean = false,
+					partitionColor: Int = 0): List<List<List<Int>>> {
 	if (matrix.isEmpty() || matrix[0].isEmpty()) {
 		return emptyList()
 	}
@@ -235,14 +237,26 @@ fun partitionMatrix(matrix: List<List<Int>>): List<List<List<Int>>> {
 
 	for (col in 0 until cols) {
 		// Check if this column is a partition (i.e., all elements are non-zero)
-		if (matrix.all { it[col] != 0 }) {
-			if (col > startCol) {
-				// Extract the partition from startCol to col-1
-				val partition = matrix.map { it.subList(startCol, col) }
-				partitions.add(partition)
+		if (colorSpecified) {
+			if (matrix.all { it[col] != 0 && it[col] == partitionColor}) {
+				if (col > startCol) {
+					// Extract the partition from startCol to col-1
+					val partition = matrix.map { it.subList(startCol, col) }
+					partitions.add(partition)
+				}
+				// Move startCol to the next column after this partition
+				startCol = col + 1
 			}
-			// Move startCol to the next column after this partition
-			startCol = col + 1
+		} else {
+			if (matrix.all { it[col] != 0 }) {
+				if (col > startCol) {
+					// Extract the partition from startCol to col-1
+					val partition = matrix.map { it.subList(startCol, col) }
+					partitions.add(partition)
+				}
+				// Move startCol to the next column after this partition
+				startCol = col + 1
+			}
 		}
 	}
 
@@ -253,4 +267,61 @@ fun partitionMatrix(matrix: List<List<Int>>): List<List<List<Int>>> {
 	}
 
 	return partitions
+}
+
+/**
+ * in Kotlin I have a List<List<Int>> - please provide the first non-zero Int in the list
+ */
+fun findFirstNonZero(matrix: List<List<Int>>): Int? {
+	for (row in matrix) {
+		for (value in row) {
+			if (value != 0) {
+				return value
+			}
+		}
+	}
+	return null // If no non-zero number is found
+}
+
+/**
+Two matrices of List<List<Int>> and List<List<Int>> and a returnColor Int
+are passed to a function.  Please check
+that the matrices are the same size.  Then return a matrix List<List<Int>>
+with a returnColor value for each matrix position where the
+two matrices have a matching value.  Return the emptyList() for any errors.
+GROK code follows:
+ */
+
+fun compareMatricesAndReturnMatchingPoints(matrix1: List<List<Int>>, matrix2: List<List<Int>>, returnColor: Int): List<List<Int>> {
+	// Check if matrices are of the same size
+	if (matrix1.size != matrix2.size || matrix1.isEmpty()) {
+		return emptyList()
+	}
+	for (i in matrix1.indices) {
+		if (matrix1[i].size != matrix2[i].size) {
+			return emptyList()
+		}
+	}
+
+	// Create a new matrix with matching values replaced by returnColor
+
+	return matrix1.mapIndexed { i, row ->
+		row.mapIndexed { j, value ->
+			if (value != 0 && value == matrix2[i][j]) returnColor else 0
+		}
+	}
+
+//	val retList : MutableList<List<Int>> = mutableListOf()
+//	for (row in 0 until matrix1.size) {
+//		val rowList : MutableList<Int> = mutableListOf()
+//		for (col in 0 until matrix1[0].size) {
+//			if (matrix1[row][col] == matrix2[row][col]) {
+//				rowList.add(returnColor)
+//			} else {
+//				rowList.add(0)
+//			}
+//		}
+//		retList.add(rowList)
+//	}
+//	return retList
 }
