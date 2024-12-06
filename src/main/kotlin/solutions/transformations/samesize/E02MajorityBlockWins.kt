@@ -32,7 +32,7 @@ class E02MajorityBlockWins : BidirectionalBaseClass() {
 	override fun testTransform(): List<List<Int>> {
 
 		if (taskName == "9565186b") {
-			println("here now")
+			// println("here now")
 		}
 
 		if (inputBlockList.isEmpty()) {

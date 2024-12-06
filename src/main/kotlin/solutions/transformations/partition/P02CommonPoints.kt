@@ -31,7 +31,7 @@ class P02CommonPoints : BidirectionalBaseClass() {
 	override fun testTransform(): List<List<Int>> {
 
 		if (taskName == "0520fde7") {
-			println("here now")
+			// println("here now")
 		}
 
 		// input matrix must be an odd number with the partition line in the middle

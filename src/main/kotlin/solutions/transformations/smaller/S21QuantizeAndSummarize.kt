@@ -29,7 +29,7 @@ class S21QuantizeAndSummarize : BidirectionalBaseClass() {
 	override fun testTransform(): List<List<Int>> {
 
 		if (taskName == "5ad4f10b") {
-			// println("here now")
+			// // println("here now")
 		}
 
 		if (inputPointList.isEmpty()) {

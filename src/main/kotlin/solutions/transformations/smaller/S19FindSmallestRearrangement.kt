@@ -29,7 +29,7 @@ class S19FindSmallestRearrangement : BidirectionalBaseClass() {
 	override fun testTransform(): List<List<Int>> {
 
 //		if (taskName == "a61ba2ce") {
-//			// println("here now")
+//			// // println("here now")
 //		}
 
 		data class BlockOpeningDirection(

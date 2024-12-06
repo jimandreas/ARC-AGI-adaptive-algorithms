@@ -23,7 +23,7 @@ class S26CountBlocks : BidirectionalBaseClass() {
 	override fun testTransform(): List<List<Int>> {
 
 		if (taskName == "d0f5fe59") {
-			// println("here now")
+			// // println("here now")
 		}
 
 		// return number of blocks as downward diagonal pattern
