@@ -8,6 +8,7 @@ package solutions.transformations
 
 import SolutionMatrix
 import SolvedTasks
+import solutions.transformations.partition.*
 import solutions.transformations.samesize.*
 import solutions.transformations.smaller.*
 import solutions.utilities.prettyPrintMatrixDiff
@@ -64,7 +65,8 @@ class TransformationBidi {
 		E01PointToRowColorMapping(),
 		E02MajorityBlockWins(),
 		S28QuantizeBlocks(),
-		S29RightLeftSymmetric()
+		S29RightLeftSymmetric(),
+		P01PatternMatching()
 
 	)
 

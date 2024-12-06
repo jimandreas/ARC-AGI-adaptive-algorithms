@@ -173,3 +173,84 @@ fun isMatrixSymmetric(matrix: List<List<Int>>): Boolean {
 	}
 	return true
 }
+
+/**
+ * invert matrix color
+ *    assume two colors - some color and zero
+ *    if another color is found error with empty list
+ *    invert the color with 0 and return the inverted matrix
+ *
+ *    Clumsy code by Jim follows:
+ */
+fun invertMatrix(m: List<List<Int>>): List<List<Int>> {
+	if (m.isEmpty()) {
+		return m
+	}
+	val rowCount = m.size
+	val colCount = m[0].size
+	val colMap = m.flatMap { it }.toSortedSet()
+	if (colMap.size != 2) {
+		return emptyList()
+	}
+	var theColor = 0
+	val foo = colMap.first()
+	if (foo == 0) {
+		theColor = colMap.elementAt(1)
+	}
+
+	val retList : MutableList<MutableList<Int>> = mutableListOf()
+	for (row in 0 until rowCount) {
+		val rowList : MutableList<Int> = mutableListOf()
+		for (col in 0 until colCount) {
+			if (m[row][col] == 0) {
+				rowList.add(theColor)
+			} else {
+				rowList.add(0)
+			}
+		}
+		retList.add(rowList)
+	}
+	return retList
+}
+
+/**
+I have a Kotlin matrix in the form of List<List<Int>>.
+In the matrix there are some non-zero values that
+form a column that go from the top of the matrix to the bottom.
+These indicate partitions in the matrix.
+Please create a function that breaks up the matrix into
+partitions and returns a List<List<List<Int>>>
+of the partitions.
+ GROK code follows:
+ */
+fun partitionMatrix(matrix: List<List<Int>>): List<List<List<Int>>> {
+	if (matrix.isEmpty() || matrix[0].isEmpty()) {
+		return emptyList()
+	}
+
+	val rows = matrix.size
+	val cols = matrix[0].size
+	val partitions = mutableListOf<List<List<Int>>>()
+	var startCol = 0
+
+	for (col in 0 until cols) {
+		// Check if this column is a partition (i.e., all elements are non-zero)
+		if (matrix.all { it[col] != 0 }) {
+			if (col > startCol) {
+				// Extract the partition from startCol to col-1
+				val partition = matrix.map { it.subList(startCol, col) }
+				partitions.add(partition)
+			}
+			// Move startCol to the next column after this partition
+			startCol = col + 1
+		}
+	}
+
+	// Add the last partition if there's any data after the last partition column
+	if (startCol < cols) {
+		val lastPartition = matrix.map { it.subList(startCol, cols) }
+		partitions.add(lastPartition)
+	}
+
+	return partitions
+}
