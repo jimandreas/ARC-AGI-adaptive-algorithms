@@ -206,9 +206,22 @@ Gemini code follows
  */
 fun findUniqueBlock(blocks: List<Block>): Pair<Int, Block> {
 
-
 	val relocatedBlocks = blocks.map { relocateToOrigin(it) }
 	val uniqueBlock = relocatedBlocks.groupBy { it }.values.singleOrNull {
+		it.size == 1
+	}?.first()
+
+	if (uniqueBlock == null) {
+		return Pair(0, Block(0, setOf(Pair(0, 0))))
+	}
+
+	return Pair(1, uniqueBlock)
+}
+
+fun findUniqueBlockCoordinatesOnly(blocks: List<Block>): Pair<Int, Block> {
+
+	val relocatedBlocks = blocks.map { relocateToOrigin(it) }
+	val uniqueBlock = relocatedBlocks.groupBy { it.coordinates }.values.singleOrNull {
 		it.size == 1
 	}?.first()
 
