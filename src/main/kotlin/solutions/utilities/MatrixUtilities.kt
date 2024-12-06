@@ -146,3 +146,30 @@ fun findNonZeroRegionFromPoint(matrix: List<List<Int>>, startRow: Int, startCol:
 		row.subList(minCol, maxCol + 1)
 	}
 }
+
+/**
+Please examine the matrix provided in Kotlin by List<List<Int>>
+and return true of the matrix contents have right to left symmetry -
+that is - the left side of the matrix is a mirror image of the right side.
+ GROK code follows
+ */
+
+fun isMatrixSymmetric(matrix: List<List<Int>>): Boolean {
+	// Check if matrix is empty or not square
+	if (matrix.isEmpty() || matrix[0].isEmpty()) return false
+	val rows = matrix.size
+	val cols = matrix[0].size
+
+	// Only square matrices can have right-left symmetry
+	//if (rows != cols) return false
+
+	// Compare elements from left to right with right to left
+	for (i in 0 until rows) {
+		for (j in 0 until cols / 2) { // Only need to check half the width
+			if (matrix[i][j] != matrix[i][cols - 1 - j]) {
+				return false
+			}
+		}
+	}
+	return true
+}
