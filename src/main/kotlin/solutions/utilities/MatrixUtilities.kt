@@ -11,6 +11,8 @@ import BoundingBox
 import Point
 import kotlin.math.max
 import kotlin.math.min
+import kotlin.math.pow
+import kotlin.math.roundToInt
 
 /**
  simply change cells with the "from" value to the "to" value in the
@@ -324,4 +326,72 @@ fun compareMatricesAndReturnMatchingPoints(matrix1: List<List<Int>>, matrix2: Li
 //		retList.add(rowList)
 //	}
 //	return retList
+}
+
+/**
+Two blocks are defined in a List<List<Int>> Kotlin matrix as given below.
+Please create a function that uses recursion to determine if a connection
+between the two blocks exists in the matrix - the connection is defined
+by non-zero points of the same value that trace a path between
+the two blocks.  Diagonal steps are not allowed, only orthogonal
+steps are valid.
+
+data class Block(val color: Int, val coordinates: Set<Pair<Int, Int>>)
+
+ GROK code follows:
+ */
+fun connectionBetweenTwoBlocks(matrix: List<List<Int>>, block1: Block, block2: Block): Boolean {
+	// Helper function to check if coordinates are within the matrix bounds
+	fun isValid(x: Int, y: Int) = x in matrix.indices && y in matrix[0].indices
+
+	// Recursive function to check for connection
+	fun dfs(current: Pair<Int, Int>, visited: Set<Pair<Int, Int>>): Boolean {
+		if (current in block2.coordinates) return true
+
+		for ((dx, dy) in listOf(0 to 1, 0 to -1, 1 to 0, -1 to 0)) { // Orthogonal moves
+			val next = Pair(current.first + dx, current.second + dy)
+			if (isValid(next.first, next.second) &&
+				//matrix[next.first][next.second] == block1.color &&
+				matrix[next.first][next.second] != 0 &&
+				next !in visited) {
+
+				if (dfs(next, visited + next)) {
+					return true
+				}
+			}
+		}
+		return false
+	}
+
+	// Check if blocks have the same color
+	if (block1.color != block2.color) return false
+
+	// Try from each coordinate of block1
+	for (coord in block1.coordinates) {
+		if (dfs(coord, setOf(coord))) {
+			return true
+		}
+	}
+	return false
+}
+
+/**
+ *
+ */
+fun isSquare(coords: Set<Pair<Int, Int>>): Boolean {
+
+	if (coords.size != 4 || coords.toSet().size != 4) return false
+
+	val minX = coords.minOf { it.first }
+	val maxX = coords.maxOf { it.first }
+	val minY = coords.minOf { it.second }
+	val maxY = coords.maxOf { it.second }
+
+	if (coords.contains(Pair(minX + 1, minY))) {
+		if (coords.contains(Pair(minX, minY+1))) {
+			return true
+		}
+	}
+	return false
+
 }

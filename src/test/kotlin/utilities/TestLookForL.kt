@@ -6,14 +6,10 @@
 
 package utilities
 
-import Block
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
-import solutions.utilities.convertBlocksToMatrix
 import solutions.utilities.findSpanningLineWithBUMP
-import solutions.utilities.hasHorizontalSymmetry
-import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 
 

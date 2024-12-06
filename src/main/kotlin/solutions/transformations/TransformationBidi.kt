@@ -67,7 +67,8 @@ class TransformationBidi {
 		S28QuantizeBlocks(),
 		S29RightLeftSymmetric(),
 		P01PatternMatching(),
-		P02CommonPoints()
+		P02CommonPoints(),
+		S30BlockConnection()
 
 	)
 
