@@ -681,3 +681,20 @@ fun clipBlocksToSubregion(
 
 	return if (clippedBlocks.isEmpty()) emptyList() else clippedBlocks
 }
+
+/**
+ thoroughly check two List<List<Int>> style matrices
+ */
+fun compareMatrices(matrix1: List<List<Int>>, matrix2: List<List<Int>>): Boolean {
+	if (matrix1.size != matrix2.size || matrix1[0].size != matrix2[0].size) {
+		return false // Matrices have different dimensions
+	}
+	for (i in matrix1.indices) {
+		for (j in matrix1[0].indices) {
+			if (matrix1[i][j] != matrix2[i][j]) {
+				return false // Cells don't match
+			}
+		}
+	}
+	return true // Matrices are identical
+}

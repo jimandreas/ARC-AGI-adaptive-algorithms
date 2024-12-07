@@ -72,7 +72,8 @@ class TransformationBidi {
 		S31FindUniqueBlockColorDontCare(),
 		S32SmallestBlockWins(),
 		E03ColorSwap(),
-		E04MaxDarkBlueWins()
+		E04MaxDarkBlueWins(),
+		S33NumColorsMapping()
 
 	)
 
