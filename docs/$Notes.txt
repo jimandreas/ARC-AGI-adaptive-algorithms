@@ -100,7 +100,6 @@ Partition tasks (lots of them)
 f2829549 - one of the partitioning problems (vertical blue bar separates things to compare)
 780d0b14 - look at regions partitioned by rows and columns with 0 color
 0520fde7 - common values problem with partition
-
-
+more notes
 
 
