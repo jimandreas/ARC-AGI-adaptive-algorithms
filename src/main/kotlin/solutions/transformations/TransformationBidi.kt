@@ -73,7 +73,8 @@ class TransformationBidi {
 		S32SmallestBlockWins(),
 		E03ColorSwap(),
 		E04MaxDarkBlueWins(),
-		S33NumColorsMapping()
+		S33NumColorsMapping(),
+		S34BlockCompositing()
 
 	)
 
