@@ -9,6 +9,7 @@ package entities
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
+import kotlin.math.exp
 import kotlin.test.assertEquals
 
 internal class EntityTest {
@@ -62,6 +63,30 @@ internal class EntityTest {
         val expectedResult1 = setOf(
             Pair(3,3), Pair(3,4))
         assertEquals(l1, expectedResult1)
+    }
+
+    @Test
+    @DisplayName("rank the colors (ints) and give their quantities")
+    fun rankIntsTest() {
+        val m = listOf(
+            listOf(1, 2, 3),
+            listOf(4, 5, 6),
+            listOf(7, 8, 9)
+        )
+
+        val entities = listOf(
+            setOf(Pair(0, 0), Pair(1, 1)), // 1, 5
+            setOf(Pair(2, 2))               // 9
+        )
+
+        val result = rankInts(m, entities)
+
+        val expectedResult = listOf(
+            Pair(1, 1), Pair(5,1), Pair(9,1)
+        )
+
+        assertEquals(result, expectedResult)
+        /// [(1, 1), (5, 1), (9, 1)]
     }
 
 }

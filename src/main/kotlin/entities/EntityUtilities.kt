@@ -8,6 +8,7 @@ package entities
 
 import Block
 import Point
+import kotlin.collections.indices
 
 /**
  * Please assume kotlin.  A matrix is given in the form of
@@ -214,4 +215,101 @@ fun isPointInPointList(row: Int, col: Int, pList: List<Point>): Boolean {
 			return true
 	}
 	return false
+}
+
+/**
+The Most Of
+
+e is the "entity list - the blocks of stuff found int the matrix
+m is the matrix
+
+returned is the Pair of the color most found (after the
+entity "background color" accumulated over all the
+entities.  In other words the number two color.
+
+ */
+
+fun findTheMostOf(m: List<List<Int>>, entities: List<Set<Pair<Int, Int>>>): Pair<Int, List<List<Int>>> {
+
+	val bu = BlockUtilities()
+	// they all have to be rectangular
+	for (ent in entities) {
+		val result = bu.verifyRectangularBlock(ent)
+		if (!result) {
+			return Pair(0, emptyList())
+		}
+	}
+
+	val findMajorityColor = rankInts(m, entities)
+	if (findMajorityColor.isEmpty()) {
+		return Pair(0, emptyList())
+	}
+
+	val majorityColor = findMajorityColor[0].first
+
+	return Pair(majorityColor, m) // needs fixing!
+
+}
+
+/**
+I have a matrix m of Ints and an entities List of Sets of Row and Column coordinates
+that reference cells in the matrix of Ints.  In Kotlin:
+
+m: List<List<Int>>, entities: List<Set<Pair<Int, Int>>>
+
+Please return the ranked list of the Ints and their quantities based on the entities List.
+ GROK code follows
+ */
+fun rankInts(
+	m: List<List<Int>>,
+	entities: List<Set<Pair<Int, Int>>>,
+	excludingMode: Boolean = false,
+	excludedColor: Int = 0)
+ : List<Pair<Int, Int>> {
+
+// Map to hold the count of each integer
+	val countMap = mutableMapOf<Int, Int>()
+
+// Iterate through each entity
+	for (entity in entities) {
+		for ((row, col) in entity) {
+			// Check if the coordinate is within the matrix bounds
+			if (row in m.indices && col in m[row].indices) {
+				val number = m[row][col]
+				if (excludingMode) {
+					if (number == excludedColor) {
+						continue
+					}
+				}
+				countMap[number] = (countMap[number] ?: 0) + 1
+			}
+		}
+	}
+
+// Convert the map to a list of pairs, sorted by count in descending order
+	val colorAndQuantity = countMap.toList().sortedByDescending { (_, count) -> count }
+
+	return colorAndQuantity
+}
+
+/**
+ convert a matrix of type List<List<Int>> to just a Set of row and column pairs
+ for entity usage - for the above analysis functions
+ */
+
+fun matrixToCoordinateSet(m: List<List<Int>>): Set<Pair<Int, Int>> {
+	val rowCount = m.size
+	if (rowCount == 0) {
+		return emptySet()
+	}
+	val colCount = m[0].size
+
+	val s : MutableSet<Pair<Int, Int>> = mutableSetOf()
+	for (row in 0 until rowCount) {
+		for (col in 0 until colCount) {
+			val p = Pair(row, col)
+			s.add(p)
+		}
+	}
+	return s
 }
