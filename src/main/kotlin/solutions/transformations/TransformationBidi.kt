@@ -74,7 +74,8 @@ class TransformationBidi {
 		E03ColorSwap(),
 		E04MaxDarkBlueWins(),
 		S33NumColorsMapping(),
-		S34BlockCompositing()
+		S34BlockCompositing(),
+		S35LeftRightCompositing()
 
 	)
 

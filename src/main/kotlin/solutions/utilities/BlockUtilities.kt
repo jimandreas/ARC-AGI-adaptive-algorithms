@@ -7,6 +7,7 @@
 package solutions.utilities
 
 import Block
+import Point
 import kotlin.collections.MutableList
 
 /**
@@ -386,10 +387,18 @@ fun findOpeningDirection(coordinates: Set<Pair<Int, Int>>): OpeningDirection {
  * just shove a block by rd and cd
  */
 fun translateBlockBy(block: Block, rd: Int, cd: Int): Block {
-	val newBlock = block.copy(coordinates = block.coordinates.map { (row, col) -> Pair(row + rd, col + cd) }
+	val newBlock = block.copy(coordinates = block.coordinates.map {
+		(row, col) -> Pair(row + rd, col + cd) }
 		.toSet())
 
 	return newBlock
+}
+
+fun translatePointBy(point:Point, rd: Int, cd: Int): Point {
+	val newCoor = Pair(point.coordinate.first + rd, point.coordinate.second + cd)
+	val newPoint = Point(point.color, newCoor)
+
+	return newPoint
 }
 
 /**

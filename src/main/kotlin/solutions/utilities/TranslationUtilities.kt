@@ -104,7 +104,9 @@ fun recreateMatrix(
 	numCol: Int,
 	blocks: List<Block>,
 	points: List<Point>,
-	fillColor:Int  = 0
+	fillColor:Int  = 0,
+	overrideColors: Boolean = false,
+	colorToUse: Int = 0
 ): List<List<Int>> {
 
 	// Initialize the matrix with all cells set to 0
@@ -119,7 +121,11 @@ fun recreateMatrix(
 				// whooopsie
 				return emptyList()
 			}
-			matrix[row][col] = block.color
+			if (!overrideColors) {
+				matrix[row][col] = block.color
+			} else {
+				matrix[row][col] = colorToUse
+			}
 		}
 	}
 
@@ -127,9 +133,12 @@ fun recreateMatrix(
 	for (point in points) {
 		val (row, col) = point.coordinate
 		if ((row > numRow - 1) || (col > numCol - 1)) return emptyList()
-		matrix[row][col] = point.color
+		if (!overrideColors) {
+			matrix[row][col] = point.color
+		} else {
+			matrix[row][col] = colorToUse
+		}
 	}
-
 	return matrix
 }
 
