@@ -6,12 +6,11 @@
 
 package solutions.transformations.smaller
 
-import MatrixAbstractions
 import Block
+import MatrixAbstractions
 import entities.BlockUtilities
 import solutions.transformations.BidirectionalBaseClass
 import solutions.utilities.recreateMatrix
-import solutions.utilities.relocateToOrigin
 import solutions.utilities.translateBlockBy
 
 // example: bc1d5164 block compositing
@@ -22,6 +21,11 @@ class S34BlockCompositing : BidirectionalBaseClass() {
 	var checkedOutput = false
 	var numRowOutput = 0
 	var numColOutput = 0
+	var rowDelta = 0
+	var colDelta = 0
+
+	var inputRowMidpoint = 0
+	var inputColMidpoint = 0
 
 	override fun resetState() {
 		checkedOutput = false
@@ -34,12 +38,27 @@ class S34BlockCompositing : BidirectionalBaseClass() {
 		if (taskName == "bc1d5164") {
 			println("here now")
 		}
+
 		if (!checkedOutput) {
-			if (outputMatrix.size != 3 && outputMatrix[0].size != 3) {
+			// demand square matrix
+			if (outputMatrix.size != outputMatrix[0].size) {
 				return emptyList()
 			}
-			numRowOutput = 3
-			numColOutput = 3
+			numRowOutput = outputMatrix.size
+			numColOutput = outputMatrix.size
+
+			if ((inputMatrix.size <= numRowOutput)
+				|| (inputMatrix[0].size <= numColOutput)
+			) {
+				return emptyList() // output has to be smaller
+			}
+
+			rowDelta = inputMatrix.size - numRowOutput
+			colDelta = inputMatrix[0].size - numColOutput
+
+			inputRowMidpoint = inputMatrix.size / 2
+			inputColMidpoint = inputMatrix[0].size / 2
+
 			checkedOutput = true
 		}
 
@@ -50,7 +69,8 @@ class S34BlockCompositing : BidirectionalBaseClass() {
 		bu.findConnectedBlocksInMatrix(
 			nIn,
 			scanDiagonals = true,
-			requireSameColor = true
+			requireSameColor = true,
+			allowPoints = true
 		)
 
 		val numRow = inputMatrix.size
@@ -68,31 +88,33 @@ class S34BlockCompositing : BidirectionalBaseClass() {
 
 			// for block at origin offset is 0, 0 already. Handle other cases
 
-			if ((minRow < 2) && (maxCol > numCol - 2)) {
-				colOffset = 1
-			} else if ((maxRow > numRow - 2) && (maxCol > numCol - 2)) {
-				rowOffset = 1 // bottom right corner
-				colOffset = 1
-			} else if ((maxRow > numRow - 2) && (minCol < 2)) {
-				rowOffset = 1
+			// if upper right
+			if ((maxRow <= inputRowMidpoint) && (minCol >= inputColMidpoint)) {
+				colOffset = colDelta
+			} else if (
+				(minRow >= inputRowMidpoint) && (minCol >= inputColMidpoint)) {
+				// bottom right corner
+				rowOffset = rowDelta
+				colOffset = colDelta
+			} else if (
+				(minRow >= inputRowMidpoint) /*&& (minCol <= inputColMidpoint)*/) {
+				// lower right
+				rowOffset = rowDelta
 			}
-			val atOrigin = relocateToOrigin(b)
-			val translated = translateBlockBy(atOrigin, rowOffset, colOffset)
+
+			val translated = translateBlockBy(b, -rowOffset, -colOffset)
 			bList.add(translated)
 		}
 
 		val retArray = recreateMatrix(
 			numRowOutput, numColOutput,
-			bList, emptyList())
+			bList, emptyList()
+		)
 
 		return retArray
-
 	}
-
 
 	override fun returnTestOutput(): List<List<Int>> {
 		return testTransform()
 	}
-
-
 }

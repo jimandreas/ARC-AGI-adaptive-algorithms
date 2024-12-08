@@ -20,7 +20,8 @@ class BlockUtilities {
 	fun findConnectedBlocksInMatrix(
 		oneTrainInstance: MatrixAbstractions,
 		scanDiagonals: Boolean = false,
-		requireSameColor: Boolean = true
+		requireSameColor: Boolean = true,
+		allowPoints: Boolean = false
 	) {
 
 		val matrix = oneTrainInstance.matrix
@@ -43,7 +44,7 @@ class BlockUtilities {
 						visited,
 						scanDiagonals
 					)
-					if (blockCoordinates.size > 1) { // Only add if it's a block (more than one cell)
+					if (blockCoordinates.size > 1 || allowPoints) { // Only add if it's a block (more than one cell)
 						val b = Block(
 							color = targetValue,
 							coordinates = blockCoordinates

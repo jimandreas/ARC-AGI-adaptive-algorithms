@@ -114,6 +114,11 @@ fun recreateMatrix(
 	for (block in blocks) {
 		for ((row, col) in block.coordinates) {
 			if ((row > numRow - 1) || (col > numCol - 1)) return emptyList()
+
+			if (row < 0 || col < 0) {
+				// whooopsie
+				return emptyList()
+			}
 			matrix[row][col] = block.color
 		}
 	}
