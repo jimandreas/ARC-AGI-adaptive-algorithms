@@ -23,7 +23,6 @@ class AnalyzeTasks {
 	}
 
 	val blockUtil = BlockUtilities()
-	val entityUtilities = EntityUtilities()
 
 	// results are accumulated in taskAbstractionsList
 
@@ -65,7 +64,7 @@ class AnalyzeTasks {
 		for (trainExample in abstractionsList) {
 			analyzeExampleInputOrOutput(trainExample.input)
 			analyzeExampleInputOrOutput(trainExample.output)
-			trainExample.pointDifferenceSet = entityUtilities.findMatrixDifferences(
+			trainExample.pointDifferenceSet = findMatrixDifferences(
 				trainExample.input.matrix, trainExample.output.matrix
 			)
 		}

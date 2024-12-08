@@ -215,6 +215,44 @@ fun invertMatrix(m: List<List<Int>>): List<List<Int>> {
 }
 
 /**
+ * invert matrix with specified colors
+ *    given two colors, swap them in the matrix
+ *    if another color is found error with empty list
+ *    invert the color with 0 and return the inverted matrix
+ *
+ *    Clumsy code by Jim follows:
+ */
+fun invertMatrixWithColorsSpecified(m: List<List<Int>>, c1:Int, c2: Int): List<List<Int>> {
+	if (m.isEmpty()) {
+		return m
+	}
+	val rowCount = m.size
+	val colCount = m[0].size
+	val colMap = m.flatMap { it }.toSortedSet()
+	if (colMap.size != 2) {
+		return emptyList()
+	}
+
+	val retList: MutableList<MutableList<Int>> = mutableListOf()
+	for (row in 0 until rowCount) {
+		val rowList: MutableList<Int> = mutableListOf()
+		for (col in 0 until colCount) {
+			if (m[row][col] == c1) {
+				rowList.add(c2)
+			} else {
+				if (m[row][col] == c2) {
+					rowList.add(c1)
+				} else {
+					return emptyList()
+				}
+			}
+		}
+		retList.add(rowList)
+	}
+	return retList
+}
+
+/**
 I have a Kotlin matrix in the form of List<List<Int>>.
 In the matrix there are some non-zero values that
 form a column that go from the top of the matrix to the bottom.
