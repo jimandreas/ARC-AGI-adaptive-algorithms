@@ -59,7 +59,7 @@ class S38FindBlockPlusInversion : BidirectionalBaseClass() {
 
 		// make sure this thing has our values
 		val validatedMatrix = validateThingWithBlocksAndPoints(
-			isolatedThings[0], inputBlockList, inputPointList
+			inputMatrix, isolatedThings[0], inputBlockList, inputPointList
 		)
 
 		// swap the colors
@@ -72,44 +72,4 @@ class S38FindBlockPlusInversion : BidirectionalBaseClass() {
 		return testTransform()
 	}
 
-	fun validateThingWithBlocksAndPoints(
-		coordinates: Set<Pair<Int, Int>>, bList: List<Block>, pList: List<Point>
-	): List<List<Int>> {
-
-		val minRow = coordinates.minOf { it.first }
-		val maxRow = coordinates.maxOf { it.first }
-		val minCol = coordinates.minOf { it.second }
-		val maxCol = coordinates.maxOf { it.second }
-
-		val retList: MutableList<List<Int>> = mutableListOf()
-		for (row in minRow..maxRow) {
-			val rowList: MutableList<Int> = mutableListOf()
-			for (col in minCol..maxCol) {
-				if (!isPointInBlockList(row, col, bList)
-					&& !isPointInPointList(row, col, pList)
-				) {
-					return emptyList()
-				}
-				rowList.add(inputMatrix[row][col])
-			}
-			retList.add(rowList)
-		}
-		return retList
-	}
-
-	fun isPointInBlockList(row: Int, col: Int, bList: List<Block>): Boolean {
-		for (b in bList) {
-			if (b.coordinates.contains(Pair(row, col)))
-				return true
-		}
-		return false
-	}
-
-	fun isPointInPointList(row: Int, col: Int, pList: List<Point>): Boolean {
-		for (p in pList) {
-			if (p.coordinate == Pair(row, col))
-				return true
-		}
-		return false
-	}
 }
