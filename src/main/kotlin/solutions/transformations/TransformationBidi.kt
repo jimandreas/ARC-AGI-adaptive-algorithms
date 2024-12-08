@@ -78,7 +78,8 @@ class TransformationBidi {
 		S35LeftRightCompositing(),
 		S36TopBottomCompositing(),
 		S37TopBottomCompositingWithInversion(),
-		S38FindBlockPlusInversion()
+		S38FindBlockPlusInversion(),
+		S39EntityWithTheMostOf()
 
 	)
 
