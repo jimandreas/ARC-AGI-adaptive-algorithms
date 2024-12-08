@@ -10,21 +10,23 @@ package solutions.transformations.smaller
 import Block
 import Point
 import solutions.transformations.BidirectionalBaseClass
+import solutions.utilities.invertMatrix
 import solutions.utilities.recreateMatrix
 import solutions.utilities.translateBlockBy
 import solutions.utilities.translatePointBy
 
-// example: dae9d2b5 left right halves compositing
+// example: fafffa47 - top bottom halves compositing with inversion
+// NOTE: also picked up 94f9d214 - with this solution
 
-class S35LeftRightCompositing : BidirectionalBaseClass() {
-	override val name: String = "left right halves compositing"
+class S37TopBottomCompositingWithInversion : BidirectionalBaseClass() {
+	override val name: String = "top bottom halves compositing with inversion"
 
 	var checkedOutput = false
 	var numColOutput = 0
 	var numRowOutput = 0
-	var colDelta = 0
+	var rowDelta = 0
 
-	var inputColMidpoint = 0
+	var inputRowMidpoint = 0
 
 	var outputColor = 0
 
@@ -36,7 +38,7 @@ class S35LeftRightCompositing : BidirectionalBaseClass() {
 	//  demand output is one half number of input columns
 	override fun testTransform(): List<List<Int>> {
 
-		if (taskName == "dae9d2b5") {
+		if (taskName == "fafffa47") {
 			println("here now")
 		}
 
@@ -44,12 +46,12 @@ class S35LeftRightCompositing : BidirectionalBaseClass() {
 			numRowOutput = outputMatrix.size
 			numColOutput = outputMatrix[0].size
 
-			val colCount = inputMatrix[0].size
-			// input matrix must be exactly twice as wide as output
-			if (numColOutput * 2 != colCount) {
+			val rowCount = inputMatrix.size
+			// input matrix must be exactly twice as high as output
+			if (numRowOutput * 2 != rowCount ) {
 				return emptyList()
 			}
-			inputColMidpoint = colCount / 2
+			inputRowMidpoint = rowCount / 2
 
 			if (outputBlockList.isNotEmpty()) {
 				outputColor = outputBlockList[0].color
@@ -71,8 +73,8 @@ class S35LeftRightCompositing : BidirectionalBaseClass() {
 			val minCol = coordinates.minOf { it.second }
 			val maxCol = coordinates.maxOf { it.second }
 
-			if (minCol >= inputColMidpoint) {
-				translated = translateBlockBy(b, 0, -inputColMidpoint)
+			if (minRow >= inputRowMidpoint) {
+				translated = translateBlockBy(b,  -inputRowMidpoint, 0)
 			} else {
 				translated = b
 			}
@@ -80,26 +82,27 @@ class S35LeftRightCompositing : BidirectionalBaseClass() {
 		}
 
 		val pList: MutableList<Point> = mutableListOf()
-		// figure out which corner each block is located in
 		for (p in inputPointList) {
 			var translated : Point
 			val coordinate = p.coordinate
-			val col = p.coordinate.second
+			val row = p.coordinate.first
 
-			if (col >= inputColMidpoint) {
-				translated = translatePointBy(p, 0, -inputColMidpoint)
+			if (row >= inputRowMidpoint) {
+				translated = translatePointBy(p, -inputRowMidpoint, 0)
 			} else {
 				translated = p
 			}
 			pList.add(translated)
 		}
 
-		val retArray = recreateMatrix(
+		val tempArray = recreateMatrix(
 			numRowOutput, numColOutput,
 			bList, pList,
 			overrideColors = true,
 			colorToUse = outputColor
 		)
+
+		val retArray = invertMatrix(tempArray)
 
 		return retArray
 	}
