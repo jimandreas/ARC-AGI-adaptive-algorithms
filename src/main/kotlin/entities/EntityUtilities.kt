@@ -313,3 +313,32 @@ fun matrixToCoordinateSet(m: List<List<Int>>): Set<Pair<Int, Int>> {
 	}
 	return s
 }
+
+/**
+ * convert a coordinate set into a sub-matrix and return it
+ */
+
+fun coordinateSetToMatrix(
+	coordinates: Set<Pair<Int, Int>>, m: List<List<Int>>): List<List<Int>> {
+	val minRow = coordinates.minOf { it.first }
+	val maxRow = coordinates.maxOf { it.first }
+	val minCol = coordinates.minOf { it.second }
+	val maxCol = coordinates.maxOf { it.second }
+	if (m.isEmpty()) {
+		return emptyList()
+	}
+	if ((maxRow > m.size) || (maxCol > m[0].size)) {
+		return emptyList()
+	}
+
+	val retList: MutableList<List<Int>> = mutableListOf()
+	for (row in minRow..maxRow) {
+		val rowList: MutableList<Int> = mutableListOf()
+		for (col in minCol..maxCol) {
+			rowList.add(m[row][col])
+		}
+		retList.add(rowList)
+	}
+	return retList
+
+}

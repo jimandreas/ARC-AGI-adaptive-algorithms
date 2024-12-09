@@ -440,6 +440,27 @@ fun findMajorityColorBasedOnCoordinates(matrix: List<List<Int>>, coordinates: Se
 }
 
 /**
+ * count occurences of color based on coordinates
+ * return count.  Code based on above function.
+ */
+fun countColorBasedOnCoordinates(color: Int, matrix: List<List<Int>>, coordinates: Set<Pair<Int, Int>>): Int {
+	// Map coordinates to matrix values
+	val values = coordinates.map { (row, col) -> matrix[row][col] }
+
+	// Count occurrences of each value
+	val valueCounts = values.groupingBy { it }.eachCount()
+
+	// Filter values with the max count
+	val majorityCandidates = valueCounts.filter { it.key == color }
+
+	if (majorityCandidates.isEmpty()) {
+		return 0
+	}
+	// should be no tie - since filter just returns the target color
+	return majorityCandidates.values.first()
+}
+
+/**
  * Finds the majority value in the matrix, excluding zeros.
  * If no majority exists (all values are equal or there's a tie),
  * it will return one of the most frequent values arbitrarily.

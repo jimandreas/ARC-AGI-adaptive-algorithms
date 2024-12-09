@@ -7,11 +7,13 @@
 
 package solutions.transformations.smaller
 
-import Block
-import Point
-import entities.*
+import entities.coordinateSetToMatrix
+import entities.findAllIsolatedThings
+import entities.findTheMostOf
+import entities.matrixToCoordinateSet
+import entities.rankInts
 import solutions.transformations.BidirectionalBaseClass
-import solutions.utilities.invertMatrixWithColorsSpecified
+import solutions.utilities.countColorBasedOnCoordinates
 
 // example: e50d258f entity with the most of
 
@@ -69,7 +71,24 @@ class S39EntityWithTheMostOf : BidirectionalBaseClass() {
 			return outputMatrix
 		}
 
-		return emptyList()
+		// cycle through the entities (blocks) and
+		//   mark which entity has the max of the 2nd ranked color
+		var colorCountMax = 0
+		var indexMax = -1
+		for (i in 0 until isolatedThings.size) {
+			val count = countColorBasedOnCoordinates(targetColor, inputMatrix, isolatedThings[i])
+			if (count > colorCountMax) {
+				colorCountMax = count
+				indexMax = i
+			}
+		}
+		if (colorCountMax == 0) {
+			return emptyList() // not found!
+		}
+
+		val retList = coordinateSetToMatrix(isolatedThings[indexMax], inputMatrix)
+
+		return retList
 	}
 
 	override fun returnTestOutput(): List<List<Int>> {

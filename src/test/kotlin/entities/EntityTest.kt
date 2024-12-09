@@ -9,6 +9,7 @@ package entities
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
+import solutions.utilities.countColorBasedOnCoordinates
 import kotlin.math.exp
 import kotlin.test.assertEquals
 
@@ -87,6 +88,24 @@ internal class EntityTest {
 
         assertEquals(result, expectedResult)
         /// [(1, 1), (5, 1), (9, 1)]
+    }
+
+
+    @Test
+    @DisplayName("rank the colors (ints) and give their quantities")
+    fun countColorBasedOnCoordinatesTest() {
+        val m = listOf(
+            listOf(1, 1, 0), // count the 1's
+            listOf(1, 2, 0),
+            listOf(0, 0, 0)
+        )
+
+        val entity = setOf(Pair(0, 0), Pair(0, 1), Pair(1, 0), Pair(1, 1))
+
+        val result = countColorBasedOnCoordinates(1, m, entity)
+
+        assertEquals(result, 3)
+
     }
 
 }
