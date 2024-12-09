@@ -8,10 +8,11 @@ package solutions.transformations
 
 import SolutionMatrix
 import SolvedTasks
+import solutions.transformations.bigger.*
 import solutions.transformations.partition.*
 import solutions.transformations.samesize.*
 import solutions.transformations.smaller.*
-import solutions.utilities.prettyPrintMatrixDiff
+import solutions.utilities.*
 import solvedTasks
 import taskAbstractionsList
 import unSolvedTasks
@@ -80,7 +81,8 @@ class TransformationBidi {
 		S37TopBottomCompositingWithInversion(),
 		S38FindBlockPlusInversion(),
 		S39EntityWithTheMostOf(),
-		S40DuplicateBlockHorizontally()
+		S40DuplicateBlockHorizontally(),
+		B01ExtendMatrixWithMirror()
 
 	)
 

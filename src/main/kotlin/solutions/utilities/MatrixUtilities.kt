@@ -479,3 +479,10 @@ fun findSwappedColors(array1: List<List<Int>>, array2: List<List<Int>>): List<Pa
 	return listOf(Pair(firstColor, secondColor))
 }
 
+fun mirrorMatrixVertically(matrix: List<List<Int>>): List<List<Int>> {
+	return matrix.reversed()
+}
+
+fun mirrorMatrixHorizontally(matrix: List<List<Int>>): List<List<Int>> {
+	return matrix.map { row -> row.reversed() }
+}

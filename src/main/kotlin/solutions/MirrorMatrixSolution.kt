@@ -10,6 +10,8 @@ import SolvedTasks
 import TaskCoordinateData
 import compareMatrices
 import experiments.ExperimentalDatasets
+import solutions.utilities.mirrorMatrixHorizontally
+import solutions.utilities.mirrorMatrixVertically
 import solvedTasks
 import verboseFlag
 
@@ -20,15 +22,6 @@ class MirrorMatrixSolution {
 	fun setExperimentalDatasets(edIn: ExperimentalDatasets) {
 		ed = edIn
 	}
-
-	fun mirrorMatrixVertically(matrix: List<List<Int>>): List<List<Int>> {
-		return matrix.reversed()
-	}
-
-	fun mirrorMatrixHorizontally(matrix: List<List<Int>>): List<List<Int>> {
-		return matrix.map { row -> row.reversed() }
-	}
-
 
 	fun testVerticalMirroringSolution(taskData: TaskCoordinateData): Boolean {
 		// Check if mirroring solves the training examples
