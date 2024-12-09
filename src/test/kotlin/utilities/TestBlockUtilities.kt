@@ -30,7 +30,7 @@ internal class TestBlockUtilities {
 				Block(4, setOf(Pair(1, 1), Pair(1, 2))),
 				Block(5, setOf(Pair(1, 3), Pair(1, 4)))
 			),
-			listOf(Block(7, setOf(Pair(2, 0), Pair(2, 1), Pair(2, 3), Pair(2, 3), Pair(2, 4))))
+			listOf(Block(7, setOf(Pair(2, 0), Pair(2, 1), Pair(2, 2), Pair(2, 3), Pair(2, 4))))
 		)
 
 		val matrix = convertBlocksToMatrix(blocks)

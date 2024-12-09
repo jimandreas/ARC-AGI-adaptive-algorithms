@@ -24,51 +24,10 @@ The final representation should have the same length for all List<Int> - therefo
 the color for wider blocks in the list must be repeated so that all lengths in the List<Int>
 are the same.   In other words, the repeating color integers in the list are proportional
 to the width of the block.
-
-
  */
 
-/*
-fun convertBlocksToMatrix(blocks: List<List<Block>>): List<List<Int>> {
-	if (blocks.isEmpty()) return emptyList()
 
-	val numRows = blocks.size
-	val maxCols = blocks.maxOf { row ->
-		row.maxOf { block ->
-			val (minCol, maxCol) = block.coordinates.fold(
-				Int.MAX_VALUE to Int.MIN_VALUE
-			) { (min, max), (r, c) ->
-				minOf(min, c) to maxOf(max, c)
-			}
-			maxCol - minCol + 1  // Calculate width based on column difference
-		}
-	}
-	val matrix = MutableList(numRows) { MutableList(maxCols) { 0 } }
-
-	for (i in 0 until numRows) {
-		var colIndex = 0
-		for (block in blocks[i]) {
-			val (minCol, maxCol) =
-				block.coordinates.fold(Int.MAX_VALUE to Int.MIN_VALUE)
-				{ (min, max), (r, c) ->
-					minOf(min, c) to maxOf(max, c)
-				}
-			val width = maxCol - minCol + 1
-
-			repeat(width) {
-				if (colIndex == maxCols) {
-					// error out something went wrong
-					return emptyList()
-				}
-				matrix[i][colIndex++] = block.color
-			}
-		}
-	}
-	return matrix
-}
-*/
-
-fun convertBlocksToMatrix(blocks: List<List<Block>>): List<List<Int>> {
+fun convertBlocksToMatrix(blocks: List<Block>): List<List<Int>> {
 	if (blocks.isEmpty()) return emptyList()
 
 	// Determine the dimensions of the matrix
@@ -78,53 +37,47 @@ fun convertBlocksToMatrix(blocks: List<List<Block>>): List<List<Int>> {
 	val matrix = MutableList(numRows) { MutableList(maxCols) { 0 } }
 
 	// Fill the matrix with block colors
-	fillMatrix(matrix, blocks)
+	//fillMatrix(matrix, blocks)
+
+	for (b in blocks) {
+		val color = b.color
+		for ((row, col) in b.coordinates) {
+			matrix[row][col] = color
+		}
+	}
 
 	return matrix
 }
 
 // Calculate the size of the grid based on blocks
-private fun calculateGridSize(blocks: List<List<Block>>): Pair<Int, Int> {
-	val numRows = blocks.size
-	var maxCols = 0
+private fun calculateGridSize(blocks: List<Block>): Pair<Int, Int> {
 
-	for (row in blocks) {
-		// Calculate the total width of all blocks in this row
-		val rowWidth = row.sumOf { block ->
-			val (minCol, maxCol) = block.coordinates.fold(Int.MAX_VALUE to Int.MIN_VALUE) { (min, max), (_, c) ->
-				minOf(min, c) to maxOf(max, c)
-			}
-			maxCol - minCol + 1 // Width of a single block
-		}
-		if (rowWidth > maxCols) maxCols = rowWidth
+	if (blocks.isEmpty()) {
+		return Pair(0, 0)
 	}
 
-	return numRows to maxCols
-}
+	var maxRowOut = 0
+	var maxColOut = 0
 
-// Fill the matrix with colors from blocks
-private fun fillMatrix(matrix: MutableList<MutableList<Int>>, blocks: List<List<Block>>) {
-	for ((rowIndex, row) in blocks.withIndex()) {
-		var colIndex = 0
-		for (block in row) {
-			val (minCol, maxCol) = block.coordinates.fold(Int.MAX_VALUE to Int.MIN_VALUE) { (min, max), (_, c) ->
-				minOf(min, c) to maxOf(max, c)
-			}
-			val width = maxCol - minCol + 1
-
-			// Fill the matrix with the block's color across its width
-			for (i in 0 until width) {
-				if (colIndex >= matrix[rowIndex].size) {
-					// Error case: If we've gone beyond the matrix size
-					throw IndexOutOfBoundsException("Matrix column index out of bounds")
-				}
-				matrix[rowIndex][colIndex++] = block.color
-			}
+	for (b in blocks) {
+		val coordinates = b.coordinates
+		val minRow = coordinates.minOf { it.first }
+		val maxRow = coordinates.maxOf { it.first }
+		val minCol = coordinates.minOf { it.second }
+		val maxCol = coordinates.maxOf { it.second }
+		if (maxRowOut < maxRow) {
+			maxRowOut = maxRow
+		}
+		if (maxColOut < maxCol) {
+			maxColOut = maxCol
 		}
 	}
+
+	return Pair(maxRowOut + 1, maxColOut + 1)
+
 }
 
-
+// TODO: add unit tests
 fun reduceMatrix(matrix: List<List<Int>>): List<List<Int>> {
 	var maxColors = -1
 	for (row in 0 until matrix.size) {
@@ -387,14 +340,13 @@ fun findOpeningDirection(coordinates: Set<Pair<Int, Int>>): OpeningDirection {
  * just shove a block by rd and cd
  */
 fun translateBlockBy(block: Block, rd: Int, cd: Int): Block {
-	val newBlock = block.copy(coordinates = block.coordinates.map {
-		(row, col) -> Pair(row + rd, col + cd) }
+	val newBlock = block.copy(coordinates = block.coordinates.map { (row, col) -> Pair(row + rd, col + cd) }
 		.toSet())
 
 	return newBlock
 }
 
-fun translatePointBy(point:Point, rd: Int, cd: Int): Point {
+fun translatePointBy(point: Point, rd: Int, cd: Int): Point {
 	val newCoor = Pair(point.coordinate.first + rd, point.coordinate.second + cd)
 	val newPoint = Point(point.color, newCoor)
 
@@ -405,7 +357,7 @@ fun translatePointBy(point:Point, rd: Int, cd: Int): Point {
  * shove a list of Block
  */
 fun translateBlockListBy(blockList: List<Block>, rd: Int, cd: Int): List<Block> {
-	val retList : MutableList<Block> = mutableListOf()
+	val retList: MutableList<Block> = mutableListOf()
 	for (b in blockList) {
 		val newb = translateBlockBy(b, rd, cd)
 		retList.add(newb)
@@ -713,7 +665,7 @@ fun clipBlocksToSubregion(
 }
 
 /**
- thoroughly check two List<List<Int>> style matrices
+thoroughly check two List<List<Int>> style matrices
  */
 fun compareMatrices(matrix1: List<List<Int>>, matrix2: List<List<Int>>): Boolean {
 	if (matrix1.size != matrix2.size || matrix1[0].size != matrix2[0].size) {
