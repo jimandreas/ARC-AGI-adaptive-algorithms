@@ -12,6 +12,7 @@ import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import solutions.utilities.convertBlocksToMatrix
 import solutions.utilities.hasHorizontalSymmetry
+import solutions.utilities.sortBlocksByColumn
 import kotlin.test.assertEquals
 
 
@@ -21,16 +22,12 @@ internal class TestBlockUtilities {
 	@DisplayName("test blocks to matrix function")
 	fun testWeights() {
 		val blocks = listOf(
-			listOf(
-				Block(1, setOf(Pair(0, 0), Pair(0, 1))),
-				Block(2, setOf(Pair(0, 2), Pair(0, 3), Pair(0, 4)))
-			),
-			listOf(
-				Block(3, setOf(Pair(1, 0))),
-				Block(4, setOf(Pair(1, 1), Pair(1, 2))),
-				Block(5, setOf(Pair(1, 3), Pair(1, 4)))
-			),
-			listOf(Block(7, setOf(Pair(2, 0), Pair(2, 1), Pair(2, 2), Pair(2, 3), Pair(2, 4))))
+			Block(1, setOf(Pair(0, 0), Pair(0, 1))),
+			Block(2, setOf(Pair(0, 2), Pair(0, 3), Pair(0, 4))),
+			Block(3, setOf(Pair(1, 0))),
+			Block(4, setOf(Pair(1, 1), Pair(1, 2))),
+			Block(5, setOf(Pair(1, 3), Pair(1, 4))),
+			Block(7, setOf(Pair(2, 0), Pair(2, 1), Pair(2, 2), Pair(2, 3), Pair(2, 4)))
 		)
 
 		val matrix = convertBlocksToMatrix(blocks)
@@ -95,6 +92,26 @@ internal class TestBlockUtilities {
 		)
 		val result = hasHorizontalSymmetry(figure)
 		assertTrue(result)
+	}
+
+	@Test
+	@DisplayName("test sort by column")
+	fun testSortBlocksByColumn() {
+		// Example usage:
+		val blocks = listOf(
+			Block(1, setOf(Pair(0, 2), Pair(1, 3))),
+			Block(2, setOf(Pair(2, 1), Pair(3, 4))),
+			Block(3, setOf(Pair(4, 0), Pair(5, 1)))
+		)
+
+		val sortedBlocks = sortBlocksByColumn(blocks)
+		val expectedBlocks = listOf(
+			Block(3, setOf(Pair(4, 0), Pair(5, 1))),
+			Block(2, setOf(Pair(2, 1), Pair(3, 4))),
+			Block(1, setOf(Pair(0, 2), Pair(1, 3)))
+		)
+
+		assertEquals(expectedBlocks, sortedBlocks)
 	}
 
 }

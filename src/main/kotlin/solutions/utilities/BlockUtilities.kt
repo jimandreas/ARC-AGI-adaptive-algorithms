@@ -680,3 +680,18 @@ fun compareMatrices(matrix1: List<List<Int>>, matrix2: List<List<Int>>): Boolean
 	}
 	return true // Matrices are identical
 }
+
+/**
+I have a list of Block in Kotlin with row and col coordinates as shown:
+data class Block(val color: Int, val coordinates: Set<Pair<Int, Int>>)
+Please sort this by the second coordinate in the Set<Pair<Int, Int>>.
+ Grok code follows
+ */
+fun sortBlocksByColumn(blocks: List<Block>): List<Block> {
+	return blocks.sortedWith { a, b ->
+		val minColA = a.coordinates.minOfOrNull { it.second } ?: Int.MAX_VALUE
+		val minColB = b.coordinates.minOfOrNull { it.second } ?: Int.MAX_VALUE
+		minColA.compareTo(minColB)
+	}
+}
+

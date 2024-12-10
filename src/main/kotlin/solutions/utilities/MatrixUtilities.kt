@@ -486,3 +486,33 @@ fun mirrorMatrixVertically(matrix: List<List<Int>>): List<List<Int>> {
 fun mirrorMatrixHorizontally(matrix: List<List<Int>>): List<List<Int>> {
 	return matrix.map { row -> row.reversed() }
 }
+
+/**
+Please create a Kotlin matrix in the form of List<List<Int> of
+size rowSize and colSize and fill the matrix vertically (columnwise)
+with the colors in List<Int> - assume the size of List<Int> is the
+same as colSize.  Return the matrix.
+ GROK code follows:
+ */
+fun createVerticalMatrixWithColors(
+	rowSize: Int, colSize: Int,
+	colors: List<Int>): List<List<Int>> {
+
+	// Check if the size of colors matches colSize
+	if (colors.size != colSize) {
+		return emptyList()
+	}
+
+	// Initialize the matrix with zeros
+	val matrix = MutableList(rowSize) { MutableList(colSize) { 0 } }
+
+	// Fill the matrix column-wise
+	for (col in 0 until colSize) {
+		for (row in 0 until rowSize) {
+			matrix[row][col] = colors[col]
+		}
+	}
+
+	return matrix
+}
+

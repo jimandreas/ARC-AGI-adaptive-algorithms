@@ -84,7 +84,8 @@ class TransformationBidi {
 		S40DuplicateBlockHorizontally(),
 		B01ExtendMatrixWithMirror(),
 		E05ColorPointsInOutput(),
-		E06CenterBlockUsingPoints()
+		E06CenterBlockUsingPoints(),
+		S41BiggestBlocksReturnedAsStripe()
 
 	)
 

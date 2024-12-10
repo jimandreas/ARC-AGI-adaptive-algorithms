@@ -11,6 +11,8 @@ import compareMatrices
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
+import solutions.utilities.mirrorMatrixHorizontally
+import solutions.utilities.mirrorMatrixVertically
 
 class MirrorMatrixSolutionTest {
 
@@ -27,7 +29,7 @@ class MirrorMatrixSolutionTest {
      */
     @Test
     @DisplayName("test of basic matrix inversion vertically")
-    fun mirrorMatrixVertically() {
+    fun mirrorMatrixVerticallyTest() {
         val input = listOf(
             listOf(0, 1, 2),
             listOf(0, 1, 0),
@@ -36,7 +38,7 @@ class MirrorMatrixSolutionTest {
             listOf(0, 1, 2)
         )
 
-        val output = mirrorAlg.mirrorMatrixVertically(input)
+        val output = mirrorMatrixVertically(input)
 
         val expectedOutput = listOf(
             listOf(0, 1, 2),
@@ -57,7 +59,7 @@ class MirrorMatrixSolutionTest {
 
         assert(result)
 
-        val failOutput = mirrorAlg.mirrorMatrixVertically(failInput)
+        val failOutput = mirrorMatrixVertically(failInput)
         val failResult = compareMatrices(failOutput, expectedOutput)
 
         assert(!failResult)
@@ -71,14 +73,14 @@ class MirrorMatrixSolutionTest {
      */
     @Test
     @DisplayName("test of basic matrix inversion horizontally")
-    fun mirrorMatrixHorizontally() {
+    fun mirrorMatrixHorizontallyTest() {
         val input = listOf(
             listOf(2, 0, 2),
             listOf(1, 0, 1),
             listOf(0, 1, 0)
         )
 
-        val output = mirrorAlg.mirrorMatrixHorizontally(input)
+        val output = mirrorMatrixHorizontally(input)
 
         val expectedOutput = listOf(
             listOf(2, 0, 2),
@@ -95,7 +97,7 @@ class MirrorMatrixSolutionTest {
 
         assert(result)
 
-        val failOutput = mirrorAlg.mirrorMatrixHorizontally(failInput)
+        val failOutput = mirrorMatrixHorizontally(failInput)
         val failResult = compareMatrices(failOutput, expectedOutput)
 
         assert(!failResult)
