@@ -18,6 +18,7 @@ Attempting to solve categories of the ARC AGI puzzles.
 
 7 puzzles solved - 1.75% [Nov 15 2024]
 10 puzzles solved - 2.50% [Nov 22 2024]
+80 puzzles solved - 20.00% [Dec 10 2024]  (2.9 Tasks per day - 73 / 25)
 
 ## Translations
 

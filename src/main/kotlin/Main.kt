@@ -62,12 +62,14 @@ fun main() {
 }
 
 fun prettyPrintSolutions(solved: List<SolvedTasks>) {
-    val percentage = solved.size.toFloat() / 400.0 * 100.0
-    val percentageText = "%.2f".format(percentage)
 
-    println("${solved.size} puzzles solved - ${percentageText}%")
     for (s in solved) {
         println("Task ${s.taskname} : ${s.solvedBy}")
     }
+    println("=============================================")
+    val percentage = solved.size.toFloat() / 400.0 * 100.0
+    val percentageText = "%.2f".format(percentage)
+    println("${solved.size} puzzles solved - ${percentageText}%")
+
 }
 
