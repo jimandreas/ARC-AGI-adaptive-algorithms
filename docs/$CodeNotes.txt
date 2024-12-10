@@ -1,5 +1,26 @@
 Code Notes
 ==========
+translation: E06 ref
+
+val bbox = computeBoundingBox(emptyList(), inputPointList)
+val bboxBlock = computeBoundingBox(inputBlockList, emptyList())
+
+val pointSpanRow = bbox.maxRow - bbox.minRow
+val blockSpanRow = bboxBlock.maxRow - bboxBlock.minRow
+
+val pointSpanCol = bbox.maxCol - bbox.minCol
+val blockSpanCol = bboxBlock.maxCol - bboxBlock.minCol
+
+// make sure the block fits inside the point space
+if (blockSpanRow > pointSpanRow || blockSpanCol > pointSpanCol) {
+    return emptyList()
+}
+
+// just do the easy delta here
+val rowDelta = bbox.minRow - bboxBlock.minRow + 1
+val colDelta = bbox.minCol - bboxBlock.minCol + 1
+
+val newBlock = translateBlockBy(inputBlockList[0], rowDelta, colDelta)
 
 Some cool Gemini created code samples:
 

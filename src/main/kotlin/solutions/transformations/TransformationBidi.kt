@@ -85,7 +85,8 @@ class TransformationBidi {
 		B01ExtendMatrixWithMirror(),
 		E05ColorPointsInOutput(),
 		E06CenterBlockUsingPoints(),
-		S41BiggestBlocksReturnedAsStripe()
+		S41BiggestBlocksReturnedAsStripe(),
+		E07TranslateAndChangeColor()
 
 	)
 
