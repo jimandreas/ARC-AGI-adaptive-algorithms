@@ -83,7 +83,8 @@ class TransformationBidi {
 		S39EntityWithTheMostOf(),
 		S40DuplicateBlockHorizontally(),
 		B01ExtendMatrixWithMirror(),
-		E05ColorPointsInOutput()
+		E05ColorPointsInOutput(),
+		E06CenterBlockUsingPoints()
 
 	)
 

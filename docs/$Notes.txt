@@ -87,12 +87,14 @@ the output, one notices various subcategories:
 ===================
 TODO
 ===================
--> rotate a square matrix, see ed36ccf7  DONE
--> color all blocks but not points, see 67385a82
+
 -> a1570a43 - a "centering" task - interesting!
 -> 239be575 - connections between blocks - need some sort of connection protocol
 -> f9012d9b - a nice tiling completion problem
 -> 88a62173 - a nice which entity is different - save for a variation on block parsing.
+
+-> b0c4d837 - first example of a "Thinking" problem - where
+  multiple examples are accumulated and then "thought" about?
 
 ---------------
 Partition tasks (lots of them)
