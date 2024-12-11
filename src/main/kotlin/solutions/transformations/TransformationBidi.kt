@@ -86,7 +86,8 @@ class TransformationBidi {
 		E05ColorPointsInOutput(),
 		E06CenterBlockUsingPoints(),
 		S41BiggestBlocksReturnedAsStripe(),
-		E07TranslateAndChangeColor()
+		E07TranslateAndChangeColor(),
+		S42CleverMergingOfPoints()
 
 	)
 
@@ -103,10 +104,6 @@ class TransformationBidi {
 		val theList = taskAbstractionsList // for debugging visibility
 		for (atask in theList) {
 			val taskName = atask.taskData.name
-
-//			if (taskName == "39a8645d") {
-//				println("We have $taskName") // majority wins
-//			}
 
 			val numExamples = atask.abstractionsList.size
 			val originalTaskData = atask.taskData
