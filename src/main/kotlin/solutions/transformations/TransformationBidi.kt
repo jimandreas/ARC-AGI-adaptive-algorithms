@@ -88,7 +88,8 @@ class TransformationBidi {
 		S41BiggestBlocksReturnedAsStripe(),
 		E07TranslateAndChangeColor(),
 		S42CleverMergingOfPoints(),
-		E08ReturnCenterColumn()
+		E08ReturnCenterColumn(),
+		E09PickWInningColor()
 
 	)
 

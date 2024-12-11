@@ -413,6 +413,18 @@ fun countColorBasedOnCoordinates(color: Int, matrix: List<List<Int>>, coordinate
 }
 
 /**
+ *
+ */
+fun countColorsInMatrix(matrix: List<List<Int>>): List<Int> {
+	// Flatten the matrix and filter out zeros
+	val values = matrix.flatten().filter { it != 0 }.sorted()
+
+	// Count occurrences of each value
+	val colorList = values.distinct()
+
+	return colorList
+}
+/**
  * Finds the majority value in the matrix, excluding zeros.
  * If no majority exists (all values are equal or there's a tie),
  * it will return one of the most frequent values arbitrarily.

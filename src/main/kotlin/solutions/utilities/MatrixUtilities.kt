@@ -16,7 +16,10 @@ import kotlin.math.min
 simply change cells with the "from" value to the "to" value in the
 matrix and return the new matrix.
  */
-fun changeMatrixColor(from: Int, to: Int, matrix: List<List<Int>>): List<List<Int>> {
+fun changeMatrixColor(
+	from: Int, to: Int,
+	matrix: List<List<Int>>,
+	supressOtherColors: Boolean = false): List<List<Int>> {
 
 	val newMatrix: MutableList<MutableList<Int>> = mutableListOf()
 	for (row in 0 until matrix.size) {
@@ -25,7 +28,11 @@ fun changeMatrixColor(from: Int, to: Int, matrix: List<List<Int>>): List<List<In
 			if (matrix[row][col] == from) {
 				newRow.add(to)
 			} else {
-				newRow.add(matrix[row][col])
+				if (!supressOtherColors) {  // whether to keep other existing colors
+					newRow.add(matrix[row][col])
+				} else {
+					newRow.add(0)
+				}
 			}
 		}
 		newMatrix.add(newRow)
