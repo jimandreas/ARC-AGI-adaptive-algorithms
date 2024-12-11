@@ -8,7 +8,6 @@ package solutions.utilities
 
 import Block
 import Point
-import kotlin.collections.MutableList
 
 /**
 In Kotlin a Block data structure is given below, and there is a List<List<Block>> that forms
@@ -707,3 +706,42 @@ fun sortBlocksByColumn(blocks: List<Block>): List<Block> {
 	}
 }
 
+// modified Gemini code
+fun areAllBlocksHorizontalRows(matrix: List<List<Int>>, blocks: List<Block>): Boolean {
+	val numCols = matrix[0].size
+
+	for (block in blocks) {
+		val cols = block.coordinates.map { it.second }.toSet() // Get unique col numbers
+		if (cols.size != numCols) { // If the block doesn't cover all cols, it's not a full row
+			return false
+		}
+		if (block.coordinates.size % numCols != 0) {
+			return false
+		}
+		val rows = block.coordinates.map { it.first }.toSet() // Get unique row numbers
+		if (rows.size != block.coordinates.size / numCols) {
+			return false
+		}
+
+	}
+	return true // If all blocks pass the checks, return true
+}
+
+fun areAllBlocksVerticalColumns(matrix: List<List<Int>>, blocks: List<Block>): Boolean {
+	val numRows = matrix.size
+
+	for (block in blocks) {
+		val rows = block.coordinates.map { it.first }.toSet() // Get unique row numbers
+		if (rows.size != numRows) { // If the block doesn't cover all rows, it's not a full column
+			return false
+		}
+		if (block.coordinates.size % numRows != 0) {
+			return false
+		}
+		val cols = block.coordinates.map { it.second }.toSet() // Get unique col numbers
+		if (cols.size != block.coordinates.size / numRows) {
+			return false
+		}
+	}
+	return true // If all blocks pass the checks, return true
+}

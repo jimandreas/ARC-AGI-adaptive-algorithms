@@ -8,6 +8,7 @@ package solutions.transformations.samesize
 
 import Block
 import solutions.transformations.BidirectionalBaseClass
+import solutions.utilities.areAllBlocksHorizontalRows
 
 // example: a85d4709 point to row colormap
 
@@ -36,7 +37,7 @@ class E01PointToRowColorMapping : BidirectionalBaseClass() {
 	override fun testTransform(): List<List<Int>> {
 
 		if (taskName == "a85d4709") {
-			// println("here now")
+			println("here now")
 		}
 
 		if (!checkedOutput) {
@@ -104,19 +105,6 @@ class E01PointToRowColorMapping : BidirectionalBaseClass() {
 			retList.add(list)
 		}
 		return retList
-	}
-
-	// modified Gemini code
-	fun areAllBlocksHorizontalRows(matrix: List<List<Int>>, blocks: List<Block>): Boolean {
-		val numCols = matrix[0].size
-
-		for (block in blocks) {
-			val cols = block.coordinates.map { it.second }.toSet() // Get unique col numbers
-			if (cols.size != numCols) { // If the block doesn't cover all cols, it's not a full row
-				return false
-			}
-		}
-		return true // If all blocks pass the checks, return true
 	}
 
 	/**

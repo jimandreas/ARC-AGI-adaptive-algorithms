@@ -90,7 +90,8 @@ class TransformationBidi {
 		S42CleverMergingOfPoints(),
 		E08ReturnCenterColumn(),
 		E09PickWInningColor(),
-		E10InputPointToOutputConstellation()
+		E10InputPointToOutputConstellation(),
+		S43BlockDirectedLinesAssembly()
 
 	)
 

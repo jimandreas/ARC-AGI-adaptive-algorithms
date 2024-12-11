@@ -10,10 +10,13 @@ import Block
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
+import solutions.utilities.areAllBlocksHorizontalRows
+import solutions.utilities.areAllBlocksVerticalColumns
 import solutions.utilities.convertBlocksToMatrix
 import solutions.utilities.hasHorizontalSymmetry
 import solutions.utilities.sortBlocksByColumn
 import kotlin.test.assertEquals
+import kotlin.test.assertFalse
 
 
 internal class TestBlockUtilities {
@@ -97,7 +100,7 @@ internal class TestBlockUtilities {
 	@Test
 	@DisplayName("test sort by column")
 	fun testSortBlocksByColumn() {
-		// Example usage:
+
 		val blocks = listOf(
 			Block(1, setOf(Pair(0, 2), Pair(1, 3))),
 			Block(2, setOf(Pair(2, 1), Pair(3, 4))),
@@ -113,5 +116,46 @@ internal class TestBlockUtilities {
 
 		assertEquals(expectedBlocks, sortedBlocks)
 	}
+
+	@Test
+	@DisplayName("test all all blocks horizontal rows")
+	fun testAreAllBlocksHorizontalRows() {
+		val b01 = listOf(
+			Block(1, setOf(Pair(0, 0), Pair(0,1))),
+			Block(2, setOf(Pair(1, 0), Pair(1, 1)))
+		)
+		val matrix = listOf(listOf(0, 0), listOf(0, 0))
+
+		val result1 = areAllBlocksHorizontalRows(matrix, b01)
+		assertTrue(result1)
+
+		val b02 = listOf(
+			Block(1, setOf(Pair(0, 0), Pair(0,1))),
+			Block(2, setOf(Pair(1, 0)))
+		)
+		val result2 = areAllBlocksHorizontalRows(matrix, b02)
+		assertFalse(result2)
+	}
+
+	@Test
+	@DisplayName("test all all blocks vertical columns")
+	fun testAreAllBlocksVerticalColumns() {
+		val b01 = listOf(
+			Block(1, setOf(Pair(0, 0), Pair(1, 0))),
+			Block(2, setOf(Pair(0, 1), Pair(1, 1)))
+		)
+		val matrix = listOf(listOf(0, 0), listOf(0, 0))
+
+		val result1 = areAllBlocksVerticalColumns(matrix, b01)
+		assertTrue(result1)
+
+		val b02 = listOf(
+			Block(1, setOf(Pair(0, 0), Pair(1, 0))),
+			Block(2, setOf(Pair(0, 1)))
+		)
+		val result2 = areAllBlocksVerticalColumns(matrix, b02)
+		assertFalse(result2)
+	}
+
 
 }
