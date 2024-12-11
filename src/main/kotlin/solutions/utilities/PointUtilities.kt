@@ -39,19 +39,25 @@ fun findMinMaxPointCoordinates(points: List<Point>):
 		}
 }
 
-/*
-// Example usage:
-fun main() {
-	val points = listOf(
-		Point(1, Pair(1, 2)),
-		Point(1, Pair(3, 4)),
-		Point(2, Pair(5, 6)),
-		Point(2, Pair(7, 8))
-	)
+/**
+Given one basis Point and a Kotlin List<Point> where the associated List<Point>
+have row and column values are absolute values.
+Please convert the row and column coordinates to relative
+row and column coordinates to the provided basis Point and return the
+new list.
+Grok code follows:
+ */
 
-	val result = findMinMaxCoordinates(points)
+fun convertToRelativeCoordinates(basis: Point, points: List<Point>): List<Point> {
+	val (basisRow, basisCol) = basis.coordinate
 
-	result.forEach { (color, coords) ->
-		println("Color $color: Rows=${coords.first}, Columns=${coords.second}")
+	return points.map { point ->
+		val (row, col) = point.coordinate
+		// Calculate relative coordinates
+		val relativeRow = row - basisRow
+		val relativeCol = col - basisCol
+		// Create a new Point with the same color but new coordinates
+		Point(point.color, Pair(relativeRow, relativeCol))
 	}
-}*/
+}
+

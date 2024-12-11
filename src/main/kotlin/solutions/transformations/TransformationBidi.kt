@@ -89,7 +89,8 @@ class TransformationBidi {
 		E07TranslateAndChangeColor(),
 		S42CleverMergingOfPoints(),
 		E08ReturnCenterColumn(),
-		E09PickWInningColor()
+		E09PickWInningColor(),
+		E10InputPointToOutputConstellation()
 
 	)
 

@@ -9,7 +9,9 @@ package utilities
 import Point
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
+import solutions.utilities.convertToRelativeCoordinates
 import solutions.utilities.findMinMaxPointCoordinates
+import kotlin.math.exp
 import kotlin.test.assertEquals
 
 
@@ -46,6 +48,28 @@ internal class TestPointUtilities {
 //		}
 	}
 
+
+	@Test
+	@DisplayName("test convert to relative coordinates")
+	fun convertToRelativeCoordinatesTest() {
+		val basisPoint = Point(0, Pair(5, 5)) // Basis point at (5, 5)
+		val pointsList = listOf(
+			Point(1, Pair(7, 9)),
+			Point(2, Pair(3, 6)),
+			Point(3, Pair(5, 5))
+		)
+
+		val relativePoints = convertToRelativeCoordinates(basisPoint, pointsList)
+
+		val expectedList = listOf(
+			Point(1, Pair(2, 4)),
+			Point(2, Pair(-2, 1)),
+			Point(3, Pair(0, 0))
+		)
+		assertEquals(relativePoints, expectedList)
+//		relativePoints.forEach {
+//			println("Color: ${it.color}, Coordinate: ${it.coordinate}") }
+	}
 
 
 }
