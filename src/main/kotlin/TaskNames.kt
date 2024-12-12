@@ -327,7 +327,7 @@ val trainingNames = listOf(
     "cdecee7f",
     "ce22a75a",
     "ce4f8723",
-    "ce602527",
+ //   "ce602527",  // AMBIGUOUS
     "ce9e57f2",
     "cf98881b",
     "d037b0a7",
