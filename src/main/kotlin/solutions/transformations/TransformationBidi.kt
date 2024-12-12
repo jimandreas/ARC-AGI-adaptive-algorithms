@@ -91,7 +91,8 @@ class TransformationBidi {
 		E08ReturnCenterColumn(),
 		E09PickWInningColor(),
 		E10InputPointToOutputConstellation(),
-		S43BlockDirectedLinesAssembly()
+		S43BlockDirectedLinesAssembly(),
+		S44MapInputColorToOutputBlock()
 
 	)
 
