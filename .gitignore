@@ -30,6 +30,7 @@ local.properties
 # the project can be imported from settings.gradle.kts
 .idea
 .kotlin
+.kotlin/
 *.iml
 
 # Old-style IDEA project files

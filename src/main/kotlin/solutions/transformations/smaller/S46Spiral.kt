@@ -10,10 +10,10 @@ import solutions.transformations.BidirectionalBaseClass
 import solutions.utilities.recreateMatrix
 import solutions.utilities.relocateToOrigin
 
-// example: S45 6f8cd79b trace edge of matrix with output color
+// example: S46 28e73c20 spiral
 
 class S46Spiral : BidirectionalBaseClass() {
-	override val name: String = "trace edge of matrix with output color"
+	override val name: String = "spiral"
 
 	var checkedOutput = false
 	var outputColor = 0
@@ -24,7 +24,7 @@ class S46Spiral : BidirectionalBaseClass() {
 
 	override fun testTransform(): List<List<Int>> {
 
-		if (taskName == "6f8cd79b") {
+		if (taskName == "28e73c20") {
 			println("here now")
 		}
 
@@ -40,26 +40,9 @@ class S46Spiral : BidirectionalBaseClass() {
 			}
 		}
 
-		val rowCount = inputMatrix.size
-		val colCount = inputMatrix[0].size
-		val retArray: MutableList<List<Int>> = mutableListOf()
+		// TBD - spiral
 
-		// create a matching array with the outline of the outputColor
-
-		for (row in 0 until rowCount) {
-			val rowList: MutableList<Int> = mutableListOf()
-			for (col in 0 until colCount) {
-				if (row == 0 || row == rowCount - 1) {
-					rowList.add(outputColor)
-				} else if (col == 0 || col == colCount - 1) {
-					rowList.add(outputColor)
-				} else {
-					rowList.add(0)
-				}
-			}
-			retArray.add(rowList)
-		}
-		return retArray
+		return emptyList()
 
 	}
 
