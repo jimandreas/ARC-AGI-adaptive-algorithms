@@ -692,19 +692,7 @@ fun compareMatrices(matrix1: List<List<Int>>, matrix2: List<List<Int>>): Boolean
 	return true // Matrices are identical
 }
 
-/**
-I have a list of Block in Kotlin with row and col coordinates as shown:
-data class Block(val color: Int, val coordinates: Set<Pair<Int, Int>>)
-Please sort this by the second coordinate in the Set<Pair<Int, Int>>.
- Grok code follows
- */
-fun sortBlocksByColumn(blocks: List<Block>): List<Block> {
-	return blocks.sortedWith { a, b ->
-		val minColA = a.coordinates.minOfOrNull { it.second } ?: Int.MAX_VALUE
-		val minColB = b.coordinates.minOfOrNull { it.second } ?: Int.MAX_VALUE
-		minColA.compareTo(minColB)
-	}
-}
+
 
 // modified Gemini code
 fun areAllBlocksHorizontalRows(matrix: List<List<Int>>, blocks: List<Block>): Boolean {
@@ -727,6 +715,27 @@ fun areAllBlocksHorizontalRows(matrix: List<List<Int>>, blocks: List<Block>): Bo
 	return true // If all blocks pass the checks, return true
 }
 
+// modified Gemini code
+fun isOneBlockHorizontal(matrix: List<List<Int>>, blocks: List<Block>): Boolean {
+	val numCols = matrix[0].size
+
+	for (block in blocks) {
+		val cols = block.coordinates.map { it.second }.toSet() // Get unique col numbers
+		if (cols.size != numCols) { // If the block doesn't cover all cols, it's not a full row
+			continue
+		}
+		if (block.coordinates.size % numCols != 0) {
+			continue
+		}
+		val rows = block.coordinates.map { it.first }.toSet() // Get unique row numbers
+		if (rows.size != block.coordinates.size / numCols) {
+			continue
+		}
+		return true // one block passed
+	}
+	return false // all blocks failed
+}
+
 fun areAllBlocksVerticalColumns(matrix: List<List<Int>>, blocks: List<Block>): Boolean {
 	val numRows = matrix.size
 
@@ -744,4 +753,54 @@ fun areAllBlocksVerticalColumns(matrix: List<List<Int>>, blocks: List<Block>): B
 		}
 	}
 	return true // If all blocks pass the checks, return true
+}
+
+fun isOneBlockVertical(matrix: List<List<Int>>, blocks: List<Block>): Boolean {
+	val numRows = matrix.size
+
+	for (block in blocks) {
+		val rows = block.coordinates.map { it.first }.toSet() // Get unique row numbers
+		if (rows.size != numRows) { // If the block doesn't cover all rows, it's not a full column
+			continue
+		}
+		if (block.coordinates.size % numRows != 0) {
+			continue
+		}
+		val cols = block.coordinates.map { it.second }.toSet() // Get unique col numbers
+		if (cols.size != block.coordinates.size / numRows) {
+			continue
+		}
+		return true
+	}
+	return false // all blocks failed test
+}
+
+/**
+I have a list of Block that form horizontal bands.
+where the coordinates are row and column indices into a matrix.
+Please sort this list of Block in ascending row order and return the new list.
+ GROK code follows:
+ */
+fun sortBlocksByRow(blocks: List<Block>): List<Block> {
+	return blocks.sortedWith { block1, block2 ->
+		// Find the minimum row for each block
+		val minRow1 = block1.coordinates.minOfOrNull { it.first } ?: Int.MAX_VALUE
+		val minRow2 = block2.coordinates.minOfOrNull { it.first } ?: Int.MAX_VALUE
+
+		// Compare the minimum rows
+		minRow1.compareTo(minRow2)
+	}
+}
+
+/**
+I have a list of Block in Kotlin with row and col coordinates.
+Please sort this by the second coordinate in the Set<Pair<Int, Int>>.
+Grok code follows
+ */
+fun sortBlocksByColumn(blocks: List<Block>): List<Block> {
+	return blocks.sortedWith { a, b ->
+		val minColA = a.coordinates.minOfOrNull { it.second } ?: Int.MAX_VALUE
+		val minColB = b.coordinates.minOfOrNull { it.second } ?: Int.MAX_VALUE
+		minColA.compareTo(minColB)
+	}
 }
