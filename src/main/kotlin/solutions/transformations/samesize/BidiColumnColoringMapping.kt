@@ -29,6 +29,9 @@ class BidiColumnColoringMapping : BidirectionalBaseClass() {
 			return emptyList()
 		}
 
+		if (inputBlockList.size != outputBlockList.size) {
+			return emptyList()
+		}
 		val thisMapping = mapBlockColors(inputBlockList, outputBlockList)
 		accumulatedColorMapping.apply { putAll(thisMapping) }
 
