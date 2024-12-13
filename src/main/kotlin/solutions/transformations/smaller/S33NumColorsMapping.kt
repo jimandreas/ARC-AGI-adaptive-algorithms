@@ -27,7 +27,7 @@ class S33NumColorsMapping : BidirectionalBaseClass() {
 	override fun testTransform(): List<List<Int>> {
 
 		if (taskName == "6e02f1e3") {
-			println("here now")
+			//println("here now")
 		}
 
 		val colors = inputMatrix.flatten().toHashSet()

@@ -16,7 +16,7 @@ import solutions.utilities.translateBlockListBy
 //    see also 94f9d214 (?)
 
 class S27TheDanteExperience : BidirectionalBaseClass() {
-	override val name: String = "**** The Dante Experience"
+	override val name: String = "The Dante Experience"
 
 	var checkedOutput = false
 	var tiledVertical = false

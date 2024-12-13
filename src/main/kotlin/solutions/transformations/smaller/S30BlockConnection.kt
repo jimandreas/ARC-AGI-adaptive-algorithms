@@ -25,10 +25,6 @@ class S30BlockConnection : BidirectionalBaseClass() {
 
 	override fun testTransform(): List<List<Int>> {
 
-		if (taskName == "239be575") {
-			// println("here now")
-		}
-
 		// results must be a single point
 		if (outputMatrix.size != 1 && outputMatrix[0].size != 1) {
 			return emptyList()

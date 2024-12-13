@@ -12,7 +12,7 @@ import solutions.transformations.BidirectionalBaseClass
 //   SEE also : 7b7f7511 for a vertical repeating pattern
 
 class S25RepeatedMatrixPatterns : BidirectionalBaseClass() {
-	override val name: String = "**** repeated matrix patterns"
+	override val name: String = "repeated matrix patterns"
 
 	var checkedOutput = false
 

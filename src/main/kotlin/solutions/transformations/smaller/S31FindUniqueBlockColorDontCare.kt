@@ -26,7 +26,7 @@ class S31FindUniqueBlockColorDontCare : BidirectionalBaseClass() {
 	override fun testTransform(): List<List<Int>> {
 
 		if (taskName == "a87f7484") {
-			println("here now")
+			//println("here now")
 		}
 
 		// redo the block abstraction allowing diagonals

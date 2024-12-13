@@ -28,7 +28,7 @@ class E05ColorPointsInOutput : BidirectionalBaseClass() {
 	override fun testTransform(): List<List<Int>> {
 
 		if (taskName == "aedd82e4") {
-			println("here now")
+			//println("here now")
 		}
 		if (inputPointList.isEmpty()) {
 			return emptyList()

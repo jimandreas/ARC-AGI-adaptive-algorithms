@@ -15,7 +15,7 @@ import solutions.utilities.translateBlocksToOrigin
 //  TODO: this runs really slow in the debugger but is OK in real time - could use optimization
 
 class S23TwoBlocksCompleteARectangle : BidirectionalBaseClass() {
-	override val name: String = "**** two blocks translate to complete a rectangle"
+	override val name: String = "two blocks translate to complete a rectangle"
 
 	var checkedOutput = false
 	var isTwoBlocksToRectangle = false

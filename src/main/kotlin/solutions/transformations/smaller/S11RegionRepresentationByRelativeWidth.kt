@@ -26,7 +26,7 @@ class S11SmallerRegionRepresentationByRelativeWidth : BidirectionalBaseClass() {
 	override fun testTransform(): List<List<Int>> {
 
 		if (taskName == "90c28cc7") {
-			println("here now")
+			//println("here now")
 		}
 
 		if (inputPointList.isNotEmpty()) {

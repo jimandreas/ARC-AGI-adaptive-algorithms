@@ -32,7 +32,7 @@ class E07TranslateAndChangeColor : BidirectionalBaseClass() {
 	override fun testTransform(): List<List<Int>> {
 
 //		if (taskName == "a79310a0") {
-//			println("here now")
+//			//println("here now")
 //		}
 
 		// redo the block abstraction allowing points

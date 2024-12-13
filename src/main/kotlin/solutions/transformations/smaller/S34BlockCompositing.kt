@@ -36,7 +36,7 @@ class S34BlockCompositing : BidirectionalBaseClass() {
 	override fun testTransform(): List<List<Int>> {
 
 		if (taskName == "bc1d5164") {
-			println("here now")
+			//println("here now")
 		}
 
 		if (!checkedOutput) {

@@ -38,7 +38,7 @@ class S36TopBottomCompositing : BidirectionalBaseClass() {
 	override fun testTransform(): List<List<Int>> {
 
 		if (taskName == "dae9d2b5") {
-			println("here now")
+			//println("here now")
 		}
 
 		if (!checkedOutput) {

@@ -28,7 +28,7 @@ class E06CenterBlockUsingPoints : BidirectionalBaseClass() {
 	override fun testTransform(): List<List<Int>> {
 
 		if (taskName == "a1570a43") {
-			println("here now")
+			//println("here now")
 		}
 		if (inputPointList.size != 4) {
 			return emptyList()

@@ -30,7 +30,7 @@ class E10InputPointToOutputConstellation : BidirectionalBaseClass() {
 	override fun testTransform(): List<List<Int>> {
 
 		if (taskName == "a9f96cdd") {
-			println("here now")
+			//println("here now")
 		}
 
 		if (inputBlockList.isNotEmpty() || outputBlockList.isNotEmpty()) {

@@ -31,9 +31,6 @@ class S41BiggestBlocksReturnedAsStripe : BidirectionalBaseClass() {
 
 	override fun testTransform(): List<List<Int>> {
 
-		if (taskName == "a3325580") {
-			 println("here now")
-		}
 		// no points allowed
 		if (inputPointList.isNotEmpty()) {
 			return emptyList()

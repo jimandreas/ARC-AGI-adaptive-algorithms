@@ -12,7 +12,7 @@ import solutions.transformations.BidirectionalBaseClass
 
 
 class S26CountBlocks : BidirectionalBaseClass() {
-	override val name: String = "**** count blocks"
+	override val name: String = "count blocks"
 
 	var checkedOutput = false
 

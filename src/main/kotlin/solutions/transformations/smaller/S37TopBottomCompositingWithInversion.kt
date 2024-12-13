@@ -39,7 +39,7 @@ class S37TopBottomCompositingWithInversion : BidirectionalBaseClass() {
 	override fun testTransform(): List<List<Int>> {
 
 		if (taskName == "fafffa47") {
-			println("here now")
+			//println("here now")
 		}
 
 		if (!checkedOutput) {

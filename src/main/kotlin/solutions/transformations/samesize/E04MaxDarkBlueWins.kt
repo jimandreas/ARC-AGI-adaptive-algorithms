@@ -29,7 +29,7 @@ class E04MaxDarkBlueWins : BidirectionalBaseClass() {
 	override fun testTransform(): List<List<Int>> {
 
 		if (taskName == "ae4f1146") {
-			println("here now")
+			//println("here now")
 		}
 
 		// redo the block abstraction allowing diagonals

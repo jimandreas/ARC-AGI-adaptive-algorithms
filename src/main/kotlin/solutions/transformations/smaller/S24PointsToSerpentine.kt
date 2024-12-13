@@ -14,7 +14,7 @@ import kotlin.math.sqrt
 // example: cdecee7f rearrange points in a serpentine fashion
 
 class S24PointsToSerpentine : BidirectionalBaseClass() {
-	override val name: String = "**** rearrange points in a serpentine fashion"
+	override val name: String = "rearrange points in a serpentine fashion"
 
 	var checkedOutput = false
 	var minSideInteger = 0
