@@ -16,6 +16,7 @@ import solutions.utilities.*
 import solvedTasks
 import taskAbstractionsList
 import unSolvedTasks
+import wrongAnswerTasks
 
 class TransformationBidi {
 
@@ -163,9 +164,15 @@ class TransformationBidi {
 						if (resultMatrix3 != originalTestMatrixInputAndOutput3.output) {
 							success = false
 
-							if ((taskName == "ce9e57f2") && (t.name == "BIDI split blocks vertically" )) {
-								prettyPrintMatrixDiff(resultMatrix3, originalTestMatrixInputAndOutput3.output)
-							}
+							// add a record indicating a wrong answer
+							val solved = SolvedTasks(
+								atask.taskData,
+								taskName,
+								t.name,
+								solutionMatrices
+							)
+							wrongAnswerTasks.add(solved)
+
 							break
 						}
 						// record the solution matrix

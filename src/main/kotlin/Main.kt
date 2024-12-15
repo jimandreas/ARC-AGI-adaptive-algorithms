@@ -26,10 +26,21 @@ fun main() {
 //    val populationsMatch = ed.taskDataWhereElementAbundancesAreIdentical.toMutableList()
 //    println("${populationsMatch.size}: number of input and ouput populations match")
 
+    // print wrong answer list
     // print solutions so far!
-    println("==== MAIN.KT ============================")
+    println("==== WRONG ANSWER LIST BELOW=============")
+//    prettyPrintSolutions(wrongAnswerTasks.toList())
+    val wrong = wrongAnswerTasks.toList()
+    for (s in wrong) {
+        println("Task ${s.taskname} : ${s.solvedBy}")
+    }
+    println("==== WRONG ANSWER ON TEST ABOVE==========")
+    println("")
+    // print solutions so far!
+    println("==== SOLVED TASKS BELOW ===============")
     prettyPrintSolutions(solvedTasks.toList())
-    println("==== MAIN.KT ============================")
+
+    println("==== SOLVED TASKS ABOVE ================")
 
 /*    // print unsolved Tasks so far!
     println("==== !!!!! UNSOLVED ============================")

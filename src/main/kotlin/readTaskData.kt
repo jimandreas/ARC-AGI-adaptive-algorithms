@@ -11,7 +11,7 @@ fun readTaskData() {
 
 	val t = System.currentTimeMillis()
 
-	var useTrainingSet = false
+	var useTrainingSet = true
 	var listToUse: List<String>
     var filePath2: String
 

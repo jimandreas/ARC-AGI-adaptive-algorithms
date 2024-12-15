@@ -4,6 +4,21 @@
 
 https://github.com/fchollet/ARC-AGI
 
+## Status
+
+*15 Dec 2024:*<br>
+Training: 88 puzzles solved - 22.00%
+
+Evaluation: 2 puzzles solved - 0.50%
+
+Clearly the focussed algorithms developed for the Training ARC-AGI Tasks are
+nearly useless for the Evaluation ARC-AGI tasks.
+
+A higher level of "ABSTRACT" or "TEST TIME ADAPATION" is needed.  This developement
+stopped short of examining *all* of the Examples as a gestalt and was 
+satisfied with "simple" algorithmic solutions.  Given this intermediate result - 
+this is CLEARLY insufficient for further progress.
+
 ## Graphical representation
 
 A graphical representation of the training examples is now implemented.  This work is continuing.

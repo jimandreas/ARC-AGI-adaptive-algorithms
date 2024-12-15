@@ -35,6 +35,7 @@ class E12Spiral : BidirectionalBaseClass() {
 		if (inputMatrix.size != inputMatrix[0].size) {
 			return emptyList() // spiral generator currently only tested for square matrices
 		}
+		println("(Spiral) EMPTY input: $taskName")
 		if (!checkedOutput) {
 			checkedOutput = true
 			outputColor = outputMatrix[0][0]

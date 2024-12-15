@@ -37,4 +37,6 @@ data class SolvedTasks(
 var solvedTasks: MutableList<SolvedTasks> = mutableListOf()
 // list of Tasks where the final test failed!
 var unSolvedTasks: MutableList<SolvedTasks> = mutableListOf()
+// list of Tasks where the test solution was wrong
+var wrongAnswerTasks: MutableList<SolvedTasks> =  mutableListOf()
 
