@@ -31,9 +31,7 @@ class P01PatternMatching : BidirectionalBaseClass() {
 
 	override fun testTransform(): List<List<Int>> {
 
-		if (taskName == "995c5fa3") {
-			//// println("here now")
-		}
+
 
 		val invertedMatrix = invertMatrix(inputMatrix)
 		if (invertedMatrix.isEmpty()) {

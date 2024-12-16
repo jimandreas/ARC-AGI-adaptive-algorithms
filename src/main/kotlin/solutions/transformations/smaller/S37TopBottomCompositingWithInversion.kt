@@ -38,9 +38,7 @@ class S37TopBottomCompositingWithInversion : BidirectionalBaseClass() {
 	//  demand output is one half number of input columns
 	override fun testTransform(): List<List<Int>> {
 
-		if (taskName == "fafffa47") {
-			//println("here now")
-		}
+
 
 		if (!checkedOutput) {
 			numRowOutput = outputMatrix.size

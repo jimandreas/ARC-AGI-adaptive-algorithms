@@ -22,9 +22,7 @@ class S22BlocksToPointsTiling : BidirectionalBaseClass() {
 
 	override fun testTransform(): List<List<Int>> {
 
-		if (taskName == "e9afcf9a") {
-			// // println("here now")
-		}
+
 
 		// conditions for this Task - blocks on input, points on output
 		if (!checkedOutput) {

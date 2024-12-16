@@ -1,16 +1,12 @@
-@file:Suppress(
-	"RedundantSuppression", "UNUSED_VARIABLE", "MemberVisibilityCanBePrivate", "unused",
-	"ReplaceManualRangeWithIndicesCalls", "ReplaceSizeZeroCheckWithIsEmpty",
-	"SameParameterValue", "UnnecessaryVariable", "LocalVariableName", "PropertyName"
-)
-
-package solutions
+package solutions.transformations.samesize
 
 import SolvedTasks
 import TaskCoordinateData
 import compareMatrices
 import experiments.ExperimentalDatasets
+import solutions.utilities.mirrorMatrixDownwardDiagonal
 import solutions.utilities.mirrorMatrixHorizontally
+import solutions.utilities.mirrorMatrixUpwardDiagonal
 import solutions.utilities.mirrorMatrixVertically
 import solvedTasks
 import verboseFlag
@@ -87,35 +83,7 @@ class MirrorMatrixSolution {
 		return true // Mirroring solves all examples
 	}
 
-	fun mirrorMatrixDownwardDiagonal(matrix: List<List<Int>>): List<List<Int>> {
-		val size = matrix.size // Assuming it's a square matrix
-		val mirroredMatrix = MutableList(size) { MutableList(size) { 0 } }
 
-		for (i in 0 until size) {
-			for (j in 0 until size) {
-				mirroredMatrix[j][i] = matrix[i][j]
-			}
-		}
-
-		return mirroredMatrix
-	}
-
-	fun mirrorMatrixUpwardDiagonal(matrix: List<List<Int>>): List<List<Int>> {
-		val size = matrix.size // Assuming it's a square matrix
-		val mirroredMatrix = MutableList(size) { MutableList(size) { 0 } }
-
-		try {
-			for (i in 0 until size) {
-				for (j in 0 until size) {
-					mirroredMatrix[size - 1 - j][size - 1 - i] = matrix[i][j]
-				}
-			}
-		} catch (e: Exception) {
-			println("oopsie!!")
-		}
-
-		return mirroredMatrix
-	}
 
 	fun testUpwardDiagonalMirroringSolution(taskData: TaskCoordinateData): Boolean {
 		// Check if mirroring solves the training examples

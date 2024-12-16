@@ -29,9 +29,7 @@ class S42CleverMergingOfPoints : BidirectionalBaseClass() {
 
 	override fun testTransform(): List<List<Int>> {
 
-//		if (taskName == "c8cbb738") {
-//			//println("here now")
-//		}
+//
 
 		if (inputPointList.isEmpty()) {
 			return emptyList()

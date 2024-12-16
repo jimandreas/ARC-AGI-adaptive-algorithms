@@ -27,9 +27,7 @@ class S44MapInputColorToOutputBlock : BidirectionalBaseClass() {
 
 	override fun testTransform(): List<List<Int>> {
 
-		if (taskName == "d4469b4b") {
-			//println("here now")
-		}
+
 
 		val colorList = countColorsInMatrix(inputMatrix)
 		if (colorList.size != 1) {

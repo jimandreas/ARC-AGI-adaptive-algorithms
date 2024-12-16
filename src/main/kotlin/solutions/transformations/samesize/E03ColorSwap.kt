@@ -26,9 +26,7 @@ class E03ColorSwap : BidirectionalBaseClass() {
 
 	override fun testTransform(): List<List<Int>> {
 
-		if (taskName == "d511f180") {
-			//println("here now")
-		}
+
 
 		val colorPairList = findSwappedColors(inputMatrix, outputMatrix)
 		if (colorPairList.isEmpty()) {

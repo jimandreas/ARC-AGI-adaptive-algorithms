@@ -24,9 +24,7 @@ class S28QuantizeBlocks : BidirectionalBaseClass() {
 
 	override fun testTransform(): List<List<Int>> {
 
-		if (taskName == "6ecd11f4") {
-			//// println("here now")
-		}
+
 
 		if (inputBlockList.isEmpty() || inputPointList.isEmpty()) {
 			return emptyList()

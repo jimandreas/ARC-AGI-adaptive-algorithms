@@ -21,9 +21,7 @@ class E08ReturnCenterColumn : BidirectionalBaseClass() {
 
 	override fun testTransform(): List<List<Int>> {
 
-//		if (taskName == "d23f8c26") {
-//			//println("here now")
-//		}
+//
 
 		// reject if their isn't an odd number of columns
 		if (inputMatrix[0].size % 2 != 1) {

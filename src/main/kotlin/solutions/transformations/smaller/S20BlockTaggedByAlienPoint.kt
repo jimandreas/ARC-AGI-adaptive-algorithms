@@ -26,9 +26,7 @@ class S20BlockTaggedByAlienPoint : BidirectionalBaseClass() {
 
 	override fun testTransform(): List<List<Int>> {
 
-//		if (taskName == "48d8fb45") {
-//			// // println("here now")
-//		}
+//
 
 		// redo the block abstraction allowing diagonals
 		//  AND allowing multi-color

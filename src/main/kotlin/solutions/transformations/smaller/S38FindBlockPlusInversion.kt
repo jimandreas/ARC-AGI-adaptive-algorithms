@@ -28,9 +28,7 @@ class S38FindBlockPlusInversion : BidirectionalBaseClass() {
 
 	override fun testTransform(): List<List<Int>> {
 
-		if (taskName == "b94a9452") {
-			//println("here now")
-		}
+
 
 		// demand two blocks or one block and one point
 

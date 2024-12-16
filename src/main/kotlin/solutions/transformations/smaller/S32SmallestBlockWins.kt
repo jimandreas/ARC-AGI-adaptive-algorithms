@@ -24,9 +24,7 @@ class S32SmallestBlockWins : BidirectionalBaseClass() {
 
 	override fun testTransform(): List<List<Int>> {
 
-		if (taskName == "23b5c85d") {
-			//println("here now")
-		}
+
 
 		if (inputBlockList.isEmpty()) {
 			return emptyList()

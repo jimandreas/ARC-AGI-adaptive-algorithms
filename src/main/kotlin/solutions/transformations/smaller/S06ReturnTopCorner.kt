@@ -29,9 +29,7 @@ class S06ReturnTopCorner : BidirectionalBaseClass() {
 
 	override fun testTransform(): List<List<Int>> {
 
-		if (taskName == "5bd6f4ac") {
-			// // println("here now")
-		}
+
 
 		if (!matrixDimensionsSaved) {
 			matrixDimensionsSaved = true

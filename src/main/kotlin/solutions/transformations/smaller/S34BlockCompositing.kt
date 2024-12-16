@@ -35,9 +35,7 @@ class S34BlockCompositing : BidirectionalBaseClass() {
 	//  composite them
 	override fun testTransform(): List<List<Int>> {
 
-		if (taskName == "bc1d5164") {
-			//println("here now")
-		}
+
 
 		if (!checkedOutput) {
 			// demand square matrix

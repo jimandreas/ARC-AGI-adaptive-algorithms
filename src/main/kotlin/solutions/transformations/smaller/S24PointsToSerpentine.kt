@@ -24,9 +24,7 @@ class S24PointsToSerpentine : BidirectionalBaseClass() {
 
 	override fun testTransform(): List<List<Int>> {
 
-		if (taskName == "cdecee7f") {
-			// // println("here now")
-		}
+
 
 		if (!checkedOutput) {
 

@@ -26,9 +26,7 @@ class S23TwoBlocksCompleteARectangle : BidirectionalBaseClass() {
 
 	override fun testTransform(): List<List<Int>> {
 
-		if (taskName == "681b3aeb") {
-			// // println("here now")
-		}
+
 
 		// conditions for this Task - two blocks on input and output, no points
 		if (!checkedOutput) {

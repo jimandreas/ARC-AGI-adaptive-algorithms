@@ -27,9 +27,7 @@ class E05ColorPointsInOutput : BidirectionalBaseClass() {
 	// basically color the points as given in the first example output
 	override fun testTransform(): List<List<Int>> {
 
-		if (taskName == "aedd82e4") {
-			//println("here now")
-		}
+
 		if (inputPointList.isEmpty()) {
 			return emptyList()
 		}

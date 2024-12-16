@@ -36,9 +36,7 @@ class S35LeftRightCompositing : BidirectionalBaseClass() {
 	//  demand output is one half number of input columns
 	override fun testTransform(): List<List<Int>> {
 
-		if (taskName == "dae9d2b5") {
-			//println("here now")
-		}
+
 
 		if (!checkedOutput) {
 			numRowOutput = outputMatrix.size

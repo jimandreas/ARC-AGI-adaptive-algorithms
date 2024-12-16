@@ -27,9 +27,7 @@ class S43BlockDirectedLinesAssembly : BidirectionalBaseClass() {
 
 	override fun testTransform(): List<List<Int>> {
 
-		if (taskName == "8e1813be") {
-			//println("here now")
-		}
+
 
 		if (!checkedOutput) {
 			checkedOutput = true

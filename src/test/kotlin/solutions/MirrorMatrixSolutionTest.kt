@@ -11,7 +11,10 @@ import compareMatrices
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
+import solutions.transformations.samesize.MirrorMatrixSolution
+import solutions.utilities.mirrorMatrixDownwardDiagonal
 import solutions.utilities.mirrorMatrixHorizontally
+import solutions.utilities.mirrorMatrixUpwardDiagonal
 import solutions.utilities.mirrorMatrixVertically
 
 class MirrorMatrixSolutionTest {
@@ -112,7 +115,7 @@ class MirrorMatrixSolutionTest {
             listOf(7, 8, 9)
         )
 
-        val result = mirrorAlg.mirrorMatrixDownwardDiagonal(matrix)
+        val result = mirrorMatrixDownwardDiagonal(matrix)
 
         println("Mirrored Downward:")
         println(result)
@@ -136,7 +139,7 @@ class MirrorMatrixSolutionTest {
             listOf(7, 8, 9)
         )
 
-        val mirroredUpward = mirrorAlg.mirrorMatrixUpwardDiagonal(matrix)
+        val mirroredUpward = mirrorMatrixUpwardDiagonal(matrix)
         println("Mirrored Upward:")
         println(mirroredUpward)
 

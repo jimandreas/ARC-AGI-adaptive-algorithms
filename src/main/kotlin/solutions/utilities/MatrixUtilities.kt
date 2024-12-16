@@ -523,3 +523,32 @@ fun createVerticalMatrixWithColors(
 	return matrix
 }
 
+fun mirrorMatrixDownwardDiagonal(matrix: List<List<Int>>): List<List<Int>> {
+	val size = matrix.size // Assuming it's a square matrix
+	val mirroredMatrix = MutableList(size) { MutableList(size) { 0 } }
+
+	for (i in 0 until size) {
+		for (j in 0 until size) {
+			mirroredMatrix[j][i] = matrix[i][j]
+		}
+	}
+
+	return mirroredMatrix
+}
+
+fun mirrorMatrixUpwardDiagonal(matrix: List<List<Int>>): List<List<Int>> {
+	val size = matrix.size // Assuming it's a square matrix
+	val mirroredMatrix = MutableList(size) { MutableList(size) { 0 } }
+
+	try {
+		for (i in 0 until size) {
+			for (j in 0 until size) {
+				mirroredMatrix[size - 1 - j][size - 1 - i] = matrix[i][j]
+			}
+		}
+	} catch (e: Exception) {
+		println("oopsie!!")
+	}
+
+	return mirroredMatrix
+}

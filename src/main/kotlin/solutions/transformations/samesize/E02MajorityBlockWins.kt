@@ -31,9 +31,7 @@ class E02MajorityBlockWins : BidirectionalBaseClass() {
 	//   save other block color for the fill color
 	override fun testTransform(): List<List<Int>> {
 
-		if (taskName == "9565186b") {
-			// println("here now")
-		}
+
 
 		if (inputBlockList.isEmpty()) {
 			return emptyList()

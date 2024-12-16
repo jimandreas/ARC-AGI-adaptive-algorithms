@@ -25,9 +25,7 @@ class S40DuplicateBlockHorizontally : BidirectionalBaseClass() {
 
 	override fun testTransform(): List<List<Int>> {
 
-		if (taskName == "28bf18c6") {
-			 //println("here now")
-		}
+
 
 		// redo the block abstraction allowing diagonals
 		val nIn = MatrixAbstractions()

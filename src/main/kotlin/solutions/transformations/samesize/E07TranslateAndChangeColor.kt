@@ -31,9 +31,7 @@ class E07TranslateAndChangeColor : BidirectionalBaseClass() {
 	// calculate transform amount
 	override fun testTransform(): List<List<Int>> {
 
-//		if (taskName == "a79310a0") {
-//			//println("here now")
-//		}
+//
 
 		// redo the block abstraction allowing points
 		val nIn = MatrixAbstractions()

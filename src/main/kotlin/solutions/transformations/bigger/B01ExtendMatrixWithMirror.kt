@@ -28,9 +28,7 @@ class B01ExtendMatrixWithMirror : BidirectionalBaseClass() {
 
 	override fun testTransform(): List<List<Int>> {
 
-		if (taskName == "8be77c9e") {
-			//println("here now")
-		}
+
 
 		val inRows = inputMatrix.size
 		val inCols = inputMatrix[0].size

@@ -28,9 +28,7 @@ class E04MaxDarkBlueWins : BidirectionalBaseClass() {
 
 	override fun testTransform(): List<List<Int>> {
 
-		if (taskName == "ae4f1146") {
-			//println("here now")
-		}
+
 
 		// redo the block abstraction allowing diagonals
 		//  looking for the biggest block in input and output

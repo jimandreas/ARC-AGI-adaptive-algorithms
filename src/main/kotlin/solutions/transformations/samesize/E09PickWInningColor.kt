@@ -24,9 +24,7 @@ class E09PickWInningColor : BidirectionalBaseClass() {
 
 	override fun testTransform(): List<List<Int>> {
 
-//		if (taskName == "f76d97a5") {
-//			//println("here now")
-//		}
+//
 
 		// figure out the winning color 
 		if (!checkedOutput) {

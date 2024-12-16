@@ -4,13 +4,26 @@
 	"SameParameterValue", "UnnecessaryVariable", "LocalVariableName", "PropertyName"
 )
 
-package solutions
+/**
+ * The filter has found where the input and output matrix cell populations
+ * are identical. The change from input to output matrices appears to be
+ * mostly a matter of some cells "translating" from one location to
+ * another in the matrix. Please write a function that (1) lists the
+ * translations in a data structure sorted by cell content (ignore cells
+ * with zero as the content), and (2) groups the "x" and "y" directions
+ * identical translations, and (3) provide a count of the quantity of translations
+ * in the group.
+ */
+
+
+package solutions.transformations.samesize
 
 import SolvedTasks
 import TaskCoordinateData
 import experiments.ExperimentalDatasets
 import solutions.utilities.isEntireMapConsistent
 import solvedTasks
+import kotlin.collections.iterator
 
 /**
  * The filter has found where the input and output matrix cell populations
@@ -152,9 +165,6 @@ class CellTranslationsAnalysis {
 				solvedTasks.add(SolvedTasks(task, task.name,"identical translations"))
 			}
 
-			if (task.name == "3906de3d") {
-				//println("3906de3d here now")
-			}
 			if (isEntireMapConsistent(t)) {
 				//println("${task.name} All translations are consistent!!!")
 				ed.taskWithTranslations.add(task)

@@ -8,6 +8,8 @@ package solutions
 
 import experiments.ExperimentalDatasets
 import solutions.transformations.TransformationBidi
+import solutions.transformations.samesize.CellTranslationsAnalysis
+import solutions.transformations.samesize.MirrorMatrixSolution
 
 class SolutionOrganizer(val ed: ExperimentalDatasets) {
 

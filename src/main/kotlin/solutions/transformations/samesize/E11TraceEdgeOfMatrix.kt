@@ -21,9 +21,7 @@ class E11TraceEdgeOfMatrix : BidirectionalBaseClass() {
 
 	override fun testTransform(): List<List<Int>> {
 
-		if (taskName == "6f8cd79b") {
-			//println("here now")
-		}
+
 
 		// there is NOTHING in the input
 		if (inputBlockList.isNotEmpty() || inputPointList.isNotEmpty()) {

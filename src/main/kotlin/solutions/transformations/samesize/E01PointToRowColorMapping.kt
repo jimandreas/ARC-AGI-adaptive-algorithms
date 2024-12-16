@@ -36,9 +36,7 @@ class E01PointToRowColorMapping : BidirectionalBaseClass() {
 	 */
 	override fun testTransform(): List<List<Int>> {
 
-		if (taskName == "a85d4709") {
-			//println("here now")
-		}
+
 
 		if (!checkedOutput) {
 			numOutputRows = outputMatrix.size
