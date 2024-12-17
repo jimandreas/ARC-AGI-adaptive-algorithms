@@ -7,8 +7,6 @@
 package solutions.transformations.bigger
 
 import solutions.transformations.BidirectionalBaseClass
-import solutions.utilities.mirrorMatrixVertically
-import solutions.utilities.recreateMatrix
 
 // example: B01 8be77c9e extend matrix with mirror
 //   also: 6d0aefbc, 6fa7a44f, c9e6f938  (four solutions with one algo!)

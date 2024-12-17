@@ -1,7 +1,8 @@
 @file:Suppress(
 	"RedundantSuppression", "UNUSED_VARIABLE", "MemberVisibilityCanBePrivate", "unused",
 	"ReplaceManualRangeWithIndicesCalls", "ReplaceSizeZeroCheckWithIsEmpty",
-	"SameParameterValue", "UnnecessaryVariable", "LocalVariableName", "PropertyName"
+	"SameParameterValue", "UnnecessaryVariable", "LocalVariableName", "PropertyName", "EmptyMethod", "EmptyMethod",
+	"EmptyMethod", "EmptyMethod"
 )
 
 package solutions.transformations.samesize
@@ -12,9 +13,11 @@ import solutions.utilities.recreateMatrix
 
 // example:  aabf363d
 
+@Suppress("EmptyMethod")
 class BidiChangeBlockColoringBasedOnPoint : BidirectionalBaseClass() {
 	override val name: String = "BIDI change block coloring based on point"
 
+	@Suppress("EmptyMethod", "EmptyMethod", "EmptyMethod")
 	override fun resetState() {
 	}
 	override fun testTransform(): List<List<Int>> {

@@ -7,9 +7,9 @@
 
 package solutions.transformations.smaller
 
-import Block
-import Point
-import entities.*
+import entities.findAllIsolatedThings
+import entities.findIsolatedThing
+import entities.validateThingWithBlocksAndPoints
 import solutions.transformations.BidirectionalBaseClass
 import solutions.utilities.invertMatrixWithColorsSpecified
 

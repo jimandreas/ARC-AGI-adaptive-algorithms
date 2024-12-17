@@ -8,11 +8,11 @@ package solutions.transformations
 
 import SolutionMatrix
 import SolvedTasks
-import solutions.transformations.bigger.*
-import solutions.transformations.partition.*
+import solutions.transformations.bigger.B01ExtendMatrixWithMirror
+import solutions.transformations.partition.P01PatternMatching
+import solutions.transformations.partition.P02CommonPoints
 import solutions.transformations.samesize.*
 import solutions.transformations.smaller.*
-import solutions.utilities.*
 import solvedTasks
 import taskAbstractionsList
 import unSolvedTasks

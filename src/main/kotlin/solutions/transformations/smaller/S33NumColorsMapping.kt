@@ -8,8 +8,6 @@ package solutions.transformations.smaller
 
 import solutions.transformations.BidirectionalBaseClass
 import solutions.utilities.compareMatrices
-import solutions.utilities.recreateMatrix
-import solutions.utilities.relocateToOrigin
 
 // example: 6e02f1e3 num colors mapping
 

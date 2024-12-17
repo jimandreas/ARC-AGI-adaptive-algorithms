@@ -8,7 +8,6 @@ package solutions.transformations.smaller
 
 import solutions.transformations.BidirectionalBaseClass
 import solutions.utilities.connectionBetweenTwoBlocks
-import solutions.utilities.isMatrixSymmetric
 import solutions.utilities.isSquare
 
 // example: 239be575 block connection

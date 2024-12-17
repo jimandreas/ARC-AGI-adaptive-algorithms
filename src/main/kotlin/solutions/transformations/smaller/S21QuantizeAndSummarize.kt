@@ -9,7 +9,6 @@ package solutions.transformations.smaller
 import Block
 import solutions.transformations.BidirectionalBaseClass
 import solutions.utilities.findMajorityColorBasedOnCoordinates
-import solutions.utilities.findMajorityColorInMatrix
 import solutions.utilities.quantize
 import solutions.utilities.translateBlockBy
 

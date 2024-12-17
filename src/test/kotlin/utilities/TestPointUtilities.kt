@@ -11,7 +11,6 @@ import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import solutions.utilities.convertToRelativeCoordinates
 import solutions.utilities.findMinMaxPointCoordinates
-import kotlin.math.exp
 import kotlin.test.assertEquals
 
 

@@ -6,10 +6,7 @@
 
 package solutions.transformations.smaller
 
-import MatrixAbstractions
-import entities.BlockUtilities
 import solutions.transformations.BidirectionalBaseClass
-import solutions.utilities.hasHorizontalSymmetry
 import solutions.utilities.recreateMatrix
 import solutions.utilities.relocateToOrigin
 

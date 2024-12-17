@@ -6,15 +6,9 @@
 
 package utilities
 
-import Block
-import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
-import solutions.utilities.convertBlocksToMatrix
 import solutions.utilities.createVerticalMatrixWithColors
-import solutions.utilities.hasHorizontalSymmetry
-import solutions.utilities.sortBlocksByColumn
-import kotlin.math.exp
 import kotlin.test.assertEquals
 
 internal class TestMatrixUtilities {

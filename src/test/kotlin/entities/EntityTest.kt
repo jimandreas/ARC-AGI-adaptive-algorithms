@@ -10,7 +10,6 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import solutions.utilities.countColorBasedOnCoordinates
-import kotlin.math.exp
 import kotlin.test.assertEquals
 
 internal class EntityTest {

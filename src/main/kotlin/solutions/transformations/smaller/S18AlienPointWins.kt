@@ -6,7 +6,6 @@
 
 package solutions.transformations.smaller
 
-import Block
 import MatrixAbstractions
 import entities.BlockUtilities
 import solutions.transformations.BidirectionalBaseClass

@@ -1,3 +1,0 @@
-# This page intentionally left blank*
-
-* well maybe not intentionally...

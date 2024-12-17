@@ -9,7 +9,6 @@ import solutions.transformations.BidirectionalBaseClass
 import solutions.utilities.SpiralDirectionChatgpt
 import solutions.utilities.detectSpiral
 import solutions.utilities.generateSpiral
-import solutions.utilities.prettyPrintMatrixDiff
 
 // example: S46 28e73c20 spiral
 
@@ -35,7 +34,7 @@ class E12Spiral : BidirectionalBaseClass() {
 		if (inputMatrix.size != inputMatrix[0].size) {
 			return emptyList() // spiral generator currently only tested for square matrices
 		}
-		println("(Spiral) EMPTY input: $taskName")
+		//println("(Spiral) EMPTY input: $taskName")
 		if (!checkedOutput) {
 			checkedOutput = true
 			outputColor = outputMatrix[0][0]

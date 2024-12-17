@@ -6,14 +6,9 @@
 
 package solutions.transformations.smaller
 
-import MatrixAbstractions
-import entities.BlockUtilities
 import solutions.transformations.BidirectionalBaseClass
-import solutions.utilities.convertBlocksToMatrix
 import solutions.utilities.createVerticalMatrixWithColors
 import solutions.utilities.sortBlocksByColumn
-import solutions.utilities.translateBlockBy
-import solutions.utilities.translateBlocksToOrigin
 
 // example: S41 a3325580 biggest blocks returned as color stripe
 
@@ -39,7 +34,7 @@ class S41BiggestBlocksReturnedAsStripe : BidirectionalBaseClass() {
 			return emptyList()
 		}
 
-		val sortedBlocks = inputBlockList.sortedByDescending(){ it.coordinates.size }
+		val sortedBlocks = inputBlockList.sortedByDescending { it.coordinates.size }
 		val biggestSize = sortedBlocks[0].coordinates.size
 
 		val biggestList = sortedBlocks.filter { it.coordinates.size == biggestSize }

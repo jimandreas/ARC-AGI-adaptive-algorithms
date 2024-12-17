@@ -1,7 +1,9 @@
 @file:Suppress(
 	"RedundantSuppression", "UNUSED_VARIABLE", "MemberVisibilityCanBePrivate", "unused",
 	"ReplaceManualRangeWithIndicesCalls", "ReplaceSizeZeroCheckWithIsEmpty",
-	"SameParameterValue", "UnnecessaryVariable", "LocalVariableName", "PropertyName"
+	"SameParameterValue", "UnnecessaryVariable", "LocalVariableName", "PropertyName", "EmptyMethod", "EmptyMethod",
+	"EmptyMethod", "EmptyMethod", "EmptyMethod", "EmptyMethod", "EmptyMethod", "EmptyMethod", "EmptyMethod",
+	"EmptyMethod", "EmptyMethod", "EmptyMethod", "EmptyMethod", "EmptyMethod", "EmptyMethod", "EmptyMethod"
 )
 
 package solutions.transformations.samesize

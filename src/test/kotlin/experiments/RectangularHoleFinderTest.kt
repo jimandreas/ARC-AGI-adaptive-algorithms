@@ -10,7 +10,6 @@ package experiments
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
-import kotlin.math.exp
 
 class RectangularHoleFinderTest {
 
@@ -66,7 +65,7 @@ class RectangularHoleFinderTest {
 			listOf(0,0,0)
 		)
 		val holes3 = rectangularHoleFinder.findRectangularHoles(matrix3)
-		println("number 3: ${holes3}")
+		println("number 3: $holes3")
 
 	}
 }

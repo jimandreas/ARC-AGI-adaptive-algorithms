@@ -37,7 +37,7 @@ class E02MajorityBlockWins : BidirectionalBaseClass() {
 			return emptyList()
 		}
 		// find biggest block
-		val sortedBlocks = inputBlockList.sortedByDescending() { it.coordinates.size }
+		val sortedBlocks = inputBlockList.sortedByDescending { it.coordinates.size }
 		val winnerBlock = sortedBlocks[0]
 
 		if (!checkedOutput) {
@@ -75,7 +75,7 @@ class E02MajorityBlockWins : BidirectionalBaseClass() {
 			return emptyList()
 		}
 		// find biggest block
-		val sortedBlocks = inputBlockList.sortedByDescending() { it.coordinates.size }
+		val sortedBlocks = inputBlockList.sortedByDescending { it.coordinates.size }
 		val winnerBlock = sortedBlocks[0]
 
 		val retMatrix = recreateMatrix(
