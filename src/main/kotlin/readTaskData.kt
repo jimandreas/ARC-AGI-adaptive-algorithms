@@ -25,6 +25,26 @@ fun readTaskData() {
         filePath2 = "$pathPrefix$evaluationPrefix"
 	}
 
+	val dataDir = File(filePath2)
+	if (!dataDir.exists() || !dataDir.isDirectory) {
+		println()
+		println("ERROR: ARC task data directory not found:")
+		println("  $filePath2")
+		println()
+		println("Please download the ARC-AGI dataset and place it at:")
+		println("  $pathPrefix")
+		println()
+		println("Expected structure:")
+		println("  ${pathPrefix}training/   (400 JSON task files)")
+		println("  ${pathPrefix}evaluation/ (100 JSON task files)")
+		println()
+		println("The dataset is available at: https://github.com/fchollet/ARC-AGI")
+		println()
+		println("To change the data directory, edit pathPrefix in TaskNames.kt")
+		System.out.flush()
+		return
+	}
+
 	for (name in listToUse) {
         val pathAndName = "$filePath2$name.json"
 		val filePath = File(pathAndName)
@@ -33,7 +53,19 @@ fun readTaskData() {
 		val canRead = filePath.canRead()
 
 		if (!(exists && isAFile && canRead)) {
-			throw Exception("file not found. $name, $filePath")
+			println()
+			println("ERROR: Task file not found or not readable:")
+			println("  $filePath")
+			println()
+			println("The data directory exists but is missing task file: $name.json")
+			println("Please ensure all task JSON files are present in:")
+			println("  $filePath2")
+			println()
+			println("The dataset is available at: https://github.com/fchollet/ARC-AGI")
+			println()
+			println("To change the data directory, edit pathPrefix in TaskNames.kt")
+			System.out.flush()
+			return
 		}
 
 		lateinit var taskData: TaskCoordinateData

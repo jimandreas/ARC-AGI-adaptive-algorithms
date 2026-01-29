@@ -53,3 +53,7 @@ gradle/signing.properties
 # profiling files
 *.hprof
 
+# claude
+.claude
+
+

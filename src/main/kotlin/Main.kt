@@ -15,6 +15,9 @@ fun main() {
 //    val databasePath = "C:\\a\\j\\kotlinIdea\\ARC-AGI-database-analysis\\DB"
 
     readTaskData()
+    if (tAllTaskData.isEmpty()) {
+        return
+    }
     val ed = ExperimentalDatasets(tAllTaskData)
 
     // this is now the master route to formally solving Tasks.
